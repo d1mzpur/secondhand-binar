@@ -12,7 +12,7 @@
 		0A9E1D0528579B6A00D864A4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A9E1D0428579B6A00D864A4 /* Assets.xcassets */; };
 		0A9E1D0828579B6A00D864A4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A9E1D0628579B6A00D864A4 /* LaunchScreen.storyboard */; };
 		0A9E1D1A28579C2E00D864A4 /* SCHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9E1D1928579C2E00D864A4 /* SCHomeViewController.swift */; };
-		0AD055AA28582072000CDA44 /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD055A928582071000CDA44 /* UIImageView+Extension.swift */; };
+		0AD055AD28582DBA000CDA44 /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD055AC28582DBA000CDA44 /* UIImageView+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,7 +23,7 @@
 		0A9E1D0728579B6A00D864A4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0A9E1D0928579B6A00D864A4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0A9E1D1928579C2E00D864A4 /* SCHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCHomeViewController.swift; sourceTree = "<group>"; };
-		0AD055A928582071000CDA44 /* UIImageView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
+		0AD055AC28582DBA000CDA44 /* UIImageView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,7 +119,7 @@
 		0A9E1D2228579EEA00D864A4 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				0AD055A928582071000CDA44 /* UIImageView+Extension.swift */,
+				0AD055AC28582DBA000CDA44 /* UIImageView+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -218,7 +218,7 @@
 			files = (
 				0A9E1CFC28579B5F00D864A4 /* AppDelegate.swift in Sources */,
 				0A9E1CFE28579B5F00D864A4 /* SceneDelegate.swift in Sources */,
-				0AD055AA28582072000CDA44 /* UIImageView+Extension.swift in Sources */,
+				0AD055AD28582DBA000CDA44 /* UIImageView+Extension.swift in Sources */,
 				0A9E1D1A28579C2E00D864A4 /* SCHomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

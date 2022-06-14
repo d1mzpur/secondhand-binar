@@ -17,6 +17,7 @@
 		0A9E1D0828579B6A00D864A4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A9E1D0628579B6A00D864A4 /* LaunchScreen.storyboard */; };
 		0A9E1D1A28579C2E00D864A4 /* SCHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9E1D1928579C2E00D864A4 /* SCHomeViewController.swift */; };
 		0AD055AD28582DBA000CDA44 /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD055AC28582DBA000CDA44 /* UIImageView+Extension.swift */; };
+		18031BAC2858D6D000EC9D69 /* ColorAlias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18031BAB2858D6D000EC9D69 /* ColorAlias.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		0A9E1D0928579B6A00D864A4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0A9E1D1928579C2E00D864A4 /* SCHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCHomeViewController.swift; sourceTree = "<group>"; };
 		0AD055AC28582DBA000CDA44 /* UIImageView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
+		18031BAB2858D6D000EC9D69 /* ColorAlias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorAlias.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +60,7 @@
 			isa = PBXGroup;
 			children = (
 				01C6CA4528586EAB00F0838E /* SCLabel.swift */,
+				18031BAB2858D6D000EC9D69 /* ColorAlias.swift */,
 			);
 			path = Atom;
 			sourceTree = "<group>";
@@ -233,6 +236,7 @@
 			files = (
 				0A9E1CFC28579B5F00D864A4 /* AppDelegate.swift in Sources */,
 				01C6CA4628586EAB00F0838E /* SCLabel.swift in Sources */,
+				18031BAC2858D6D000EC9D69 /* ColorAlias.swift in Sources */,
 				0A9E1CFE28579B5F00D864A4 /* SceneDelegate.swift in Sources */,
 				0AD055AD28582DBA000CDA44 /* UIImageView+Extension.swift in Sources */,
 				0A9E1D1A28579C2E00D864A4 /* SCHomeViewController.swift in Sources */,

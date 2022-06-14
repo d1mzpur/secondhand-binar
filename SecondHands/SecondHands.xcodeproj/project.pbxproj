@@ -60,7 +60,6 @@
 			isa = PBXGroup;
 			children = (
 				01C6CA4528586EAB00F0838E /* SCLabel.swift */,
-				18031BAB2858D6D000EC9D69 /* ColorAlias.swift */,
 			);
 			path = Atom;
 			sourceTree = "<group>";
@@ -157,6 +156,7 @@
 		0A9E1D2228579EEA00D864A4 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				18031BAB2858D6D000EC9D69 /* ColorAlias.swift */,
 				0AD055AC28582DBA000CDA44 /* UIImageView+Extension.swift */,
 			);
 			path = Extension;

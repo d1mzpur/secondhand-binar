@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		01C6CA3F28586DF900F0838E /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 01C6CA3E28586DF900F0838E /* Poppins-Regular.ttf */; };
+		01C6CA4628586EAB00F0838E /* SCLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C6CA4528586EAB00F0838E /* SCLabel.swift */; };
+		01C6CA482858713E00F0838E /* Poppins-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 01C6CA472858713E00F0838E /* Poppins-Light.ttf */; };
+		01C6CA4A2858714F00F0838E /* Poppins-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 01C6CA492858714F00F0838E /* Poppins-Bold.ttf */; };
 		0A9E1CFC28579B5F00D864A4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9E1CFB28579B5F00D864A4 /* AppDelegate.swift */; };
 		0A9E1CFE28579B5F00D864A4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9E1CFD28579B5F00D864A4 /* SceneDelegate.swift */; };
 		0A9E1D0528579B6A00D864A4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A9E1D0428579B6A00D864A4 /* Assets.xcassets */; };
@@ -16,6 +20,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		01C6CA3E28586DF900F0838E /* Poppins-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Regular.ttf"; sourceTree = "<group>"; };
+		01C6CA4528586EAB00F0838E /* SCLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCLabel.swift; sourceTree = "<group>"; };
+		01C6CA472858713E00F0838E /* Poppins-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Light.ttf"; sourceTree = "<group>"; };
+		01C6CA492858714F00F0838E /* Poppins-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Bold.ttf"; sourceTree = "<group>"; };
 		0A9E1CF828579B5F00D864A4 /* SecondHands.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SecondHands.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A9E1CFB28579B5F00D864A4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0A9E1CFD28579B5F00D864A4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -37,6 +45,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		01C6CA4228586E7B00F0838E /* ComponentView */ = {
+			isa = PBXGroup;
+			children = (
+				01C6CA4428586E9200F0838E /* Molecule */,
+				01C6CA4328586E8A00F0838E /* Atom */,
+			);
+			path = ComponentView;
+			sourceTree = "<group>";
+		};
+		01C6CA4328586E8A00F0838E /* Atom */ = {
+			isa = PBXGroup;
+			children = (
+				01C6CA4528586EAB00F0838E /* SCLabel.swift */,
+			);
+			path = Atom;
+			sourceTree = "<group>";
+		};
+		01C6CA4428586E9200F0838E /* Molecule */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Molecule;
+			sourceTree = "<group>";
+		};
 		0A9E1CEF28579B5F00D864A4 = {
 			isa = PBXGroup;
 			children = (
@@ -77,6 +109,9 @@
 			isa = PBXGroup;
 			children = (
 				0A9E1D0428579B6A00D864A4 /* Assets.xcassets */,
+				01C6CA3E28586DF900F0838E /* Poppins-Regular.ttf */,
+				01C6CA472858713E00F0838E /* Poppins-Light.ttf */,
+				01C6CA492858714F00F0838E /* Poppins-Bold.ttf */,
 				0A9E1D0628579B6A00D864A4 /* LaunchScreen.storyboard */,
 				0A9E1D0928579B6A00D864A4 /* Info.plist */,
 			);
@@ -86,7 +121,7 @@
 		0A9E1D1228579B8D00D864A4 /* PresentationLayer */ = {
 			isa = PBXGroup;
 			children = (
-				0A9E1D2628579F7300D864A4 /* ComponentView */,
+				01C6CA4228586E7B00F0838E /* ComponentView */,
 				0A9E1D1C28579C3600D864A4 /* Home */,
 			);
 			path = PresentationLayer;
@@ -122,29 +157,6 @@
 				0AD055AC28582DBA000CDA44 /* UIImageView+Extension.swift */,
 			);
 			path = Extension;
-			sourceTree = "<group>";
-		};
-		0A9E1D2628579F7300D864A4 /* ComponentView */ = {
-			isa = PBXGroup;
-			children = (
-				0A9E1D2728579F7D00D864A4 /* Atom */,
-				0A9E1D2828579F8500D864A4 /* Molecule */,
-			);
-			path = ComponentView;
-			sourceTree = "<group>";
-		};
-		0A9E1D2728579F7D00D864A4 /* Atom */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Atom;
-			sourceTree = "<group>";
-		};
-		0A9E1D2828579F8500D864A4 /* Molecule */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Molecule;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -204,8 +216,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01C6CA3F28586DF900F0838E /* Poppins-Regular.ttf in Resources */,
 				0A9E1D0828579B6A00D864A4 /* LaunchScreen.storyboard in Resources */,
+				01C6CA4A2858714F00F0838E /* Poppins-Bold.ttf in Resources */,
 				0A9E1D0528579B6A00D864A4 /* Assets.xcassets in Resources */,
+				01C6CA482858713E00F0838E /* Poppins-Light.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -217,6 +232,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A9E1CFC28579B5F00D864A4 /* AppDelegate.swift in Sources */,
+				01C6CA4628586EAB00F0838E /* SCLabel.swift in Sources */,
 				0A9E1CFE28579B5F00D864A4 /* SceneDelegate.swift in Sources */,
 				0AD055AD28582DBA000CDA44 /* UIImageView+Extension.swift in Sources */,
 				0A9E1D1A28579C2E00D864A4 /* SCHomeViewController.swift in Sources */,

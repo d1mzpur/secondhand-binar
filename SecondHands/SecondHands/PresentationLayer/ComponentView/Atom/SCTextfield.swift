@@ -80,23 +80,6 @@ class SCTextfield: UITextField {
     
 }
 
-extension UIView {
-    func addSubviews(_ views: UIView...) {
-        views.forEach{
-            addSubview($0)
-        }
-    }
-    
-    func setTranslatesAutoresizingMaskIntoConstraintsToFalse(_ views: UIView...) {
-        views.forEach {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-        }
-    }
-}
-
-
-
-
 //private lazy var areaTextField: SCTextfield = {
 //    let textField = SCTextfield()
 //    textField.setPlaceholder(placeholder: "Area")

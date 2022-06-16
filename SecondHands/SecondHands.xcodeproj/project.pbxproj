@@ -274,12 +274,9 @@
 				18031BAC2858D6D000EC9D69 /* ColorAlias.swift in Sources */,
 				0A9E1CFE28579B5F00D864A4 /* SceneDelegate.swift in Sources */,
 				0AD055AD28582DBA000CDA44 /* UIImageView+Extension.swift in Sources */,
-<<<<<<< HEAD
-=======
 				0A9E1D1A28579C2E00D864A4 /* SCHomeViewController.swift in Sources */,
 				22E1F760285A30D900FA40BF /* SCTextfield.swift in Sources */,
 				72BDD18D2858A0BF006A75A6 /* SCButton.swift in Sources */,
->>>>>>> 9e29e504ce04efbea11b4d1cd1aad64c16fb1eb4
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

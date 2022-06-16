@@ -19,6 +19,9 @@
 		0A9E1D0528579B6A00D864A4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A9E1D0428579B6A00D864A4 /* Assets.xcassets */; };
 		0A9E1D0828579B6A00D864A4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A9E1D0628579B6A00D864A4 /* LaunchScreen.storyboard */; };
 		0AD055AD28582DBA000CDA44 /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD055AC28582DBA000CDA44 /* UIImageView+Extension.swift */; };
+		18031BAC2858D6D000EC9D69 /* ColorAlias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18031BAB2858D6D000EC9D69 /* ColorAlias.swift */; };
+		22E1F760285A30D900FA40BF /* SCTextfield.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E1F75F285A30D900FA40BF /* SCTextfield.swift */; };
+		72BDD18D2858A0BF006A75A6 /* SCButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72BDD18C2858A0BF006A75A6 /* SCButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +39,9 @@
 		0A9E1D0728579B6A00D864A4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0A9E1D0928579B6A00D864A4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0AD055AC28582DBA000CDA44 /* UIImageView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
+		18031BAB2858D6D000EC9D69 /* ColorAlias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorAlias.swift; sourceTree = "<group>"; };
+		22E1F75F285A30D900FA40BF /* SCTextfield.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCTextfield.swift; sourceTree = "<group>"; };
+		72BDD18C2858A0BF006A75A6 /* SCButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +68,8 @@
 			isa = PBXGroup;
 			children = (
 				01C6CA4528586EAB00F0838E /* SCLabel.swift */,
+				72BDD18C2858A0BF006A75A6 /* SCButton.swift */,
+				22E1F75F285A30D900FA40BF /* SCTextfield.swift */,
 			);
 			path = Atom;
 			sourceTree = "<group>";
@@ -159,6 +167,7 @@
 		0A9E1D2228579EEA00D864A4 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				18031BAB2858D6D000EC9D69 /* ColorAlias.swift */,
 				0AD055AC28582DBA000CDA44 /* UIImageView+Extension.swift */,
 				019DC75728590A68008B4BFE /* UIView+Extension.swift */,
 			);
@@ -242,8 +251,15 @@
 				0A9E1CFC28579B5F00D864A4 /* AppDelegate.swift in Sources */,
 				0A62E597285B042400BC3034 /* CategorySectionCollectionReusableView.swift in Sources */,
 				01C6CA4628586EAB00F0838E /* SCLabel.swift in Sources */,
+				18031BAC2858D6D000EC9D69 /* ColorAlias.swift in Sources */,
 				0A9E1CFE28579B5F00D864A4 /* SceneDelegate.swift in Sources */,
 				0AD055AD28582DBA000CDA44 /* UIImageView+Extension.swift in Sources */,
+<<<<<<< HEAD
+=======
+				0A9E1D1A28579C2E00D864A4 /* SCHomeViewController.swift in Sources */,
+				22E1F760285A30D900FA40BF /* SCTextfield.swift in Sources */,
+				72BDD18D2858A0BF006A75A6 /* SCButton.swift in Sources */,
+>>>>>>> 9e29e504ce04efbea11b4d1cd1aad64c16fb1eb4
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

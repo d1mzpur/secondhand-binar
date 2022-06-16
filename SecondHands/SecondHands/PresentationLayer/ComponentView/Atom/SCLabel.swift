@@ -9,9 +9,14 @@ import UIKit
 
 class SCLabel: UILabel {
     enum Weight: String {
+        case thin = "Poppins-Thin"
+        case extraLight = "Poppins-ExtraLight"
         case light = "Poppins-Light"
         case regular = "Poppins-Regular"
+        case medium = "Poppins-Medium"
+        case semiBold = "Poppins-SemiBold"
         case bold = "Poppins-Bold"
+        case extraBold = "Poppins-ExtraBold"
     }
     private var weight: Weight = .regular
     private var size: CGFloat = 14

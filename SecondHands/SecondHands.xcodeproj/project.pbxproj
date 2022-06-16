@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0159351D285B0A21006F9EE6 /* Poppins-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 01593517285B0A20006F9EE6 /* Poppins-ExtraBold.ttf */; };
+		0159351E285B0A21006F9EE6 /* Poppins-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 01593518285B0A21006F9EE6 /* Poppins-Medium.ttf */; };
+		0159351F285B0A21006F9EE6 /* Poppins-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 01593519285B0A21006F9EE6 /* Poppins-Thin.ttf */; };
+		01593520285B0A21006F9EE6 /* Poppins-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0159351A285B0A21006F9EE6 /* Poppins-ExtraLight.ttf */; };
+		01593521285B0A21006F9EE6 /* Poppins-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0159351B285B0A21006F9EE6 /* Poppins-SemiBold.ttf */; };
 		019DC75828590A68008B4BFE /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019DC75728590A68008B4BFE /* UIView+Extension.swift */; };
 		01C6CA3F28586DF900F0838E /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 01C6CA3E28586DF900F0838E /* Poppins-Regular.ttf */; };
 		01C6CA4628586EAB00F0838E /* SCLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C6CA4528586EAB00F0838E /* SCLabel.swift */; };
@@ -24,6 +29,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		01593517285B0A20006F9EE6 /* Poppins-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-ExtraBold.ttf"; sourceTree = "<group>"; };
+		01593518285B0A21006F9EE6 /* Poppins-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Medium.ttf"; sourceTree = "<group>"; };
+		01593519285B0A21006F9EE6 /* Poppins-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Thin.ttf"; sourceTree = "<group>"; };
+		0159351A285B0A21006F9EE6 /* Poppins-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-ExtraLight.ttf"; sourceTree = "<group>"; };
+		0159351B285B0A21006F9EE6 /* Poppins-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-SemiBold.ttf"; sourceTree = "<group>"; };
 		019DC75728590A68008B4BFE /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		01C6CA3E28586DF900F0838E /* Poppins-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Regular.ttf"; sourceTree = "<group>"; };
 		01C6CA4528586EAB00F0838E /* SCLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCLabel.swift; sourceTree = "<group>"; };
@@ -122,6 +132,11 @@
 				01C6CA3E28586DF900F0838E /* Poppins-Regular.ttf */,
 				01C6CA472858713E00F0838E /* Poppins-Light.ttf */,
 				01C6CA492858714F00F0838E /* Poppins-Bold.ttf */,
+				01593517285B0A20006F9EE6 /* Poppins-ExtraBold.ttf */,
+				0159351A285B0A21006F9EE6 /* Poppins-ExtraLight.ttf */,
+				01593518285B0A21006F9EE6 /* Poppins-Medium.ttf */,
+				0159351B285B0A21006F9EE6 /* Poppins-SemiBold.ttf */,
+				01593519285B0A21006F9EE6 /* Poppins-Thin.ttf */,
 				0A9E1D0628579B6A00D864A4 /* LaunchScreen.storyboard */,
 				0A9E1D0928579B6A00D864A4 /* Info.plist */,
 			);
@@ -229,9 +244,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				01C6CA3F28586DF900F0838E /* Poppins-Regular.ttf in Resources */,
+				0159351E285B0A21006F9EE6 /* Poppins-Medium.ttf in Resources */,
 				0A9E1D0828579B6A00D864A4 /* LaunchScreen.storyboard in Resources */,
+				01593520285B0A21006F9EE6 /* Poppins-ExtraLight.ttf in Resources */,
 				01C6CA4A2858714F00F0838E /* Poppins-Bold.ttf in Resources */,
+				01593521285B0A21006F9EE6 /* Poppins-SemiBold.ttf in Resources */,
 				0A9E1D0528579B6A00D864A4 /* Assets.xcassets in Resources */,
+				0159351F285B0A21006F9EE6 /* Poppins-Thin.ttf in Resources */,
+				0159351D285B0A21006F9EE6 /* Poppins-ExtraBold.ttf in Resources */,
 				01C6CA482858713E00F0838E /* Poppins-Light.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

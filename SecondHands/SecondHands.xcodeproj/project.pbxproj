@@ -12,6 +12,8 @@
 		0159351F285B0A21006F9EE6 /* Poppins-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 01593519285B0A21006F9EE6 /* Poppins-Thin.ttf */; };
 		01593520285B0A21006F9EE6 /* Poppins-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0159351A285B0A21006F9EE6 /* Poppins-ExtraLight.ttf */; };
 		01593521285B0A21006F9EE6 /* Poppins-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0159351B285B0A21006F9EE6 /* Poppins-SemiBold.ttf */; };
+		01593524285B2C8B006F9EE6 /* SCProductCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01593523285B2C8B006F9EE6 /* SCProductCard.swift */; };
+		01593526285B30C5006F9EE6 /* exampleProductCardImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 01593525285B30C5006F9EE6 /* exampleProductCardImage.png */; };
 		019DC75828590A68008B4BFE /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019DC75728590A68008B4BFE /* UIView+Extension.swift */; };
 		01C6CA3F28586DF900F0838E /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 01C6CA3E28586DF900F0838E /* Poppins-Regular.ttf */; };
 		01C6CA4628586EAB00F0838E /* SCLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C6CA4528586EAB00F0838E /* SCLabel.swift */; };
@@ -35,6 +37,8 @@
 		01593519285B0A21006F9EE6 /* Poppins-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Thin.ttf"; sourceTree = "<group>"; };
 		0159351A285B0A21006F9EE6 /* Poppins-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-ExtraLight.ttf"; sourceTree = "<group>"; };
 		0159351B285B0A21006F9EE6 /* Poppins-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-SemiBold.ttf"; sourceTree = "<group>"; };
+		01593523285B2C8B006F9EE6 /* SCProductCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCProductCard.swift; sourceTree = "<group>"; };
+		01593525285B30C5006F9EE6 /* exampleProductCardImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = exampleProductCardImage.png; sourceTree = "<group>"; };
 		019DC75728590A68008B4BFE /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		01C6CA3E28586DF900F0838E /* Poppins-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Regular.ttf"; sourceTree = "<group>"; };
 		01C6CA4528586EAB00F0838E /* SCLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCLabel.swift; sourceTree = "<group>"; };
@@ -87,6 +91,7 @@
 		01C6CA4428586E9200F0838E /* Molecule */ = {
 			isa = PBXGroup;
 			children = (
+				01593523285B2C8B006F9EE6 /* SCProductCard.swift */,
 			);
 			path = Molecule;
 			sourceTree = "<group>";
@@ -131,6 +136,7 @@
 			isa = PBXGroup;
 			children = (
 				0A9E1D0428579B6A00D864A4 /* Assets.xcassets */,
+				01593525285B30C5006F9EE6 /* exampleProductCardImage.png */,
 				01C6CA3E28586DF900F0838E /* Poppins-Regular.ttf */,
 				01C6CA472858713E00F0838E /* Poppins-Light.ttf */,
 				01C6CA492858714F00F0838E /* Poppins-Bold.ttf */,
@@ -253,6 +259,7 @@
 				01C6CA4A2858714F00F0838E /* Poppins-Bold.ttf in Resources */,
 				01593521285B0A21006F9EE6 /* Poppins-SemiBold.ttf in Resources */,
 				0A9E1D0528579B6A00D864A4 /* Assets.xcassets in Resources */,
+				01593526285B30C5006F9EE6 /* exampleProductCardImage.png in Resources */,
 				0159351F285B0A21006F9EE6 /* Poppins-Thin.ttf in Resources */,
 				0159351D285B0A21006F9EE6 /* Poppins-ExtraBold.ttf in Resources */,
 				01C6CA482858713E00F0838E /* Poppins-Light.ttf in Resources */,
@@ -270,11 +277,11 @@
 				019DC75828590A68008B4BFE /* UIView+Extension.swift in Sources */,
 				0A9E1CFC28579B5F00D864A4 /* AppDelegate.swift in Sources */,
 				0A62E597285B042400BC3034 /* CategorySectionCollectionReusableView.swift in Sources */,
+				01593524285B2C8B006F9EE6 /* SCProductCard.swift in Sources */,
 				01C6CA4628586EAB00F0838E /* SCLabel.swift in Sources */,
 				18031BAC2858D6D000EC9D69 /* ColorAlias.swift in Sources */,
 				0A9E1CFE28579B5F00D864A4 /* SceneDelegate.swift in Sources */,
 				0AD055AD28582DBA000CDA44 /* UIImageView+Extension.swift in Sources */,
-				0A9E1D1A28579C2E00D864A4 /* SCHomeViewController.swift in Sources */,
 				22E1F760285A30D900FA40BF /* SCTextfield.swift in Sources */,
 				72BDD18D2858A0BF006A75A6 /* SCButton.swift in Sources */,
 			);

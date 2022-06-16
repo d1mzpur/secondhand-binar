@@ -36,4 +36,10 @@ extension UIView {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
     }
+    
+    func addAction(_ selector: Selector, target: AnyObject) {
+        isUserInteractionEnabled = true
+        let gesture = UITapGestureRecognizer(target: target, action: selector)
+        self.addGestureRecognizer(gesture)
+    }
 }

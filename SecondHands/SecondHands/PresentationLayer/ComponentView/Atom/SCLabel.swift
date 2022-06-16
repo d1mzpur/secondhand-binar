@@ -18,8 +18,8 @@ class SCLabel: UILabel {
         case bold = "Poppins-Bold"
         case extraBold = "Poppins-ExtraBold"
     }
-    private var weight: Weight = .regular
-    private var size: CGFloat = 14
+    var weight: Weight = .regular
+    var size: CGFloat = 14
     
     init(frame: CGRect = CGRect.zero, weight: Weight = .regular, size:CGFloat = 14) {
         super.init(frame: frame)

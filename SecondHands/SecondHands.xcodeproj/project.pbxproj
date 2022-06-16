@@ -69,6 +69,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		01593527285B6CF8006F9EE6 /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				01C6CA3E28586DF900F0838E /* Poppins-Regular.ttf */,
+				01C6CA472858713E00F0838E /* Poppins-Light.ttf */,
+				01C6CA492858714F00F0838E /* Poppins-Bold.ttf */,
+				01593517285B0A20006F9EE6 /* Poppins-ExtraBold.ttf */,
+				0159351A285B0A21006F9EE6 /* Poppins-ExtraLight.ttf */,
+				01593518285B0A21006F9EE6 /* Poppins-Medium.ttf */,
+				0159351B285B0A21006F9EE6 /* Poppins-SemiBold.ttf */,
+				01593519285B0A21006F9EE6 /* Poppins-Thin.ttf */,
+			);
+			path = Font;
+			sourceTree = "<group>";
+		};
 		01C6CA4228586E7B00F0838E /* ComponentView */ = {
 			isa = PBXGroup;
 			children = (
@@ -135,16 +150,9 @@
 		0A9E1D1128579B8900D864A4 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				01593527285B6CF8006F9EE6 /* Font */,
 				0A9E1D0428579B6A00D864A4 /* Assets.xcassets */,
 				01593525285B30C5006F9EE6 /* exampleProductCardImage.png */,
-				01C6CA3E28586DF900F0838E /* Poppins-Regular.ttf */,
-				01C6CA472858713E00F0838E /* Poppins-Light.ttf */,
-				01C6CA492858714F00F0838E /* Poppins-Bold.ttf */,
-				01593517285B0A20006F9EE6 /* Poppins-ExtraBold.ttf */,
-				0159351A285B0A21006F9EE6 /* Poppins-ExtraLight.ttf */,
-				01593518285B0A21006F9EE6 /* Poppins-Medium.ttf */,
-				0159351B285B0A21006F9EE6 /* Poppins-SemiBold.ttf */,
-				01593519285B0A21006F9EE6 /* Poppins-Thin.ttf */,
 				0A9E1D0628579B6A00D864A4 /* LaunchScreen.storyboard */,
 				0A9E1D0928579B6A00D864A4 /* Info.plist */,
 			);

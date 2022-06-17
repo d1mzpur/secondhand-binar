@@ -21,6 +21,7 @@ class SCProductCard: UIView {
     lazy var productTitle: SCLabel = {
         var lbl = SCLabel()
         lbl.text = "Jam Tangan Casio"
+        lbl.textColor = .Neutral05
         lbl.translatesAutoresizingMaskIntoConstraints = false
         return lbl
     }()
@@ -29,7 +30,7 @@ class SCProductCard: UIView {
         var lbl = SCLabel()
         lbl.text = "Aksesoris"
         lbl.size = 10
-        lbl.textColor = .systemGray
+        lbl.textColor = .Neutral03
         lbl.translatesAutoresizingMaskIntoConstraints = false
         return lbl
     }()
@@ -37,6 +38,7 @@ class SCProductCard: UIView {
     lazy var productPrice: SCLabel = {
         var lbl = SCLabel()
         lbl.text = "Rp 250.000"
+        lbl.textColor = .Neutral05
         lbl.translatesAutoresizingMaskIntoConstraints = false
         return lbl
     }()

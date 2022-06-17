@@ -11,7 +11,7 @@ class CategorySectionCollectionReusableView: UICollectionReusableView {
     lazy var label = UILabel()
     override init(frame: CGRect) {
         super.init(frame: frame)
-        label.font = SCLabel(frame: .zero, weight: .bold, size: 14).font
+        label.font = SCLabel(frame: .zero, weight: .medium, size: 14).font
         label.text = "Telusuri Kategori"
         label.frame = bounds
         addSubview(label)

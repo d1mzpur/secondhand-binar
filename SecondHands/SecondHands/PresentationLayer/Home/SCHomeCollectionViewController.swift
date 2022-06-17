@@ -35,6 +35,16 @@ class SCHomeCollectionViewController: UICollectionViewController {
         super.init(collectionViewLayout: SCHomeCollectionViewController.createLayout())
     }
     
+    let item = [ ItemProduct(id: "1", productImage: "productImage", productTitle: "Puma Archive", productCategory: "Sepatu Casual", productPrice: "250.000"),
+                 ItemProduct(id: "2", productImage: "productImage", productTitle: "Puma Bold", productCategory: "Tas", productPrice: "300.000"),
+                 ItemProduct(id: "3", productImage: "productImage", productTitle: "Puma Futsal", productCategory: "Celana", productPrice: "400.000"),
+                 ItemProduct(id: "4", productImage: "productImage", productTitle: "Puma Bola", productCategory: "Tenda Biru", productPrice: "500.000"),
+                 ItemProduct(id: "1", productImage: "productImage", productTitle: "Puma Archive", productCategory: "Peralatan Rumah Tangga", productPrice: "250.000"),
+                 ItemProduct(id: "2", productImage: "productImage", productTitle: "Puma Bold", productCategory: "Sayur - Sayuran", productPrice: "300.000"),
+                 ItemProduct(id: "3", productImage: "productImage", productTitle: "Puma Futsal", productCategory: "Buah - Buahan", productPrice: "400.000"),
+                 ItemProduct(id: "4", productImage: "productImage", productTitle: "Puma Bola", productCategory: "Laptop", productPrice: "500.000")
+    ]
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -43,12 +53,26 @@ class SCHomeCollectionViewController: UICollectionViewController {
         super.viewDidLoad()
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
+        
+        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        bannerCellRegistrasion = UICollectionView.CellRegistration(handler: { (cell: SCProductCardViewCollectionViewCell, _, item: ItemProduct) in
+            cell.setup(item: item)
+        })
+        
+        categoryCellRegistration = UICollectionView.CellRegistration(handler: { (cell: SCCategoryChipCollectionViewCell, _, item: ItemProduct) in
+            cell.textTitle.text = item.productCategory
+        })
+        
         self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         self.collectionView.register(CategorySectionCollectionReusableView.self, forSupplementaryViewOfKind: SCHomeCollectionViewController.categoryId, withReuseIdentifier: headerId)
+        
         createSearchBar()
         configureView()
         createTransparantNavBar()
     }
+    
+    var bannerCellRegistrasion: UICollectionView.CellRegistration<SCProductCardViewCollectionViewCell, ItemProduct>!
+    var categoryCellRegistration: UICollectionView.CellRegistration<SCCategoryChipCollectionViewCell, ItemProduct>!
     
     func createSearchBar() {
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: searchBar)
@@ -62,14 +86,15 @@ class SCHomeCollectionViewController: UICollectionViewController {
     
     static func createLayout() -> UICollectionViewCompositionalLayout {
         return UICollectionViewCompositionalLayout { (sectionNumber, environment) -> NSCollectionLayoutSection? in
-            let itemView = ItemType.allCases[sectionNumber]
+            let data = ItemType.allCases[sectionNumber]
             
-            switch itemView {
+            switch data {
             case .banners:
                 let itemBanner = NSCollectionLayoutItem(
                     layoutSize: .init(
                         widthDimension: .fractionalWidth(1),
                         heightDimension: .fractionalHeight(1)))
+                
                 let group = NSCollectionLayoutGroup
                     .horizontal(
                         layoutSize: .init(
@@ -78,50 +103,47 @@ class SCHomeCollectionViewController: UICollectionViewController {
                         subitems: [itemBanner])
                 
                 let section = NSCollectionLayoutSection(group: group)
-                section.contentInsets.top = 16
-                section.orthogonalScrollingBehavior = .paging
-//                section.contentInsets.bottom = 64
+                
+                section.orthogonalScrollingBehavior = .groupPagingCentered
                 return section
             case .chip:
                 let itemCategory = NSCollectionLayoutItem(
                     layoutSize: .init(
-                        widthDimension: .absolute(100),
-                        heightDimension: .absolute(40)))
-                itemCategory.contentInsets.trailing = 8
+                        widthDimension: .estimated(100),
+                        heightDimension: .estimated(50)))
+
                 
-                let group = NSCollectionLayoutGroup
-                    .horizontal(
-                        layoutSize: .init(
-                            widthDimension: .fractionalWidth(0.5),
-                            heightDimension: .estimated(500)),
-                        subitems: [itemCategory])
-                
-                let section = NSCollectionLayoutSection(group: group)
-                section.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
-                section.contentInsets.leading = 16
-                section.contentInsets.bottom = 24
-                section.boundarySupplementaryItems = [
-                    .init(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .absolute(50)), elementKind: categoryId, alignment: .topLeading)
-                ]
-                return section
-            case .cardView:
-                let itemCategory = NSCollectionLayoutItem(
-                    layoutSize: .init(
-                        widthDimension: .fractionalWidth(0.5),
-                        heightDimension: .absolute(240)))
-                itemCategory.contentInsets.trailing = 16
-                itemCategory.contentInsets.bottom = 16
                 let group = NSCollectionLayoutGroup
                     .horizontal(
                         layoutSize: .init(
                             widthDimension: .fractionalWidth(1),
-                            heightDimension: .estimated(500)),
+                            heightDimension: .estimated(50)),
                         subitems: [itemCategory])
-                group.contentInsets.bottom = 16
+                
+                let section = NSCollectionLayoutSection(group: group)
+                section.orthogonalScrollingBehavior = .continuous
+                
+                section.boundarySupplementaryItems = [
+                    .init(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .absolute(50)), elementKind: categoryId, alignment: .topLeading)
+                ]
+                
+                section.contentInsets.bottom = 32
+                
+                return section
+            case .cardView :
+                let layoutSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5), heightDimension: .absolute(200))
+                
+                let itemCategory = NSCollectionLayoutItem(layoutSize: layoutSize)
+                itemCategory.contentInsets.trailing = 16
+                
+                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(300))
+                let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [itemCategory])
                 let section = NSCollectionLayoutSection(group: group)
                 section.contentInsets.leading = 16
+                section.interGroupSpacing = 16
                 return section
             }
+            
         }
     }
     
@@ -158,9 +180,21 @@ class SCHomeCollectionViewController: UICollectionViewController {
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
-        cell.backgroundColor = .systemYellow
-        return cell
+        let data = item[indexPath.item]
+        if indexPath.section == 0 {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
+            cell.backgroundColor = .systemYellow
+            return cell
+        } else if indexPath.section == 1 {
+            let cell = collectionView.dequeueConfiguredReusableCell(using: categoryCellRegistration, for: indexPath, item: data)
+            return cell
+        } else {
+            let cell = collectionView.dequeueConfiguredReusableCell(using: bannerCellRegistrasion, for: indexPath, item: data)
+//                .createRounded(radius: 4)
+//            cell.container.backgroundColor = .systemGray6
+            cell.backgroundColor = .gray
+            return cell
+        }
     }
 
 }
@@ -201,3 +235,4 @@ extension SCHomeCollectionViewController: UISearchBarDelegate, UITextFieldDelega
     }
     
 }
+

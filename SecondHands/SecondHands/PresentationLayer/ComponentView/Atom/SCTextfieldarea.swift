@@ -16,7 +16,7 @@ class SCTextfieldarea: UITextView {
         right: 20
     )
     
-    init(frame: CGRect) {
+    init(frame: CGRect = CGRect.zero) {
         super.init(frame: frame, textContainer: .none)
         configure()
     }
@@ -26,15 +26,14 @@ class SCTextfieldarea: UITextView {
     }
     
     private func configure() {
-        translatesAutoresizingMaskIntoConstraints = false
         font = UIFont(name: "Poppins-Regular", size: 14)
         layer.borderWidth = 1.0
-        layer.borderColor = UIColor.systemGray5.cgColor
+        layer.borderColor = UIColor.Neutral02.cgColor
         layer.cornerRadius = 16
         clipsToBounds = true
         backgroundColor = .systemBackground
         isEditable = true
-        
+        contentInset = textPadding
     }
     
     public func setText(placeholder: String) {

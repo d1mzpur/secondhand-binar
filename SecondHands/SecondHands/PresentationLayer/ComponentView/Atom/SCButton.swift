@@ -25,13 +25,11 @@ class SCButton: UIButton {
         case ghostButton
     }
     
-    
     public private(set) var style: Style
     public private(set) var size: Size
     public private(set) var type: typeButton
     public private(set) var title: String
 
-    
     //MARK: -init
     init(style: Style, size: Size, type: typeButton, title: String) {
         self.size = size
@@ -53,8 +51,6 @@ class SCButton: UIButton {
         buttonSetup()
         handleSizeButton()
         handleStyleButton()
-        
-        
     }
     
     private func buttonSetup(){
@@ -67,9 +63,9 @@ class SCButton: UIButton {
     private func handleSizeButton(){
         switch size {
         case .normal:
-            frame = CGRect(x: 100, y: 100, width: 200, height: 48)
+            self.addConstraint(self.heightAnchor.constraint(equalToConstant: 48))
         case .small:
-            frame = CGRect(x: 100, y: 100, width: 200, height: 36)
+            self.addConstraint(self.heightAnchor.constraint(equalToConstant: 36))
 
         }
     }
@@ -79,28 +75,28 @@ class SCButton: UIButton {
         case .primary:
             switch type {
             case .defaultButton:
-                setTitleColor(UIColor(red: 1, green: 1, blue: 1, alpha: 1), for: .normal)
-                layer.backgroundColor = UIColor(red: 0.443, green: 0.149, blue: 0.71, alpha: 1).cgColor
+                setTitleColor(UIColor.Neutral01, for: .normal)
+                layer.backgroundColor = UIColor.DarkBlue04.cgColor
             case .disableButton:
-                setTitleColor(UIColor(red: 1, green: 1, blue: 1, alpha: 1), for: .normal)
-                layer.backgroundColor = UIColor(red: 0.816, green: 0.816, blue: 0.816, alpha: 1).cgColor
+                setTitleColor(UIColor.Neutral01, for: .normal)
+                layer.backgroundColor = UIColor.Neutral02.cgColor
             case .ghostButton:
-                setTitleColor(UIColor(red: 0.443, green: 0.149, blue: 0.71, alpha: 1), for: .normal)
+                setTitleColor(UIColor.DarkBlue04, for: .normal)
             }
         case .secondary:
             switch type {
             case .defaultButton:
-                setTitleColor(UIColor(red: 0.082, green: 0.082, blue: 0.082, alpha: 1), for: .normal)
-                layer.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1).cgColor
+                setTitleColor(UIColor.Neutral05, for: .normal)
+                layer.backgroundColor = UIColor.Neutral01.cgColor
                 layer.borderWidth = 1
-                layer.borderColor = UIColor(red: 0.443, green: 0.149, blue: 0.71, alpha: 1).cgColor
+                layer.borderColor = UIColor.DarkBlue04.cgColor
             case .disableButton:
-                setTitleColor(UIColor(red: 0.816, green: 0.816, blue: 0.816, alpha: 1), for: .normal)
-                layer.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1).cgColor
+                setTitleColor(UIColor.Neutral02, for: .normal)
+                layer.backgroundColor = UIColor.Neutral01.cgColor
                 layer.borderWidth = 1
-                layer.borderColor = UIColor(red: 0.816, green: 0.816, blue: 0.816, alpha: 1).cgColor
+                layer.borderColor = UIColor.Neutral02.cgColor
             case .ghostButton:
-                setTitleColor(UIColor(red: 0.082, green: 0.082, blue: 0.082, alpha: 1), for: .normal)
+                setTitleColor(UIColor.Neutral05, for: .normal)
             }
         }
     }

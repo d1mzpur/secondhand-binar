@@ -16,6 +16,7 @@
 		01593526285B30C5006F9EE6 /* exampleProductCardImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 01593525285B30C5006F9EE6 /* exampleProductCardImage.png */; };
 		01593531285CAB8E006F9EE6 /* SCImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01593530285CAB8E006F9EE6 /* SCImagePicker.swift */; };
 		01593533285CAC44006F9EE6 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01593532285CAC44006F9EE6 /* UIImage+Extension.swift */; };
+		0188A908285D11780079E091 /* SCFormItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0188A907285D11780079E091 /* SCFormItem.swift */; };
 		019DC75828590A68008B4BFE /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019DC75728590A68008B4BFE /* UIView+Extension.swift */; };
 		01C6CA3F28586DF900F0838E /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 01C6CA3E28586DF900F0838E /* Poppins-Regular.ttf */; };
 		01C6CA4628586EAB00F0838E /* SCLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C6CA4528586EAB00F0838E /* SCLabel.swift */; };
@@ -49,6 +50,7 @@
 		01593525285B30C5006F9EE6 /* exampleProductCardImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = exampleProductCardImage.png; sourceTree = "<group>"; };
 		01593530285CAB8E006F9EE6 /* SCImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCImagePicker.swift; sourceTree = "<group>"; };
 		01593532285CAC44006F9EE6 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
+		0188A907285D11780079E091 /* SCFormItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCFormItem.swift; sourceTree = "<group>"; };
 		019DC75728590A68008B4BFE /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		01C6CA3E28586DF900F0838E /* Poppins-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Regular.ttf"; sourceTree = "<group>"; };
 		01C6CA4528586EAB00F0838E /* SCLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCLabel.swift; sourceTree = "<group>"; };
@@ -126,6 +128,7 @@
 			isa = PBXGroup;
 			children = (
 				01593523285B2C8B006F9EE6 /* SCProductCard.swift */,
+				0188A907285D11780079E091 /* SCFormItem.swift */,
 			);
 			path = Molecule;
 			sourceTree = "<group>";
@@ -333,6 +336,7 @@
 				0A62E597285B042400BC3034 /* CategorySectionCollectionReusableView.swift in Sources */,
 				01593524285B2C8B006F9EE6 /* SCProductCard.swift in Sources */,
 				01C6CA4628586EAB00F0838E /* SCLabel.swift in Sources */,
+				0188A908285D11780079E091 /* SCFormItem.swift in Sources */,
 				18031BAC2858D6D000EC9D69 /* UIColor+Extension.swift in Sources */,
 				0AC61C08285C4FDD00586870 /* SCCategoryChipCollectionViewCell.swift in Sources */,
 				0A9E1CFE28579B5F00D864A4 /* SceneDelegate.swift in Sources */,

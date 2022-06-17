@@ -77,10 +77,15 @@ class SCProductCard: UIView {
         setup()
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.dropShadow(type: .low)
+    }
+    
+    
     private func setup() {
         self.backgroundColor = .white
         self.layer.cornerRadius = 10
-        self.dropShadow(type: .low)
         self.addSubview(productStack)
 
         NSLayoutConstraint.activate([

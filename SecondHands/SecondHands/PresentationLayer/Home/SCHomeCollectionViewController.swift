@@ -192,7 +192,7 @@ class SCHomeCollectionViewController: UICollectionViewController {
             let cell = collectionView.dequeueConfiguredReusableCell(using: bannerCellRegistrasion, for: indexPath, item: data)
 //                .createRounded(radius: 4)
 //            cell.container.backgroundColor = .systemGray6
-            cell.backgroundColor = .gray
+            cell.backgroundColor = .white
             return cell
         }
     }

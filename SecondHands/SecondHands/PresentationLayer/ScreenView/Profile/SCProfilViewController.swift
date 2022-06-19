@@ -22,7 +22,6 @@ class SCProfilViewController: UIViewController {
     lazy var formAdress:  SCFormItem = SCFormItem(formType: .area, formName: "Alamat", placeholder: "contoh: Jalan Ikan Hiu 33")
     
     lazy var imagePicker: SCImagePicker = SCImagePicker(
-            frame: CGRect(x: 100, y:100, width: 100, height: 100),
             delegate: self,
             style: .style1,
             completionHandler: { (image) in print("image:", image)}
@@ -30,13 +29,10 @@ class SCProfilViewController: UIViewController {
     
     lazy var formItemStack: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [
-            imagePicker,
             formName,
             formAdress,
             formNumberPhone
         ])
-        
-        stackView.setCustomSpacing(124, after: imagePicker)
         stackView.setCustomSpacing(16, after: formName)
         stackView.setCustomSpacing(16, after: formAdress)
         stackView.axis = .vertical
@@ -48,12 +44,24 @@ class SCProfilViewController: UIViewController {
         super.viewDidLoad()
         title = "Lengkapi Info Akun"
         view.backgroundColor = .white
+        view.addSubview(imagePicker)
         view.addSubview(formItemStack)
+        
+        imagePicker.translatesAutoresizingMaskIntoConstraints = false
         formItemStack.translatesAutoresizingMaskIntoConstraints = false
+        
+        
         NSLayoutConstraint.activate([
+            
+            imagePicker.topAnchor.constraint(equalTo: view.topAnchor, constant: 125),
+            imagePicker.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            imagePicker.heightAnchor.constraint(equalToConstant: 100),
+            imagePicker.widthAnchor.constraint(equalToConstant: 100),
+            
+            formItemStack.topAnchor.constraint(equalTo: imagePicker.bottomAnchor, constant: 50),
             formItemStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            formItemStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            formItemStack.topAnchor.constraint(equalTo: view.topAnchor, constant: 150)
+            formItemStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
+            
         ])
     }
     

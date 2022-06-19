@@ -8,16 +8,23 @@
 import UIKit
 
 
-class SCTextfieldarea: UITextView {
+class SCTextfieldarea: UITextView, UITextViewDelegate {
     var textPadding = UIEdgeInsets(
-        top: 0,
-        left: 20,
-        bottom: 0,
-        right: 20
+        top: 15,
+        left: 15,
+        bottom: 15,
+        right: 15
     )
+    
+    var placeholder: String = "Placeholder"{
+        didSet{
+            self.text = placeholder
+        }
+    }
     
     init(frame: CGRect = CGRect.zero) {
         super.init(frame: frame, textContainer: .none)
+        self.delegate = self
         configure()
     }
     
@@ -25,7 +32,22 @@ class SCTextfieldarea: UITextView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.textColor == UIColor.Neutral02 {
+            textView.text = nil
+            textView.textColor = UIColor.black
+        }
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text.isEmpty {
+            textView.text = self.placeholder
+            textView.textColor = UIColor.Neutral02
+        }
+    }
+    
     private func configure() {
+        textContainerInset = textPadding
         font = UIFont(name: "Poppins-Regular", size: 14)
         layer.borderWidth = 1.0
         layer.borderColor = UIColor.Neutral02.cgColor
@@ -33,11 +55,11 @@ class SCTextfieldarea: UITextView {
         clipsToBounds = true
         backgroundColor = .systemBackground
         isEditable = true
-        contentInset = textPadding
     }
     
     public func setText(placeholder: String) {
-        self.text = placeholder
+        self.placeholder = placeholder
+        self.textColor = UIColor.Neutral02
     }
     
 }

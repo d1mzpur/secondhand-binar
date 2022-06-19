@@ -135,6 +135,23 @@
 			path = Molecule;
 			sourceTree = "<group>";
 		};
+		01CD6CA3285EFE8F00BA99DF /* ScreenView */ = {
+			isa = PBXGroup;
+			children = (
+				01CD6CA4285EFEA000BA99DF /* Profile */,
+				0A9E1D1C28579C3600D864A4 /* Home */,
+			);
+			path = ScreenView;
+			sourceTree = "<group>";
+		};
+		01CD6CA4285EFEA000BA99DF /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				22D5643D285DA7E300BB5294 /* SCProfilViewController.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
 		0A9E1CEF28579B5F00D864A4 = {
 			isa = PBXGroup;
 			children = (
@@ -186,8 +203,8 @@
 		0A9E1D1228579B8D00D864A4 /* PresentationLayer */ = {
 			isa = PBXGroup;
 			children = (
+				01CD6CA3285EFE8F00BA99DF /* ScreenView */,
 				01C6CA4228586E7B00F0838E /* ComponentView */,
-				0A9E1D1C28579C3600D864A4 /* Home */,
 			);
 			path = PresentationLayer;
 			sourceTree = "<group>";
@@ -212,7 +229,6 @@
 		0A9E1D1C28579C3600D864A4 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				22D5643D285DA7E300BB5294 /* SCProfilViewController.swift */,
 				0AC61BFA285C4E6500586870 /* Cell */,
 				0A80DBDC2859D8E80002287B /* SCHomeCollectionViewController.swift */,
 				0A62E596285B042400BC3034 /* CategorySectionCollectionReusableView.swift */,

@@ -21,6 +21,8 @@ class SCProfilViewController: UIViewController {
     lazy var formNumberPhone:  SCFormItem = SCFormItem(formType: .normal, formName: "No Handphone", placeholder: "contoh: +628123456789")
     lazy var formAdress:  SCFormItem = SCFormItem(formType: .area, formName: "Alamat", placeholder: "contoh: Jalan Ikan Hiu 33")
     
+    lazy var saveButton: SCButton = SCButton(style: .primary, size: .normal, type: .defaultButton, title: "Simpan")
+    
     lazy var imagePicker: SCImagePicker = SCImagePicker(
             delegate: self,
             style: .style1,
@@ -31,10 +33,12 @@ class SCProfilViewController: UIViewController {
         let stackView = UIStackView(arrangedSubviews: [
             formName,
             formAdress,
-            formNumberPhone
+            formNumberPhone,
+            saveButton
         ])
         stackView.setCustomSpacing(16, after: formName)
         stackView.setCustomSpacing(16, after: formAdress)
+        stackView.setCustomSpacing(24, after: formNumberPhone)
         stackView.axis = .vertical
         return stackView
         

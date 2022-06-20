@@ -61,32 +61,41 @@ extension LayoutSection {
     
     private func createLayoutProductList(environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
         
-        let desiredWidth: CGFloat = 230
-        let itemCount = environment.container.effectiveContentSize.width / desiredWidth
-        let fractionWidth: CGFloat = 1 / (itemCount.rounded())
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(fractionWidth), heightDimension: .fractionalHeight(1.0))
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.contentInsets = NSDirectionalEdgeInsets.uniform(size: 10)
+        let layoutSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5), heightDimension: .fractionalWidth(0.66))
         
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalWidth(0.5))
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        let itemCategory = NSCollectionLayoutItem(layoutSize: layoutSize)
+        itemCategory.contentInsets.trailing = 16
         
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(300))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [itemCategory])
         let section = NSCollectionLayoutSection(group: group)
-//        let layoutSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5), heightDimension: .absolute(200))
-//        let itemCategory = NSCollectionLayoutItem(layoutSize: layoutSize)
-//        itemCategory.contentInsets.trailing = 16
+        section.contentInsets.leading = 16
+        section.interGroupSpacing = 16
+        return section
+        
+//        let desiredWidth: CGFloat = 230
+//        let itemCount = environment.container.effectiveContentSize.width / desiredWidth
+//        let fractionWidth: CGFloat = 1 / (itemCount.rounded())
+//        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(fractionWidth), heightDimension: .fractionalHeight(1.0))
+//        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+//        item.contentInsets = NSDirectionalEdgeInsets.uniform(size: 10)
 //
-//        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(200))
-//        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [itemCategory])
+//        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalWidth(0.5))
+//        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
 //
 //        let section = NSCollectionLayoutSection(group: group)
-//        section.contentInsets.leading = 16
-//        section.interGroupSpacing = 16
-        return section
+////        let layoutSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5), heightDimension: .absolute(200))
+////        let itemCategory = NSCollectionLayoutItem(layoutSize: layoutSize)
+////        itemCategory.contentInsets.trailing = 16
+////
+////        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(200))
+////        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [itemCategory])
+////
+////        let section = NSCollectionLayoutSection(group: group)
+////        section.contentInsets.leading = 16
+////        section.interGroupSpacing = 16
+//        return section
     }
-    
-    
-
 }
 
 

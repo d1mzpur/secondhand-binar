@@ -21,10 +21,10 @@ class SCTabBar: UITabBarController , UITabBarControllerDelegate{
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        navigationController?.isNavigationBarHidden = true
+        self.navigationController?.isNavigationBarHidden = true
         
         //tab 1
-        let tab1 = SCHomeCollectionViewController()
+        let tab1 = SCHomeViewController()
         let nav1 = UINavigationController(rootViewController: tab1)
         let tab1Item = UITabBarItem(title: "Home", image: UIImage(systemName: "house"), selectedImage: UIImage(systemName: "house"))
         tab1.tabBarItem = tab1Item
@@ -48,7 +48,7 @@ class SCTabBar: UITabBarController , UITabBarControllerDelegate{
         tab4.tabBarItem = tab4Item
         
         //tab 5
-        let tab5 = SCHomeCollectionViewController()
+        let tab5 = SCAccountViewController()
         let nav5 = UINavigationController(rootViewController: tab5)
         let tab5Item = UITabBarItem(title: "Akun", image: UIImage(systemName: "person"), selectedImage: UIImage(systemName: "person.fill"))
         tab5.tabBarItem = tab5Item

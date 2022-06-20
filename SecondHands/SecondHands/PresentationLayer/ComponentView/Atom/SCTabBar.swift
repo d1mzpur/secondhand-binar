@@ -21,7 +21,7 @@ class SCTabBar: UITabBarController , UITabBarControllerDelegate{
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        navigationController?.isNavigationBarHidden = true
+        self.navigationController?.isNavigationBarHidden = true
         
         //tab 1
         let tab1 = SCHomeViewController()

@@ -53,8 +53,14 @@ class SCAccountViewController: UIViewController {
     ])
     
     override func viewWillAppear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = false
         view.backgroundColor = .white
         navigationController?.navigationBar.isHidden = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        navigationController?.navigationBar.isHidden = false
+        self.tabBarController?.tabBar.isHidden = true
     }
     
     lazy var textTitle: UILabel = {

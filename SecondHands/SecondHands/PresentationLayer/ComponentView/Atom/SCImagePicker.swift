@@ -70,7 +70,6 @@ extension SCImagePicker: UIImagePickerControllerDelegate, UINavigationController
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         picker.dismiss(animated: true, completion: nil)
-
         if let image = info[.originalImage] as? UIImage {
             handler(image)
             pickerIcon.image = image.resizeImageTo(size: CGSize( width:self.frame.size.width, height: self.frame.size.height))

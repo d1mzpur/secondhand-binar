@@ -59,7 +59,7 @@ class SCHomeCollectionViewController: UICollectionViewController {
         bannerRegisterCell = UICollectionView.CellRegistration(handler: { (cell: SCBannerCollectionViewCell, _, item: OfferItem) in
             
             cell.offerImage.image = UIImage(named: "offerImage")
-            cell.offerTitle.text = item.offerTitle
+            
             cell.discount.text = item.discount
         })
         
@@ -68,7 +68,7 @@ class SCHomeCollectionViewController: UICollectionViewController {
         })
         
         productListRegisterCell = UICollectionView.CellRegistration(handler: { (cell: SCProductCardViewCollectionViewCell, _, item: ProductItem) in
-            cell.setup(item: item)
+            
         })
         
 //        topBar = navigationController?.navigationBar.topItem
@@ -196,7 +196,7 @@ class SCHomeCollectionViewController: UICollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let data = item[indexPath.item]
-        let item = OfferItem(id: "1", offerImage: "offerImage", offerTitle: "Bulan Ramadhan\nBanyak Dison", discount: "60%")
+        let item = OfferItem(id: "1", bannerImage: "offerImage", bannerTitle: "Bulan Ramadhan\nBanyak Dison", discount: "60%")
         if indexPath.section == 0 {
             let cell = collectionView.dequeueConfiguredReusableCell(using: bannerRegisterCell, for: indexPath, item: item)
             
@@ -253,5 +253,18 @@ extension SCHomeCollectionViewController: UISearchBarDelegate, UITextFieldDelega
     
     func cancelButton(show: Bool) {
         searchBar.showsCancelButton = show
+    }
+}
+
+extension UIViewController {
+    var topbarHeight: CGFloat {
+        return (view.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0.0) +
+            (self.navigationController?.navigationBar.frame.height ?? 0.0)
+    }
+}
+
+extension UIApplication {
+    var statusBarView: UIView? {
+        return value(forKey: "statusBar") as? UIView
     }
 }

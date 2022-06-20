@@ -7,24 +7,30 @@
 
 import Foundation
 
-struct ProductItem: Codable, Hashable {
+//struct ResultItem: Hashable {
+//    let productItem: [ProductItem]
+//    let offerItem: OfferItem
+//    
+//    func hash(into hasher: inout Hasher) {
+//        hasher.combine(productItem)
+//    }
+//    
+//    static func == (lhs: ResultItem, rhs: ResultItem) -> Bool {
+//        return lhs.offerItem == rhs.offerItem && lhs.productItem == rhs.productItem
+//    }
+//}
+
+struct ProductItem: Hashable {
     let id: String
     let productImage: String
     let productTitle: String
     let productCategory: String
     let productPrice: String
-}
+    }
 
-struct ProductCategory {
+struct OfferItem: Hashable {
     let id: String
-    let productImage: String
-    let productTitle: String
-    let productCategory: String
-}
-
-struct OfferItem {
-    let id: String
-    let offerImage: String
-    let offerTitle: String
+    let bannerImage: String
+    let bannerTitle: String
     let discount: String
 }

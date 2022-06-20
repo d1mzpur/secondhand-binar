@@ -16,6 +16,11 @@ class SCImagePicker: UIView {
     var style: Style = .style1
     var delegate: UIViewController = UIViewController()
     var handler: (UIImage) -> Void = {arg in }
+    var action: Bool = true
+    
+    func disableAction(){
+        action = false
+    }
     
     lazy var pickerIcon: UIImageView = {
         let image = UIImage(systemName: "camera")
@@ -25,7 +30,11 @@ class SCImagePicker: UIView {
         return imageView
     }()
     
-    init(frame: CGRect = CGRect.zero, delegate: UIViewController = UIViewController(), style: Style = .style1, completionHandler: @escaping ( (UIImage) -> Void) ) {
+    init(frame: CGRect = CGRect.zero,
+         delegate: UIViewController = UIViewController(),
+         style: Style = .style1,
+         completionHandler: @escaping ( (UIImage) -> Void) )
+    {
         super.init(frame: frame)
         self.delegate = delegate
         self.style = style
@@ -62,15 +71,16 @@ class SCImagePicker: UIView {
 
 extension SCImagePicker: UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     @objc func addPhotoAction(_ sender: Any) {
-        let imagePickerVC = UIImagePickerController()
-        imagePickerVC.sourceType = .photoLibrary
-        imagePickerVC.delegate = self // new
-        delegate.present(imagePickerVC, animated: true)
+        if (action){
+            let imagePickerVC = UIImagePickerController()
+            imagePickerVC.sourceType = .photoLibrary
+            imagePickerVC.delegate = self // new
+            delegate.present(imagePickerVC, animated: true)
+        }
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         picker.dismiss(animated: true, completion: nil)
-
         if let image = info[.originalImage] as? UIImage {
             handler(image)
             pickerIcon.image = image.resizeImageTo(size: CGSize( width:self.frame.size.width, height: self.frame.size.height))

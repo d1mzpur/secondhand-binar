@@ -19,6 +19,8 @@
 		0188A908285D11780079E091 /* SCFormItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0188A907285D11780079E091 /* SCFormItem.swift */; };
 		019DC75828590A68008B4BFE /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019DC75728590A68008B4BFE /* UIView+Extension.swift */; };
 		01B18BA22860447000A09AD8 /* SCTextfieldWithPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B18BA12860447000A09AD8 /* SCTextfieldWithPickerView.swift */; };
+		01B18BA6286088C400A09AD8 /* SCHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B18BA5286088C400A09AD8 /* SCHomeViewController.swift */; };
+		01B18BA8286088D300A09AD8 /* LayoutSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B18BA7286088D300A09AD8 /* LayoutSection.swift */; };
 		01C6CA3F28586DF900F0838E /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 01C6CA3E28586DF900F0838E /* Poppins-Regular.ttf */; };
 		01C6CA4628586EAB00F0838E /* SCLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C6CA4528586EAB00F0838E /* SCLabel.swift */; };
 		01C6CA482858713E00F0838E /* Poppins-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 01C6CA472858713E00F0838E /* Poppins-Light.ttf */; };
@@ -27,10 +29,8 @@
 		0A62E597285B042400BC3034 /* CategorySectionCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A62E596285B042400BC3034 /* CategorySectionCollectionReusableView.swift */; };
 		0A659650285CD08E006346F1 /* SCNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A65964F285CD08E006346F1 /* SCNotification.swift */; };
 		0A68049928607FF500EF2577 /* SCAccountTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A68049828607FF500EF2577 /* SCAccountTableViewCell.swift */; };
-		0A68049C2860801400EF2577 /* LayoutSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A68049B2860801400EF2577 /* LayoutSection.swift */; };
 		0A6804A02860802700EF2577 /* SCAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A68049F2860802600EF2577 /* SCAccountViewController.swift */; };
 		0A6804A32860803A00EF2577 /* SCFooterForVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6804A22860803A00EF2577 /* SCFooterForVersion.swift */; };
-		0A6804A62860804200EF2577 /* SCHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6804A52860804100EF2577 /* SCHomeViewController.swift */; };
 		0A6804AC286081B100EF2577 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6804AB286081B100EF2577 /* UIColor+Extension.swift */; };
 		0A80DBDD2859D8E80002287B /* SCHomeCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A80DBDC2859D8E80002287B /* SCHomeCollectionViewController.swift */; };
 		0A9A5879285DB2DA00E008A4 /* SCChipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9A5878285DB2DA00E008A4 /* SCChipView.swift */; };
@@ -63,6 +63,8 @@
 		0188A907285D11780079E091 /* SCFormItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCFormItem.swift; sourceTree = "<group>"; };
 		019DC75728590A68008B4BFE /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		01B18BA12860447000A09AD8 /* SCTextfieldWithPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCTextfieldWithPickerView.swift; sourceTree = "<group>"; };
+		01B18BA5286088C400A09AD8 /* SCHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SCHomeViewController.swift; sourceTree = "<group>"; };
+		01B18BA7286088D300A09AD8 /* LayoutSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutSection.swift; sourceTree = "<group>"; };
 		01C6CA3E28586DF900F0838E /* Poppins-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Regular.ttf"; sourceTree = "<group>"; };
 		01C6CA4528586EAB00F0838E /* SCLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCLabel.swift; sourceTree = "<group>"; };
 		01C6CA472858713E00F0838E /* Poppins-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Light.ttf"; sourceTree = "<group>"; };
@@ -71,10 +73,8 @@
 		0A62E596285B042400BC3034 /* CategorySectionCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySectionCollectionReusableView.swift; sourceTree = "<group>"; };
 		0A65964F285CD08E006346F1 /* SCNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCNotification.swift; sourceTree = "<group>"; };
 		0A68049828607FF500EF2577 /* SCAccountTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCAccountTableViewCell.swift; path = SecondHands/PresentationLayer/ScreenView/Profile/Cell/SCAccountTableViewCell.swift; sourceTree = SOURCE_ROOT; };
-		0A68049B2860801400EF2577 /* LayoutSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LayoutSection.swift; path = SecondHands/PresentationLayer/Home/Layout/LayoutSection.swift; sourceTree = SOURCE_ROOT; };
 		0A68049F2860802600EF2577 /* SCAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCAccountViewController.swift; path = SecondHands/PresentationLayer/ScreenView/Profile/SCAccountViewController.swift; sourceTree = SOURCE_ROOT; };
 		0A6804A22860803A00EF2577 /* SCFooterForVersion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCFooterForVersion.swift; path = SecondHands/PresentationLayer/ScreenView/Profile/Cell/SCFooterForVersion.swift; sourceTree = SOURCE_ROOT; };
-		0A6804A52860804100EF2577 /* SCHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCHomeViewController.swift; path = SecondHands/PresentationLayer/Home/SCHomeViewController.swift; sourceTree = SOURCE_ROOT; };
 		0A6804AB286081B100EF2577 /* UIColor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		0A80DBDC2859D8E80002287B /* SCHomeCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCHomeCollectionViewController.swift; sourceTree = "<group>"; };
 		0A9A5878285DB2DA00E008A4 /* SCChipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCChipView.swift; sourceTree = "<group>"; };
@@ -263,7 +263,7 @@
 			isa = PBXGroup;
 			children = (
 				0A80DBDC2859D8E80002287B /* SCHomeCollectionViewController.swift */,
-				0A6804A52860804100EF2577 /* SCHomeViewController.swift */,
+				01B18BA5286088C400A09AD8 /* SCHomeViewController.swift */,
 				0AC61BFA285C4E6500586870 /* Cell */,
 				0AD6AD35285FEE320065DFE0 /* Layout */,
 			);
@@ -303,7 +303,7 @@
 		0AD6AD35285FEE320065DFE0 /* Layout */ = {
 			isa = PBXGroup;
 			children = (
-				0A68049B2860801400EF2577 /* LayoutSection.swift */,
+				01B18BA7286088D300A09AD8 /* LayoutSection.swift */,
 			);
 			path = Layout;
 			sourceTree = "<group>";
@@ -405,8 +405,8 @@
 				0A9E1CFE28579B5F00D864A4 /* SceneDelegate.swift in Sources */,
 				01B18BA22860447000A09AD8 /* SCTextfieldWithPickerView.swift in Sources */,
 				0AD055AD28582DBA000CDA44 /* UIImageView+Extension.swift in Sources */,
-				0A6804A62860804200EF2577 /* SCHomeViewController.swift in Sources */,
 				0A6804AC286081B100EF2577 /* UIColor+Extension.swift in Sources */,
+				01B18BA6286088C400A09AD8 /* SCHomeViewController.swift in Sources */,
 				01593533285CAC44006F9EE6 /* UIImage+Extension.swift in Sources */,
 				0A6804A02860802700EF2577 /* SCAccountViewController.swift in Sources */,
 				22E1F760285A30D900FA40BF /* SCTextfield.swift in Sources */,
@@ -414,7 +414,7 @@
 				0AF723D5285FA9FA00C0F146 /* SCSearchBar.swift in Sources */,
 				72BDD18D2858A0BF006A75A6 /* SCButton.swift in Sources */,
 				22D5643E285DA7E300BB5294 /* SCProfilViewController.swift in Sources */,
-				0A68049C2860801400EF2577 /* LayoutSection.swift in Sources */,
+				01B18BA8286088D300A09AD8 /* LayoutSection.swift in Sources */,
 				0A9A5879285DB2DA00E008A4 /* SCChipView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

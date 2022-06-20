@@ -127,6 +127,10 @@ extension SCAccountViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let cell = tableView.cellForRow(at: indexPath) as? SCAccountTableViewCell else { return }
+        if(sectionItem.settingItem[indexPath.row].title == "Ubah Akun"){
+            let profileVC = SCProfilViewController()
+            navigationController?.pushViewController(profileVC, animated: true)
+        }
         print(sectionItem.settingItem[indexPath.row])
     }
     

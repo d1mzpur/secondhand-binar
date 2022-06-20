@@ -10,11 +10,15 @@ import UIKit
 class SCRegisterViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = true
+        self.navigationController?.navigationBar.barTintColor = .white
         let nav = self.navigationController?.navigationBar
         nav?.tintColor = UIColor.black
-        let icon = UIImage(systemName: "arrow.left")
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: icon, style: .plain, target: self, action: Selector(("action")))
+        let image = UIImage(systemName: "arrow.left")
+//        navigationItem.leftBarButtonItem = UIBarButtonItem(image: image, style: .plain, target: self, action:  Selector(("action")))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: image, style: .plain, target: self, action:  #selector(backButton))
     }
+
     lazy var registerLabel: SCLabel = SCLabel( weight: .bold, size: 24)
     
     lazy var formName: SCFormItem = SCFormItem(formType: .normal, formName: "Nama", placeholder: "Nama Lengkap")
@@ -84,19 +88,10 @@ class SCRegisterViewController: UIViewController {
             loginLabelStack.centerXAnchor.constraint(equalTo: view.centerXAnchor)
             
         ])
-
-        // Do any additional setup after loading the view.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @objc
+    func backButton() {
+        self.navigationController?.popViewController(animated: true)
     }
-    */
-
 }

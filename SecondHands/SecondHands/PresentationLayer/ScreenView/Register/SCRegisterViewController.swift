@@ -80,7 +80,7 @@ class SCRegisterViewController: UIViewController {
             formStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             formStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             
-            loginLabelStack.topAnchor.constraint(equalTo: formStack.bottomAnchor, constant: 116),
+            loginLabelStack.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -24),
             loginLabelStack.centerXAnchor.constraint(equalTo: view.centerXAnchor)
             
         ])

@@ -73,7 +73,7 @@
 		0A17E99B285C6A0900B59262 /* SCBannerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCBannerCollectionViewCell.swift; sourceTree = "<group>"; };
 		0A65964F285CD08E006346F1 /* SCNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCNotification.swift; sourceTree = "<group>"; };
 		0A68049828607FF500EF2577 /* SCAccountTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCAccountTableViewCell.swift; path = SecondHands/PresentationLayer/ScreenView/Profile/Cell/SCAccountTableViewCell.swift; sourceTree = SOURCE_ROOT; };
-		0A68049F2860802600EF2577 /* SCAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCAccountViewController.swift; path = SecondHands/PresentationLayer/ScreenView/Profile/SCAccountViewController.swift; sourceTree = SOURCE_ROOT; };
+		0A68049F2860802600EF2577 /* SCAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCAccountViewController.swift; path = SecondHands/PresentationLayer/ScreenView/Account/SCAccountViewController.swift; sourceTree = SOURCE_ROOT; };
 		0A6804A22860803A00EF2577 /* SCFooterForVersion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCFooterForVersion.swift; path = SecondHands/PresentationLayer/ScreenView/Profile/Cell/SCFooterForVersion.swift; sourceTree = SOURCE_ROOT; };
 		0A6804AB286081B100EF2577 /* UIColor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		0A80DBDC2859D8E80002287B /* SCHomeCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCHomeCollectionViewController.swift; sourceTree = "<group>"; };
@@ -124,6 +124,22 @@
 			path = Font;
 			sourceTree = "<group>";
 		};
+		016F1C502860A7CB007A1ADE /* Register */ = {
+			isa = PBXGroup;
+			children = (
+				726047F528607B9100AB2EA7 /* SCRegisterViewController.swift */,
+			);
+			path = Register;
+			sourceTree = "<group>";
+		};
+		016F1C512860A7EB007A1ADE /* Account */ = {
+			isa = PBXGroup;
+			children = (
+				0A68049F2860802600EF2577 /* SCAccountViewController.swift */,
+			);
+			path = Account;
+			sourceTree = "<group>";
+		};
 		01C6CA4228586E7B00F0838E /* ComponentView */ = {
 			isa = PBXGroup;
 			children = (
@@ -162,6 +178,8 @@
 		01CD6CA3285EFE8F00BA99DF /* ScreenView */ = {
 			isa = PBXGroup;
 			children = (
+				016F1C512860A7EB007A1ADE /* Account */,
+				016F1C502860A7CB007A1ADE /* Register */,
 				0A9E1D1C28579C3600D864A4 /* Home */,
 				01CD6CA4285EFEA000BA99DF /* Profile */,
 			);
@@ -173,7 +191,6 @@
 			children = (
 				0A6804A92860807000EF2577 /* Cell */,
 				22D5643D285DA7E300BB5294 /* SCProfilViewController.swift */,
-				0A68049F2860802600EF2577 /* SCAccountViewController.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -265,7 +282,6 @@
 			isa = PBXGroup;
 			children = (
 				0A80DBDC2859D8E80002287B /* SCHomeCollectionViewController.swift */,
-				726047F528607B9100AB2EA7 /* SCRegisterViewController.swift */,
 				01B18BA5286088C400A09AD8 /* SCHomeViewController.swift */,
 				0AC61BFA285C4E6500586870 /* Cell */,
 				0AD6AD35285FEE320065DFE0 /* Layout */,

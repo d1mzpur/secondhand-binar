@@ -11,6 +11,7 @@ class SCFormItem: UIView {
     enum FormType {
         case normal
         case password
+        case pickerView
         case area
     }
     
@@ -22,9 +23,12 @@ class SCFormItem: UIView {
     }
     var placeholder: String = "" {
         didSet {
-            Textfield.setPlaceholder(placeholder: placeholder)
-            TextfieldPassword.setPlaceholder(placeholder: placeholder)
-            Textfieldarea.setText(placeholder: placeholder)
+            switch formType{
+                case .normal: return Textfield.setPlaceholder(placeholder: placeholder)
+                case .password: return TextfieldPassword.setPlaceholder(placeholder: placeholder)
+                case .pickerView: return TextfieldWithPicker.setPlaceholder(placeholder: placeholder)
+                case .area: return Textfieldarea.setText(placeholder: placeholder)
+            }
         }
     }
     
@@ -33,7 +37,16 @@ class SCFormItem: UIView {
             switch formType{
                 case .normal: return Textfield.text ?? ""
                 case .password: return TextfieldPassword.text ?? ""
+                case .pickerView: return TextfieldWithPicker.text ?? ""
                 case .area: return Textfieldarea.text
+            }
+        }
+    }
+    
+    var dataList: [String] = [] {
+        didSet{
+            if (formType == .pickerView){
+                TextfieldWithPicker.dataList = dataList
             }
         }
     }
@@ -46,6 +59,13 @@ class SCFormItem: UIView {
     
     lazy var Textfield: SCTextfield = {
         var textField = SCTextfield()
+        textField.addConstraint(textField.heightAnchor.constraint(equalToConstant: 48))
+        return textField
+    }()
+    
+    lazy var TextfieldWithPicker: SCTextfieldWithPickerView = {
+        var textField = SCTextfieldWithPickerView()
+        textField.dataList = []
         textField.addConstraint(textField.heightAnchor.constraint(equalToConstant: 48))
         return textField
     }()
@@ -70,6 +90,7 @@ class SCFormItem: UIView {
         switch formType{
             case .normal: stackView.addArrangedSubview(Textfield)
             case .password: stackView.addArrangedSubview(TextfieldPassword)
+            case .pickerView: stackView.addArrangedSubview(TextfieldWithPicker)
             case .area: stackView.addArrangedSubview(Textfieldarea)
         }
         stackView.setCustomSpacing(4.0, after: formLabel)

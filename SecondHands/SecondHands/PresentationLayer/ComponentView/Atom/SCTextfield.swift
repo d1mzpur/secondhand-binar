@@ -45,18 +45,13 @@ class SCTextfield: UITextField {
     }
     
     private func configure() {
-        translatesAutoresizingMaskIntoConstraints = false
         font = UIFont(name: "Poppins-Regular", size: 14)
         layer.borderWidth = 1.0
-        layer.borderColor = UIColor.systemGray5.cgColor
+        layer.borderColor = UIColor.Neutral02.cgColor
         layer.cornerRadius = 16
         clipsToBounds = true
         backgroundColor = .systemBackground
         clearButtonMode = .whileEditing
-        
-        NSLayoutConstraint.activate([
-            self.heightAnchor.constraint(equalToConstant: 48)
-        ])
     }
     
     public func setPlaceholder(placeholder: String) {
@@ -64,13 +59,13 @@ class SCTextfield: UITextField {
     }
     
     public func setForPasswordTextfield() {
-           clearButtonMode = .never
-           let button = UIButton(frame: CGRect(x: 0, y: 0, width: 24, height: 24))
-           button.setImage(UIImage(systemName: "eye"), for: .normal)
-           button.setImage(UIImage(systemName: "eye.fill"), for: .selected)
-           button.addTarget(self, action: #selector(togglePasswordView), for: .touchUpInside)
-           rightView = button
-           rightViewMode = .always
+        clearButtonMode = .never
+        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 24, height: 24))
+        button.setImage(UIImage(systemName: "eye"), for: .normal)
+        button.setImage(UIImage(systemName: "eye.fill"), for: .selected)
+        button.addTarget(self, action: #selector(togglePasswordView), for: .touchUpInside)
+        rightView = button
+        rightViewMode = .always
     }
 
     @objc func togglePasswordView(_ sender: UIButton) {

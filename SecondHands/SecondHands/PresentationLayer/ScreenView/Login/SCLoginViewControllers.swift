@@ -1,13 +1,13 @@
 //
-//  SCRegisterViewController.swift
+//  SCLoginViewControllers.swift
 //  SecondHands
 //
-//  Created by Tatang Sulaeman on 20/06/22.
+//  Created by Dimas Purnomo on 20/06/22.
 //
 
 import UIKit
 
-class SCRegisterViewController: UIViewController {
+class SCLoginViewControllers: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         self.tabBarController?.tabBar.isHidden = true
@@ -18,30 +18,27 @@ class SCRegisterViewController: UIViewController {
 //        navigationItem.leftBarButtonItem = UIBarButtonItem(image: image, style: .plain, target: self, action:  Selector(("action")))
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: image, style: .plain, target: self, action:  #selector(backButton))
     }
-
-    lazy var registerLabel: SCLabel = SCLabel( weight: .bold, size: 24)
     
-    lazy var formName: SCFormItem = SCFormItem(formType: .normal, formName: "Nama", placeholder: "Nama Lengkap")
+    lazy var registerLabel: SCLabel = SCLabel( weight: .bold, size: 24)
     
     lazy var formEmail: SCFormItem = SCFormItem(formType: .normal, formName: "Email", placeholder: "contoh: johndee@gmail.com")
     
-    lazy var formPassword: SCFormItem = SCFormItem( formType: .password, formName: "Buat password", placeholder: "Buat password")
+    lazy var formPassword: SCFormItem = SCFormItem( formType: .password, formName: "Password", placeholder: "Masukkkan password")
     
-    lazy var registerButton: SCButton = SCButton(style: .primary, size: .normal, type: .defaultButton, title: "Daftar")
+    lazy var loginButton: SCButton = SCButton(style: .primary, size: .normal, type: .defaultButton, title: "Masuk")
     
     lazy var logilLabel: SCLabel = SCLabel( weight: .regular, size: 14)
     
-    lazy var loginButton: SCButton = SCButton(style: .primary, size: .small, type: .ghostButton, title: "Masuk disini")
+    lazy var logincellButton: SCButton = SCButton(style: .primary, size: .small, type: .ghostButton, title: "Daftar disini")
     
     
     
     lazy var formStack: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [
-        formName,
         formEmail,
         formPassword,
-        registerButton])
-        stack.setCustomSpacing(16, after: formName)
+        loginButton])
+
         stack.setCustomSpacing(16, after: formEmail)
         stack.setCustomSpacing(24, after: formPassword)
         stack.axis = .vertical
@@ -52,7 +49,7 @@ class SCRegisterViewController: UIViewController {
     lazy var loginLabelStack: UIStackView = {
        let stack = UIStackView(arrangedSubviews: [
        logilLabel,
-       loginButton
+       logincellButton
        ])
         stack.setCustomSpacing(8, after: logilLabel)
         stack.axis = .horizontal
@@ -63,9 +60,9 @@ class SCRegisterViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         view.addSubview(registerLabel)
-        registerLabel.text = "Daftar"
+        registerLabel.text = "Masuk"
         registerLabel.textColor = .black
-        logilLabel.text = "Sudah punya akun?"
+        logilLabel.text = "Belum punya akun?"
         view.addSubview(formStack)
         view.addSubview(loginLabelStack)
         
@@ -84,7 +81,7 @@ class SCRegisterViewController: UIViewController {
             formStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             formStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             
-            loginLabelStack.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -24),
+            loginLabelStack.topAnchor.constraint(equalTo: formStack.bottomAnchor, constant: 116),
             loginLabelStack.centerXAnchor.constraint(equalTo: view.centerXAnchor)
             
         ])
@@ -94,4 +91,5 @@ class SCRegisterViewController: UIViewController {
     func backButton() {
         self.navigationController?.popViewController(animated: true)
     }
+    
 }

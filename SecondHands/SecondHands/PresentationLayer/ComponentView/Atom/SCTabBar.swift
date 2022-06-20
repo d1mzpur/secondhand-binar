@@ -24,7 +24,7 @@ class SCTabBar: UITabBarController , UITabBarControllerDelegate{
         navigationController?.isNavigationBarHidden = true
         
         //tab 1
-        let tab1 = SCHomeCollectionViewController()
+        let tab1 = SCHomeViewController()
         let nav1 = UINavigationController(rootViewController: tab1)
         let tab1Item = UITabBarItem(title: "Home", image: UIImage(systemName: "house"), selectedImage: UIImage(systemName: "house"))
         tab1.tabBarItem = tab1Item

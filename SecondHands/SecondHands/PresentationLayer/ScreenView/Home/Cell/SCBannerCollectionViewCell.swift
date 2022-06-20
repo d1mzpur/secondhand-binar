@@ -8,7 +8,7 @@
 import UIKit
 
 class SCBannerCollectionViewCell: UICollectionViewCell {
-    lazy var searchBar: SCSearchBar = {
+    var searchBar: SCSearchBar = {
         var searchBar = SCSearchBar()
         searchBar.layer.cornerRadius = 16
         searchBar.clipsToBounds = true
@@ -20,13 +20,13 @@ class SCBannerCollectionViewCell: UICollectionViewCell {
         return searchBar
     }()
     
-    lazy var offerImage: UIImageView = {
+    var offerImage: UIImageView = {
         var imageOffers = UIImageView()
         imageOffers.contentMode = .scaleAspectFit
         return imageOffers
     }()
     
-    lazy var offerTitle: UILabel = {
+    var offerTitle: UILabel = {
         var titleOffers = UILabel()
         titleOffers.font = SCLabel(frame: .zero, weight: .bold, size: 20).font
         titleOffers.textColor = .black
@@ -34,7 +34,7 @@ class SCBannerCollectionViewCell: UICollectionViewCell {
         return titleOffers
     }()
     
-    lazy var subDiscount: UILabel = {
+    var subDiscount: UILabel = {
         var titleOffers = UILabel()
         let text: String = "Diskon Hingga"
         titleOffers.text = text
@@ -43,7 +43,7 @@ class SCBannerCollectionViewCell: UICollectionViewCell {
         return titleOffers
     }()
     
-    lazy var discount: UILabel = {
+    var discount: UILabel = {
         var titleOffers = UILabel()
         titleOffers.font = SCLabel(frame: .zero, weight: .medium, size: 18).font
         titleOffers.textColor = UIColor(red: 0.98, green: 0.173, blue: 0.353, alpha: 1)

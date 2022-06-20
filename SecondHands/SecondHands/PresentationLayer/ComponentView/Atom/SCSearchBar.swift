@@ -5,10 +5,10 @@
 //  Created by Adji Firmansyah on 20/06/22.
 //
 
-import SwiftUI
+import UIKit
 
 class SCSearchBar: UIView {
-    lazy var searchBar: UITextField = {
+    var searchBar: UITextField = {
        var searchBar = UITextField()
         searchBar.placeholder = "Cari di Second Hand"
         searchBar.font = SCLabel(frame: .zero, weight: .regular, size: 14).font
@@ -17,11 +17,18 @@ class SCSearchBar: UIView {
         return searchBar
     }()
     
-    lazy var iconTap: UIImageView = {
+    var iconTap: UIImageView = {
         var iconTap = UIImageView()
         iconTap.contentMode = .scaleAspectFit
         iconTap.heightAnchor.constraint(equalToConstant: 16).isActive = true
         return iconTap
+    }()
+    
+    lazy var searchStackView: UIStackView = {
+        var searchStackView = UIStackView(arrangedSubviews: [searchBar, iconTap])
+        searchStackView.axis = .horizontal
+        searchStackView.distribution = .fillProportionally
+        return searchStackView
     }()
     
     private var heightConstraint: NSLayoutConstraint?

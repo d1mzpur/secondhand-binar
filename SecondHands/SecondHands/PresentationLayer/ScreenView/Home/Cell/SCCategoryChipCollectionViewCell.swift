@@ -8,14 +8,14 @@
 import UIKit
 
 class SCCategoryChipCollectionViewCell: UICollectionViewCell {
-    lazy var containerView: UIView = {
+    var containerView: UIView = {
         var chip = UIView()
         chip.layer.cornerRadius = 12
         chip.backgroundColor = UIColor(red: 0.886, green: 0.831, blue: 0.941, alpha: 1)
         return chip
     }()
     
-    lazy var textTitle: UILabel = {
+    var textTitle: UILabel = {
         var textTitle = UILabel()
         textTitle.text = "Keranjang Sepatu"
         textTitle.font = .systemFont(ofSize: 14, weight: .regular)
@@ -23,7 +23,7 @@ class SCCategoryChipCollectionViewCell: UICollectionViewCell {
         return textTitle
     }()
     
-    lazy var iconView: UIImageView = {
+    var iconView: UIImageView = {
         var iconView = UIImageView()
         iconView.image = UIImage(systemName: "magnifyingglass")
         iconView.tintColor = UIColor(red: 0.235, green: 0.235, blue: 0.235, alpha: 1)

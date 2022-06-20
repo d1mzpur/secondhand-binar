@@ -48,7 +48,7 @@ class SCTabBar: UITabBarController , UITabBarControllerDelegate{
         tab4.tabBarItem = tab4Item
         
         //tab 5
-        let tab5 = SCHomeCollectionViewController()
+        let tab5 = SCAccountViewController()
         let nav5 = UINavigationController(rootViewController: tab5)
         let tab5Item = UITabBarItem(title: "Akun", image: UIImage(systemName: "person"), selectedImage: UIImage(systemName: "person.fill"))
         tab5.tabBarItem = tab5Item

@@ -39,9 +39,6 @@ class SCHomeViewController: UIViewController {
         
         var searchBar = UISearchBar(frame: frameSearchBar)
         searchBar.placeholder = "Search item"
-        //        searchBar.searchTextField.delegate = self
-        //        searchBar.delegate = self
-        
         return searchBar
     }()
     
@@ -68,7 +65,7 @@ class SCHomeViewController: UIViewController {
     }
     
     func configureView() {
-        homeCollectionView.collectionViewLayout = LayoutSection.createLayout(getHeightSuperView: getHeightSuperView())
+        homeCollectionView.collectionViewLayout = LayoutSection.createLayout(getHeightSuperView: self.getTopbarHeight)
         homeCollectionView.backgroundColor = .white
     }
     
@@ -96,7 +93,6 @@ class SCHomeViewController: UIViewController {
             bottomConstraint
         ])
     }
-    
 }
 
 extension SCHomeViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -135,13 +131,14 @@ extension SCHomeViewController: UICollectionViewDelegate, UICollectionViewDataSo
             return bannerCell
         } else if section == 1 {
             categoryCell.configure(item: productItem)
-            categoryCell.backgroundColor = .red
+            
             return categoryCell
         } else {
             productCell.configure(item: productItem)
             return productCell
         }
     }
+    
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
             guard
                 let headerOfCategory = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: CategorySectionCollectionReusableView.reuseIdentifier, for: indexPath) as? CategorySectionCollectionReusableView
@@ -150,7 +147,6 @@ extension SCHomeViewController: UICollectionViewDelegate, UICollectionViewDataSo
         
             return headerOfCategory
     }
-
 }
 
 extension SCHomeViewController {
@@ -166,6 +162,13 @@ extension SCHomeViewController {
         }
     }
     
+}
+
+extension UIViewController {
+    var getTopbarHeight: CGFloat {
+        return (view.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0.0) +
+            (self.navigationController?.navigationBar.frame.height ?? 0.0)
+    }
 }
 
 extension SCHomeViewController {

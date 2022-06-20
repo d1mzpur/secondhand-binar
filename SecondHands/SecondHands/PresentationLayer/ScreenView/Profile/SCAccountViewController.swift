@@ -18,6 +18,7 @@ class SCAccountViewController: UIViewController {
                                         style: .style1, completionHandler: { image in
                                             print(image.images)
                                         })
+        imagePicker.disableAction()
         return imagePicker
     }()
     

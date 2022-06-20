@@ -10,12 +10,17 @@ import UIKit
 class SCProfilViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
-        navigationController?.navigationBar.barTintColor = .white
+        self.tabBarController?.tabBar.isHidden = true
+        self.navigationController?.navigationBar.barTintColor = .white
         let nav = self.navigationController?.navigationBar
         nav?.tintColor = UIColor.black
         let image = UIImage(systemName: "arrow.left")
 //        navigationItem.leftBarButtonItem = UIBarButtonItem(image: image, style: .plain, target: self, action:  Selector(("action")))
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: image, style: .plain, target: self, action:  #selector(backButton))
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = false
     }
 
     

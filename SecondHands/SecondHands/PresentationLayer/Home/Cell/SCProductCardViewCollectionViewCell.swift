@@ -20,11 +20,21 @@ class SCProductCardViewCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setup(item: ProductItem) {
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        cardView.productCategory.text = nil
+        cardView.productImage.image = nil
+        cardView.productPrice.text = nil
+        cardView.productTitle.text = nil
+    }
+    
+    
+    func configure(item: ProductItem) {
         cardView.productImage.image = UIImage(named: item.productImage)
         cardView.productTitle.text = item.productTitle
         cardView.productCategory.text = item.productCategory
         cardView.productPrice.text = item.productPrice
+        cardView.clipsToBounds = true
     }
     
     private func setupConstraint() {

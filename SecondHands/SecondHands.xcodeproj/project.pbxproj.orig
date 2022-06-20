@@ -20,11 +20,8 @@
 		01C6CA482858713E00F0838E /* Poppins-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 01C6CA472858713E00F0838E /* Poppins-Light.ttf */; };
 		01C6CA4A2858714F00F0838E /* Poppins-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 01C6CA492858714F00F0838E /* Poppins-Bold.ttf */; };
 		0A17E99C285C6A0900B59262 /* SCBannerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A17E99B285C6A0900B59262 /* SCBannerCollectionViewCell.swift */; };
-		0A2EE236285DFC790041A483 /* SCHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2EE235285DFC780041A483 /* SCHomeViewController.swift */; };
 		0A62E597285B042400BC3034 /* CategorySectionCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A62E596285B042400BC3034 /* CategorySectionCollectionReusableView.swift */; };
-		0A659650285CD08E006346F1 /* SCNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A65964F285CD08E006346F1 /* SCNotification.swift */; };
 		0A80DBDD2859D8E80002287B /* SCHomeCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A80DBDC2859D8E80002287B /* SCHomeCollectionViewController.swift */; };
-		0A9A5879285DB2DA00E008A4 /* SCChipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9A5878285DB2DA00E008A4 /* SCChipView.swift */; };
 		0A9E1CFC28579B5F00D864A4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9E1CFB28579B5F00D864A4 /* AppDelegate.swift */; };
 		0A9E1CFE28579B5F00D864A4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9E1CFD28579B5F00D864A4 /* SceneDelegate.swift */; };
 		0A9E1D0528579B6A00D864A4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A9E1D0428579B6A00D864A4 /* Assets.xcassets */; };
@@ -33,11 +30,6 @@
 		0AC61C05285C4F2800586870 /* SCProductCardViewCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC61C04285C4F2800586870 /* SCProductCardViewCollectionViewCell.swift */; };
 		0AC61C08285C4FDD00586870 /* SCCategoryChipCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC61C07285C4FDD00586870 /* SCCategoryChipCollectionViewCell.swift */; };
 		0AD055AD28582DBA000CDA44 /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD055AC28582DBA000CDA44 /* UIImageView+Extension.swift */; };
-		0AD6AD37285FEE790065DFE0 /* LayoutSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD6AD36285FEE790065DFE0 /* LayoutSection.swift */; };
-		0AF723C8285F7A6E00C0F146 /* SCAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF723C7285F7A6E00C0F146 /* SCAccountViewController.swift */; };
-		0AF723CC285F8A0200C0F146 /* SCAccountTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF723CB285F8A0200C0F146 /* SCAccountTableViewCell.swift */; };
-		0AF723D0285FA1A600C0F146 /* SCFooterForVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF723CF285FA1A600C0F146 /* SCFooterForVersion.swift */; };
-		0AF723D5285FA9FA00C0F146 /* SCSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF723D4285FA9FA00C0F146 /* SCSearchBar.swift */; };
 		18031BAC2858D6D000EC9D69 /* ColorAlias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18031BAB2858D6D000EC9D69 /* ColorAlias.swift */; };
 		225D67B3285C772700C7EAA2 /* SCTextfieldarea.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225D67B2285C772700C7EAA2 /* SCTextfieldarea.swift */; };
 		22E1F760285A30D900FA40BF /* SCTextfield.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E1F75F285A30D900FA40BF /* SCTextfield.swift */; };
@@ -59,11 +51,8 @@
 		01C6CA472858713E00F0838E /* Poppins-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Light.ttf"; sourceTree = "<group>"; };
 		01C6CA492858714F00F0838E /* Poppins-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Bold.ttf"; sourceTree = "<group>"; };
 		0A17E99B285C6A0900B59262 /* SCBannerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCBannerCollectionViewCell.swift; sourceTree = "<group>"; };
-		0A2EE235285DFC780041A483 /* SCHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCHomeViewController.swift; sourceTree = "<group>"; };
 		0A62E596285B042400BC3034 /* CategorySectionCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySectionCollectionReusableView.swift; sourceTree = "<group>"; };
-		0A65964F285CD08E006346F1 /* SCNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCNotification.swift; sourceTree = "<group>"; };
 		0A80DBDC2859D8E80002287B /* SCHomeCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCHomeCollectionViewController.swift; sourceTree = "<group>"; };
-		0A9A5878285DB2DA00E008A4 /* SCChipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCChipView.swift; sourceTree = "<group>"; };
 		0A9E1CF828579B5F00D864A4 /* SecondHands.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SecondHands.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A9E1CFB28579B5F00D864A4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0A9E1CFD28579B5F00D864A4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -74,11 +63,6 @@
 		0AC61C04285C4F2800586870 /* SCProductCardViewCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SCProductCardViewCollectionViewCell.swift; sourceTree = "<group>"; };
 		0AC61C07285C4FDD00586870 /* SCCategoryChipCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SCCategoryChipCollectionViewCell.swift; sourceTree = "<group>"; };
 		0AD055AC28582DBA000CDA44 /* UIImageView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
-		0AD6AD36285FEE790065DFE0 /* LayoutSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutSection.swift; sourceTree = "<group>"; };
-		0AF723C7285F7A6E00C0F146 /* SCAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCAccountViewController.swift; sourceTree = "<group>"; };
-		0AF723CB285F8A0200C0F146 /* SCAccountTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCAccountTableViewCell.swift; sourceTree = "<group>"; };
-		0AF723CF285FA1A600C0F146 /* SCFooterForVersion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCFooterForVersion.swift; sourceTree = "<group>"; };
-		0AF723D4285FA9FA00C0F146 /* SCSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCSearchBar.swift; sourceTree = "<group>"; };
 		18031BAB2858D6D000EC9D69 /* ColorAlias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorAlias.swift; sourceTree = "<group>"; };
 		225D67B2285C772700C7EAA2 /* SCTextfieldarea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCTextfieldarea.swift; sourceTree = "<group>"; };
 		22E1F75F285A30D900FA40BF /* SCTextfield.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCTextfield.swift; sourceTree = "<group>"; };
@@ -124,13 +108,10 @@
 		01C6CA4328586E8A00F0838E /* Atom */ = {
 			isa = PBXGroup;
 			children = (
-				72BDD18C2858A0BF006A75A6 /* SCButton.swift */,
-				0A9A5878285DB2DA00E008A4 /* SCChipView.swift */,
-				0AF723D4285FA9FA00C0F146 /* SCSearchBar.swift */,
 				01C6CA4528586EAB00F0838E /* SCLabel.swift */,
-				0A65964F285CD08E006346F1 /* SCNotification.swift */,
-				720BB592285B177F0000E24C /* SCTabBar.swift */,
+				72BDD18C2858A0BF006A75A6 /* SCButton.swift */,
 				22E1F75F285A30D900FA40BF /* SCTextfield.swift */,
+				720BB592285B177F0000E24C /* SCTabBar.swift */,
 				225D67B2285C772700C7EAA2 /* SCTextfieldarea.swift */,
 			);
 			path = Atom;
@@ -221,13 +202,9 @@
 		0A9E1D1C28579C3600D864A4 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				0A62E596285B042400BC3034 /* CategorySectionCollectionReusableView.swift */,
-				0AD6AD35285FEE320065DFE0 /* Layout */,
 				0AC61BFA285C4E6500586870 /* Cell */,
-				0AF723C7285F7A6E00C0F146 /* SCAccountViewController.swift */,
-				0AF723CF285FA1A600C0F146 /* SCFooterForVersion.swift */,
 				0A80DBDC2859D8E80002287B /* SCHomeCollectionViewController.swift */,
-				0A2EE235285DFC780041A483 /* SCHomeViewController.swift */,
+				0A62E596285B042400BC3034 /* CategorySectionCollectionReusableView.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -245,10 +222,9 @@
 		0AC61BFA285C4E6500586870 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				0AF723CB285F8A0200C0F146 /* SCAccountTableViewCell.swift */,
-				0A17E99B285C6A0900B59262 /* SCBannerCollectionViewCell.swift */,
-				0AC61C07285C4FDD00586870 /* SCCategoryChipCollectionViewCell.swift */,
 				0AC61C04285C4F2800586870 /* SCProductCardViewCollectionViewCell.swift */,
+				0AC61C07285C4FDD00586870 /* SCCategoryChipCollectionViewCell.swift */,
+				0A17E99B285C6A0900B59262 /* SCBannerCollectionViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -259,14 +235,6 @@
 				0AC61BFF285C4E8600586870 /* ProductItem.swift */,
 			);
 			path = Entity;
-			sourceTree = "<group>";
-		};
-		0AD6AD35285FEE320065DFE0 /* Layout */ = {
-			isa = PBXGroup;
-			children = (
-				0AD6AD36285FEE790065DFE0 /* LayoutSection.swift */,
-			);
-			path = Layout;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -348,30 +316,26 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A80DBDD2859D8E80002287B /* SCHomeCollectionViewController.swift in Sources */,
-				0AF723D0285FA1A600C0F146 /* SCFooterForVersion.swift in Sources */,
-				0AD6AD37285FEE790065DFE0 /* LayoutSection.swift in Sources */,
 				0AC61C05285C4F2800586870 /* SCProductCardViewCollectionViewCell.swift in Sources */,
-				0AF723C8285F7A6E00C0F146 /* SCAccountViewController.swift in Sources */,
 				019DC75828590A68008B4BFE /* UIView+Extension.swift in Sources */,
 				720BB593285B177F0000E24C /* SCTabBar.swift in Sources */,
-				225D67B3285C772700C7EAA2 /* SCTextfieldarea.swift in Sources */,
+<<<<<<< HEAD
 				0AC61C00285C4E8600586870 /* ProductItem.swift in Sources */,
+=======
+				225D67B3285C772700C7EAA2 /* SCTextfieldarea.swift in Sources */,
+				0AC61C00285C4E8600586870 /* ItemProduct.swift in Sources */,
+>>>>>>> 744347cd87f89241e7d9d984c437a50b6749c2a8
 				0A9E1CFC28579B5F00D864A4 /* AppDelegate.swift in Sources */,
 				0A17E99C285C6A0900B59262 /* SCBannerCollectionViewCell.swift in Sources */,
 				0A62E597285B042400BC3034 /* CategorySectionCollectionReusableView.swift in Sources */,
 				01593524285B2C8B006F9EE6 /* SCProductCard.swift in Sources */,
-				0AF723CC285F8A0200C0F146 /* SCAccountTableViewCell.swift in Sources */,
-				0A659650285CD08E006346F1 /* SCNotification.swift in Sources */,
-				0A2EE236285DFC790041A483 /* SCHomeViewController.swift in Sources */,
 				01C6CA4628586EAB00F0838E /* SCLabel.swift in Sources */,
 				18031BAC2858D6D000EC9D69 /* ColorAlias.swift in Sources */,
 				0AC61C08285C4FDD00586870 /* SCCategoryChipCollectionViewCell.swift in Sources */,
 				0A9E1CFE28579B5F00D864A4 /* SceneDelegate.swift in Sources */,
 				0AD055AD28582DBA000CDA44 /* UIImageView+Extension.swift in Sources */,
 				22E1F760285A30D900FA40BF /* SCTextfield.swift in Sources */,
-				0AF723D5285FA9FA00C0F146 /* SCSearchBar.swift in Sources */,
 				72BDD18D2858A0BF006A75A6 /* SCButton.swift in Sources */,
-				0A9A5879285DB2DA00E008A4 /* SCChipView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

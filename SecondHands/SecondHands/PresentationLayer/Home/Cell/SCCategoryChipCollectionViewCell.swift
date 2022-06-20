@@ -8,15 +8,10 @@
 import UIKit
 
 class SCCategoryChipCollectionViewCell: UICollectionViewCell {
-    typealias onTap = () -> Void
-    
     lazy var containerView: UIView = {
         var chip = UIView()
         chip.layer.cornerRadius = 12
         chip.backgroundColor = UIColor(red: 0.886, green: 0.831, blue: 0.941, alpha: 1)
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.onTap(_:)))
-        chip.addGestureRecognizer(tapGesture)
-        chip.isUserInteractionEnabled = true
         return chip
     }()
     
@@ -34,6 +29,8 @@ class SCCategoryChipCollectionViewCell: UICollectionViewCell {
         iconView.tintColor = UIColor(red: 0.235, green: 0.235, blue: 0.235, alpha: 1)
         iconView.heightAnchor.constraint(equalToConstant: 14).isActive = true
         iconView.widthAnchor.constraint(equalToConstant: 14).isActive = true
+        iconView.contentMode = .scaleAspectFill
+        iconView.clipsToBounds = true
         return iconView
     }()
     
@@ -45,34 +42,37 @@ class SCCategoryChipCollectionViewCell: UICollectionViewCell {
         return chipStackView
     }()
     
+    typealias onTap = (Bool) -> Void
+    var onCellTap: onTap?
     var isClicked: Bool = false
-    var onChipTap: onTap?
     
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+    }
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.addSubview(containerView)
         containerView.addSubview(chipStackView)
-        
         setupConstraint()
     }
     
-    @objc func onTap(_ sender: UITapGestureRecognizer) {
-        print("Tapped")
-        isClicked.toggle()
-        
-        button(state: isClicked)
-        onChipTap?()
+    func configure(item: ProductItem) {
+        textTitle.text = item.productCategory
     }
     
-    private func button(state: Bool) {
+    func cellClicked(state: Bool) {
+        onCellTap?(state)
+        isClicked.toggle()
+        
         if isClicked {
-            containerView.backgroundColor = UIColor(red: 0.443, green: 0.149, blue: 0.71, alpha: 1)
-            iconView.tintColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
-            textTitle.textColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
+            containerView.backgroundColor = .DarkBlue04
+            iconView.tintColor = .Neutral01
+            textTitle.textColor = .Neutral01
         } else {
-            containerView.backgroundColor = UIColor(red: 0.886, green: 0.831, blue: 0.941, alpha: 1)
-            iconView.tintColor = UIColor(red: 0.235, green: 0.235, blue: 0.235, alpha: 1)
-            textTitle.textColor = UIColor(red: 0.235, green: 0.235, blue: 0.235, alpha: 1)
+            containerView.backgroundColor = .DarkBlue01
+            iconView.tintColor = .Neutral04
+            textTitle.textColor = .Neutral04
         }
     }
     

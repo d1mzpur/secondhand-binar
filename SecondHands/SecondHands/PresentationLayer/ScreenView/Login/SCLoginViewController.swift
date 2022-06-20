@@ -48,7 +48,7 @@ class SCLoginViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             
-            formItemStack.topAnchor.constraint(equalTo: imagePicker.bottomAnchor, constant: 50),
+            formItemStack.topAnchor.constraint(equalTo: view.topAnchor, constant: 50),
             formItemStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             formItemStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
             

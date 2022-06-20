@@ -26,7 +26,6 @@
 		01C6CA482858713E00F0838E /* Poppins-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 01C6CA472858713E00F0838E /* Poppins-Light.ttf */; };
 		01C6CA4A2858714F00F0838E /* Poppins-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 01C6CA492858714F00F0838E /* Poppins-Bold.ttf */; };
 		0A17E99C285C6A0900B59262 /* SCBannerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A17E99B285C6A0900B59262 /* SCBannerCollectionViewCell.swift */; };
-		0A62E597285B042400BC3034 /* CategorySectionCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A62E596285B042400BC3034 /* CategorySectionCollectionReusableView.swift */; };
 		0A659650285CD08E006346F1 /* SCNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A65964F285CD08E006346F1 /* SCNotification.swift */; };
 		0A68049928607FF500EF2577 /* SCAccountTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A68049828607FF500EF2577 /* SCAccountTableViewCell.swift */; };
 		0A6804A02860802700EF2577 /* SCAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A68049F2860802600EF2577 /* SCAccountViewController.swift */; };
@@ -48,6 +47,7 @@
 		22E1F760285A30D900FA40BF /* SCTextfield.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E1F75F285A30D900FA40BF /* SCTextfield.swift */; };
 		720BB593285B177F0000E24C /* SCTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720BB592285B177F0000E24C /* SCTabBar.swift */; };
 		726047F628607B9100AB2EA7 /* SCRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 726047F528607B9100AB2EA7 /* SCRegisterViewController.swift */; };
+		726047F82860A34C00AB2EA7 /* CategorySectionCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 726047F72860A34C00AB2EA7 /* CategorySectionCollectionReusableView.swift */; };
 		72BDD18D2858A0BF006A75A6 /* SCButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72BDD18C2858A0BF006A75A6 /* SCButton.swift */; };
 /* End PBXBuildFile section */
 
@@ -71,7 +71,6 @@
 		01C6CA472858713E00F0838E /* Poppins-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Light.ttf"; sourceTree = "<group>"; };
 		01C6CA492858714F00F0838E /* Poppins-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Bold.ttf"; sourceTree = "<group>"; };
 		0A17E99B285C6A0900B59262 /* SCBannerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCBannerCollectionViewCell.swift; sourceTree = "<group>"; };
-		0A62E596285B042400BC3034 /* CategorySectionCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySectionCollectionReusableView.swift; sourceTree = "<group>"; };
 		0A65964F285CD08E006346F1 /* SCNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCNotification.swift; sourceTree = "<group>"; };
 		0A68049828607FF500EF2577 /* SCAccountTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCAccountTableViewCell.swift; path = SecondHands/PresentationLayer/ScreenView/Profile/Cell/SCAccountTableViewCell.swift; sourceTree = SOURCE_ROOT; };
 		0A68049F2860802600EF2577 /* SCAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCAccountViewController.swift; path = SecondHands/PresentationLayer/ScreenView/Profile/SCAccountViewController.swift; sourceTree = SOURCE_ROOT; };
@@ -95,6 +94,7 @@
 		22E1F75F285A30D900FA40BF /* SCTextfield.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCTextfield.swift; sourceTree = "<group>"; };
 		720BB592285B177F0000E24C /* SCTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCTabBar.swift; sourceTree = "<group>"; };
 		726047F528607B9100AB2EA7 /* SCRegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCRegisterViewController.swift; sourceTree = "<group>"; };
+		726047F72860A34C00AB2EA7 /* CategorySectionCollectionReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategorySectionCollectionReusableView.swift; sourceTree = "<group>"; };
 		72BDD18C2858A0BF006A75A6 /* SCButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -265,7 +265,6 @@
 			isa = PBXGroup;
 			children = (
 				0A80DBDC2859D8E80002287B /* SCHomeCollectionViewController.swift */,
-				0A62E596285B042400BC3034 /* CategorySectionCollectionReusableView.swift */,
 				726047F528607B9100AB2EA7 /* SCRegisterViewController.swift */,
 				01B18BA5286088C400A09AD8 /* SCHomeViewController.swift */,
 				0AC61BFA285C4E6500586870 /* Cell */,
@@ -288,7 +287,7 @@
 		0AC61BFA285C4E6500586870 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				0A62E596285B042400BC3034 /* CategorySectionCollectionReusableView.swift */,
+				726047F72860A34C00AB2EA7 /* CategorySectionCollectionReusableView.swift */,
 				0A17E99B285C6A0900B59262 /* SCBannerCollectionViewCell.swift */,
 				0AC61C07285C4FDD00586870 /* SCCategoryChipCollectionViewCell.swift */,
 				0AC61C04285C4F2800586870 /* SCProductCardViewCollectionViewCell.swift */,
@@ -400,7 +399,6 @@
 				726047F628607B9100AB2EA7 /* SCRegisterViewController.swift in Sources */,
 				0A9E1CFC28579B5F00D864A4 /* AppDelegate.swift in Sources */,
 				0A17E99C285C6A0900B59262 /* SCBannerCollectionViewCell.swift in Sources */,
-				0A62E597285B042400BC3034 /* CategorySectionCollectionReusableView.swift in Sources */,
 				01593524285B2C8B006F9EE6 /* SCProductCard.swift in Sources */,
 				0A659650285CD08E006346F1 /* SCNotification.swift in Sources */,
 				0A6804A32860803A00EF2577 /* SCFooterForVersion.swift in Sources */,
@@ -409,6 +407,7 @@
 				0AC61C08285C4FDD00586870 /* SCCategoryChipCollectionViewCell.swift in Sources */,
 				0A9E1CFE28579B5F00D864A4 /* SceneDelegate.swift in Sources */,
 				01B18BA22860447000A09AD8 /* SCTextfieldWithPickerView.swift in Sources */,
+				726047F82860A34C00AB2EA7 /* CategorySectionCollectionReusableView.swift in Sources */,
 				0AD055AD28582DBA000CDA44 /* UIImageView+Extension.swift in Sources */,
 				0A6804AC286081B100EF2577 /* UIColor+Extension.swift in Sources */,
 				01B18BA6286088C400A09AD8 /* SCHomeViewController.swift in Sources */,

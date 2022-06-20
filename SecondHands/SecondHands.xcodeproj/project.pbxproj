@@ -126,14 +126,6 @@
 			path = Font;
 			sourceTree = "<group>";
 		};
-		016F1C502860A7CB007A1ADE /* Register */ = {
-			isa = PBXGroup;
-			children = (
-				726047F528607B9100AB2EA7 /* SCRegisterViewController.swift */,
-			);
-			path = Register;
-			sourceTree = "<group>";
-		};
 		016F1C512860A7EB007A1ADE /* Account */ = {
 			isa = PBXGroup;
 			children = (
@@ -181,7 +173,6 @@
 			isa = PBXGroup;
 			children = (
 				016F1C512860A7EB007A1ADE /* Account */,
-				016F1C502860A7CB007A1ADE /* Register */,
 				22144F0E2860C524003921ED /* Register */,
 				22144F0D2860C514003921ED /* Login */,
 				0A9E1D1C28579C3600D864A4 /* Home */,

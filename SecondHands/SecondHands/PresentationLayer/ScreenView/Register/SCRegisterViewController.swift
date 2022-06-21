@@ -29,7 +29,7 @@ class SCRegisterViewController: UIViewController {
     
     lazy var registerButton: SCButton = SCButton(style: .primary, size: .normal, type: .defaultButton, title: "Daftar")
     
-    lazy var logilLabel: SCLabel = SCLabel( weight: .regular, size: 14)
+    lazy var loginLabel: SCLabel = SCLabel( weight: .regular, size: 14)
     
     lazy var loginButton: SCButton = SCButton(style: .primary, size: .small, type: .ghostButton, title: "Masuk disini")
     
@@ -51,10 +51,10 @@ class SCRegisterViewController: UIViewController {
     
     lazy var loginLabelStack: UIStackView = {
        let stack = UIStackView(arrangedSubviews: [
-       logilLabel,
+       loginLabel,
        loginButton
        ])
-        stack.setCustomSpacing(8, after: logilLabel)
+        stack.setCustomSpacing(8, after: loginLabel)
         stack.axis = .horizontal
         return stack
     }()
@@ -65,7 +65,11 @@ class SCRegisterViewController: UIViewController {
         view.addSubview(registerLabel)
         registerLabel.text = "Daftar"
         registerLabel.textColor = .black
-        logilLabel.text = "Sudah punya akun?"
+        loginLabel.text = "Sudah punya akun?"
+        
+        registerButton.addTarget(self, action: #selector(navigateToHome), for: .touchUpInside )
+        loginButton.addTarget(self, action: #selector(backButton), for: .touchUpInside )
+        
         view.addSubview(formStack)
         view.addSubview(loginLabelStack)
         
@@ -90,8 +94,12 @@ class SCRegisterViewController: UIViewController {
         ])
     }
     
-    @objc
-    func backButton() {
+    @objc func backButton() {
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    @objc func navigateToHome(){
+        let tabBar = SCTabBar()
+        navigationController?.pushViewController(tabBar, animated: true)
     }
 }

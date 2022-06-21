@@ -27,9 +27,9 @@ class SCLoginViewControllers: UIViewController {
     
     lazy var loginButton: SCButton = SCButton(style: .primary, size: .normal, type: .defaultButton, title: "Masuk")
     
-    lazy var logilLabel: SCLabel = SCLabel( weight: .regular, size: 14)
+    lazy var loginLabel: SCLabel = SCLabel( weight: .regular, size: 14)
     
-    lazy var logincellButton: SCButton = SCButton(style: .primary, size: .small, type: .ghostButton, title: "Daftar disini")
+    lazy var registerButton: SCButton = SCButton(style: .primary, size: .small, type: .ghostButton, title: "Daftar disini")
     
     
     
@@ -48,13 +48,23 @@ class SCLoginViewControllers: UIViewController {
     
     lazy var loginLabelStack: UIStackView = {
        let stack = UIStackView(arrangedSubviews: [
-       logilLabel,
-       logincellButton
+       loginLabel,
+       registerButton
        ])
-        stack.setCustomSpacing(8, after: logilLabel)
+        stack.setCustomSpacing(8, after: loginLabel)
         stack.axis = .horizontal
         return stack
     }()
+    
+    @objc func navigateToHome(){
+        let tabBar = SCTabBar()
+        navigationController?.pushViewController(tabBar, animated: true)
+    }
+    
+    @objc func navigateToRegister(){
+        let registerVC = SCRegisterViewController()
+        navigationController?.pushViewController(registerVC, animated: true)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,7 +72,10 @@ class SCLoginViewControllers: UIViewController {
         view.addSubview(registerLabel)
         registerLabel.text = "Masuk"
         registerLabel.textColor = .black
-        logilLabel.text = "Belum punya akun?"
+        loginLabel.text = "Belum punya akun?"
+        loginButton.addTarget(self, action: #selector(navigateToHome), for: .touchUpInside )
+        registerButton.addTarget(self, action: #selector(navigateToRegister), for: .touchUpInside )
+        
         view.addSubview(formStack)
         view.addSubview(loginLabelStack)
         

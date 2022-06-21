@@ -49,6 +49,7 @@
 		720BB593285B177F0000E24C /* SCTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720BB592285B177F0000E24C /* SCTabBar.swift */; };
 		726047F628607B9100AB2EA7 /* SCRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 726047F528607B9100AB2EA7 /* SCRegisterViewController.swift */; };
 		726047F82860A34C00AB2EA7 /* CategorySectionCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 726047F72860A34C00AB2EA7 /* CategorySectionCollectionReusableView.swift */; };
+		729BBDB92861C61B00BAE262 /* SCSellerUploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 729BBDB82861C61B00BAE262 /* SCSellerUploadViewController.swift */; };
 		72BDD18D2858A0BF006A75A6 /* SCButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72BDD18C2858A0BF006A75A6 /* SCButton.swift */; };
 /* End PBXBuildFile section */
 
@@ -97,6 +98,7 @@
 		720BB592285B177F0000E24C /* SCTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCTabBar.swift; sourceTree = "<group>"; };
 		726047F528607B9100AB2EA7 /* SCRegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCRegisterViewController.swift; sourceTree = "<group>"; };
 		726047F72860A34C00AB2EA7 /* CategorySectionCollectionReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategorySectionCollectionReusableView.swift; sourceTree = "<group>"; };
+		729BBDB82861C61B00BAE262 /* SCSellerUploadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCSellerUploadViewController.swift; sourceTree = "<group>"; };
 		72BDD18C2858A0BF006A75A6 /* SCButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -173,6 +175,7 @@
 		01CD6CA3285EFE8F00BA99DF /* ScreenView */ = {
 			isa = PBXGroup;
 			children = (
+				729BBDB72861C5F500BAE262 /* Seller */,
 				016F1C512860A7EB007A1ADE /* Account */,
 				22144F0E2860C524003921ED /* Register */,
 				22144F0D2860C514003921ED /* Login */,
@@ -338,6 +341,14 @@
 			path = Register;
 			sourceTree = "<group>";
 		};
+		729BBDB72861C5F500BAE262 /* Seller */ = {
+			isa = PBXGroup;
+			children = (
+				729BBDB82861C61B00BAE262 /* SCSellerUploadViewController.swift */,
+			);
+			path = Seller;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -443,6 +454,8 @@
 				0A6804A02860802700EF2577 /* SCAccountViewController.swift in Sources */,
 				22144F102860C54F003921ED /* SCLoginViewControllers.swift in Sources */,
 				22E1F760285A30D900FA40BF /* SCTextfield.swift in Sources */,
+				729BBDB92861C61B00BAE262 /* SCSellerUploadViewController.swift in Sources */,
+				0A68049928607FF500EF2577 /* SCAccountTableViewCell.swift in Sources */,
 				0AF723D5285FA9FA00C0F146 /* SCSearchBar.swift in Sources */,
 				72BDD18D2858A0BF006A75A6 /* SCButton.swift in Sources */,
 				22D5643E285DA7E300BB5294 /* SCProfilViewController.swift in Sources */,

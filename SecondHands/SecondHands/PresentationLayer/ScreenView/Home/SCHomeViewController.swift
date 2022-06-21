@@ -25,6 +25,7 @@ class SCHomeViewController: UIViewController {
                                   ProductItem(id: "7", productImage: "productImage", productTitle: "Dji Mavic Air", productCategory: "Drone", productPrice: "500.000"),
                                   ProductItem(id: "8", productImage: "productImage", productTitle: "Macbook Pro", productCategory: "Laptop", productPrice: "250.000"),
                                   ]
+    var selectedCategoryIndex: Int = -1
     
     let offerItem = OfferItem(id: "1",
                               bannerImage: "offerImage",
@@ -129,7 +130,6 @@ extension SCHomeViewController: UICollectionViewDelegate, UICollectionViewDataSo
         
         if section == 0 {
             bannerCell.configure(item: offerItem)
-            
             let heightBanner = bannerCell.frame.height + 80
             bannerCell.layer.insertSublayer(setGradientBackground(), at: 0)
             gradientLayer.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: heightBanner)
@@ -137,7 +137,8 @@ extension SCHomeViewController: UICollectionViewDelegate, UICollectionViewDataSo
             return bannerCell
         } else if section == 1 {
             categoryCell.configure(item: productItem)
-            
+            let selected = selectedCategoryIndex == indexPath[1]
+            categoryCell.cellClicked(state: selected)
             return categoryCell
         } else {
             productCell.configure(item: productItem)
@@ -152,6 +153,15 @@ extension SCHomeViewController: UICollectionViewDelegate, UICollectionViewDataSo
             headerOfCategory.label.text = "Telusuri Kategori"
         
             return headerOfCategory
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//        let data = productItem[indexPath.row]
+        if ((collectionView.dequeueReusableCell(withReuseIdentifier: "categoryChips", for: indexPath) as? SCCategoryChipCollectionViewCell) != nil){
+            selectedCategoryIndex = selectedCategoryIndex != indexPath[1] ? indexPath[1] : -1
+            print("Tap ", indexPath[1])
+            collectionView.reloadData()
+        }
     }
 }
 

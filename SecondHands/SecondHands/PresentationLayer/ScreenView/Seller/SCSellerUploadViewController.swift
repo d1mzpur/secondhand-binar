@@ -69,7 +69,7 @@ class SCSellerUploadViewController: UIViewController {
         "Elektronik","Mainan"
         ]
         labelImagePicker.text = "Foto Produk"
-        imagePickerProduct.layer.borderWidth = 1
+//        imagePickerProduct.layer.borderWidth = 1
         view.addSubview(formStack)
         view.addSubview(labelImagePicker)
         view.addSubview(imagePickerProduct)

@@ -22,6 +22,7 @@ class SCBannerCollectionViewCell: UICollectionViewCell {
     
     var offerImage: UIImageView = {
         var imageOffers = UIImageView()
+        
         imageOffers.contentMode = .scaleAspectFit
         return imageOffers
     }()
@@ -29,7 +30,7 @@ class SCBannerCollectionViewCell: UICollectionViewCell {
     var offerTitle: UILabel = {
         var titleOffers = UILabel()
         titleOffers.font = SCLabel(frame: .zero, weight: .bold, size: 20).font
-        titleOffers.textColor = .black
+        titleOffers.textColor = .Neutral05
         titleOffers.numberOfLines = 0
         return titleOffers
     }()
@@ -39,28 +40,30 @@ class SCBannerCollectionViewCell: UICollectionViewCell {
         let text: String = "Diskon Hingga"
         titleOffers.text = text
         titleOffers.font = SCLabel(frame: .zero, weight: .regular, size: 10).font
-        titleOffers.textColor = .black
+        titleOffers.textColor = .Neutral05
         return titleOffers
     }()
     
     var discount: UILabel = {
         var titleOffers = UILabel()
         titleOffers.font = SCLabel(frame: .zero, weight: .medium, size: 18).font
-        titleOffers.textColor = UIColor(red: 0.98, green: 0.173, blue: 0.353, alpha: 1)
+        titleOffers.textColor = .red
         return titleOffers
     }()
     
-    lazy var discountStackView: UIStackView = {
-        var discountSV = UIStackView(arrangedSubviews: [subDiscount, discount])
-        discountSV.axis = .vertical
-        discountSV.spacing = 4
-        return discountSV
-    }()
+//    lazy var discountStackView: UIStackView = {
+//        var discountSV = UIStackView(arrangedSubviews: [subDiscount, discount])
+//        discountSV.axis = .vertical
+//        discountSV.spacing = 4
+//        return discountSV
+//    }()
     
     lazy var titleStackView: UIStackView = {
-        var titleSV = UIStackView(arrangedSubviews: [offerTitle, discountStackView])
+        var titleSV = UIStackView(arrangedSubviews: [offerTitle, subDiscount, discount])
         titleSV.axis = .vertical
-        titleSV.heightAnchor.constraint(greaterThanOrEqualToConstant: 50).isActive = true
+        titleSV.setCustomSpacing(16, after: offerTitle)
+        titleSV.setCustomSpacing(4, after: subDiscount)
+        titleSV.setCustomSpacing(16, after: discount)
         return titleSV
     }()
     
@@ -91,8 +94,11 @@ class SCBannerCollectionViewCell: UICollectionViewCell {
     private func setupConstraint() {
         bannerStackView.translatesAutoresizingMaskIntoConstraints = false
         searchBar.translatesAutoresizingMaskIntoConstraints = false
+        offerImage.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
+            offerImage.heightAnchor.constraint(equalToConstant: 123),
+            offerImage.widthAnchor.constraint(equalToConstant: 127),
             searchBar.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
             searchBar.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
             searchBar.bottomAnchor.constraint(equalTo: bannerStackView.topAnchor, constant: -16),

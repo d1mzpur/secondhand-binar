@@ -11,7 +11,7 @@ class SCCategoryChipCollectionViewCell: UICollectionViewCell {
     var containerView: UIView = {
         var chip = UIView()
         chip.layer.cornerRadius = 12
-        chip.backgroundColor = UIColor(red: 0.886, green: 0.831, blue: 0.941, alpha: 1)
+        chip.backgroundColor = .DarkBlue01
         return chip
     }()
     
@@ -19,14 +19,14 @@ class SCCategoryChipCollectionViewCell: UICollectionViewCell {
         var textTitle = UILabel()
         textTitle.text = "Keranjang Sepatu"
         textTitle.font = .systemFont(ofSize: 14, weight: .regular)
-        textTitle.textColor = UIColor(red: 0.235, green: 0.235, blue: 0.235, alpha: 1)
+        textTitle.textColor = .Neutral04
         return textTitle
     }()
     
     var iconView: UIImageView = {
         var iconView = UIImageView()
         iconView.image = UIImage(systemName: "magnifyingglass")
-        iconView.tintColor = UIColor(red: 0.235, green: 0.235, blue: 0.235, alpha: 1)
+        iconView.tintColor = .Neutral04
         iconView.heightAnchor.constraint(equalToConstant: 14).isActive = true
         iconView.widthAnchor.constraint(equalToConstant: 14).isActive = true
         iconView.contentMode = .scaleAspectFill
@@ -41,15 +41,19 @@ class SCCategoryChipCollectionViewCell: UICollectionViewCell {
         
         return chipStackView
     }()
-    
     typealias onTap = (Bool) -> Void
+    typealias onTapByIndext = (_ indexPath: IndexPath) -> Void
+    var onCellTapByIndex: onTapByIndext?
     var onCellTap: onTap?
     var isClicked: Bool = false
     
-    
     override func prepareForReuse() {
         super.prepareForReuse()
+        containerView.backgroundColor = .DarkBlue01
+        iconView.tintColor = .Neutral04
+        textTitle.textColor = .Neutral04
     }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.addSubview(containerView)
@@ -57,8 +61,27 @@ class SCCategoryChipCollectionViewCell: UICollectionViewCell {
         setupConstraint()
     }
     
-    func configure(item: ProductItem) {
-        textTitle.text = item.productCategory
+    func configure(item: String) {
+        textTitle.text = item
+    }
+    
+    var cellTapped: Bool = false {
+        didSet {
+            changeState()
+        }
+    }
+    
+    private func changeState() {
+        if cellTapped {
+            
+            containerView.backgroundColor = .DarkBlue04
+            iconView.tintColor = .Neutral01
+            textTitle.textColor = .Neutral01
+        } else {
+            containerView.backgroundColor = .DarkBlue01
+            iconView.tintColor = .Neutral04
+            textTitle.textColor = .Neutral04
+        }
     }
     
     func cellClicked(state: Bool) {
@@ -78,10 +101,10 @@ class SCCategoryChipCollectionViewCell: UICollectionViewCell {
     
     private func setupConstraint() {
         containerView.translatesAutoresizingMaskIntoConstraints = false
-        containerView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-        containerView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
-        containerView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
-        containerView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+        containerView.topAnchor.constraint(equalTo: self.contentView.topAnchor).isActive = true
+        containerView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor).isActive = true
+        containerView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor).isActive = true
+        containerView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor).isActive = true
         
         chipStackView.translatesAutoresizingMaskIntoConstraints = false
         

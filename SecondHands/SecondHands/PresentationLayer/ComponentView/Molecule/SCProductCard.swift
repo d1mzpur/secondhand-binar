@@ -12,6 +12,8 @@ class SCProductCard: UIView {
         let imageName = "exampleProductCardImage.png"
         let image = UIImage(named: imageName)
         let imageView = UIImageView(image: image!)
+        imageView.autoresizingMask = [.flexibleWidth]
+        imageView.contentMode = .scaleAspectFit
         imageView.layer.masksToBounds = true
         imageView.layer.cornerRadius = 10
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -98,9 +100,9 @@ class SCProductCard: UIView {
             productStack.bottomAnchor.constraint(equalTo: self.bottomAnchor,constant: -8),
             
             productImage.heightAnchor.constraint(equalTo: productStack.heightAnchor, multiplier: 0.5),
-            productTitle.heightAnchor.constraint(equalTo: productStack.heightAnchor, multiplier: 0.1),
-            productCategory.heightAnchor.constraint(equalTo: productStack.heightAnchor, multiplier: 0.075),
-            productPrice.heightAnchor.constraint(equalTo: productStack.heightAnchor, multiplier: 0.1),
+//            productTitle.heightAnchor.constraint(equalTo: productStack.heightAnchor, multiplier: 0.1),
+//            productCategory.heightAnchor.constraint(equalTo: productStack.heightAnchor, multiplier: 0.075),
+//            productPrice.heightAnchor.constraint(equalTo: productStack.heightAnchor, multiplier: 0.1),
         ])
         
     }

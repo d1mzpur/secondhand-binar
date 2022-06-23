@@ -44,15 +44,15 @@ extension LayoutSection {
     }
     
     private func createLayoutChips() -> NSCollectionLayoutSection {
-        let layoutSize = NSCollectionLayoutSize(widthDimension: .estimated(100), heightDimension: .absolute(44))
+        let layoutSize = NSCollectionLayoutSize(widthDimension: .estimated(110), heightDimension: .absolute(44))
         let itemCategory = NSCollectionLayoutItem(layoutSize: layoutSize)
         
-        let groupSize = NSCollectionLayoutSize(widthDimension: .estimated(100), heightDimension: .absolute(44))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.35), heightDimension: .absolute(44))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [itemCategory])
         
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .continuous
-        section.interGroupSpacing = 16
+//        section.interGroupSpacing = 16
         section.contentInsets.leading = 16
         section.contentInsets.bottom = 32
         section.boundarySupplementaryItems = [.init(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .absolute(50)), elementKind: "categoryId", alignment: .topLeading)]
@@ -61,7 +61,7 @@ extension LayoutSection {
     
     private func createLayoutProductList(environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
         
-        let layoutSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5), heightDimension: .fractionalWidth(0.66))
+        let layoutSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5), heightDimension: .fractionalWidth(0.5))
         
         let itemCategory = NSCollectionLayoutItem(layoutSize: layoutSize)
         itemCategory.contentInsets.trailing = 16

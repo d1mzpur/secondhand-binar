@@ -11,26 +11,27 @@ typealias item = [ProductItem]
 
 class SCHomeViewController: UIViewController {
     var productItem: item = [ProductItem(id: "1", productImage: "productImage", productTitle: "Apple Watch", productCategory: "Smart Watch", productPrice: "300.000"),
-                                  ProductItem(id: "2", productImage: "productImage", productTitle: "Samsung Watch", productCategory: "Smart Watch", productPrice: "400.000"),
-                                  ProductItem( id: "3", productImage: "productImage", productTitle: "iPhone 13", productCategory: "Smartphone", productPrice: "500.000"),
-                                  ProductItem( id: "4", productImage: "productImage", productTitle: "Samsung Galaxy S20", productCategory: "Smartphone", productPrice: "250.000"),
-                                  ProductItem( id: "5", productImage: "productImage", productTitle: "AirPods Pro", productCategory: "Air pods", productPrice: "300.000"),
-                                  ProductItem( id: "6", productImage: "productImage", productTitle: "Sony Alpha A6300", productCategory: "Mirrorless", productPrice: "400.000"),
-                                  ProductItem(id: "7", productImage: "productImage", productTitle: "Dji Mavic Air", productCategory: "Drone", productPrice: "500.000"),
-                                  ProductItem(id: "8", productImage: "productImage", productTitle: "Macbook Pro", productCategory: "Laptop", productPrice: "250.000"),
-                                  ProductItem( id: "3", productImage: "productImage", productTitle: "iPhone 13", productCategory: "Smartphone", productPrice: "500.000"),
-                                  ProductItem( id: "4", productImage: "productImage", productTitle: "Samsung Galaxy S20", productCategory: "Smartphone", productPrice: "250.000"),
-                                  ProductItem( id: "5", productImage: "productImage", productTitle: "AirPods Pro", productCategory: "Air pods", productPrice: "300.000"),
-                                  ProductItem( id: "6", productImage: "productImage", productTitle: "Sony Alpha A6300", productCategory: "Mirrorless", productPrice: "400.000"),
-                                  ProductItem(id: "7", productImage: "productImage", productTitle: "Dji Mavic Air", productCategory: "Drone", productPrice: "500.000"),
-                                  ProductItem(id: "8", productImage: "productImage", productTitle: "Macbook Pro", productCategory: "Laptop", productPrice: "250.000"),
-                                  ]
-    var selectedCategoryIndex: Int = -1
+                             ProductItem(id: "2", productImage: "productImage", productTitle: "Samsung Watch", productCategory: "Smart Watch", productPrice: "400.000"),
+                             ProductItem( id: "3", productImage: "productImage", productTitle: "iPhone 13", productCategory: "Smartphone", productPrice: "500.000"),
+                             ProductItem( id: "4", productImage: "productImage", productTitle: "Samsung Galaxy S20", productCategory: "Smartphone", productPrice: "250.000"),
+                             ProductItem( id: "5", productImage: "productImage", productTitle: "AirPods Pro", productCategory: "Air pods", productPrice: "300.000"),
+                             ProductItem( id: "6", productImage: "productImage", productTitle: "Sony Alpha A6300", productCategory: "Mirrorless", productPrice: "400.000"),
+                             ProductItem(id: "7", productImage: "productImage", productTitle: "Dji Mavic Air", productCategory: "Drone", productPrice: "500.000"),
+                             ProductItem(id: "8", productImage: "productImage", productTitle: "Macbook Pro", productCategory: "Laptop", productPrice: "250.000"),
+                             ProductItem( id: "3", productImage: "productImage", productTitle: "iPhone 13", productCategory: "Smartphone", productPrice: "500.000"),
+                             ProductItem( id: "4", productImage: "productImage", productTitle: "Samsung Galaxy S20", productCategory: "Smartphone", productPrice: "250.000"),
+                             ProductItem( id: "5", productImage: "productImage", productTitle: "AirPods Pro", productCategory: "Air pods", productPrice: "300.000"),
+                             ProductItem( id: "6", productImage: "productImage", productTitle: "Sony Alpha A6300", productCategory: "Mirrorless", productPrice: "400.000"),
+                             ProductItem(id: "7", productImage: "productImage", productTitle: "Dji Mavic Air", productCategory: "Drone", productPrice: "500.000"),
+                             ProductItem(id: "8", productImage: "productImage", productTitle: "Macbook Pro", productCategory: "Laptop", productPrice: "250.000"),
+    ]
     
     let offerItem = OfferItem(id: "1",
                               bannerImage: "offerImage",
                               bannerTitle: "Bulan Ramadhan\nBanyak Dison",
                               discount: "60%")
+    var filterListProduct: [ProductItem]? = nil
+    lazy var removeDuplicate = self.productItem.removeDuplicates()
     
     lazy var searchBar: UISearchBar = {
         let frameNavBar = navigationController?.navigationBar.frame
@@ -47,10 +48,12 @@ class SCHomeViewController: UIViewController {
     
     let homeCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
     let gradientLayer = CAGradientLayer()
-    private var lastContentOffset: CGFloat = 0
-    
+    //    private var lastContentOffset: CGFloat = 0
+    var selectedCategoryIndex: Int = -1
     override func viewWillAppear(_ animated: Bool) {
+        
         navigationController?.navigationBar.isHidden = true
+        
         deleteBackgroundTopBar()
         createSearchBar()
     }
@@ -74,6 +77,7 @@ class SCHomeViewController: UIViewController {
     func configureView() {
         homeCollectionView.collectionViewLayout = LayoutSection.createLayout(getHeightSuperView: self.getTopbarHeight)
         homeCollectionView.backgroundColor = .white
+        homeCollectionView.showsVerticalScrollIndicator = false
     }
     
     func setupCollection() {
@@ -111,14 +115,15 @@ extension SCHomeViewController: UICollectionViewDelegate, UICollectionViewDataSo
         if section == 0 {
             return 1
         } else if section == 1 {
-            return productItem.count
+            return removeDuplicate.count
         } else {
-            return productItem.count
+            return isProductEmpty()
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let productItem = self.productItem[indexPath.item]
+        
+        let productCategory = self.productItem[indexPath.item]
         let offerItem = self.offerItem
         let section = indexPath.section
         
@@ -129,6 +134,7 @@ extension SCHomeViewController: UICollectionViewDelegate, UICollectionViewDataSo
         else { return UICollectionViewCell() }
         
         if section == 0 {
+            
             bannerCell.configure(item: offerItem)
             let heightBanner = bannerCell.frame.height + 80
             bannerCell.layer.insertSublayer(setGradientBackground(), at: 0)
@@ -136,32 +142,68 @@ extension SCHomeViewController: UICollectionViewDelegate, UICollectionViewDataSo
             
             return bannerCell
         } else if section == 1 {
-            categoryCell.configure(item: productItem)
+            
+            let category = removeDuplicate[indexPath.item].productCategory
+            categoryCell.configure(item: category)
             let selected = selectedCategoryIndex == indexPath[1]
             categoryCell.cellClicked(state: selected)
+            categoryCell.onCellTapByIndex = { [weak self] filter in
+                
+                guard let self = self else { return }
+                print(self.productItem[filter.item].productCategory)
+                self.filterListProduct = self.productItem.filter {
+                    $0.productCategory.contains(
+                        self.productItem[filter.item]
+                            .productCategory)
+                }
+            }
+            
             return categoryCell
         } else {
-            productCell.configure(item: productItem)
+            guard let item = filterListProduct?.isEmpty == nil ? productCategory : filterListProduct?[indexPath.item] else { return UICollectionViewCell() }
+            productCell.configure(item: item)
             return productCell
         }
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-            guard
-                let headerOfCategory = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: CategorySectionCollectionReusableView.reuseIdentifier, for: indexPath) as? CategorySectionCollectionReusableView
-            else { return UICollectionReusableView() }
-            headerOfCategory.label.text = "Telusuri Kategori"
+        guard
+            let headerOfCategory = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: CategorySectionCollectionReusableView.reuseIdentifier, for: indexPath) as? CategorySectionCollectionReusableView
+        else { return UICollectionReusableView() }
+        headerOfCategory.label.text = "Telusuri Kategori"
         
-            return headerOfCategory
+        return headerOfCategory
+    }
+    
+    func isProductEmpty() -> Int {
+        return (self.filterListProduct?.isEmpty) == nil ? Int(self.productItem.count) : Int(self.filterListProduct?.count ?? 0)
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        let data = productItem[indexPath.row]
-        if ((collectionView.dequeueReusableCell(withReuseIdentifier: "categoryChips", for: indexPath) as? SCCategoryChipCollectionViewCell) != nil){
-            selectedCategoryIndex = selectedCategoryIndex != indexPath[1] ? indexPath[1] : -1
-            print("Tap ", indexPath[1])
+        
+        switch indexPath.section {
+        case 0:
+            guard let _ = homeCollectionView.cellForItem(at: indexPath) as? SCBannerCollectionViewCell else { return }
+        case 1:
+            let categoryCell = collectionView.cellForItem(at: indexPath) as?
+                SCCategoryChipCollectionViewCell
+            categoryCell?.onCellTapByIndex?(indexPath)
+            
+            if ((collectionView.dequeueReusableCell(withReuseIdentifier: "categoryChips", for: indexPath) as? SCCategoryChipCollectionViewCell) != nil) {
+                selectedCategoryIndex = selectedCategoryIndex != indexPath[1] ? indexPath[1] : -1
+                print("Tap ", indexPath[1])
+                collectionView.reloadData()
+            }
             collectionView.reloadData()
+            
+        case 2:
+            guard let _ = homeCollectionView.cellForItem(at: indexPath) as? SCProductCardViewCollectionViewCell else { return }
+        default:
+            break
         }
+        
     }
 }
 
@@ -171,7 +213,7 @@ extension SCHomeViewController {
         var offset = scrollView.contentOffset.y / 150
         if offset > 1 {
             offset = 1
-            self.navigationController?.navigationBar.barTintColor = UIColor(hue: 1, saturation: offset, brightness: 1, alpha: 1)
+            self.navigationController?.navigationBar.barTintColor = UIColor(hue: 1, saturation: offset, brightness: 1, alpha: 0)
             self.navigationController?.navigationBar.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: offset)
         } else {
             self.navigationController?.navigationBar.barTintColor = UIColor(hue: 1, saturation: offset, brightness: 1, alpha: 1)

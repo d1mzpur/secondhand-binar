@@ -20,14 +20,15 @@ class SCProductCardViewCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        cardView.productCategory.text = nil
-        cardView.productImage.image = nil
-        cardView.productPrice.text = nil
-        cardView.productTitle.text = nil
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        cardView.dropShadow(type: .low)
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        cardView.dropShadow(type: .low)
+    }
     
     func configure(item: ProductItem) {
         cardView.productImage.image = UIImage(named: item.productImage)
@@ -39,10 +40,9 @@ class SCProductCardViewCollectionViewCell: UICollectionViewCell {
     
     private func setupConstraint() {
         cardView.translatesAutoresizingMaskIntoConstraints = false
-        cardView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-        cardView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
-        cardView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
-        cardView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
-        
+        cardView.topAnchor.constraint(equalTo: self.contentView.topAnchor).isActive = true
+        cardView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor).isActive = true
+        cardView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor).isActive = true
+        cardView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor).isActive = true
     }
 }

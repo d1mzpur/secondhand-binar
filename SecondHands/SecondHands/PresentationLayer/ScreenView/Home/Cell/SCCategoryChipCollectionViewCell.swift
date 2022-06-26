@@ -49,6 +49,7 @@ class SCCategoryChipCollectionViewCell: UICollectionViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
+        invalidateIntrinsicContentSize()
         containerView.backgroundColor = .DarkBlue01
         iconView.tintColor = .Neutral04
         textTitle.textColor = .Neutral04
@@ -63,25 +64,6 @@ class SCCategoryChipCollectionViewCell: UICollectionViewCell {
     
     func configure(item: String) {
         textTitle.text = item
-    }
-    
-    var cellTapped: Bool = false {
-        didSet {
-            changeState()
-        }
-    }
-    
-    private func changeState() {
-        if cellTapped {
-            
-            containerView.backgroundColor = .DarkBlue04
-            iconView.tintColor = .Neutral01
-            textTitle.textColor = .Neutral01
-        } else {
-            containerView.backgroundColor = .DarkBlue01
-            iconView.tintColor = .Neutral04
-            textTitle.textColor = .Neutral04
-        }
     }
     
     func cellClicked(state: Bool) {

@@ -10,28 +10,21 @@ import SwiftUI
 typealias item = [ProductItem]
 
 class SCHomeViewController: UIViewController {
-    var productItem: item = [ProductItem(id: "1", productImage: "productImage", productTitle: "Apple Watch", productCategory: "Smart Watch", productPrice: "300.000"),
-                             ProductItem(id: "2", productImage: "productImage", productTitle: "Samsung Watch", productCategory: "Smart Watch", productPrice: "400.000"),
-                             ProductItem( id: "3", productImage: "productImage", productTitle: "iPhone 13", productCategory: "Smartphone", productPrice: "500.000"),
-                             ProductItem( id: "4", productImage: "productImage", productTitle: "Samsung Galaxy S20", productCategory: "Smartphone", productPrice: "250.000"),
-                             ProductItem( id: "5", productImage: "productImage", productTitle: "AirPods Pro", productCategory: "Air pods", productPrice: "300.000"),
-                             ProductItem( id: "6", productImage: "productImage", productTitle: "Sony Alpha A6300", productCategory: "Mirrorless", productPrice: "400.000"),
-                             ProductItem(id: "7", productImage: "productImage", productTitle: "Dji Mavic Air", productCategory: "Drone", productPrice: "500.000"),
-                             ProductItem(id: "8", productImage: "productImage", productTitle: "Macbook Pro", productCategory: "Laptop", productPrice: "250.000"),
-                             ProductItem( id: "3", productImage: "productImage", productTitle: "iPhone 13", productCategory: "Smartphone", productPrice: "500.000"),
-                             ProductItem( id: "4", productImage: "productImage", productTitle: "Samsung Galaxy S20", productCategory: "Smartphone", productPrice: "250.000"),
-                             ProductItem( id: "5", productImage: "productImage", productTitle: "AirPods Pro", productCategory: "Air pods", productPrice: "300.000"),
-                             ProductItem( id: "6", productImage: "productImage", productTitle: "Sony Alpha A6300", productCategory: "Mirrorless", productPrice: "400.000"),
-                             ProductItem(id: "7", productImage: "productImage", productTitle: "Dji Mavic Air", productCategory: "Drone", productPrice: "500.000"),
-                             ProductItem(id: "8", productImage: "productImage", productTitle: "Macbook Pro", productCategory: "Laptop", productPrice: "250.000"),
-    ]
+    var productItem: item = ProductItem.createData()
     
-    let offerItem = OfferItem(id: "1",
-                              bannerImage: "offerImage",
-                              bannerTitle: "Bulan Ramadhan\nBanyak Dison",
-                              discount: "60%")
-    var filterListProduct: [ProductItem]? = nil
-    lazy var removeDuplicate = self.productItem.removeDuplicates()
+    let offerItem: [OfferItem] = OfferItem.createData()
+    
+    var customSearchBar: SCSearchBar = {
+        var searchBar = SCSearchBar()
+        searchBar.layer.cornerRadius = 16
+        searchBar.clipsToBounds = true
+        searchBar.height = 44
+        searchBar.margin = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: -16)
+        searchBar.backgroundColor = .white
+        
+        
+        return searchBar
+    }()
     
     lazy var searchBar: UISearchBar = {
         let frameNavBar = navigationController?.navigationBar.frame
@@ -47,9 +40,12 @@ class SCHomeViewController: UIViewController {
     lazy var searchView = SCSearchBar()
     
     let homeCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
+    
+    var filterListProduct: [ProductItem]? = nil
+    lazy var removeDuplicate = self.productItem.removeDuplicates()
     let gradientLayer = CAGradientLayer()
-    //    private var lastContentOffset: CGFloat = 0
     var selectedCategoryIndex: Int = -1
+    
     override func viewWillAppear(_ animated: Bool) {
         
         navigationController?.navigationBar.isHidden = true
@@ -62,6 +58,7 @@ class SCHomeViewController: UIViewController {
         super.viewWillDisappear(animated)
         navigationController?.navigationBar.isHidden = false
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
@@ -90,18 +87,19 @@ class SCHomeViewController: UIViewController {
     }
     
     func createSearchBar() {
-        //        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: searchBar)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: customSearchBar)
     }
     
     func setupConstraint() {
         homeCollectionView.translatesAutoresizingMaskIntoConstraints = false
-        let bottomConstraint = homeCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        bottomConstraint.priority = .defaultLow
+//        let bottomConstraint = homeCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+//        bottomConstraint.priority = .defaultLow
         NSLayoutConstraint.activate([
             homeCollectionView.topAnchor.constraint(equalTo: view.topAnchor),
             homeCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             homeCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            bottomConstraint
+            homeCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+//            bottomConstraint
         ])
     }
 }
@@ -124,7 +122,6 @@ extension SCHomeViewController: UICollectionViewDelegate, UICollectionViewDataSo
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let productCategory = self.productItem[indexPath.item]
-        let offerItem = self.offerItem
         let section = indexPath.section
         
         guard
@@ -134,7 +131,7 @@ extension SCHomeViewController: UICollectionViewDelegate, UICollectionViewDataSo
         else { return UICollectionViewCell() }
         
         if section == 0 {
-            
+            let offerItem = self.offerItem[indexPath.row]
             bannerCell.configure(item: offerItem)
             let heightBanner = bannerCell.frame.height + 80
             bannerCell.layer.insertSublayer(setGradientBackground(), at: 0)
@@ -167,20 +164,6 @@ extension SCHomeViewController: UICollectionViewDelegate, UICollectionViewDataSo
         
     }
     
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        guard
-            let headerOfCategory = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: CategorySectionCollectionReusableView.reuseIdentifier, for: indexPath) as? CategorySectionCollectionReusableView
-        else { return UICollectionReusableView() }
-        headerOfCategory.label.text = "Telusuri Kategori"
-        
-        return headerOfCategory
-    }
-    
-    func isProductEmpty() -> Int {
-        return (self.filterListProduct?.isEmpty) == nil ? Int(self.productItem.count) : Int(self.filterListProduct?.count ?? 0)
-        
-    }
-    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         switch indexPath.section {
@@ -193,10 +176,9 @@ extension SCHomeViewController: UICollectionViewDelegate, UICollectionViewDataSo
             
             if ((collectionView.dequeueReusableCell(withReuseIdentifier: "categoryChips", for: indexPath) as? SCCategoryChipCollectionViewCell) != nil) {
                 selectedCategoryIndex = selectedCategoryIndex != indexPath[1] ? indexPath[1] : -1
-                print("Tap ", indexPath[1])
+                print("Tap ", selectedCategoryIndex)
                 collectionView.reloadData()
             }
-            collectionView.reloadData()
             
         case 2:
             guard let _ = homeCollectionView.cellForItem(at: indexPath) as? SCProductCardViewCollectionViewCell else { return }
@@ -205,6 +187,21 @@ extension SCHomeViewController: UICollectionViewDelegate, UICollectionViewDataSo
         }
         
     }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        guard
+            let headerOfCategory = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: CategorySectionCollectionReusableView.reuseIdentifier, for: indexPath) as? CategorySectionCollectionReusableView
+        else { return UICollectionReusableView() }
+        headerOfCategory.label.text = "Telusuri Kategori"
+        
+        return headerOfCategory
+    }
+    
+    override func prepareForInterfaceBuilder() {
+        super.prepareForInterfaceBuilder()
+        
+    }
+    
 }
 
 extension SCHomeViewController {
@@ -213,10 +210,10 @@ extension SCHomeViewController {
         var offset = scrollView.contentOffset.y / 150
         if offset > 1 {
             offset = 1
-            self.navigationController?.navigationBar.barTintColor = UIColor(hue: 1, saturation: offset, brightness: 1, alpha: 0)
-            self.navigationController?.navigationBar.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: offset)
+//            self.navigationController?.navigationBar.barTintColor = UIColor(hue: 1, saturation: offset, brightness: 1, alpha: 0)
+            self.navigationController?.navigationBar.backgroundColor = .LimeGreen03
         } else {
-            self.navigationController?.navigationBar.barTintColor = UIColor(hue: 1, saturation: offset, brightness: 1, alpha: 1)
+            self.navigationController?.navigationBar.barTintColor = .clear
         }
     }
     
@@ -230,14 +227,14 @@ extension UIViewController {
 }
 
 extension SCHomeViewController {
-    func getHeightSuperView() -> CGFloat {
-        let heightStatusBar = view.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
-        let heightNavbar = navigationController?.navigationBar.frame.height ?? 0
-        return heightStatusBar + heightNavbar
-    }
     
+    func isProductEmpty() -> Int {
+        return (self.filterListProduct?.isEmpty) == nil ? Int(self.productItem.count) : Int(self.filterListProduct?.count ?? 0)
+        
+    }
+
     func deleteBackgroundTopBar() {
-        navigationController?.navigationBar.isHidden = true
+
         let colorTop =  UIColor.red //your status bar color
         let colorBottom = UIColor.white//color for your navigation bar
         let gradientLayer = CAGradientLayer()

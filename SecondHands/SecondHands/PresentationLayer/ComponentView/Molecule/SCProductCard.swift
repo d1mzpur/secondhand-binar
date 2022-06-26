@@ -12,8 +12,7 @@ class SCProductCard: UIView {
         let imageName = "exampleProductCardImage.png"
         let image = UIImage(named: imageName)
         let imageView = UIImageView(image: image!)
-        imageView.autoresizingMask = [.flexibleWidth]
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
         imageView.layer.masksToBounds = true
         imageView.layer.cornerRadius = 10
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -56,6 +55,7 @@ class SCProductCard: UIView {
         stackView.setCustomSpacing(8.0, after: productImage)
         stackView.setCustomSpacing(4.0, after: productTitle)
         stackView.setCustomSpacing(8.0, after: productCategory)
+        stackView.setCustomSpacing(24.0, after: productPrice)
         stackView.axis = .vertical
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
@@ -99,9 +99,9 @@ class SCProductCard: UIView {
             productStack.trailingAnchor.constraint(equalTo: self.trailingAnchor,constant: -8),
             productStack.bottomAnchor.constraint(equalTo: self.bottomAnchor,constant: -8),
             
-            productImage.heightAnchor.constraint(equalTo: productStack.heightAnchor, multiplier: 0.5),
+            productImage.heightAnchor.constraint(equalTo: productImage.widthAnchor, multiplier: 0.71),
 //            productTitle.heightAnchor.constraint(equalTo: productStack.heightAnchor, multiplier: 0.1),
-//            productCategory.heightAnchor.constraint(equalTo: productStack.heightAnchor, multiplier: 0.075),
+            productCategory.heightAnchor.constraint(equalTo: productStack.heightAnchor, multiplier: 0.075),
 //            productPrice.heightAnchor.constraint(equalTo: productStack.heightAnchor, multiplier: 0.1),
         ])
         

@@ -51,13 +51,6 @@ class SCBannerCollectionViewCell: UICollectionViewCell {
         return titleOffers
     }()
     
-//    lazy var discountStackView: UIStackView = {
-//        var discountSV = UIStackView(arrangedSubviews: [subDiscount, discount])
-//        discountSV.axis = .vertical
-//        discountSV.spacing = 4
-//        return discountSV
-//    }()
-    
     lazy var titleStackView: UIStackView = {
         var titleSV = UIStackView(arrangedSubviews: [offerTitle, subDiscount, discount])
         titleSV.axis = .vertical
@@ -94,11 +87,16 @@ class SCBannerCollectionViewCell: UICollectionViewCell {
     private func setupConstraint() {
         bannerStackView.translatesAutoresizingMaskIntoConstraints = false
         searchBar.translatesAutoresizingMaskIntoConstraints = false
-        offerImage.translatesAutoresizingMaskIntoConstraints = false
+//        offerImage.translatesAutoresizingMaskIntoConstraints = false
+        offerTitle.translatesAutoresizingMaskIntoConstraints = false
+        
+//        let heighConstraint: NSLayoutConstraint!
+//        heighConstraint = offerTitle.heightAnchor.constraint(greaterThanOrEqualToConstant: 60)
+//        heighConstraint.isActive = true
         
         NSLayoutConstraint.activate([
-            offerImage.heightAnchor.constraint(equalToConstant: 123),
-            offerImage.widthAnchor.constraint(equalToConstant: 127),
+//            offerImage.heightAnchor.constraint(equalToConstant: 123),
+//            offerImage.widthAnchor.constraint(equalToConstant: 127),
             searchBar.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
             searchBar.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
             searchBar.bottomAnchor.constraint(equalTo: bannerStackView.topAnchor, constant: -16),

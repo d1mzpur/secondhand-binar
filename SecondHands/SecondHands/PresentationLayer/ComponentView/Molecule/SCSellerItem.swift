@@ -66,6 +66,10 @@ class SCSellerItem: UIView {
         return lbl
     }()
     
+    lazy var actionButton: SCButton = SCButton(style: .secondary, size: .normal, type: .defaultButton, title: "Tolak")
+    
+    lazy var actionButton2: SCButton = SCButton(style: .primary, size: .normal, type: .defaultButton, title: "Terima")
+    
     lazy var productStack: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [
             productLabel,
@@ -87,7 +91,8 @@ class SCSellerItem: UIView {
         setup()
     }
     
-    init(frame: CGRect = CGRect.zero, productImageURL: String, productLabel: String, productTitle: String, productPrice: String, discountProduct: String ) {
+    
+    init(frame: CGRect = CGRect.zero, productImageURL: String, productLabel: String, productTitle: String, productPrice: String, discountProduct: String) {
         super.init(frame: frame)
         self.productImage.loadImage(resource: productImageURL)
         self.productLabel.text = productLabel
@@ -107,14 +112,15 @@ class SCSellerItem: UIView {
         self.addSubview(productImage)
         self.addSubview(productStack)
         self.addSubview(timeProduct)
+        self.addSubview(actionButton)
+        self.addSubview(actionButton2)
         
         productImage.clipsToBounds = true
         productImage.contentMode = .scaleAspectFill
         productImage.layer.cornerRadius = 12
-        
-        
-        
-        
+    
+        actionButton.translatesAutoresizingMaskIntoConstraints = false
+        actionButton2.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
                 
@@ -130,6 +136,15 @@ class SCSellerItem: UIView {
             timeProduct.topAnchor.constraint(equalTo: productImage.topAnchor),
             timeProduct.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
             
+            actionButton.topAnchor.constraint(equalTo: productStack.topAnchor, constant: 100),
+            actionButton.heightAnchor.constraint(equalTo: self.heightAnchor, constant: 20),
+            actionButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 0),
+            actionButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -188),
+            
+            actionButton2.topAnchor.constraint(equalTo: productStack.topAnchor, constant: 100),
+            actionButton2.heightAnchor.constraint(equalTo: self.heightAnchor, constant: 20),
+            actionButton2.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 188),
+            actionButton2.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 0)
             
         ])
         

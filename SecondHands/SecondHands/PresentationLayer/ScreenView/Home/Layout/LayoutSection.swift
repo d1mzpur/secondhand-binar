@@ -14,15 +14,36 @@ enum Section: CaseIterable {
 
 class LayoutSection {
     
-    static func createLayout(getHeightSuperView: CGFloat) -> UICollectionViewCompositionalLayout {
+    static func createHomeLayout(getHeightSuperView: CGFloat) -> UICollectionViewCompositionalLayout {
         
         return UICollectionViewCompositionalLayout { (sectionNumber, environment) -> NSCollectionLayoutSection? in
             if sectionNumber == 0 {
                 return LayoutSection().createLayoutBanner(getHeightSuperView: getHeightSuperView)
             } else if sectionNumber == 1 {
-                return LayoutSection().createLayoutChips()
+                let section = LayoutSection().createLayoutChips()
+                section.contentInsets = .init(top: 16, leading: 16, bottom: 32, trailing: 16)
+                section.boundarySupplementaryItems = [.init(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .estimated(20)), elementKind: "categoryId", alignment: .topLeading)]
+                return section
             } else {
-                return LayoutSection().createLayoutProductList(environment: environment)
+                return LayoutSection().createLayoutProductList()
+            }
+        }
+    }
+    
+    static func createSellerProduct() -> UICollectionViewCompositionalLayout {
+        return UICollectionViewCompositionalLayout { (section, environment) -> NSCollectionLayoutSection? in
+            if section == 0 {
+                let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(30))
+                let section = LayoutSection().createLayoutSeller()
+                section.boundarySupplementaryItems = [.init(layoutSize: headerSize, elementKind: "headerProductId", alignment: .top)]
+                section.contentInsets = .init(top: 16, leading: 16, bottom: 0, trailing: 16)
+                return section
+            } else if section == 1 {
+                let section = LayoutSection().createLayoutChips()
+                section.contentInsets = .init(top: 24, leading: 16, bottom: 24, trailing: 16)
+                return section
+            } else {
+                return LayoutSection().createLayoutProductList()
             }
         }
     }
@@ -43,7 +64,7 @@ extension LayoutSection {
         return section
     }
     
-    private func createLayoutChips() -> NSCollectionLayoutSection {
+    func createLayoutChips() -> NSCollectionLayoutSection {
         let layoutSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
         let itemCategory = NSCollectionLayoutItem(layoutSize: layoutSize)
         
@@ -54,13 +75,10 @@ extension LayoutSection {
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .continuous
         section.interGroupSpacing = 16
-        section.contentInsets.leading = 16
-        section.contentInsets.bottom = 32
-        section.boundarySupplementaryItems = [.init(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .absolute(50)), elementKind: "categoryId", alignment: .topLeading)]
         return section
     }
     
-    private func createLayoutProductList(environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
+    private func createLayoutProductList() -> NSCollectionLayoutSection {
         
         let layoutSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5), heightDimension: .fractionalWidth(0.6))
         
@@ -72,6 +90,17 @@ extension LayoutSection {
         let section = NSCollectionLayoutSection(group: group)
         section.contentInsets.leading = 16
         section.interGroupSpacing = 16
+        return section
+    }
+    
+    private func createLayoutSeller() -> NSCollectionLayoutSection {
+        let heightItem: CGFloat = 80
+        let layoutSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(heightItem))
+        let itemBanner = NSCollectionLayoutItem(layoutSize: layoutSize)
+        
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(heightItem))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [itemBanner])
+        let section = NSCollectionLayoutSection(group: group)
         return section
     }
 }

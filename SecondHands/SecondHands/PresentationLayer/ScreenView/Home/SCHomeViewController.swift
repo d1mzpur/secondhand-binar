@@ -72,7 +72,7 @@ class SCHomeViewController: UIViewController {
     }
     
     func configureView() {
-        homeCollectionView.collectionViewLayout = LayoutSection.createLayout(getHeightSuperView: self.getTopbarHeight)
+        homeCollectionView.collectionViewLayout = LayoutSection.createHomeLayout(getHeightSuperView: self.getTopbarHeight)
         homeCollectionView.backgroundColor = .white
         homeCollectionView.showsVerticalScrollIndicator = false
     }
@@ -81,9 +81,10 @@ class SCHomeViewController: UIViewController {
         homeCollectionView.delegate = self
         homeCollectionView.dataSource = self
         homeCollectionView.register(SCBannerCollectionViewCell.self, forCellWithReuseIdentifier: "banner")
+        homeCollectionView.register(SCCategoryChipCollectionViewCell.self, forCellWithReuseIdentifier: "allCategoryChips")
         homeCollectionView.register(SCCategoryChipCollectionViewCell.self, forCellWithReuseIdentifier: "categoryChips")
         homeCollectionView.register(SCProductCardViewCollectionViewCell.self, forCellWithReuseIdentifier: "productList")
-        homeCollectionView.register(CategorySectionCollectionReusableView.self, forSupplementaryViewOfKind: "categoryId", withReuseIdentifier: CategorySectionCollectionReusableView.reuseIdentifier)
+        homeCollectionView.register(SCHeaderCollectionReusableView.self, forSupplementaryViewOfKind: "categoryId", withReuseIdentifier: "headerCategory")
     }
     
     func createSearchBar() {
@@ -126,6 +127,7 @@ extension SCHomeViewController: UICollectionViewDelegate, UICollectionViewDataSo
         
         guard
             let bannerCell = collectionView.dequeueReusableCell(withReuseIdentifier: "banner", for: indexPath) as? SCBannerCollectionViewCell,
+            let allCategoryCell = collectionView.dequeueReusableCell(withReuseIdentifier: "allCategoryChips", for: indexPath) as? SCCategoryChipCollectionViewCell,
             let categoryCell = collectionView.dequeueReusableCell(withReuseIdentifier: "categoryChips", for: indexPath) as? SCCategoryChipCollectionViewCell,
             let productCell = collectionView.dequeueReusableCell(withReuseIdentifier: "productList", for: indexPath) as? SCProductCardViewCollectionViewCell
         else { return UICollectionViewCell() }
@@ -139,25 +141,32 @@ extension SCHomeViewController: UICollectionViewDelegate, UICollectionViewDataSo
             
             return bannerCell
         } else if section == 1 {
-            
-            let category = removeDuplicate[indexPath.item].productCategory
-            categoryCell.configure(item: category)
-            let selected = selectedCategoryIndex == indexPath[1]
-            categoryCell.cellClicked(state: selected)
-            categoryCell.onCellTapByIndex = { [weak self] filter in
-                
-                guard let self = self else { return }
-                print(self.productItem[filter.item].productCategory)
-                self.filterListProduct = self.productItem.filter {
-                    $0.productCategory.contains(
-                        self.productItem[filter.item]
-                            .productCategory)
+            if section == 0 {
+                allCategoryCell.configure(item: "Semua")
+                let selected = selectedCategoryIndex == indexPath[1]
+                allCategoryCell.cellClicked(state: !selected)
+                return allCategoryCell
+            } else {
+                let category = removeDuplicate[indexPath.item].productCategory
+                categoryCell.configure(item: category)
+                let selected = selectedCategoryIndex == indexPath[1]
+                categoryCell.cellClicked(state: selected)
+                categoryCell.onCellTapByIndex = { [weak self] filter in
+                    
+                    guard let self = self else { return }
+                    print(self.productItem[filter.item].productCategory)
+                    self.filterListProduct = self.productItem.filter {
+                        $0.productCategory.contains(
+                            self.productItem[filter.item]
+                                .productCategory)
+                    }
                 }
+                
+                return categoryCell
             }
-            
-            return categoryCell
         } else {
             guard let item = filterListProduct?.isEmpty == nil ? productCategory : filterListProduct?[indexPath.item] else { return UICollectionViewCell() }
+            
             productCell.configure(item: item)
             return productCell
         }
@@ -190,8 +199,9 @@ extension SCHomeViewController: UICollectionViewDelegate, UICollectionViewDataSo
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         guard
-            let headerOfCategory = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: CategorySectionCollectionReusableView.reuseIdentifier, for: indexPath) as? CategorySectionCollectionReusableView
+            let headerOfCategory = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "headerCategory", for: indexPath) as? SCHeaderCollectionReusableView
         else { return UICollectionReusableView() }
+        headerOfCategory.label.font = SCLabel(frame: .zero, weight: .medium, size: 14).font
         headerOfCategory.label.text = "Telusuri Kategori"
         
         return headerOfCategory

@@ -68,7 +68,7 @@ class SCCategoryChipCollectionViewCell: UICollectionViewCell {
     
     func cellClicked(state: Bool) {
         onCellTap?(state)
-        isClicked=state
+        isClicked = state
         
         if isClicked {
             containerView.backgroundColor = .DarkBlue04

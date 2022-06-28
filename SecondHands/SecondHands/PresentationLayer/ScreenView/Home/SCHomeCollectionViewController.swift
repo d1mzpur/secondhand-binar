@@ -35,15 +35,7 @@ class SCHomeCollectionViewController: UICollectionViewController {
         super.init(collectionViewLayout: SCHomeCollectionViewController.createLayout())
     }
     
-    let item = [ ProductItem(id: "2", productImage: "productImage", productTitle: "Apple Watch", productCategory: "Smart Watch", productPrice: "300.000"),
-                 ProductItem(id: "3", productImage: "productImage", productTitle: "Samsung Watch", productCategory: "Smart Watch", productPrice: "400.000"),
-                 ProductItem(id: "4", productImage: "productImage", productTitle: "iPhone 13", productCategory: "Smartphone", productPrice: "500.000"),
-                 ProductItem(id: "1", productImage: "productImage", productTitle: "Samsung Galaxy S20", productCategory: "Smartphone", productPrice: "250.000"),
-                 ProductItem(id: "2", productImage: "productImage", productTitle: "AirPods Pro", productCategory: "Air pods", productPrice: "300.000"),
-                 ProductItem(id: "3", productImage: "productImage", productTitle: "Sony Alpha A6300", productCategory: "Mirrorless", productPrice: "400.000"),
-                 ProductItem(id: "4", productImage: "productImage", productTitle: "Dji Mavic Air", productCategory: "Drone", productPrice: "500.000"),
-                 ProductItem(id: "1", productImage: "productImage", productTitle: "Macbook Pro", productCategory: "Laptop", productPrice: "250.000"),
-    ]
+    let item: [ProductItem] = ProductItem.createData()
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -74,7 +66,7 @@ class SCHomeCollectionViewController: UICollectionViewController {
 //        topBar = navigationController?.navigationBar.topItem
         
         self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-        self.collectionView.register(CategorySectionCollectionReusableView.self, forSupplementaryViewOfKind: SCHomeCollectionViewController.categoryId, withReuseIdentifier: headerId)
+        self.collectionView.register(SCHeaderCollectionReusableView.self, forSupplementaryViewOfKind: SCHomeCollectionViewController.categoryId, withReuseIdentifier: headerId)
         
         createSearchBar()
         configureView()

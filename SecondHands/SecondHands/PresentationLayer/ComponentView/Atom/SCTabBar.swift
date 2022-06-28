@@ -42,7 +42,11 @@ class SCTabBar: UITabBarController , UITabBarControllerDelegate{
         tab3.tabBarItem = tab3Item
         
         //tab 4
+
         let tab4 = SCSellerProductListViewController()
+
+        let tab4 = SCSellerViewController()
+
         let nav4 = UINavigationController(rootViewController: tab4)
         let tab4Item = UITabBarItem(title: "Daftar Jual", image: UIImage(systemName: "list.bullet"), selectedImage: UIImage(systemName: "list.bullet"))
         tab4.tabBarItem = tab4Item

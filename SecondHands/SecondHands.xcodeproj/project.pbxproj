@@ -180,6 +180,7 @@
 		01C6CA4428586E9200F0838E /* Molecule */ = {
 			isa = PBXGroup;
 			children = (
+				0A50751F286AB62600CF1912 /* SCSellerProfileView.swift */,
 				01593523285B2C8B006F9EE6 /* SCProductCard.swift */,
 				0188A907285D11780079E091 /* SCFormItem.swift */,
 				22B9F2412869FD4E0082BA10 /* SCSellerItem.swift */,
@@ -380,7 +381,6 @@
 			children = (
 				729BBDB82861C61B00BAE262 /* SCSellerUploadViewController.swift */,
 				0A996318286927250074D640 /* SCSellerProductListViewController.swift */,
-				0A50751F286AB62600CF1912 /* SCSellerProfileView.swift */,
 				0A99631B2869975F0074D640 /* Cell */,
 			);
 			path = Seller;

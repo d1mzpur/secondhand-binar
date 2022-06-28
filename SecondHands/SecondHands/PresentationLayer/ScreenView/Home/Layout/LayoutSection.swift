@@ -69,7 +69,7 @@ extension LayoutSection {
         return section
     }
     
-    private func createLayoutProductList() -> NSCollectionLayoutSection {
+    func createLayoutProductList() -> NSCollectionLayoutSection {
         
         let layoutSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5), heightDimension: .fractionalWidth(0.6))
         
@@ -84,7 +84,7 @@ extension LayoutSection {
         return section
     }
     
-    private func createLayoutSeller() -> NSCollectionLayoutSection {
+    func createLayoutSeller() -> NSCollectionLayoutSection {
         let heightItem: CGFloat = 80
         let layoutSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(heightItem))
         let itemBanner = NSCollectionLayoutItem(layoutSize: layoutSize)

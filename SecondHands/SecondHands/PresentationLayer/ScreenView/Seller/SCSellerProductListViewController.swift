@@ -60,12 +60,14 @@ class SCSellerProductListViewController: UIViewController {
         ])
     }
     
+    
+    
 }
 
 extension SCSellerProductListViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return dataProduct.count + 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -74,7 +76,7 @@ extension SCSellerProductListViewController: UICollectionViewDelegate, UICollect
         else { return UICollectionViewCell() }
         
         let item = indexPath.item
-        let data = self.dataProduct[indexPath.item]
+        let data = self.dataProduct[item > 0 ? item - 1 : item]
         if item == 0 {
             return addProductCell
         } else {

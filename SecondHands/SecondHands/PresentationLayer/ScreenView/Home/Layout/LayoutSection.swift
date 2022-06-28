@@ -32,19 +32,10 @@ class LayoutSection {
     
     static func createSellerProduct() -> UICollectionViewCompositionalLayout {
         return UICollectionViewCompositionalLayout { (section, environment) -> NSCollectionLayoutSection? in
-            if section == 0 {
-                let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(30))
-                let section = LayoutSection().createLayoutSeller()
-                section.boundarySupplementaryItems = [.init(layoutSize: headerSize, elementKind: "headerProductId", alignment: .top)]
-                section.contentInsets = .init(top: 16, leading: 16, bottom: 0, trailing: 16)
-                return section
-            } else if section == 1 {
-                let section = LayoutSection().createLayoutChips()
-                section.contentInsets = .init(top: 24, leading: 16, bottom: 24, trailing: 16)
-                return section
-            } else {
-                return LayoutSection().createLayoutProductList()
-            }
+            let section = LayoutSection().createLayoutProductList()
+            section.contentInsets =  .init(top: 8, leading: 16, bottom: 0, trailing: 0)
+            return section
+            
         }
     }
 }

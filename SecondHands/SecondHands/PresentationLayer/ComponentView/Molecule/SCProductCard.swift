@@ -99,9 +99,9 @@ class SCProductCard: UIView {
             productStack.trailingAnchor.constraint(equalTo: self.trailingAnchor,constant: -8),
             productStack.bottomAnchor.constraint(equalTo: self.bottomAnchor,constant: -8),
             
-            productImage.heightAnchor.constraint(equalTo: productImage.widthAnchor, multiplier: 0.71),
+//            productImage.heightAnchor.constraint(equalTo: productImage.widthAnchor, multiplier: 0.71),
 //            productTitle.heightAnchor.constraint(equalTo: productStack.heightAnchor, multiplier: 0.1),
-            productCategory.heightAnchor.constraint(equalTo: productStack.heightAnchor, multiplier: 0.075),
+//            productCategory.heightAnchor.constraint(equalTo: productStack.heightAnchor, multiplier: 0.075),
 //            productPrice.heightAnchor.constraint(equalTo: productStack.heightAnchor, multiplier: 0.1),
         ])
         

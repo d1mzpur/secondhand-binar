@@ -68,7 +68,7 @@ class SCCategoryChipCollectionViewCell: UICollectionViewCell {
     
     func cellClicked(state: Bool) {
         onCellTap?(state)
-        isClicked=state
+        isClicked = state
         
         if isClicked {
             containerView.backgroundColor = .DarkBlue04
@@ -83,10 +83,10 @@ class SCCategoryChipCollectionViewCell: UICollectionViewCell {
     
     private func setupConstraint() {
         containerView.translatesAutoresizingMaskIntoConstraints = false
-        containerView.topAnchor.constraint(equalTo: self.contentView.topAnchor).isActive = true
-        containerView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor).isActive = true
-        containerView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor).isActive = true
-        containerView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor).isActive = true
+        containerView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+        containerView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+        containerView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        containerView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
         
         chipStackView.translatesAutoresizingMaskIntoConstraints = false
         

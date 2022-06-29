@@ -53,6 +53,7 @@
 		22B9F2422869FD4E0082BA10 /* SCSellerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B9F2412869FD4E0082BA10 /* SCSellerItem.swift */; };
 		22D5643E285DA7E300BB5294 /* SCProfilViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D5643D285DA7E300BB5294 /* SCProfilViewController.swift */; };
 		22E1F760285A30D900FA40BF /* SCTextfield.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E1F75F285A30D900FA40BF /* SCTextfield.swift */; };
+		36885D132946690787344D9D /* libPods-SecondHands.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E059F21AB9FE36138B7D4CF /* libPods-SecondHands.a */; };
 		720BB593285B177F0000E24C /* SCTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720BB592285B177F0000E24C /* SCTabBar.swift */; };
 		726047F628607B9100AB2EA7 /* SCRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 726047F528607B9100AB2EA7 /* SCRegisterViewController.swift */; };
 		729BBDB92861C61B00BAE262 /* SCSellerUploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 729BBDB82861C61B00BAE262 /* SCSellerUploadViewController.swift */; };
@@ -82,6 +83,7 @@
 		01C6CA4528586EAB00F0838E /* SCLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCLabel.swift; sourceTree = "<group>"; };
 		01C6CA472858713E00F0838E /* Poppins-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Light.ttf"; sourceTree = "<group>"; };
 		01C6CA492858714F00F0838E /* Poppins-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Bold.ttf"; sourceTree = "<group>"; };
+		04E43696090E9B696D55119A /* Pods-SecondHands.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SecondHands.release.xcconfig"; path = "Target Support Files/Pods-SecondHands/Pods-SecondHands.release.xcconfig"; sourceTree = "<group>"; };
 		0A17E99B285C6A0900B59262 /* SCBannerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCBannerCollectionViewCell.swift; sourceTree = "<group>"; };
 		0A50751F286AB62600CF1912 /* SCSellerProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCSellerProfileView.swift; sourceTree = "<group>"; };
 		0A646D622864A79100160074 /* Array+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
@@ -110,12 +112,14 @@
 		22B9F2412869FD4E0082BA10 /* SCSellerItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCSellerItem.swift; sourceTree = "<group>"; };
 		22D5643D285DA7E300BB5294 /* SCProfilViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCProfilViewController.swift; sourceTree = "<group>"; };
 		22E1F75F285A30D900FA40BF /* SCTextfield.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCTextfield.swift; sourceTree = "<group>"; };
+		2405D193D3FF10489009FF7C /* Pods-SecondHands.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SecondHands.debug.xcconfig"; path = "Target Support Files/Pods-SecondHands/Pods-SecondHands.debug.xcconfig"; sourceTree = "<group>"; };
 		720BB592285B177F0000E24C /* SCTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCTabBar.swift; sourceTree = "<group>"; };
 		726047F528607B9100AB2EA7 /* SCRegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCRegisterViewController.swift; sourceTree = "<group>"; };
 		729BBDB82861C61B00BAE262 /* SCSellerUploadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCSellerUploadViewController.swift; sourceTree = "<group>"; };
 		72BDD18C2858A0BF006A75A6 /* SCButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCButton.swift; sourceTree = "<group>"; };
 		72FDA1672869BA1E00CD275E /* SCTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCTestViewController.swift; sourceTree = "<group>"; };
 		72FDA1692869BAF200CD275E /* SCModalContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCModalContactsViewController.swift; sourceTree = "<group>"; };
+		8E059F21AB9FE36138B7D4CF /* libPods-SecondHands.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SecondHands.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +127,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				36885D132946690787344D9D /* libPods-SecondHands.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -211,6 +216,16 @@
 			path = Profile;
 			sourceTree = "<group>";
 		};
+		076755CD7087A88C2C17F468 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				2405D193D3FF10489009FF7C /* Pods-SecondHands.debug.xcconfig */,
+				04E43696090E9B696D55119A /* Pods-SecondHands.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		0A6804A92860807000EF2577 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -234,6 +249,8 @@
 			children = (
 				0A9E1CF928579B5F00D864A4 /* Products */,
 				0A9E1CFA28579B5F00D864A4 /* SecondHands */,
+				076755CD7087A88C2C17F468 /* Pods */,
+				C3773511B88FA71C6CF758F9 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -389,6 +406,14 @@
 			path = Modal;
 			sourceTree = "<group>";
 		};
+		C3773511B88FA71C6CF758F9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8E059F21AB9FE36138B7D4CF /* libPods-SecondHands.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -396,6 +421,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0A9E1D0C28579B6A00D864A4 /* Build configuration list for PBXNativeTarget "SecondHands" */;
 			buildPhases = (
+				C41DBD7011C60078256E2E93 /* [CP] Check Pods Manifest.lock */,
 				0A9E1CF428579B5F00D864A4 /* Sources */,
 				0A9E1CF528579B5F00D864A4 /* Frameworks */,
 				0A9E1CF628579B5F00D864A4 /* Resources */,
@@ -461,6 +487,31 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		C41DBD7011C60078256E2E93 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SecondHands-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		0A9E1CF428579B5F00D864A4 /* Sources */ = {
@@ -643,6 +694,7 @@
 		};
 		0A9E1D0D28579B6A00D864A4 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2405D193D3FF10489009FF7C /* Pods-SecondHands.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -663,6 +715,7 @@
 		};
 		0A9E1D0E28579B6A00D864A4 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 04E43696090E9B696D55119A /* Pods-SecondHands.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

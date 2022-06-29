@@ -48,6 +48,8 @@
 		0AC61C08285C4FDD00586870 /* SCCategoryChipCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC61C07285C4FDD00586870 /* SCCategoryChipCollectionViewCell.swift */; };
 		0AD055AD28582DBA000CDA44 /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD055AC28582DBA000CDA44 /* UIImageView+Extension.swift */; };
 		0AF723D5285FA9FA00C0F146 /* SCSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF723D4285FA9FA00C0F146 /* SCSearchBar.swift */; };
+		2213A0EF286CADFA00122486 /* SCSellerPublishProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2213A0EE286CADFA00122486 /* SCSellerPublishProductViewController.swift */; };
+		2213A0F1286CB63800122486 /* SCDescCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2213A0F0286CB63800122486 /* SCDescCard.swift */; };
 		22144F102860C54F003921ED /* SCLoginViewControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22144F0F2860C54F003921ED /* SCLoginViewControllers.swift */; };
 		225D67B3285C772700C7EAA2 /* SCTextfieldarea.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225D67B2285C772700C7EAA2 /* SCTextfieldarea.swift */; };
 		22B9F2422869FD4E0082BA10 /* SCSellerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B9F2412869FD4E0082BA10 /* SCSellerItem.swift */; };
@@ -107,6 +109,8 @@
 		0AC61C07285C4FDD00586870 /* SCCategoryChipCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SCCategoryChipCollectionViewCell.swift; sourceTree = "<group>"; };
 		0AD055AC28582DBA000CDA44 /* UIImageView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
 		0AF723D4285FA9FA00C0F146 /* SCSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCSearchBar.swift; sourceTree = "<group>"; };
+		2213A0EE286CADFA00122486 /* SCSellerPublishProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCSellerPublishProductViewController.swift; sourceTree = "<group>"; };
+		2213A0F0286CB63800122486 /* SCDescCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCDescCard.swift; sourceTree = "<group>"; };
 		22144F0F2860C54F003921ED /* SCLoginViewControllers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCLoginViewControllers.swift; sourceTree = "<group>"; };
 		225D67B2285C772700C7EAA2 /* SCTextfieldarea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCTextfieldarea.swift; sourceTree = "<group>"; };
 		22B9F2412869FD4E0082BA10 /* SCSellerItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCSellerItem.swift; sourceTree = "<group>"; };
@@ -172,13 +176,13 @@
 			children = (
 				72BDD18C2858A0BF006A75A6 /* SCButton.swift */,
 				0A9A5878285DB2DA00E008A4 /* SCChipView.swift */,
-				0AF723D4285FA9FA00C0F146 /* SCSearchBar.swift */,
+				01593530285CAB8E006F9EE6 /* SCImagePicker.swift */,
 				01C6CA4528586EAB00F0838E /* SCLabel.swift */,
 				0A65964F285CD08E006346F1 /* SCNotification.swift */,
+				0AF723D4285FA9FA00C0F146 /* SCSearchBar.swift */,
 				720BB592285B177F0000E24C /* SCTabBar.swift */,
 				22E1F75F285A30D900FA40BF /* SCTextfield.swift */,
 				225D67B2285C772700C7EAA2 /* SCTextfieldarea.swift */,
-				01593530285CAB8E006F9EE6 /* SCImagePicker.swift */,
 				01B18BA12860447000A09AD8 /* SCTextfieldWithPickerView.swift */,
 			);
 			path = Atom;
@@ -187,10 +191,11 @@
 		01C6CA4428586E9200F0838E /* Molecule */ = {
 			isa = PBXGroup;
 			children = (
-				0A50751F286AB62600CF1912 /* SCSellerProfileView.swift */,
-				01593523285B2C8B006F9EE6 /* SCProductCard.swift */,
 				0188A907285D11780079E091 /* SCFormItem.swift */,
+				01593523285B2C8B006F9EE6 /* SCProductCard.swift */,
 				22B9F2412869FD4E0082BA10 /* SCSellerItem.swift */,
+				0A50751F286AB62600CF1912 /* SCSellerProfileView.swift */,
+				2213A0F0286CB63800122486 /* SCDescCard.swift */,
 			);
 			path = Molecule;
 			sourceTree = "<group>";
@@ -198,12 +203,12 @@
 		01CD6CA3285EFE8F00BA99DF /* ScreenView */ = {
 			isa = PBXGroup;
 			children = (
-				729BBDB72861C5F500BAE262 /* Seller */,
 				016F1C512860A7EB007A1ADE /* Account */,
-				22144F0E2860C524003921ED /* Register */,
-				22144F0D2860C514003921ED /* Login */,
 				0A9E1D1C28579C3600D864A4 /* Home */,
+				22144F0D2860C514003921ED /* Login */,
 				01CD6CA4285EFEA000BA99DF /* Profile */,
+				22144F0E2860C524003921ED /* Register */,
+				729BBDB72861C5F500BAE262 /* Seller */,
 			);
 			path = ScreenView;
 			sourceTree = "<group>";
@@ -222,7 +227,6 @@
 				2405D193D3FF10489009FF7C /* Pods-SecondHands.debug.xcconfig */,
 				04E43696090E9B696D55119A /* Pods-SecondHands.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -247,10 +251,10 @@
 		0A9E1CEF28579B5F00D864A4 = {
 			isa = PBXGroup;
 			children = (
+				C3773511B88FA71C6CF758F9 /* Frameworks */,
+				076755CD7087A88C2C17F468 /* Pods */,
 				0A9E1CF928579B5F00D864A4 /* Products */,
 				0A9E1CFA28579B5F00D864A4 /* SecondHands */,
-				076755CD7087A88C2C17F468 /* Pods */,
-				C3773511B88FA71C6CF758F9 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -323,10 +327,10 @@
 		0A9E1D1C28579C3600D864A4 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				0A80DBDC2859D8E80002287B /* SCHomeCollectionViewController.swift */,
-				01B18BA5286088C400A09AD8 /* SCHomeViewController.swift */,
 				0AC61BFA285C4E6500586870 /* Cell */,
 				0AD6AD35285FEE320065DFE0 /* Layout */,
+				0A80DBDC2859D8E80002287B /* SCHomeCollectionViewController.swift */,
+				01B18BA5286088C400A09AD8 /* SCHomeViewController.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -334,11 +338,11 @@
 		0A9E1D2228579EEA00D864A4 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				0A6804AB286081B100EF2577 /* UIColor+Extension.swift */,
-				0AD055AC28582DBA000CDA44 /* UIImageView+Extension.swift */,
 				0A646D622864A79100160074 /* Array+Extension.swift */,
-				019DC75728590A68008B4BFE /* UIView+Extension.swift */,
+				0A6804AB286081B100EF2577 /* UIColor+Extension.swift */,
 				01593532285CAC44006F9EE6 /* UIImage+Extension.swift */,
+				0AD055AC28582DBA000CDA44 /* UIImageView+Extension.swift */,
+				019DC75728590A68008B4BFE /* UIView+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -389,10 +393,11 @@
 		729BBDB72861C5F500BAE262 /* Seller */ = {
 			isa = PBXGroup;
 			children = (
-				72FDA1662869B9E800CD275E /* Modal */,
-				729BBDB82861C61B00BAE262 /* SCSellerUploadViewController.swift */,
-				0A996318286927250074D640 /* SCSellerProductListViewController.swift */,
 				0A99631B2869975F0074D640 /* Cell */,
+				72FDA1662869B9E800CD275E /* Modal */,
+				0A996318286927250074D640 /* SCSellerProductListViewController.swift */,
+				729BBDB82861C61B00BAE262 /* SCSellerUploadViewController.swift */,
+				2213A0EE286CADFA00122486 /* SCSellerPublishProductViewController.swift */,
 			);
 			path = Seller;
 			sourceTree = "<group>";
@@ -529,6 +534,8 @@
 				225D67B3285C772700C7EAA2 /* SCTextfieldarea.swift in Sources */,
 				0AC61C00285C4E8600586870 /* ProductItem.swift in Sources */,
 				726047F628607B9100AB2EA7 /* SCRegisterViewController.swift in Sources */,
+				2213A0F1286CB63800122486 /* SCDescCard.swift in Sources */,
+				2213A0EF286CADFA00122486 /* SCSellerPublishProductViewController.swift in Sources */,
 				0A646D632864A79100160074 /* Array+Extension.swift in Sources */,
 				0A9E1CFC28579B5F00D864A4 /* AppDelegate.swift in Sources */,
 				0A507520286AB62600CF1912 /* SCSellerProfileView.swift in Sources */,

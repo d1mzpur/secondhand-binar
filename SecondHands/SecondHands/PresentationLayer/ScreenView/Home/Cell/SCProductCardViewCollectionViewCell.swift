@@ -41,11 +41,7 @@ class SCProductCardViewCollectionViewCell: UICollectionViewCell {
         cardView.translatesAutoresizingMaskIntoConstraints = false
         cardView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         cardView.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
-        cardView.heightAnchor.constraint(equalToConstant: 206).isActive = true
-        cardView.widthAnchor.constraint(equalToConstant: 156).isActive = true
-//        cardView.topAnchor.constraint(equalTo: self.contentView.topAnchor).isActive = true
-//        cardView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor).isActive = true
-//        cardView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor).isActive = true
-//        cardView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor).isActive = true
+        cardView.heightAnchor.constraint(equalToConstant: 206 * 1.2).isActive = true
+        cardView.widthAnchor.constraint(equalToConstant: 156 * 1.2).isActive = true
     }
 }

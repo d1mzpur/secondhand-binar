@@ -19,8 +19,8 @@ class SCAddProductCollectionViewCell: UICollectionViewCell {
         imagePicker.translatesAutoresizingMaskIntoConstraints = false
         imagePicker.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         imagePicker.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
-        imagePicker.heightAnchor.constraint(equalToConstant: 206).isActive = true
-        imagePicker.widthAnchor.constraint(equalToConstant: 156).isActive = true
+        imagePicker.heightAnchor.constraint(equalToConstant: 247).isActive = true
+        imagePicker.widthAnchor.constraint(equalToConstant: 156 * 1.2).isActive = true
     }
     
     required init?(coder: NSCoder) {

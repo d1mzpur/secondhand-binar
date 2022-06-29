@@ -11,19 +11,16 @@ class SCAddProductCollectionViewCell: UICollectionViewCell {
     lazy var imagePicker = SCImagePicker(frame: .zero, style: .style2) { (image) in }
     override init(frame: CGRect) {
         super.init(frame: frame)
-        contentView.addSubview(imagePicker)
+        addSubview(imagePicker)
         setupConstraint()
     }
     
     private func setupConstraint() {
         imagePicker.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            imagePicker.topAnchor.constraint(equalTo: contentView.topAnchor),
-            imagePicker.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            imagePicker.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            imagePicker.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-        ])
+        imagePicker.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+        imagePicker.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+        imagePicker.heightAnchor.constraint(equalToConstant: 206).isActive = true
+        imagePicker.widthAnchor.constraint(equalToConstant: 156).isActive = true
     }
     
     required init?(coder: NSCoder) {

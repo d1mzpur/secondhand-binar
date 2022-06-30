@@ -7,7 +7,6 @@
 
 import UIKit
 
-
 class SCDescCard: UIView {
     lazy var descTitle: SCLabel = {
         var lbl = SCLabel()
@@ -20,8 +19,9 @@ class SCDescCard: UIView {
     
     lazy var descLabel: SCLabel = {
         var lbl = SCLabel()
-        lbl.text = "Aksesoris"
+        lbl.text = "Note Deskripsi"
         lbl.textColor = .Neutral03
+        lbl.numberOfLines = 0
         lbl.translatesAutoresizingMaskIntoConstraints = true
         return lbl
     }()
@@ -65,13 +65,15 @@ class SCDescCard: UIView {
         self.backgroundColor = .white
         self.layer.cornerRadius = 10
         self.addSubview(productStack)
-
+        
+        productStack.translatesAutoresizingMaskIntoConstraints = false
+        
         NSLayoutConstraint.activate([
     
-            productStack.topAnchor.constraint(equalTo: self.topAnchor,constant: 8),
-            productStack.leadingAnchor.constraint(equalTo: self.leadingAnchor,constant: 8),
-            productStack.trailingAnchor.constraint(equalTo: self.trailingAnchor,constant: -8),
-            productStack.bottomAnchor.constraint(equalTo: self.bottomAnchor,constant: -8),
+            productStack.topAnchor.constraint(equalTo: self.topAnchor,constant: 19),
+            productStack.leadingAnchor.constraint(equalTo: self.leadingAnchor,constant: 16),
+            productStack.trailingAnchor.constraint(equalTo: self.trailingAnchor,constant: -16),
+            productStack.bottomAnchor.constraint(equalTo: self.bottomAnchor,constant: -16),
             
 //            productImage.heightAnchor.constraint(equalTo: productImage.widthAnchor, multiplier: 0.71),
 //            productTitle.heightAnchor.constraint(equalTo: productStack.heightAnchor, multiplier: 0.1),

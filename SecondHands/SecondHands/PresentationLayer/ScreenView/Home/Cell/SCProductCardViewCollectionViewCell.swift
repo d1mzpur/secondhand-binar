@@ -30,10 +30,10 @@ class SCProductCardViewCollectionViewCell: UICollectionViewCell {
     }
     
     func configure(item: ProductItem) {
-        cardView.productImage.image = UIImage(named: item.productImage)
+        cardView.productImage.loadImage(resource: item.productImage)
         cardView.productTitle.text = item.productTitle
-        cardView.productCategory.text = item.productCategory
-        cardView.productPrice.text = item.productPrice
+//        cardView.productCategory.text = item.productCategory
+//        cardView.productPrice.text = "\(item.productPrice)"
         cardView.clipsToBounds = true
     }
     

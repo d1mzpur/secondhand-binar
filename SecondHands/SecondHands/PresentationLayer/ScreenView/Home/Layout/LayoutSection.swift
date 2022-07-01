@@ -33,7 +33,21 @@ class LayoutSection {
     static func createSellerProduct() -> UICollectionViewCompositionalLayout {
         return UICollectionViewCompositionalLayout { (section, environment) -> NSCollectionLayoutSection? in
             let section = LayoutSection().createLayoutProductList()
-//            section.contentInsets =  .init(top: 8, leading: 16, bottom: 0, trailing: 0)
+            
+            let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(50))
+            let headerElement = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: "sellerCategoryHeader", alignment: .top)
+            headerElement.pinToVisibleBounds = true
+            section.boundarySupplementaryItems = [headerElement]
+//            section.contentInsets =  .init(top: 0, leading: 16, bottom: 0, trailing: 16)
+            return section
+            
+        }
+    }
+    
+    static func createLayoutCategory() -> UICollectionViewCompositionalLayout {
+        return UICollectionViewCompositionalLayout { (section, environment) -> NSCollectionLayoutSection? in
+            let section = LayoutSection().createLayoutChips()
+            section.contentInsets =  .init(top: 0, leading: 16, bottom: 8, trailing: 16)
             return section
             
         }

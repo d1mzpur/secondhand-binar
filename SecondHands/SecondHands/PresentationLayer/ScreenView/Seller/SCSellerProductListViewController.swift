@@ -10,7 +10,7 @@ import UIKit
 class SCSellerProductListViewController: UIViewController {
     var sellerView = SCSellerProfileView()
     var user: User = User.createData()
-    var dataProduct: [ProductItem] = ProductItem.createData()
+    var dataProduct: [ProductItem]?
     var selectedCategoryIndex: Int = -1
     
     var sellerCollection: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
@@ -33,6 +33,7 @@ class SCSellerProductListViewController: UIViewController {
         sellerCollection.delegate = self
         sellerCollection.dataSource = self
         sellerCollection.register(SCAddProductCollectionViewCell.self, forCellWithReuseIdentifier: "addProdcut")
+        sellerCollection.register(CategoryCollectionReusableView.self, forSupplementaryViewOfKind: "sellerCategoryHeader", withReuseIdentifier: "sellerHeader")
         sellerCollection.register(SCProductCardViewCollectionViewCell.self, forCellWithReuseIdentifier: "sellerProduct")
     }
     
@@ -53,21 +54,19 @@ class SCSellerProductListViewController: UIViewController {
             sellerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             sellerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             
-            sellerCollection.topAnchor.constraint(equalTo: sellerView.bottomAnchor, constant: 8),
+            sellerCollection.topAnchor.constraint(equalTo: sellerView.bottomAnchor, constant: 16),
             sellerCollection.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             sellerCollection.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             sellerCollection.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
     }
     
-    
-    
 }
 
 extension SCSellerProductListViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dataProduct.count + 1
+        return dataProduct?.count ?? 0 + 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -76,11 +75,11 @@ extension SCSellerProductListViewController: UICollectionViewDelegate, UICollect
         else { return UICollectionViewCell() }
         
         let item = indexPath.item
-        let data = self.dataProduct[item > 0 ? item - 1 : item]
+        let data = (self.dataProduct?[item > 0 ? item - 1 : item] ?? nil)
         if item == 0 {
             return addProductCell
         } else {
-            productCell.configure(item: data)
+            productCell.configure(item: data!)
             return productCell
         }
         
@@ -90,4 +89,11 @@ extension SCSellerProductListViewController: UICollectionViewDelegate, UICollect
         guard let _ = collectionView.cellForItem(at: indexPath) as? SCProductCardViewCollectionViewCell else { return }
     }
     
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        guard
+            let cell = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "sellerHeader", for: indexPath) as? CategoryCollectionReusableView
+        else { return UICollectionReusableView() }
+        cell.configure(product: dataProduct ?? [])
+        return cell
+    }
 }

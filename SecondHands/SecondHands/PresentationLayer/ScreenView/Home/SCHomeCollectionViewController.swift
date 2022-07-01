@@ -35,7 +35,7 @@ class SCHomeCollectionViewController: UICollectionViewController {
         super.init(collectionViewLayout: SCHomeCollectionViewController.createLayout())
     }
     
-    let item: [ProductItem] = ProductItem.createData()
+    var item: [ProductItem]?
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -56,7 +56,7 @@ class SCHomeCollectionViewController: UICollectionViewController {
         })
         
         categoryRegisterCell = UICollectionView.CellRegistration(handler: { (cell: SCCategoryChipCollectionViewCell, _, item: ProductItem) in
-            cell.textTitle.text = item.productCategory
+//            cell.textTitle.text = item.productCategory
         })
         
         productListRegisterCell = UICollectionView.CellRegistration(handler: { (cell: SCProductCardViewCollectionViewCell, _, item: ProductItem) in
@@ -179,15 +179,15 @@ class SCHomeCollectionViewController: UICollectionViewController {
         if section == 0 {
             return 1
         } else if section == 1 {
-            return item.count
+            return item?.count ?? 0
         } else {
-            return item.count
+            return item?.count ?? 0
         }
         
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let data = item[indexPath.item]
+        let data = item?[indexPath.item]
         let item = OfferItem(id: "1", bannerImage: "offerImage", bannerTitle: "Bulan Ramadhan\nBanyak Dison", discount: "60%")
         if indexPath.section == 0 {
             let cell = collectionView.dequeueConfiguredReusableCell(using: bannerRegisterCell, for: indexPath, item: item)
@@ -204,9 +204,9 @@ class SCHomeCollectionViewController: UICollectionViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let data = item[indexPath.row]
+        let data = item?[indexPath.row]
         if (collectionView.cellForItem(at: indexPath) != nil) {
-            print("Tap ", data.productTitle)
+            print("Tap ", data?.productTitle)
         }
     }
 

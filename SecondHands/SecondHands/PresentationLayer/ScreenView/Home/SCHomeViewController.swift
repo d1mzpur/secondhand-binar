@@ -63,6 +63,8 @@ class SCHomeViewController: UIViewController {
         setupAddView()
         
         setupCollection()
+        
+        setupConstraint()
         service.getProductList(by: .buyer) { [weak self] result in
             guard let self = self else { return }
             switch result {
@@ -74,7 +76,6 @@ class SCHomeViewController: UIViewController {
             }
             
         }
-        setupConstraint()
     }
     
     func setupAddView() {
@@ -110,7 +111,7 @@ class SCHomeViewController: UIViewController {
             homeCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             homeCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             homeCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-            //            bottomConstraint
+            
         ])
     }
 }
@@ -161,20 +162,22 @@ extension SCHomeViewController: UICollectionViewDelegate, UICollectionViewDataSo
                 filterListProduct = productItem
                 return allCategoryCell
             } else {
-//                let category = productCategory?.productCategory ?? ""
-//                categoryCell.configure(item: category)
-//
-//
-//                categoryCell.onCellTapByIndex = { [weak self] filter in
-//
-//                    guard let self = self else { return }
-//                    print(self.productItem?[newItem].productCategory)
-//                    self.filterListProduct = self.productItem?.filter {
-//                        $0.productCategory.contains(
+                let category = productCategory?.productCategory?[newItem].name ?? ""
+                categoryCell.configure(item: category)
+
+
+                categoryCell.onCellTapByIndex = { [weak self] filter in
+                    let selectedProductCategory = "Smartphone"
+                    filterListProduct = productItem?.filter { ($0.productCategory?.contains(where: selectedProductCategory) ?? false) }
+                    guard let self = self else { return }
+                    print(self.productItem?[newItem].productCategory)
+//                    self.filterListProduct = self.productItem?.filter { $0.productCategory?.contains(where: fil)
+                        
+//                        $0.productCategory?.contains(
 //                            self.productItem?[newItem]
 //                                .productCategory ?? "")
 //                    }
-//                }
+                }
                 
                 return categoryCell
             }

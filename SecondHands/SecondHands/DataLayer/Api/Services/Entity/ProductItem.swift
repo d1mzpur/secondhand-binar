@@ -15,7 +15,6 @@ struct ProductItem: Codable {
     let id: Int?
     let productImage: String?
     let productTitle: String?
-//    let productCategory: String
     let productPrice: Int?
     let productDescription: String?
 //    let sellerLocation: String
@@ -23,13 +22,12 @@ struct ProductItem: Codable {
 //    let statusProduct: String
 //    let createdAt: String
 //    let updatedAt: String
-//    let categories: [Categories]
+    let productCategory: [Categories]?
     
     enum CodingKeys: String, CodingKey {
         case id
         case productImage = "image_url"
         case productTitle = "name"
-//        case productCategory = "Categories"
         case productPrice = "base_price"
         case productDescription = "description"
 //        case sellerLocation = "location"
@@ -37,7 +35,7 @@ struct ProductItem: Codable {
 //        case statusProduct = "status"
 //        case createdAt = "createdAt"
 //        case updatedAt = "updateAt"
-//        case categories
+        case productCategory = "Categories"
     }
 //    static func createData() -> [ProductItem] {
 //        return [ProductItem(id: "1", productImage: "productImage", productTitle: "Apple Watch", productCategory: "Smart Watch", productPrice: "300.000", productDescription: "", sellerLocation: "Bogor", userId: "", statusProduct: "Available", createdAt: "2000-01-01T00:00:00.000Z", updatedAt: "2000-01-01T00:00:00.000Z", categories: [Categories(id: 1, name: "")]),

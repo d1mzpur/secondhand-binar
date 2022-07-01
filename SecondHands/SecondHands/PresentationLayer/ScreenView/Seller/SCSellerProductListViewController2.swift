@@ -12,11 +12,17 @@ class SCSellerProductListViewController2: UIViewController {
     var user: User = User.createData()
     var dataProduct: [ProductItem] = ProductItem.createData()
     var selectedCategoryIndex: Int = -1
+    var productListType: String = "table"
     
-    var sellerCollection: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
-    var sellerTableView: UITableView = UITableView()
-    
-    
+    lazy var textTitle: UILabel = {
+        var textTitle = UILabel()
+        textTitle.text = "Daftar Jual Saya"
+        textTitle.font = SCLabel(frame: .zero, weight: .bold, size: 20).font
+        textTitle.textColor = .black
+        return textTitle
+    }()
+    lazy var sellerCollection: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
+    lazy var sellerTableView: UITableView = UITableView()
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -27,51 +33,54 @@ class SCSellerProductListViewController2: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         configureView()
+        view.addSubview(textTitle)
         view.addSubview(sellerView)
-//        view.addSubview(sellerCollection)
-//        setupCollection()
-        view.addSubview(sellerTableView)
-        setupTableView()
+        sellerView.addAction(#selector(switchView), target: self)
+        if productListType == "collection"{
+            view.addSubview(sellerCollection)
+            setupCollection()
+        }
+        else{
+            view.addSubview(sellerTableView)
+            setupTableView()
+        }
         setupConstraint()
     }
     
-//    private func setupCollection() {
-//        sellerCollection.delegate = self
-//        sellerCollection.dataSource = self
-//        sellerCollection.register(SCAddProductCollectionViewCell.self, forCellWithReuseIdentifier: "addProdcut")
-//        sellerCollection.register(SCProductCardViewCollectionViewCell.self, forCellWithReuseIdentifier: "sellerProduct")
-//    }
+    @objc func switchView(){
+        if productListType == "collection"{
+            productListType = "table"
+        }
+        else{
+            productListType = "collection"
+        }
+        self.viewDidLoad()
+
+    }
+    
+    private func setupCollection() {
+        sellerCollection.delegate = self
+        sellerCollection.dataSource = self
+        sellerCollection.register(SCAddProductCollectionViewCell.self, forCellWithReuseIdentifier: "addProdcut")
+        sellerCollection.register(SCProductCardViewCollectionViewCell.self, forCellWithReuseIdentifier: "sellerProduct")
+        sellerCollection.collectionViewLayout = LayoutSection.createSellerProduct()
+        sellerCollection.backgroundColor = .white
+        sellerCollection.showsVerticalScrollIndicator = false
+        sellerCollection.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            sellerCollection.topAnchor.constraint(equalTo: sellerView.bottomAnchor, constant: 8),
+            sellerCollection.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            sellerCollection.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            sellerCollection.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+        ])
+    }
     
     private func setupTableView() {
         sellerTableView.delegate = self
         sellerTableView.dataSource = self
-//        sellerCollection.register(SCAddProductCollectionViewCell.self, forCellWithReuseIdentifier: "addProdcut")
         sellerTableView.register(SCSellerItemTableView.self, forCellReuseIdentifier: "sellerProductList")
-    }
-    
-    private func configureView() {
-//        sellerCollection.collectionViewLayout = LayoutSection.createSellerProduct()
-//        sellerCollection.backgroundColor = .white
-//        sellerCollection.showsVerticalScrollIndicator = false
-
-        sellerView.configure(user: user)
-    }
-    
-    private func setupConstraint() {
-        sellerView.translatesAutoresizingMaskIntoConstraints = false
         sellerTableView.translatesAutoresizingMaskIntoConstraints = false
-//        sellerCollection.translatesAutoresizingMaskIntoConstraints = false
-        
         NSLayoutConstraint.activate([
-            sellerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
-            sellerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            sellerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            
-//            sellerCollection.topAnchor.constraint(equalTo: sellerView.bottomAnchor, constant: 8),
-//            sellerCollection.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-//            sellerCollection.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-//            sellerCollection.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            
             sellerTableView.topAnchor.constraint(equalTo: sellerView.bottomAnchor, constant: 8),
             sellerTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             sellerTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
@@ -79,8 +88,24 @@ class SCSellerProductListViewController2: UIViewController {
         ])
     }
     
+    private func configureView() {
+        sellerView.configure(user: user)
+    }
     
+    private func setupConstraint() {
+        textTitle.translatesAutoresizingMaskIntoConstraints = false
+        sellerView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            textTitle.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
+            textTitle.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            textTitle.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            
+            sellerView.topAnchor.constraint(equalTo: textTitle.bottomAnchor, constant: 16),
+            sellerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            sellerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
     
+        ])
+    }
 }
 
 extension SCSellerProductListViewController2: UICollectionViewDelegate, UICollectionViewDataSource {

@@ -56,26 +56,6 @@ struct ProductItem: Codable {
 //    }
 }
 
-struct OfferItem {
-    let id: String
-    let bannerImage: String
-    let bannerTitle: String
-    let discount: String
-    
-    static func createData() -> [OfferItem] {
-        return [
-            OfferItem(id: "1",
-                      bannerImage: "offerImage",
-                      bannerTitle: "Bulan Ramadhan\nBanyak Dison",
-                      discount: "60%"),
-            OfferItem(id: "2",
-                      bannerImage: "offerImage",
-                      bannerTitle: "Bulan Ramadhan\nBanyak Diskon",
-                      discount: "60%")
-        ]
-    }
-}
-
 struct User {
     let imageUser: String
     let userName: String

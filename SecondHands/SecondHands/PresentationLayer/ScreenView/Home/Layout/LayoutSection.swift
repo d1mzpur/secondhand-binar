@@ -18,7 +18,9 @@ class LayoutSection {
         
         return UICollectionViewCompositionalLayout { (sectionNumber, environment) -> NSCollectionLayoutSection? in
             if sectionNumber == 0 {
-                return LayoutSection().createLayoutBanner(getHeightSuperView: getHeightSuperView)
+                let section = LayoutSection().createLayoutBanner(getHeightSuperView: getHeightSuperView)
+//                section.orthogonalScrollingBehavior = .paging
+                return section
             } else if sectionNumber == 1 {
                 let section = LayoutSection().createLayoutChips()
                 section.contentInsets = .init(top: 16, leading: 16, bottom: 32, trailing: 16)
@@ -33,12 +35,6 @@ class LayoutSection {
     static func createSellerProduct() -> UICollectionViewCompositionalLayout {
         return UICollectionViewCompositionalLayout { (section, environment) -> NSCollectionLayoutSection? in
             let section = LayoutSection().createLayoutProductList()
-            
-            let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(50))
-            let headerElement = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: "sellerCategoryHeader", alignment: .top)
-            headerElement.pinToVisibleBounds = true
-            section.boundarySupplementaryItems = [headerElement]
-//            section.contentInsets =  .init(top: 0, leading: 16, bottom: 0, trailing: 16)
             return section
             
         }
@@ -56,8 +52,9 @@ class LayoutSection {
 
 extension LayoutSection {
     private func createLayoutBanner(getHeightSuperView: CGFloat) -> NSCollectionLayoutSection {
-        let sizeTopBar = getHeightSuperView
-        let heightItem = 200 + sizeTopBar + 16
+//        let sizeTopBar = getHeightSuperView
+//        let heightItem = 200 + sizeTopBar + 16
+        let heightItem: CGFloat = 200
         let layoutSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(heightItem))
         let itemBanner = NSCollectionLayoutItem(layoutSize: layoutSize)
         
@@ -65,7 +62,7 @@ extension LayoutSection {
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [itemBanner])
         
         let section = NSCollectionLayoutSection(group: group)
-        section.contentInsets.top = -getHeightSuperView
+        section.orthogonalScrollingBehavior = .continuous
         return section
     }
     

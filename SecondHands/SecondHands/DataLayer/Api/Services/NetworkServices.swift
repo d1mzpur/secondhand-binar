@@ -20,10 +20,49 @@ enum UserEndpoint: String {
     case buyer = "/buyer"
 }
 
+enum ItemEndpoint: String {
+    case product = "/product"
+    case order = "/order"
+    case category = "/category"
+    case banner = "/banner"
+}
+
 class NetworkServices {
 //    /buyer/product
     let baseUrl = "https://market-final-project.herokuapp.com"
-    func getProductList(by user: UserEndpoint, completion: @escaping(Result<[ProductItem], Error>) -> Void) {
+    
+    func getBanner(completion: @escaping(Result<[OfferItem], Error>) -> Void) {
+        let endPoint = self.baseUrl
+        
+        guard let urlcomponents = URLComponentsBuilder(baseURL: endPoint)
+            .path("/seller")
+            .path("/banner")
+            .buildUrl()
+        else { return }
+        let urlRequest = URLRequestBuilder(url: urlcomponents)
+            .httpMethod(.GET)
+            .build()
+        print(urlRequest.url)
+        let jsonDecoder = JSONDecoder()
+        URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
+            guard let data = data else { return }
+            if let error = error {
+                print(error.localizedDescription)
+            }
+            
+            do {
+                let session = try jsonDecoder.decode([OfferItem].self, from: data)
+                DispatchQueue.main.async {
+                    completion(.success(session))
+                }
+                
+            } catch let error {
+                completion(.failure(error))
+            }
+        }.resume()
+    }
+    
+    func getProduct(by user: UserEndpoint, completion: @escaping(Result<[ProductItem], Error>) -> Void) {
         let endPoint = self.baseUrl
         
         guard let urlcomponents = URLComponentsBuilder(baseURL: endPoint)
@@ -42,7 +81,6 @@ class NetworkServices {
                 print(error.localizedDescription)
             }
             
-            
             do {
                 let session = try jsonDecoder.decode([ProductItem].self, from: data)
                 DispatchQueue.main.async {
@@ -53,6 +91,10 @@ class NetworkServices {
                 completion(.failure(error))
             }
         }.resume()
+        
+    }
+    
+    func getItem( ) {
         
     }
 }

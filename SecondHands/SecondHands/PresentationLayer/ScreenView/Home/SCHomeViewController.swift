@@ -9,8 +9,8 @@ import SwiftUI
 
 class SCHomeViewController: UIViewController {
     var productItem: [ProductItem]?
-    
-    let offerItem: [OfferItem] = OfferItem.createData()
+    var offerItem: [OfferItem]?
+    var category = [String]()
     var firstState: Bool = false
     var customSearchBar: SCSearchBar = {
         var searchBar = SCSearchBar()
@@ -19,7 +19,6 @@ class SCHomeViewController: UIViewController {
         searchBar.height = 44
         searchBar.margin = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: -16)
         searchBar.backgroundColor = .white
-        
         
         return searchBar
     }()
@@ -65,21 +64,34 @@ class SCHomeViewController: UIViewController {
         setupCollection()
         
         setupConstraint()
-        service.getProductList(by: .buyer) { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success(let itemResults):
-                self.productItem = itemResults
-                self.homeCollectionView.reloadData()
-            case .failure(let error):
-                print(error.localizedDescription)
-            }
-            
-        }
+        getData()
     }
     
     func setupAddView() {
         view.addSubview(homeCollectionView)
+    }
+    
+    func getData() {
+        service.getBanner { result in
+            switch result {
+            case .success(let success):
+                self.offerItem = success
+            case .failure(let error):
+                print(error)
+            }
+        }
+        
+        service.getProduct(by: .buyer) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let itemResults):
+                self.productItem = itemResults
+                self.category = self.createCategoryList()
+                self.homeCollectionView.reloadData()
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
     }
     
     func configureView() {
@@ -125,19 +137,13 @@ extension SCHomeViewController: UICollectionViewDelegate, UICollectionViewDataSo
         if section == 0 {
             return 1
         } else if section == 1 {
-            return productItem?.count ?? 0 + 1
+            return category.count ?? 0 + 1
         } else {
             return isProductEmpty()
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let item = indexPath.item
-        let newItem = item > 0 ? item - 1 : item
-        let productCategory = self.productItem?[newItem]
-        let section = indexPath.section
-        
-        
         guard
             let bannerCell = collectionView.dequeueReusableCell(withReuseIdentifier: "banner", for: indexPath) as? SCBannerCollectionViewCell,
             let allCategoryCell = collectionView.dequeueReusableCell(withReuseIdentifier: "allCategoryChips", for: indexPath) as? SCCategoryChipCollectionViewCell,
@@ -145,12 +151,18 @@ extension SCHomeViewController: UICollectionViewDelegate, UICollectionViewDataSo
             let productCell = collectionView.dequeueReusableCell(withReuseIdentifier: "productList", for: indexPath) as? SCProductCardViewCollectionViewCell
         else { return UICollectionViewCell() }
         
+        let section = indexPath.section
+        let item = indexPath.item + 1
+        let newItem = item > 0 ? item - 1 : item
+        
+        let productList = self.productItem?[newItem]
+        
         if section == 0 {
-            let offerItem = self.offerItem[indexPath.row]
-            bannerCell.configure(item: offerItem)
-            let heightBanner = bannerCell.frame.height + 80
-            bannerCell.layer.insertSublayer(setGradientBackground(), at: 0)
-            gradientLayer.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: heightBanner)
+            let offerItem = self.offerItem?[indexPath.row]
+            bannerCell.configure(item: offerItem ?? .init(bannerId: 0, bannerImage: "", bannerTitle: "", createdAt: "", updatedAt: ""))
+            //            let heightBanner = bannerCell.frame.height + 80
+            //            bannerCell.layer.insertSublayer(setGradientBackground(), at: 0)
+            //            gradientLayer.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: heightBanner)
             
             return bannerCell
         } else if section == 1 {
@@ -162,28 +174,24 @@ extension SCHomeViewController: UICollectionViewDelegate, UICollectionViewDataSo
                 filterListProduct = productItem
                 return allCategoryCell
             } else {
-                let category = productCategory?.productCategory?[newItem].name ?? ""
-                categoryCell.configure(item: category)
-
-
-                categoryCell.onCellTapByIndex = { [weak self] filter in
-                    let selectedProductCategory = "Smartphone"
-                    filterListProduct = productItem?.filter { ($0.productCategory?.contains(where: selectedProductCategory) ?? false) }
+                categoryCell.configure(item: category[newItem])
+                categoryCell.onCellTapByIndex = { [weak self] cellTap in
                     guard let self = self else { return }
-                    print(self.productItem?[newItem].productCategory)
-//                    self.filterListProduct = self.productItem?.filter { $0.productCategory?.contains(where: fil)
-                        
-//                        $0.productCategory?.contains(
-//                            self.productItem?[newItem]
-//                                .productCategory ?? "")
-//                    }
-                }
-                
+                    
+                    print("Cell For row", self.category[newItem])
+                    let selectedProductCategory = self.category[newItem]
+                    self.filterListProduct = self.productItem?.map { $0.productCategory?.filter { $0 }}
+                    
+                    print("Filter ", self.filterListProduct)
+                    collectionView.reloadData()
+                    }
+                    
                 return categoryCell
+                
             }
         } else {
-            guard let item = filterListProduct?.isEmpty == nil ? productCategory : filterListProduct?[indexPath.item] else { return UICollectionViewCell() }
-            
+            guard let item = filterListProduct?.isEmpty == nil ? productList : filterListProduct?[newItem] else { return UICollectionViewCell() }
+            print("ITEM Filter" , filterListProduct?.isEmpty)
             productCell.configure(item: item)
             return productCell
         }
@@ -193,17 +201,18 @@ extension SCHomeViewController: UICollectionViewDelegate, UICollectionViewDataSo
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let item = indexPath.item
         let newItem = item > 0 ? item - 1 : item
+        let indexPATH = IndexPath(item: newItem, section: 1)
         switch indexPath.section {
         case 0:
             guard let _ = homeCollectionView.cellForItem(at: indexPath) as? SCBannerCollectionViewCell else { return }
         case 1:
-            let categoryCell = collectionView.cellForItem(at: indexPath) as?
+            let categoryCell = collectionView.cellForItem(at: indexPATH) as?
                 SCCategoryChipCollectionViewCell
             categoryCell?.onCellTapByIndex?(indexPath)
             
             if ((collectionView.dequeueReusableCell(withReuseIdentifier: "categoryChips", for: indexPath) as? SCCategoryChipCollectionViewCell) != nil) {
                 selectedCategoryIndex = selectedCategoryIndex != indexPath[1] ? indexPath[1] : -1
-                print("Tap ", selectedCategoryIndex, productItem?[newItem])
+                print("Tap ", selectedCategoryIndex, category[selectedCategoryIndex])
                 collectionView.reloadData()
             }
             
@@ -219,16 +228,13 @@ extension SCHomeViewController: UICollectionViewDelegate, UICollectionViewDataSo
         guard
             let headerOfCategory = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "headerCategory", for: indexPath) as? SCHeaderCollectionReusableView
         else { return UICollectionReusableView() }
+        
         headerOfCategory.label.font = SCLabel(frame: .zero, weight: .medium, size: 14).font
         headerOfCategory.label.text = "Telusuri Kategori"
         
         return headerOfCategory
     }
     
-    override func prepareForInterfaceBuilder() {
-        super.prepareForInterfaceBuilder()
-        
-    }
     
 }
 
@@ -243,6 +249,13 @@ extension SCHomeViewController {
         } else {
             self.navigationController?.navigationBar.barTintColor = .clear
         }
+    }
+    
+    func createCategoryList() -> [String] {
+        var categories = [String]()
+        let product =  productItem?.compactMap { $0.productCategory?.compactMap { $0.name }}
+        product?.forEach({ (category) in categories.append(contentsOf: category) })
+        return Set(categories).compactMap { $0.capitalized }
     }
     
 }

@@ -60,4 +60,23 @@ extension UIView {
 
         self.layer.addSublayer(shapeLayer)
     }
+    
+    func showLoading(style: UIActivityIndicatorView.Style = .medium) {
+        let loading =  UIActivityIndicatorView(style: .medium)
+        
+        loading.tintColor = .systemBlue
+        loading.translatesAutoresizingMaskIntoConstraints = false
+        loading.startAnimating()
+        loading.hidesWhenStopped = true
+//        loading.tag = UIView.loadingViewTag
+        addSubview(loading)
+        loading.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        loading.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+    }
+    func stopLoading() {
+        let loading = UIActivityIndicatorView(style: .medium)
+        loading.stopAnimating()
+        loading.removeFromSuperview()
+    }
 }
+

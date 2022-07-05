@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		01265CC52872F46300C4DFC4 /* SCSellerTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01265CC42872F46300C4DFC4 /* SCSellerTableView.swift */; };
+		01265CC72872F78200C4DFC4 /* SCSellerCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01265CC62872F78200C4DFC4 /* SCSellerCollectionView.swift */; };
 		0159351D285B0A21006F9EE6 /* Poppins-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 01593517285B0A20006F9EE6 /* Poppins-ExtraBold.ttf */; };
 		0159351E285B0A21006F9EE6 /* Poppins-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 01593518285B0A21006F9EE6 /* Poppins-Medium.ttf */; };
 		0159351F285B0A21006F9EE6 /* Poppins-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 01593519285B0A21006F9EE6 /* Poppins-Thin.ttf */; };
@@ -67,6 +69,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		01265CC42872F46300C4DFC4 /* SCSellerTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCSellerTableView.swift; sourceTree = "<group>"; };
+		01265CC62872F78200C4DFC4 /* SCSellerCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCSellerCollectionView.swift; sourceTree = "<group>"; };
 		01593517285B0A20006F9EE6 /* Poppins-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-ExtraBold.ttf"; sourceTree = "<group>"; };
 		01593518285B0A21006F9EE6 /* Poppins-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Medium.ttf"; sourceTree = "<group>"; };
 		01593519285B0A21006F9EE6 /* Poppins-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Thin.ttf"; sourceTree = "<group>"; };
@@ -142,6 +146,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		01265CC32872F43000C4DFC4 /* ProductSection */ = {
+			isa = PBXGroup;
+			children = (
+				01265CC42872F46300C4DFC4 /* SCSellerTableView.swift */,
+				01265CC62872F78200C4DFC4 /* SCSellerCollectionView.swift */,
+			);
+			path = ProductSection;
+			sourceTree = "<group>";
+		};
 		01593527285B6CF8006F9EE6 /* Font */ = {
 			isa = PBXGroup;
 			children = (
@@ -406,6 +419,7 @@
 		729BBDB72861C5F500BAE262 /* Seller */ = {
 			isa = PBXGroup;
 			children = (
+				01265CC32872F43000C4DFC4 /* ProductSection */,
 				0A99631B2869975F0074D640 /* Cell */,
 				72FDA1662869B9E800CD275E /* Modal */,
 				0A996318286927250074D640 /* SCSellerProductListViewController.swift */,
@@ -551,6 +565,7 @@
 				726047F628607B9100AB2EA7 /* SCRegisterViewController.swift in Sources */,
 				2213A0F1286CB63800122486 /* SCDescCard.swift in Sources */,
 				2213A0EF286CADFA00122486 /* SCSellerPublishProductViewController.swift in Sources */,
+				01265CC52872F46300C4DFC4 /* SCSellerTableView.swift in Sources */,
 				0A646D632864A79100160074 /* Array+Extension.swift in Sources */,
 				0A9E1CFC28579B5F00D864A4 /* AppDelegate.swift in Sources */,
 				0A507520286AB62600CF1912 /* SCSellerProfileView.swift in Sources */,
@@ -578,6 +593,7 @@
 				0AF723D5285FA9FA00C0F146 /* SCSearchBar.swift in Sources */,
 				72BDD18D2858A0BF006A75A6 /* SCButton.swift in Sources */,
 				22D5643E285DA7E300BB5294 /* SCProfilViewController.swift in Sources */,
+				01265CC72872F78200C4DFC4 /* SCSellerCollectionView.swift in Sources */,
 				0A996325286A0DDD0074D640 /* SCAddProductCollectionViewCell.swift in Sources */,
 				22062A7F286E071100047AB5 /* SCNotificationViewController.swift in Sources */,
 				01B18BA8286088D300A09AD8 /* LayoutSection.swift in Sources */,

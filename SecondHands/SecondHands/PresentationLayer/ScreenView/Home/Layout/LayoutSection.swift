@@ -33,9 +33,16 @@ class LayoutSection {
     static func createSellerProduct() -> UICollectionViewCompositionalLayout {
         return UICollectionViewCompositionalLayout { (section, environment) -> NSCollectionLayoutSection? in
             let section = LayoutSection().createLayoutProductList()
-//            section.contentInsets =  .init(top: 8, leading: 16, bottom: 0, trailing: 0)
             return section
             
+        }
+    }
+    
+    static func createSellerCategory() -> UICollectionViewCompositionalLayout {
+        return UICollectionViewCompositionalLayout { (section, environment) -> NSCollectionLayoutSection? in
+            let section = LayoutSection().createLayoutChips()
+            section.contentInsets = .init(top: 8, leading: 16, bottom: 8, trailing: 16)
+            return section
         }
     }
 }

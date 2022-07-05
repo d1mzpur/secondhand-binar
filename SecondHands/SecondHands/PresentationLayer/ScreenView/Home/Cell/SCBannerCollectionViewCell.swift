@@ -67,6 +67,11 @@ class SCBannerCollectionViewCell: UICollectionViewCell {
 //        return bannerSC
 //    }()
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        offerImage.image = nil
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.addSubview(offerImage)

@@ -19,7 +19,7 @@ class LayoutSection {
         return UICollectionViewCompositionalLayout { (sectionNumber, environment) -> NSCollectionLayoutSection? in
             if sectionNumber == 0 {
                 let section = LayoutSection().createLayoutBanner(getHeightSuperView: getHeightSuperView)
-//                section.orthogonalScrollingBehavior = .paging
+                section.orthogonalScrollingBehavior = .paging
                 return section
             } else if sectionNumber == 1 {
                 let section = LayoutSection().createLayoutChips()
@@ -62,7 +62,7 @@ extension LayoutSection {
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [itemBanner])
         
         let section = NSCollectionLayoutSection(group: group)
-        section.orthogonalScrollingBehavior = .continuous
+//        section.orthogonalScrollingBehavior = .continuous
         return section
     }
     

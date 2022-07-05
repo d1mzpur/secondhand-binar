@@ -11,7 +11,7 @@ class SCProductCard: UIView {
     lazy var productImage: UIImageView = {
         let imageName = "exampleProductCardImage.png"
         let image = UIImage(named: imageName)
-        let imageView = UIImageView(image: image!)
+        let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.layer.masksToBounds = true
         imageView.layer.cornerRadius = 10

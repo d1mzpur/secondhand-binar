@@ -10,7 +10,10 @@ import Foundation
 struct Categories: Codable {
     let id: Int?
     let name: String?
+    let createdAt: String?
+    let updatedAt: String?
 }
+
 struct ProductItem: Codable {
     let id: Int?
     let productImage: String?
@@ -55,6 +58,8 @@ struct ProductItem: Codable {
 //        ]
 //    }
 }
+
+
 
 struct User {
     let imageUser: String

@@ -13,6 +13,7 @@ class SCSellerProductListViewController: UIViewController {
     var dataProduct: [ProductItem]?
     var selectedCategoryIndex: Int = -1
     
+    var categoryCollection: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
     var sellerCollection: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -24,29 +25,40 @@ class SCSellerProductListViewController: UIViewController {
         view.backgroundColor = .white
         configureView()
         view.addSubview(sellerView)
+        view.addSubview(categoryCollection)
         view.addSubview(sellerCollection)
         setupCollection()
         setupConstraint()
     }
     
     private func setupCollection() {
+        categoryCollection.delegate = self
+        categoryCollection.dataSource = self
         sellerCollection.delegate = self
         sellerCollection.dataSource = self
+        
+        categoryCollection.register(SCCategoryChipCollectionViewCell.self, forCellWithReuseIdentifier: "sellerCategory")
         sellerCollection.register(SCAddProductCollectionViewCell.self, forCellWithReuseIdentifier: "addProdcut")
-        sellerCollection.register(CategoryCollectionReusableView.self, forSupplementaryViewOfKind: "sellerCategoryHeader", withReuseIdentifier: "sellerHeader")
         sellerCollection.register(SCProductCardViewCollectionViewCell.self, forCellWithReuseIdentifier: "sellerProduct")
     }
     
     private func configureView() {
+        categoryCollection.collectionViewLayout = LayoutSection.createLayoutCategory()
         sellerCollection.collectionViewLayout = LayoutSection.createSellerProduct()
+        
+        categoryCollection.backgroundColor = .white
+        
         sellerCollection.backgroundColor = .white
         sellerCollection.showsVerticalScrollIndicator = false
         
         sellerView.configure(user: user)
+        
+//        sellerView.configure(user: user)
     }
     
     private func setupConstraint() {
         sellerView.translatesAutoresizingMaskIntoConstraints = false
+        categoryCollection.translatesAutoresizingMaskIntoConstraints = false
         sellerCollection.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
@@ -54,7 +66,11 @@ class SCSellerProductListViewController: UIViewController {
             sellerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             sellerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             
-            sellerCollection.topAnchor.constraint(equalTo: sellerView.bottomAnchor, constant: 16),
+            categoryCollection.topAnchor.constraint(equalTo: sellerView.bottomAnchor, constant: 16),
+            categoryCollection.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            categoryCollection.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            
+            sellerCollection.topAnchor.constraint(equalTo: categoryCollection.bottomAnchor, constant: 16),
             sellerCollection.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             sellerCollection.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             sellerCollection.bottomAnchor.constraint(equalTo: view.bottomAnchor),

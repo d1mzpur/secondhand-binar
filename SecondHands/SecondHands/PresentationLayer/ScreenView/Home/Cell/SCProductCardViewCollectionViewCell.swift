@@ -34,10 +34,15 @@ class SCProductCardViewCollectionViewCell: UICollectionViewCell {
     }
     
     func configure(item: ProductItem) {
+        guard
+            let productPrice = item.productPrice,
+            let category = item.productCategory?.map( { ($0.name ?? "") } ).joined(separator: ", ")
+        else { return }
         cardView.productImage.loadImage(resource: item.productImage)
         cardView.productTitle.text = item.productTitle
-//        cardView.productCategory.text = item.productCategory
-        cardView.productPrice.text = "\(item.productPrice!)"
+        cardView.productCategory.text = category
+        
+        cardView.productPrice.text = "\(productPrice)"
         cardView.clipsToBounds = true
     }
     

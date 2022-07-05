@@ -10,7 +10,7 @@ import SwiftUI
 class SCHomeViewController: UIViewController {
     var productItem: [ProductItem]?
     var offerItem: [OfferItem]?
-    var category = [String]()
+    var category: [Categories]?
     var firstState: Bool = false
     var customSearchBar: SCSearchBar = {
         var searchBar = SCSearchBar()
@@ -64,14 +64,16 @@ class SCHomeViewController: UIViewController {
         setupCollection()
         
         setupConstraint()
-        getData()
+        getBanner()
+        getCategory()
+        getProduct()
     }
     
     func setupAddView() {
         view.addSubview(homeCollectionView)
     }
     
-    func getData() {
+    func getBanner() {
         service.getBanner { result in
             switch result {
             case .success(let success):
@@ -80,14 +82,34 @@ class SCHomeViewController: UIViewController {
                 print(error)
             }
         }
-        
+    }
+    
+    func getCategory() {
+        service.getCategory { (result) in
+            switch result {
+            case .success(let result):
+                DispatchQueue.main.async {
+                    self.category = result
+                    self.homeCollectionView.reloadData()
+                }
+                
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    func getProduct() {
         service.getProduct(by: .buyer) { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let itemResults):
-                self.productItem = itemResults
-                self.category = self.createCategoryList()
-                self.homeCollectionView.reloadData()
+                DispatchQueue.main.async {
+                    self.productItem = itemResults
+    //                self.category = self.createCategoryList()
+                    self.homeCollectionView.reloadData()
+                }
+                
             case .failure(let error):
                 print(error.localizedDescription)
             }
@@ -135,9 +157,9 @@ extension SCHomeViewController: UICollectionViewDelegate, UICollectionViewDataSo
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if section == 0 {
-            return 1
+            return offerItem?.count ?? 0
         } else if section == 1 {
-            return category.count ?? 0 + 1
+            return category?.count ?? 0 + 1
         } else {
             return isProductEmpty()
         }
@@ -174,17 +196,26 @@ extension SCHomeViewController: UICollectionViewDelegate, UICollectionViewDataSo
                 filterListProduct = productItem
                 return allCategoryCell
             } else {
-                categoryCell.configure(item: category[newItem])
-                categoryCell.onCellTapByIndex = { [weak self] cellTap in
-                    guard let self = self else { return }
-                    
-                    print("Cell For row", self.category[newItem])
-                    let selectedProductCategory = self.category[newItem]
-                    self.filterListProduct = self.productItem?.map { $0.productCategory?.filter { $0 }}
-                    
-                    print("Filter ", self.filterListProduct)
+                let category = self.category?[newItem].name
+//                print("ini kategory", category)
+                categoryCell.configure(item: category!)
+                categoryCell.onCellTapByIndex = { cellTap in
+                    // MARK: - FILTER
+//                    print("Cell For row", self.category?[newItem])
+                    let selectedProductCategory = self.category?[cellTap.item].name
+                    self.filterListProduct = self.productItem!.filter { ($0.productCategory?.contains(where: { (category) -> Bool in
+                        category.name == selectedProductCategory
+                    }))! }
+                    print("Filter Data", self.filterListProduct)
+//                    self.filterListProduct = self.productItem?.filter {
+//                        ($0.productCategory?.contains { category in
+//                            return category.name == selectedProductCategory
+//                        })!
+//                    }
+//                    print("Filter ", self.filterListProduct)
                     collectionView.reloadData()
-                    }
+                    
+                }
                     
                 return categoryCell
                 
@@ -212,7 +243,7 @@ extension SCHomeViewController: UICollectionViewDelegate, UICollectionViewDataSo
             
             if ((collectionView.dequeueReusableCell(withReuseIdentifier: "categoryChips", for: indexPath) as? SCCategoryChipCollectionViewCell) != nil) {
                 selectedCategoryIndex = selectedCategoryIndex != indexPath[1] ? indexPath[1] : -1
-                print("Tap ", selectedCategoryIndex, category[selectedCategoryIndex])
+                print("Tap ", selectedCategoryIndex, category?[selectedCategoryIndex])
                 collectionView.reloadData()
             }
             

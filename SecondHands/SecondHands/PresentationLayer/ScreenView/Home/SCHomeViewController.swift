@@ -159,7 +159,7 @@ extension SCHomeViewController: UICollectionViewDelegate, UICollectionViewDataSo
         if section == 0 {
             return offerItem?.count ?? 0
         } else if section == 1 {
-            return category?.count ?? 0 + 1
+            return (category?.count ?? 0) + 1
         } else {
             return isProductEmpty()
         }
@@ -193,12 +193,12 @@ extension SCHomeViewController: UICollectionViewDelegate, UICollectionViewDataSo
             allCategoryCell.cellClicked(state: selected)
             if indexPath.item == 0 {
                 allCategoryCell.configure(item: "Semua")
-                filterListProduct = productItem
                 return allCategoryCell
             } else {
+                print(newItem,"<<<<",self.category?[newItem].name)
                 let category = self.category?[newItem].name
 //                print("ini kategory", category)
-                categoryCell.configure(item: category!)
+                categoryCell.configure(item: category ?? "test")
                 categoryCell.onCellTapByIndex = { cellTap in
                     // MARK: - FILTER
 //                    print("Cell For row", self.category?[newItem])
@@ -244,6 +244,9 @@ extension SCHomeViewController: UICollectionViewDelegate, UICollectionViewDataSo
             if ((collectionView.dequeueReusableCell(withReuseIdentifier: "categoryChips", for: indexPath) as? SCCategoryChipCollectionViewCell) != nil) {
                 selectedCategoryIndex = selectedCategoryIndex != indexPath[1] ? indexPath[1] : -1
                 print("Tap ", selectedCategoryIndex, category?[selectedCategoryIndex])
+                if(selectedCategoryIndex==0){
+                    filterListProduct = productItem
+                }
                 collectionView.reloadData()
             }
             

@@ -10,11 +10,11 @@ import UIKit
 class SCSellerProductListViewController2: UIViewController {
     var sellerView = SCSellerProfileView()
     var user: User = User.createData()
-    var dataProduct: [ProductItem] = ProductItem.createData()
-    var selectedCategoryIndex: Int = 0
-    var productListType: String = "table"
-    let categoryTitle: [String] = ["Produk","Diminati","Terjual"]
+    var dataProduct: [ProductItem] = []
+    var categoryTitleArray: [String] = ["Produk","Diminati","Terjual"]
     
+    
+    var selectedCategory: String = "Produk"
     lazy var textTitle: UILabel = {
         var textTitle = UILabel()
         textTitle.text = "Daftar Jual Saya"
@@ -22,9 +22,10 @@ class SCSellerProductListViewController2: UIViewController {
         textTitle.textColor = .black
         return textTitle
     }()
-    lazy var sellerCategory: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
-    lazy var sellerCollection: SCSellerCollectionView = SCSellerCollectionView()
-    lazy var sellerTableView: SCSellerTableView = SCSellerTableView()
+    
+    lazy var sellerCategory: SCSellerCategoryCollectionView = SCSellerCategoryCollectionView(viewController: self, categoryTitleArray: categoryTitleArray)
+    lazy var sellerCollection: SCSellerProductCollectionView = SCSellerProductCollectionView(dataProduct: dataProduct)
+    lazy var sellerTableView: SCSellerProductTableView = SCSellerProductTableView(dataProduct: dataProduct)
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -38,19 +39,10 @@ class SCSellerProductListViewController2: UIViewController {
         view.addSubview(textTitle)
         view.addSubview(sellerView)
         view.addSubview(sellerCategory)
-        sellerCategory.delegate = self
-        sellerCategory.dataSource = self
-        sellerCategory.register(SCCategoryChipCollectionViewCell.self, forCellWithReuseIdentifier: "categoryChips")
-        sellerCategory.collectionViewLayout = LayoutSection.createSellerCategory()
-        sellerCategory.backgroundColor = .white
-        sellerCategory.showsVerticalScrollIndicator = false
-        sellerCategory.translatesAutoresizingMaskIntoConstraints = false
-        
-        
-        
+  
         sellerCollection.removeFromSuperview()
         sellerTableView.removeFromSuperview()
-        switch( categoryTitle[selectedCategoryIndex] ){
+        switch( selectedCategory ){
         case "Produk":
             view.addSubview(sellerCollection)
             setupCollection()
@@ -64,8 +56,6 @@ class SCSellerProductListViewController2: UIViewController {
         default:
             break;
         }
-        
-        
         setupConstraint()
     }
 
@@ -110,30 +100,6 @@ class SCSellerProductListViewController2: UIViewController {
             sellerCategory.heightAnchor.constraint(equalToConstant: 60),
     
         ])
-    }
-}
-
-extension SCSellerProductListViewController2: UICollectionViewDelegate, UICollectionViewDataSource{
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        3
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let categoryCell = collectionView.dequeueReusableCell(withReuseIdentifier: "categoryChips", for: indexPath) as! SCCategoryChipCollectionViewCell
-        categoryCell.textTitle.text = categoryTitle[indexPath[1]]
-        let selected = selectedCategoryIndex == indexPath[1]
-        categoryCell.cellClicked(state: selected)
-        return categoryCell
-        
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let categoryCell = collectionView.dequeueReusableCell(withReuseIdentifier: "categoryChips", for: indexPath) as! SCCategoryChipCollectionViewCell
-        categoryCell.onCellTapByIndex?(indexPath)
-        selectedCategoryIndex = indexPath[1]
-        print("Tap ", selectedCategoryIndex)
-        collectionView.reloadData()
-        self.viewDidLoad()
     }
 }
 

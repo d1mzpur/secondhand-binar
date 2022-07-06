@@ -8,11 +8,12 @@
 import Foundation
 import UIKit
 
-class SCSellerCollectionView: UICollectionView,UICollectionViewDelegate, UICollectionViewDataSource{
-    var dataProduct: [ProductItem] = ProductItem.createData()
+class SCSellerProductCollectionView: UICollectionView,UICollectionViewDelegate, UICollectionViewDataSource{
+    var dataProduct: [ProductItem] = []
     
-    init(){
+    init(dataProduct: [ProductItem]){
         super.init(frame: .zero, collectionViewLayout: UICollectionViewLayout())
+        self.dataProduct = dataProduct
         self.delegate = self
         self.dataSource = self
         self.register(SCAddProductCollectionViewCell.self, forCellWithReuseIdentifier: "addProdcut")
@@ -32,15 +33,14 @@ class SCSellerCollectionView: UICollectionView,UICollectionViewDelegate, UIColle
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let addProductCell = collectionView.dequeueReusableCell(withReuseIdentifier: "addProdcut", for: indexPath) as? SCAddProductCollectionViewCell,
-              let productCell = collectionView.dequeueReusableCell(withReuseIdentifier: "sellerProduct", for: indexPath) as? SCProductCardViewCollectionViewCell
-        else { return UICollectionViewCell() }
-        
+        let addProductCell = collectionView.dequeueReusableCell(withReuseIdentifier: "addProdcut", for: indexPath) as! SCAddProductCollectionViewCell
+        let productCell = collectionView.dequeueReusableCell(withReuseIdentifier: "sellerProduct", for: indexPath) as! SCProductCardViewCollectionViewCell
         let item = indexPath.item
-        let data = self.dataProduct[item > 0 ? item - 1 : item]
+        
         if item == 0 {
             return addProductCell
         } else {
+            let data = self.dataProduct[item - 1]
             productCell.configure(item: data)
             return productCell
         }

@@ -36,7 +36,7 @@ class SCTabBar: UITabBarController , UITabBarControllerDelegate{
         tab2.tabBarItem = tab2Item
         
         //tab 3
-        let tab3 = SCSellerProductListViewController2()
+        let tab3 = SCSellerUploadViewController()
         let nav3 = UINavigationController(rootViewController: tab3)
         let tab3Item = UITabBarItem(title: "Jual", image: UIImage(systemName: "plus.circle"), selectedImage: UIImage(systemName: "plus.circle"))
         tab3.tabBarItem = tab3Item

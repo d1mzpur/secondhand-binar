@@ -18,6 +18,13 @@ class SCSellerPublishProductViewController: UIViewController {
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(backButton))
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+//        self.dismiss(animated: true, completion: nil)
+        self.tabBarController?.tabBar.isHidden = false
+    }
+    
+    
+    
     lazy var productCard = SCProductCard(frame: .zero, productImageURL: "", productTitle: "Jam Tangan Casio", productCategory: "Aksesoris", productPrice: "Rp 250.000")
     
     lazy var sellerCard = SCSellerProfileView(frame: .zero, productImageURL: "", productLabel: "Nama Penjual", sellerCity: "Kota")
@@ -50,6 +57,7 @@ class SCSellerPublishProductViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        publishButton.addTarget(self, action: #selector(navigateToHome), for: .touchUpInside )
         let screensize: CGRect = UIScreen.main.bounds
         let screenWidth = screensize.width
         let screenHeight = screensize.height
@@ -92,8 +100,13 @@ class SCSellerPublishProductViewController: UIViewController {
         
     }
     
-    @objc
-    func backButton() {
+    @objc func backButton() {
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    @objc func navigateToHome() {
+        self.tabBarController?.selectedIndex = 0
+        self.navigationController?.popViewController(animated: false)
+        
     }
 }

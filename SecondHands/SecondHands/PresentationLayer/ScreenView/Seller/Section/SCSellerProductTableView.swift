@@ -49,7 +49,7 @@ class SCSellerItemTableView: UITableViewCell{
         item.productPrice.text = data.productPrice
     }
     
-    private lazy var item: SCSellerItem = SCSellerItem(productImageURL: "String", productLabel: "Penawaran product", productTitle: "Jam Tangan Casio", productPrice: "Rp 250.000", discountProduct: "Ditawar Rp 200.000")
+    private lazy var item: SCSellerItem = SCSellerItem()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

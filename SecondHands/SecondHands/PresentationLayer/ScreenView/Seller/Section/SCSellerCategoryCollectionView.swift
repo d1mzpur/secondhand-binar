@@ -10,9 +10,9 @@ import UIKit
 class SCSellerCategoryCollectionView: UICollectionView, UICollectionViewDelegate, UICollectionViewDataSource{
     var categoryTitle: [String] = []
     var selectedCategoryIndex: Int = 0
-    var viewController: SCSellerProductListViewController2 = SCSellerProductListViewController2()
+    var viewController: SCSellerProductListViewController = SCSellerProductListViewController()
     
-    init( viewController:SCSellerProductListViewController2 = SCSellerProductListViewController2(), categoryTitleArray: [String] = []){
+    init( viewController: SCSellerProductListViewController = SCSellerProductListViewController(), categoryTitleArray: [String] = []){
         super.init(frame: .zero, collectionViewLayout: UICollectionViewLayout())
         self.viewController = viewController
         self.categoryTitle = categoryTitleArray

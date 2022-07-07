@@ -30,25 +30,41 @@ class SCSellerPublishProductViewController: UIViewController {
         sellerCard,
         descCard,
        ])
+        view.addSubview(makeHeaderImageView())
+        makeHeaderImageView().bringSubviewToFront(stack)
         stack.setCustomSpacing(16, after: productCard)
         stack.setCustomSpacing(16, after: sellerCard)
         stack.axis = .vertical
         return stack
     }()
     
+    private func makeHeaderImageView() -> UIImageView {
+        let imageName = "exampleProductCardImage.png"
+        let image = UIImage(named: imageName)
+        let imageView = UIImageView(image: image!)
+        imageView.contentMode = .scaleAspectFill
+        imageView.frame = CGRect(x: 0,y: 0,width: 360, height: 300)
+        return imageView
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         view.addSubview(formStack)
         
+        productCard.productImage.isHidden = true
+        sellerCard.editButton.isHidden = true
+        
         formStack.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            formStack.topAnchor.constraint(equalTo: view.topAnchor, constant: 106),
+            formStack.topAnchor.constraint(equalTo: view.topAnchor, constant: 265),
             formStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             formStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             
+            productCard.productStack.leadingAnchor.constraint(equalTo: formStack.leadingAnchor, constant: 22),
+            productCard.productStack.trailingAnchor.constraint(equalTo: formStack.trailingAnchor, constant: -20),
+            productCard.productStack.heightAnchor.constraint(equalTo: productCard.heightAnchor, constant: 0)
         ])
         
     }

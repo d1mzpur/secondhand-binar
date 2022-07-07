@@ -30,13 +30,13 @@ class SCTabBar: UITabBarController , UITabBarControllerDelegate{
         tab1.tabBarItem = tab1Item
         
         //tab 2
-        let tab2 = SCSellerUploadViewController()
+        let tab2 = SCNotificationViewController()
         let nav2 = UINavigationController(rootViewController: tab2)
         let tab2Item = UITabBarItem(title: "Notifikasi", image: UIImage(systemName: "bell"), selectedImage: UIImage(systemName: "bell"))
         tab2.tabBarItem = tab2Item
         
         //tab 3
-        let tab3 = UIViewController()
+        let tab3 = SCSellerProductListViewController2()
         let nav3 = UINavigationController(rootViewController: tab3)
         let tab3Item = UITabBarItem(title: "Jual", image: UIImage(systemName: "plus.circle"), selectedImage: UIImage(systemName: "plus.circle"))
         tab3.tabBarItem = tab3Item

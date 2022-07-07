@@ -112,15 +112,15 @@ class SCSellerItem: UIView {
         self.addSubview(productImage)
         self.addSubview(productStack)
         self.addSubview(timeProduct)
-        self.addSubview(actionButton)
-        self.addSubview(actionButton2)
+//        self.addSubview(actionButton)
+//        self.addSubview(actionButton2)
         
         productImage.clipsToBounds = true
         productImage.contentMode = .scaleAspectFill
         productImage.layer.cornerRadius = 12
     
-        actionButton.translatesAutoresizingMaskIntoConstraints = false
-        actionButton2.translatesAutoresizingMaskIntoConstraints = false
+//        actionButton.translatesAutoresizingMaskIntoConstraints = false
+//        actionButton2.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
                 
@@ -129,22 +129,23 @@ class SCSellerItem: UIView {
             productImage.heightAnchor.constraint(equalToConstant: 48),
             productImage.widthAnchor.constraint(equalTo: productImage.heightAnchor),
             
-            productStack.topAnchor.constraint(equalTo: productImage.topAnchor),
-            productStack.leadingAnchor.constraint(equalTo: self.leadingAnchor,constant: 60),
-            productStack.trailingAnchor.constraint(equalTo: self.trailingAnchor,constant: 10),
-            
-            timeProduct.topAnchor.constraint(equalTo: productImage.topAnchor),
+            timeProduct.topAnchor.constraint(equalTo: self.topAnchor),
             timeProduct.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
             
-            actionButton.topAnchor.constraint(equalTo: productStack.topAnchor, constant: 100),
-            actionButton.heightAnchor.constraint(equalTo: self.heightAnchor, constant: 20),
-            actionButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 0),
-            actionButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -188),
+            productStack.topAnchor.constraint(equalTo: self.topAnchor),
+            productStack.leadingAnchor.constraint(equalTo: self.leadingAnchor,constant: 60),
+            productStack.trailingAnchor.constraint(equalTo: self.trailingAnchor,constant: 10),
+            productStack.bottomAnchor.constraint(equalTo: self.bottomAnchor)
             
-            actionButton2.topAnchor.constraint(equalTo: productStack.topAnchor, constant: 100),
-            actionButton2.heightAnchor.constraint(equalTo: self.heightAnchor, constant: 20),
-            actionButton2.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 188),
-            actionButton2.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 0)
+//            actionButton.topAnchor.constraint(equalTo: productStack.topAnchor, constant: 100),
+//            actionButton.heightAnchor.constraint(equalTo: self.heightAnchor, constant: 20),
+//            actionButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 0),
+//            actionButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -188),
+//            
+//            actionButton2.topAnchor.constraint(equalTo: productStack.topAnchor, constant: 100),
+//            actionButton2.heightAnchor.constraint(equalTo: self.heightAnchor, constant: 20),
+//            actionButton2.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 188),
+//            actionButton2.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 0)
             
         ])
         

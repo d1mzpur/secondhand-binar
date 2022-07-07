@@ -11,6 +11,12 @@ class SCHomeViewController: UIViewController {
     var productItem: [ProductItem]?
     var offerItem: [OfferItem]?
     var category: [Categories]?
+    var newCategory: [Categories]? {
+        var newCategoryItem = self.category.map { $0 }
+        newCategoryItem?.insert(Categories(id: 0, name: "Semua", createdAt: "", updatedAt: ""), at: 0)
+        
+        return newCategoryItem
+    }
     var firstState: Bool = false
     var customSearchBar: SCSearchBar = {
         var searchBar = SCSearchBar()
@@ -106,7 +112,7 @@ class SCHomeViewController: UIViewController {
             case .success(let itemResults):
                 DispatchQueue.main.async {
                     self.productItem = itemResults
-    //                self.category = self.createCategoryList()
+                    //                self.category = self.createCategoryList()
                     self.homeCollectionView.reloadData()
                 }
                 
@@ -159,7 +165,9 @@ extension SCHomeViewController: UICollectionViewDelegate, UICollectionViewDataSo
         if section == 0 {
             return offerItem?.count ?? 0
         } else if section == 1 {
-            return (category?.count ?? 0) + 1
+            print(category?.isEmpty)
+            return category?.isEmpty == nil ? 0 : category!.count + 1
+            //            return category?.count ?? 0
         } else {
             return isProductEmpty()
         }
@@ -168,7 +176,6 @@ extension SCHomeViewController: UICollectionViewDelegate, UICollectionViewDataSo
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard
             let bannerCell = collectionView.dequeueReusableCell(withReuseIdentifier: "banner", for: indexPath) as? SCBannerCollectionViewCell,
-            let allCategoryCell = collectionView.dequeueReusableCell(withReuseIdentifier: "allCategoryChips", for: indexPath) as? SCCategoryChipCollectionViewCell,
             let categoryCell = collectionView.dequeueReusableCell(withReuseIdentifier: "categoryChips", for: indexPath) as? SCCategoryChipCollectionViewCell,
             let productCell = collectionView.dequeueReusableCell(withReuseIdentifier: "productList", for: indexPath) as? SCProductCardViewCollectionViewCell
         else { return UICollectionViewCell() }
@@ -182,44 +189,22 @@ extension SCHomeViewController: UICollectionViewDelegate, UICollectionViewDataSo
         if section == 0 {
             let offerItem = self.offerItem?[indexPath.row]
             bannerCell.configure(item: offerItem ?? .init(bannerId: 0, bannerImage: "", bannerTitle: "", createdAt: "", updatedAt: ""))
-            //            let heightBanner = bannerCell.frame.height + 80
-            //            bannerCell.layer.insertSublayer(setGradientBackground(), at: 0)
-            //            gradientLayer.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: heightBanner)
             
             return bannerCell
         } else if section == 1 {
             let selected = selectedCategoryIndex == indexPath[1]
             categoryCell.cellClicked(state: selected)
-            allCategoryCell.cellClicked(state: selected)
-            if indexPath.item == 0 {
-                allCategoryCell.configure(item: "Semua")
-                return allCategoryCell
-            } else {
-                print(newItem,"<<<<",self.category?[newItem].name)
-                let category = self.category?[newItem].name
-//                print("ini kategory", category)
-                categoryCell.configure(item: category ?? "test")
-                categoryCell.onCellTapByIndex = { cellTap in
-                    // MARK: - FILTER
-//                    print("Cell For row", self.category?[newItem])
-                    let selectedProductCategory = self.category?[cellTap.item].name
-                    self.filterListProduct = self.productItem!.filter { ($0.productCategory?.contains(where: { (category) -> Bool in
-                        category.name == selectedProductCategory
-                    }))! }
-                    print("Filter Data", self.filterListProduct)
-//                    self.filterListProduct = self.productItem?.filter {
-//                        ($0.productCategory?.contains { category in
-//                            return category.name == selectedProductCategory
-//                        })!
-//                    }
-//                    print("Filter ", self.filterListProduct)
-                    collectionView.reloadData()
-                    
-                }
-                    
-                return categoryCell
+            categoryCell.onCellTapByIndex = { cellTapByIndex in
+                print("==>> Update by filter = ", self.category?[cellTapByIndex.item].name)
+                self.filterListProduct = self.productItem.map { $0 }?.filter { $0.productCategory!.contains { $0.name == self.category?[cellTapByIndex.item].name } }
                 
+                collectionView.reloadData()
+                print("== RELOAD DATA ==")
             }
+            categoryCell.configure(item: self.newCategory?[indexPath.row].name ?? "")
+            return categoryCell
+            
+            
         } else {
             guard let item = filterListProduct?.isEmpty == nil ? productList : filterListProduct?[newItem] else { return UICollectionViewCell() }
             print("ITEM Filter" , filterListProduct?.isEmpty)
@@ -237,14 +222,21 @@ extension SCHomeViewController: UICollectionViewDelegate, UICollectionViewDataSo
         case 0:
             guard let _ = homeCollectionView.cellForItem(at: indexPath) as? SCBannerCollectionViewCell else { return }
         case 1:
-            let categoryCell = collectionView.cellForItem(at: indexPATH) as?
-                SCCategoryChipCollectionViewCell
-            categoryCell?.onCellTapByIndex?(indexPath)
+            let allCategory = collectionView.cellForItem(at: indexPath) as? SCCategoryChipCollectionViewCell
+            let categoryCell = collectionView.cellForItem(at: indexPATH) as? SCCategoryChipCollectionViewCell
+            if indexPath.row == 0 {
+                allCategory?.onCellTapByIndex?(indexPath)
+            } else {
+                categoryCell?.onCellTapByIndex?(indexPath)
+            }
+            
+            
             
             if ((collectionView.dequeueReusableCell(withReuseIdentifier: "categoryChips", for: indexPath) as? SCCategoryChipCollectionViewCell) != nil) {
+                print(indexPath.item)
                 selectedCategoryIndex = selectedCategoryIndex != indexPath[1] ? indexPath[1] : -1
-                print("Tap ", selectedCategoryIndex, category?[selectedCategoryIndex])
-                if(selectedCategoryIndex==0){
+                //                print("Tap ", selectedCategoryIndex, self.newCategory?[selectedCategoryIndex].name)
+                if selectedCategoryIndex == 0 {
                     filterListProduct = productItem
                 }
                 collectionView.reloadData()
@@ -304,7 +296,7 @@ extension UIViewController {
 extension SCHomeViewController {
     
     func isProductEmpty() -> Int {
-        return (self.filterListProduct?.isEmpty) == nil ? Int(self.productItem?.count ?? 0) : Int(self.filterListProduct?.count ?? 0)
+        return (self.filterListProduct?.isEmpty) == true ? Int(self.productItem?.count ?? 0) : Int(self.filterListProduct?.count ?? 0)
         
     }
     

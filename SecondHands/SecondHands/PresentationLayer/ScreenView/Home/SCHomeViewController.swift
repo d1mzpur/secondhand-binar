@@ -68,7 +68,7 @@ class SCHomeViewController: UIViewController {
         setupAddView()
         
         setupCollection()
-        
+        createSearchBar()
         setupConstraint()
         getBanner()
         getCategory()
@@ -112,7 +112,7 @@ class SCHomeViewController: UIViewController {
             case .success(let itemResults):
                 DispatchQueue.main.async {
                     self.productItem = itemResults
-                    //                self.category = self.createCategoryList()
+                    self.filterListProduct = self.productItem
                     self.homeCollectionView.reloadData()
                 }
                 
@@ -132,7 +132,6 @@ class SCHomeViewController: UIViewController {
         homeCollectionView.delegate = self
         homeCollectionView.dataSource = self
         homeCollectionView.register(SCBannerCollectionViewCell.self, forCellWithReuseIdentifier: "banner")
-        homeCollectionView.register(SCCategoryChipCollectionViewCell.self, forCellWithReuseIdentifier: "allCategoryChips")
         homeCollectionView.register(SCCategoryChipCollectionViewCell.self, forCellWithReuseIdentifier: "categoryChips")
         homeCollectionView.register(SCProductCardViewCollectionViewCell.self, forCellWithReuseIdentifier: "productList")
         homeCollectionView.register(SCHeaderCollectionReusableView.self, forSupplementaryViewOfKind: "categoryId", withReuseIdentifier: "headerCategory")
@@ -165,9 +164,7 @@ extension SCHomeViewController: UICollectionViewDelegate, UICollectionViewDataSo
         if section == 0 {
             return offerItem?.count ?? 0
         } else if section == 1 {
-            print(category?.isEmpty)
-            return category?.isEmpty == nil ? 0 : category!.count + 1
-            //            return category?.count ?? 0
+            return newCategory?.count ?? 0
         } else {
             return isProductEmpty()
         }
@@ -184,7 +181,7 @@ extension SCHomeViewController: UICollectionViewDelegate, UICollectionViewDataSo
         let item = indexPath.item + 1
         let newItem = item > 0 ? item - 1 : item
         
-        let productList = self.productItem?[newItem]
+        let productList = self.productItem?[indexPath.item]
         
         if section == 0 {
             let offerItem = self.offerItem?[indexPath.row]
@@ -195,8 +192,12 @@ extension SCHomeViewController: UICollectionViewDelegate, UICollectionViewDataSo
             let selected = selectedCategoryIndex == indexPath[1]
             categoryCell.cellClicked(state: selected)
             categoryCell.onCellTapByIndex = { cellTapByIndex in
-                print("==>> Update by filter = ", self.category?[cellTapByIndex.item].name)
-                self.filterListProduct = self.productItem.map { $0 }?.filter { $0.productCategory!.contains { $0.name == self.category?[cellTapByIndex.item].name } }
+                print("==>> Update by filter = ", self.newCategory?[cellTapByIndex.item].name)
+                self.filterListProduct = self.productItem.map { $0 }?.filter { $0.productCategory!.contains { $0.name == self.newCategory?[cellTapByIndex.item].name } }
+                
+                let encode = try? JSONEncoder().encode(self.filterListProduct)
+                let serial = try? JSONSerialization.jsonObject(with: encode ?? Data(), options: .allowFragments)
+                print(serial)
                 
                 collectionView.reloadData()
                 print("== RELOAD DATA ==")
@@ -207,7 +208,6 @@ extension SCHomeViewController: UICollectionViewDelegate, UICollectionViewDataSo
             
         } else {
             guard let item = filterListProduct?.isEmpty == nil ? productList : filterListProduct?[newItem] else { return UICollectionViewCell() }
-            print("ITEM Filter" , filterListProduct?.isEmpty)
             productCell.configure(item: item)
             return productCell
         }
@@ -222,24 +222,12 @@ extension SCHomeViewController: UICollectionViewDelegate, UICollectionViewDataSo
         case 0:
             guard let _ = homeCollectionView.cellForItem(at: indexPath) as? SCBannerCollectionViewCell else { return }
         case 1:
-            let allCategory = collectionView.cellForItem(at: indexPath) as? SCCategoryChipCollectionViewCell
             let categoryCell = collectionView.cellForItem(at: indexPATH) as? SCCategoryChipCollectionViewCell
-            if indexPath.row == 0 {
-                allCategory?.onCellTapByIndex?(indexPath)
-            } else {
+
                 categoryCell?.onCellTapByIndex?(indexPath)
-            }
-            
-            
-            
-            if ((collectionView.dequeueReusableCell(withReuseIdentifier: "categoryChips", for: indexPath) as? SCCategoryChipCollectionViewCell) != nil) {
-                print(indexPath.item)
-                selectedCategoryIndex = selectedCategoryIndex != indexPath[1] ? indexPath[1] : -1
-                //                print("Tap ", selectedCategoryIndex, self.newCategory?[selectedCategoryIndex].name)
-                if selectedCategoryIndex == 0 {
-                    filterListProduct = productItem
-                }
-                collectionView.reloadData()
+            selectedCategoryIndex = selectedCategoryIndex != indexPath[1] ? indexPath[1] : -1
+            if selectedCategoryIndex == 0 {
+                filterListProduct = productItem
             }
             
         case 2:
@@ -268,12 +256,12 @@ extension SCHomeViewController {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         var offset = scrollView.contentOffset.y / 150
-        if offset > 1 {
+        if offset > -0.5 {
             offset = 1
-            //            self.navigationController?.navigationBar.barTintColor = UIColor(hue: 1, saturation: offset, brightness: 1, alpha: 0)
+            self.navigationController?.navigationBar.barTintColor = UIColor(hue: 1, saturation: offset, brightness: 1, alpha: 0)
             self.navigationController?.navigationBar.backgroundColor = .LimeGreen03
         } else {
-            self.navigationController?.navigationBar.barTintColor = .clear
+            self.navigationController?.navigationBar.barTintColor = .white
         }
     }
     

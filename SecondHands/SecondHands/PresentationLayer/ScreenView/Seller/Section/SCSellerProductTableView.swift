@@ -49,11 +49,29 @@ class SCSellerItemTableView: UITableViewCell{
         item.productPrice.text = data.productPrice
     }
     
-    private lazy var item: SCSellerItem = SCSellerItem()
+    private lazy var item: SCSellerItem = {
+        var sellerItem = SCSellerItem()
+        sellerItem.addbutton(
+            button1Name: "Tolak",
+            button2Name: "Terima"
+        )
+        sellerItem.actionButton1.addTarget(self, action: #selector(tolakAction), for: .touchUpInside)
+        sellerItem.actionButton2.addTarget(self, action: #selector(terimaAction), for: .touchUpInside)
+        return sellerItem
+    }()
+    
+    @objc func tolakAction(){
+        print("tolak")
+    }
+    
+    @objc func terimaAction(){
+        print("terima")
+    }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.selectionStyle = .none
+        self.contentView.isUserInteractionEnabled = true
         addSubview(item)
         item.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([

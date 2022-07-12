@@ -34,8 +34,15 @@ class LayoutSection {
     
     static func createSellerProduct() -> UICollectionViewCompositionalLayout {
         return UICollectionViewCompositionalLayout { (section, environment) -> NSCollectionLayoutSection? in
-            let section = LayoutSection().createLayoutProductList()
-            return section
+            if section == 0 {
+                let section = LayoutSection().createLayoutChips()
+                section.contentInsets = .init(top: 0, leading: 16, bottom: 24, trailing: 16)
+                return section
+            } else {
+                let section = LayoutSection().createLayoutProductList()
+                
+                return section
+            }
             
         }
     }
@@ -45,15 +52,14 @@ class LayoutSection {
             let section = LayoutSection().createLayoutChips()
             section.contentInsets =  .init(top: 0, leading: 16, bottom: 8, trailing: 16)
             return section
-            
         }
     }
 }
 
 extension LayoutSection {
     private func createLayoutBanner(getHeightSuperView: CGFloat) -> NSCollectionLayoutSection {
-//        let sizeTopBar = getHeightSuperView
-//        let heightItem = 200 + sizeTopBar + 16
+        //        let sizeTopBar = getHeightSuperView
+        //        let heightItem = 200 + sizeTopBar + 16
         let heightItem: CGFloat = 200
         let layoutSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(heightItem))
         let itemBanner = NSCollectionLayoutItem(layoutSize: layoutSize)
@@ -62,7 +68,7 @@ extension LayoutSection {
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [itemBanner])
         
         let section = NSCollectionLayoutSection(group: group)
-//        section.orthogonalScrollingBehavior = .continuous
+        //        section.orthogonalScrollingBehavior = .continuous
         return section
     }
     
@@ -85,13 +91,13 @@ extension LayoutSection {
         let layoutSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5), heightDimension: .fractionalWidth(0.6))
         
         let itemCategory = NSCollectionLayoutItem(layoutSize: layoutSize)
-//        itemCategory.contentInsets.trailing = 16
+        //        itemCategory.contentInsets.trailing = 16
         
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalWidth(0.6))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [itemCategory])
         let section = NSCollectionLayoutSection(group: group)
-//        section.contentInsets.leading = 16
-//        section.interGroupSpacing = 16
+        //        section.contentInsets.leading = 16
+        //        section.interGroupSpacing = 16
         return section
     }
     

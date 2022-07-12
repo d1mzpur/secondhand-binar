@@ -193,11 +193,8 @@ extension SCHomeViewController: UICollectionViewDelegate, UICollectionViewDataSo
             categoryCell.cellClicked(state: selected)
             categoryCell.onCellTapByIndex = { cellTapByIndex in
                 print("==>> Update by filter = ", self.newCategory?[cellTapByIndex.item].name)
-                self.filterListProduct = self.productItem.map { $0 }?.filter { $0.productCategory!.contains { $0.name == self.newCategory?[cellTapByIndex.item].name } }
-                
-                let encode = try? JSONEncoder().encode(self.filterListProduct)
-                let serial = try? JSONSerialization.jsonObject(with: encode ?? Data(), options: .allowFragments)
-                print(serial)
+                let selectedCategory = self.newCategory?[cellTapByIndex.item].name
+                self.filterListProduct = self.productItem.map { $0 }?.filter { $0.productCategory!.contains { $0.name == selectedCategory } }
                 
                 collectionView.reloadData()
                 print("== RELOAD DATA ==")
@@ -218,6 +215,8 @@ extension SCHomeViewController: UICollectionViewDelegate, UICollectionViewDataSo
         let item = indexPath.item
         let newItem = item > 0 ? item - 1 : item
         let indexPATH = IndexPath(item: newItem, section: 1)
+        
+        
         switch indexPath.section {
         case 0:
             guard let _ = homeCollectionView.cellForItem(at: indexPath) as? SCBannerCollectionViewCell else { return }

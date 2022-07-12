@@ -18,9 +18,7 @@ class LayoutSection {
         
         return UICollectionViewCompositionalLayout { (sectionNumber, environment) -> NSCollectionLayoutSection? in
             if sectionNumber == 0 {
-                let section = LayoutSection().createLayoutBanner(getHeightSuperView: getHeightSuperView)
-                section.orthogonalScrollingBehavior = .paging
-                return section
+                return LayoutSection().createLayoutBanner(getHeightSuperView: getHeightSuperView)
             } else if sectionNumber == 1 {
                 let section = LayoutSection().createLayoutChips()
                 section.contentInsets = .init(top: 16, leading: 16, bottom: 32, trailing: 16)
@@ -34,23 +32,15 @@ class LayoutSection {
     
     static func createSellerProduct() -> UICollectionViewCompositionalLayout {
         return UICollectionViewCompositionalLayout { (section, environment) -> NSCollectionLayoutSection? in
-            if section == 0 {
-                let section = LayoutSection().createLayoutChips()
-                section.contentInsets = .init(top: 0, leading: 16, bottom: 24, trailing: 16)
-                return section
-            } else {
-                let section = LayoutSection().createLayoutProductList()
-                
-                return section
-            }
-            
+            let section = LayoutSection().createLayoutProductList()
+            return section
         }
     }
     
-    static func createLayoutCategory() -> UICollectionViewCompositionalLayout {
+    static func createSellerCategory() -> UICollectionViewCompositionalLayout {
         return UICollectionViewCompositionalLayout { (section, environment) -> NSCollectionLayoutSection? in
             let section = LayoutSection().createLayoutChips()
-            section.contentInsets =  .init(top: 0, leading: 16, bottom: 8, trailing: 16)
+            section.contentInsets = .init(top: 8, leading: 16, bottom: 8, trailing: 16)
             return section
         }
     }
@@ -68,7 +58,7 @@ extension LayoutSection {
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [itemBanner])
         
         let section = NSCollectionLayoutSection(group: group)
-        //        section.orthogonalScrollingBehavior = .continuous
+        section.orthogonalScrollingBehavior = .groupPagingCentered
         return section
     }
     

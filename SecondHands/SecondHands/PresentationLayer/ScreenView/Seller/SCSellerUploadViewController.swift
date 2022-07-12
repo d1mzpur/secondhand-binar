@@ -18,6 +18,10 @@ class SCSellerUploadViewController: UIViewController {
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(backButton))
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = false
+    }
+    
     lazy var formProductName: SCFormItem = SCFormItem( formType: .normal, formName: "Nama Produk", placeholder: "Nama Produk")
     
     lazy var formProductPrice: SCFormItem = SCFormItem(formType: .normal, formName: "Harga Produk", placeholder: "Rp.0.00")
@@ -59,16 +63,16 @@ class SCSellerUploadViewController: UIViewController {
         return stack
     }()
     
-    
-
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Lengkapi Detail Produk"
+        navigationItem.title = "Lengkapi Detail Produk"
         view.backgroundColor = .white
         formCategory.dataList = [
         "Elektronik","Mainan"
         ]
         labelImagePicker.text = "Foto Produk"
+        previewButton.addTarget(self, action: #selector(navigateToPreview), for: .touchUpInside )
+        uploadButton.addTarget(self, action: #selector(backButton), for: .touchUpInside )
 //        imagePickerProduct.layer.borderWidth = 1
         view.addSubview(formStack)
         view.addSubview(labelImagePicker)
@@ -113,8 +117,16 @@ class SCSellerUploadViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
-    @objc
-    func backButton() {
-        self.navigationController?.popViewController(animated: true)
+    @objc func backButton() {
+        self.tabBarController?.selectedIndex = 0
+    }
+    
+    @objc func navigateToPreview(){
+        let tabBar = SCSellerPublishProductViewController()
+        navigationController?.pushViewController(tabBar, animated: true)
+        tabBar.productCard.productTitle.text = formProductName.text
+        tabBar.productCard.productPrice.text = ("Rp " + formProductPrice.text)
+        tabBar.productCard.productCategory.text = formCategory.text
+        tabBar.descCard.descLabel.text = formDescription.text
     }
 }

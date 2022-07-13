@@ -9,12 +9,11 @@ import UIKit
 
 class SCNotificationViewController: UIViewController {
     var user: User = User.createData()
-    var dataProduct: [ProductItem] = ProductItem.createData()
+    var dataProduct: [ProductItem] = []
     var selectedCategoryIndex: Int = -1
     
     lazy var registerLabel: SCLabel = SCLabel( weight: .bold, size: 24)
     
-    var NotificationCollection: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
     var NotificationTableView: UITableView = UITableView()
     
     
@@ -88,34 +87,6 @@ class SCNotificationViewController: UIViewController {
     
 }
 
-extension SCNotificationViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dataProduct.count + 1
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let addProductCell = collectionView.dequeueReusableCell(withReuseIdentifier: "addProdcut", for: indexPath) as? SCAddProductCollectionViewCell,
-              let productCell = collectionView.dequeueReusableCell(withReuseIdentifier: "sellerProduct", for: indexPath) as? SCProductCardViewCollectionViewCell
-        else { return UICollectionViewCell() }
-        
-        let item = indexPath.item
-        let data = self.dataProduct[item > 0 ? item - 1 : item]
-        if item == 0 {
-            return addProductCell
-        } else {
-            productCell.configure(item: data)
-            return productCell
-        }
-        
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let _ = collectionView.cellForItem(at: indexPath) as? SCProductCardViewCollectionViewCell else { return }
-    }
-    
-}
-
 extension SCNotificationViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataProduct.count
@@ -136,7 +107,7 @@ class SCNotificationItemTableView: UITableViewCell{
     func fill(data:ProductItem){
 //        item.productImage
         item.productTitle.text = data.productTitle
-        item.productPrice.text = data.productPrice
+        item.productPrice.text = String(describing: data.productPrice)
     }
     
     private lazy var item: SCSellerItem = SCSellerItem()

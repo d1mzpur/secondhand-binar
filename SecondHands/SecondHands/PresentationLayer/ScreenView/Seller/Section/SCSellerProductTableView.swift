@@ -46,7 +46,7 @@ class SCSellerItemTableView: UITableViewCell{
     func fill(data:ProductItem){
 //        item.productImage
         item.productTitle.text = data.productTitle
-        item.productPrice.text = data.productPrice
+        item.productPrice.text = String(describing: data.productPrice)
     }
     
     private lazy var item = SCSellerItem()

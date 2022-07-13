@@ -10,7 +10,7 @@ import UIKit
 class SCSellerProductListViewController: UIViewController {
     var sellerView = SCSellerProfileView()
     var user: User = User.createData()
-    var dataProduct: [ProductItem] = ProductItem.createData()
+    var dataProduct: [ProductItem] = []
     var categoryTitleArray: [String] = ["Produk","Diminati","Terjual"]
     
     

@@ -63,6 +63,7 @@ class SCSellerProfileView: UIView {
     
     init(frame: CGRect, productImageURL: String, productLabel: String, sellerCity: String) {
         super.init(frame: frame)
+        
         self.imageSeller.loadImage(resource: productImageURL)
         self.usernameSeller.text = productLabel
         self.sellerCity.text = sellerCity

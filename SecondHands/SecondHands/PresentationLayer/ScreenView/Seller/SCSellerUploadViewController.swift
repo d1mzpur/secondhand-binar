@@ -131,6 +131,5 @@ class SCSellerUploadViewController: UIViewController {
         SCSellerPublishVC.productCard.productCategory.text = formCategory.text
         SCSellerPublishVC.descCard.descLabel.text = formDescription.text
         SCSellerPublishVC.makeHeaderImageView.image = imagePickerProduct.pickerIcon.image!
-        SCSellerPublishVC.setImage(imagePickerProduct.pickerIcon.image!)
     }
 }

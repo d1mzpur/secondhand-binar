@@ -101,10 +101,6 @@ class SCSellerPublishProductViewController: UIViewController {
         
     }
     
-    func setImage(_ image: UIImage) {
-        makeHeaderImageView.image = image
-    }
-    
     @objc func backButton() {
         self.navigationController?.popViewController(animated: true)
     }

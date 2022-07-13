@@ -46,11 +46,12 @@ class SCSellerPublishProductViewController: UIViewController {
     var makeHeaderImageView: UIImageView {
         let imageName = "exampleProductCardImage.png"
         let image = UIImage(named: imageName)
-        let imageView = UIImageView(image: image!)
+        let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.frame = CGRect(x: 0,y: 0,width: 360, height: 300)
         return imageView
-    };
+
+    }
     
     lazy var publishButton: SCButton = SCButton(style: .primary, size: .normal, type: .defaultButton, title: "Terbitkan")
     
@@ -71,11 +72,12 @@ class SCSellerPublishProductViewController: UIViewController {
         scrollView.bringSubviewToFront(formStack)
         formStack.bringSubviewToFront(makeHeaderImageView)
         scrollView.contentSize = CGSize(width: screenWidth, height: screenHeight)
+        makeHeaderImageView.contentMode = .scaleToFill
+        makeHeaderImageView.frame = CGRect(x: 0,y: 0,width: 390, height: 300)
+        makeHeaderImageView.isUserInteractionEnabled = false
         
         scrollView.addSubview(publishButton)
         formStack.bringSubviewToFront(publishButton)
-        
-    
         
         productCard.productImage.isHidden = true
         sellerCard.editButton.isHidden = true
@@ -98,6 +100,11 @@ class SCSellerPublishProductViewController: UIViewController {
             publishButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
         
+    }
+    
+    func setImage(_ image: UIImage) {
+        
+        makeHeaderImageView.image = image
     }
     
     @objc func backButton() {

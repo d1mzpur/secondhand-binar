@@ -22,6 +22,8 @@ class SCSellerUploadViewController: UIViewController {
         self.tabBarController?.tabBar.isHidden = false
     }
     
+    var image: UIImage = UIImage()
+    
     lazy var formProductName: SCFormItem = SCFormItem( formType: .normal, formName: "Nama Produk", placeholder: "Nama Produk")
     
     lazy var formProductPrice: SCFormItem = SCFormItem(formType: .normal, formName: "Harga Produk", placeholder: "Rp.0.00")
@@ -32,7 +34,7 @@ class SCSellerUploadViewController: UIViewController {
     
     lazy var labelImagePicker: SCLabel = SCLabel(weight: .regular, size: 14)
     
-    lazy var imagePickerProduct: SCImagePicker = SCImagePicker(delegate: self, style: .style2, completionHandler: { (image) in print("image:", image)})
+    lazy var imagePickerProduct: SCImagePicker = SCImagePicker(delegate: self, style: .style2, completionHandler: { (image) in self.image = image})
     
     lazy var previewButton: SCButton = SCButton(style: .secondary, size: .normal, type: .defaultButton, title: "Preview")
     
@@ -128,5 +130,7 @@ class SCSellerUploadViewController: UIViewController {
         tabBar.productCard.productPrice.text = ("Rp " + formProductPrice.text)
         tabBar.productCard.productCategory.text = formCategory.text
         tabBar.descCard.descLabel.text = formDescription.text
+        tabBar.makeHeaderImageView.image = imagePickerProduct.pickerIcon.image!
+        tabBar.setImage(imagePickerProduct.pickerIcon.image!)
     }
 }

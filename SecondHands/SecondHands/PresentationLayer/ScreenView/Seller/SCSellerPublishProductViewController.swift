@@ -43,15 +43,14 @@ class SCSellerPublishProductViewController: UIViewController {
         return stack
     }()
     
-    var makeHeaderImageView: UIImageView {
+    lazy var makeHeaderImageView: UIImageView = {
         let imageName = "exampleProductCardImage.png"
         let image = UIImage(named: imageName)
-        let imageView = UIImageView()
+        let imageView = UIImageView(image: image)
         imageView.contentMode = .scaleAspectFill
         imageView.frame = CGRect(x: 0,y: 0,width: 360, height: 300)
         return imageView
-
-    }
+    }()
     
     lazy var publishButton: SCButton = SCButton(style: .primary, size: .normal, type: .defaultButton, title: "Terbitkan")
     
@@ -103,7 +102,6 @@ class SCSellerPublishProductViewController: UIViewController {
     }
     
     func setImage(_ image: UIImage) {
-        
         makeHeaderImageView.image = image
     }
     

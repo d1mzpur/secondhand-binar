@@ -10,7 +10,7 @@ import UIKit
 class SCSellerProductOfferViewController: UIViewController {
     var sellerView = SCSellerProfileView()
     var user: User = User.createData()
-    var dataProduct: [ProductItem] = ProductItem.createData()
+    var dataProduct: [ProductItem] = []
  
     lazy var offerLabel: SCLabel = SCLabel( weight: .medium, size: 14)
     lazy var sellerTableView: UITableView = UITableView()
@@ -90,7 +90,7 @@ class SCSellerProductOfferViewControllerCell: UITableViewCell{
     func fill(data:ProductItem){
 //        item.productImage
         item.productTitle.text = data.productTitle
-        item.productPrice.text = data.productPrice
+        item.productPrice.text = String(describing: data.productPrice)
     }
     
     private lazy var item: SCSellerItem = {

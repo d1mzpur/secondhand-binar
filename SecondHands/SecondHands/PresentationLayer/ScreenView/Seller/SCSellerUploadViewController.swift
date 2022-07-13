@@ -124,13 +124,13 @@ class SCSellerUploadViewController: UIViewController {
     }
     
     @objc func navigateToPreview(){
-        let tabBar = SCSellerPublishProductViewController()
-        navigationController?.pushViewController(tabBar, animated: true)
-        tabBar.productCard.productTitle.text = formProductName.text
-        tabBar.productCard.productPrice.text = ("Rp " + formProductPrice.text)
-        tabBar.productCard.productCategory.text = formCategory.text
-        tabBar.descCard.descLabel.text = formDescription.text
-        tabBar.makeHeaderImageView.image = imagePickerProduct.pickerIcon.image!
-        tabBar.setImage(imagePickerProduct.pickerIcon.image!)
+        let SCSellerPublishVC = SCSellerPublishProductViewController()
+        navigationController?.pushViewController(SCSellerPublishVC, animated: true)
+        SCSellerPublishVC.productCard.productTitle.text = formProductName.text
+        SCSellerPublishVC.productCard.productPrice.text = ("Rp " + formProductPrice.text)
+        SCSellerPublishVC.productCard.productCategory.text = formCategory.text
+        SCSellerPublishVC.descCard.descLabel.text = formDescription.text
+        SCSellerPublishVC.makeHeaderImageView.image = imagePickerProduct.pickerIcon.image!
+        SCSellerPublishVC.setImage(imagePickerProduct.pickerIcon.image!)
     }
 }

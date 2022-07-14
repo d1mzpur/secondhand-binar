@@ -48,7 +48,6 @@ class SCSellerPublishProductViewController: UIViewController {
         let image = UIImage(named: imageName)
         let imageView = UIImageView(image: image)
         imageView.contentMode = .scaleAspectFill
-        imageView.frame = CGRect(x: 0,y: 0,width: 360, height: 300)
         return imageView
     }()
     
@@ -72,7 +71,6 @@ class SCSellerPublishProductViewController: UIViewController {
         formStack.bringSubviewToFront(makeHeaderImageView)
         scrollView.contentSize = CGSize(width: screenWidth, height: screenHeight)
         makeHeaderImageView.contentMode = .scaleToFill
-        makeHeaderImageView.frame = CGRect(x: 0,y: 0,width: 390, height: 300)
         makeHeaderImageView.isUserInteractionEnabled = false
         
         scrollView.addSubview(publishButton)
@@ -83,12 +81,18 @@ class SCSellerPublishProductViewController: UIViewController {
         
         formStack.translatesAutoresizingMaskIntoConstraints = false
         publishButton.translatesAutoresizingMaskIntoConstraints = false
+        makeHeaderImageView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            formStack.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 265),
+            makeHeaderImageView.topAnchor.constraint(equalTo: view.topAnchor),
+            makeHeaderImageView.widthAnchor.constraint(equalToConstant: screenWidth),
+            makeHeaderImageView.heightAnchor.constraint(equalToConstant: 300),
+            
+            formStack.topAnchor.constraint(equalTo: makeHeaderImageView.bottomAnchor, constant: -30),
             formStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             formStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             
+
             productCard.productStack.leadingAnchor.constraint(equalTo: formStack.leadingAnchor, constant: 22),
             productCard.productStack.trailingAnchor.constraint(equalTo: formStack.trailingAnchor, constant: -20),
             productCard.productStack.heightAnchor.constraint(equalTo: productCard.heightAnchor, constant: 0),

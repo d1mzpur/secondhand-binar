@@ -106,7 +106,7 @@ class SCSellerPublishProductViewController: UIViewController {
     }
     
     @objc func navigateToHome() {
-        self.tabBarController?.selectedIndex = 0
+        self.tabBarController?.selectedIndex = 3
         self.navigationController?.popViewController(animated: false)
         
     }

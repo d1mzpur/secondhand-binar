@@ -42,7 +42,7 @@ class SCProductCardViewCollectionViewCell: UICollectionViewCell {
         cardView.productTitle.text = item.productTitle
         cardView.productCategory.text = category
         
-        cardView.productPrice.text = "\(productPrice)"
+        cardView.productPrice.text = "Rp \(productPrice)"
         cardView.clipsToBounds = true
     }
     

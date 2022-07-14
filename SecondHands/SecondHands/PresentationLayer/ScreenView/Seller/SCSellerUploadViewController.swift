@@ -120,7 +120,7 @@ class SCSellerUploadViewController: UIViewController {
     }
     */
     @objc func backButton() {
-        self.tabBarController?.selectedIndex = 0
+        self.tabBarController?.selectedIndex = 3
     }
     
     @objc func navigateToPreview(){

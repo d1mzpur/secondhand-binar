@@ -23,6 +23,7 @@
 		01B18BA22860447000A09AD8 /* SCTextfieldWithPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B18BA12860447000A09AD8 /* SCTextfieldWithPickerView.swift */; };
 		01B18BA6286088C400A09AD8 /* SCHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B18BA5286088C400A09AD8 /* SCHomeViewController.swift */; };
 		01B18BA8286088D300A09AD8 /* LayoutSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B18BA7286088D300A09AD8 /* LayoutSection.swift */; };
+		01B3DC7E287FFD7900895676 /* OrderItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B3DC7D287FFD7900895676 /* OrderItem.swift */; };
 		01B999072875A5EE00F73A46 /* emptyProduct.png in Resources */ = {isa = PBXBuildFile; fileRef = 01B999062875A5EE00F73A46 /* emptyProduct.png */; };
 		01C6CA3F28586DF900F0838E /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 01C6CA3E28586DF900F0838E /* Poppins-Regular.ttf */; };
 		01C6CA4628586EAB00F0838E /* SCLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C6CA4528586EAB00F0838E /* SCLabel.swift */; };
@@ -92,6 +93,7 @@
 		01B18BA12860447000A09AD8 /* SCTextfieldWithPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCTextfieldWithPickerView.swift; sourceTree = "<group>"; };
 		01B18BA5286088C400A09AD8 /* SCHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SCHomeViewController.swift; sourceTree = "<group>"; };
 		01B18BA7286088D300A09AD8 /* LayoutSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutSection.swift; sourceTree = "<group>"; };
+		01B3DC7D287FFD7900895676 /* OrderItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderItem.swift; sourceTree = "<group>"; };
 		01B999062875A5EE00F73A46 /* emptyProduct.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emptyProduct.png; sourceTree = "<group>"; };
 		01C6CA3E28586DF900F0838E /* Poppins-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Regular.ttf"; sourceTree = "<group>"; };
 		01C6CA4528586EAB00F0838E /* SCLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCLabel.swift; sourceTree = "<group>"; };
@@ -126,8 +128,8 @@
 		0AD38191287DCC2500C65B9A /* SCSellerProductTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SCSellerProductTableView.swift; sourceTree = "<group>"; };
 		0AD38192287DCC2500C65B9A /* SCSellerCategoryCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SCSellerCategoryCollectionView.swift; sourceTree = "<group>"; };
 		0AD38193287DCC2500C65B9A /* SCSellerProductCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SCSellerProductCollectionView.swift; sourceTree = "<group>"; };
-		0AD381B8287DD77D00C65B9A /* ProductItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProductItem.swift; path = SecondHands/DataLayer/Api/Services/Entity/ProductItem.swift; sourceTree = SOURCE_ROOT; };
-		0AD381B9287DD77E00C65B9A /* OfferItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OfferItem.swift; path = SecondHands/DataLayer/Api/Services/Entity/OfferItem.swift; sourceTree = SOURCE_ROOT; };
+		0AD381B8287DD77D00C65B9A /* ProductItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProductItem.swift; path = SecondHands/DataLayer/Entity/ProductItem.swift; sourceTree = SOURCE_ROOT; };
+		0AD381B9287DD77E00C65B9A /* OfferItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OfferItem.swift; path = SecondHands/DataLayer/Entity/OfferItem.swift; sourceTree = SOURCE_ROOT; };
 		0AD381BE287DD7AC00C65B9A /* SCHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCHomeViewController.swift; path = SecondHands/PresentationLayer/ScreenView/Home/SCHomeViewController.swift; sourceTree = SOURCE_ROOT; };
 		0AF723D4285FA9FA00C0F146 /* SCSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCSearchBar.swift; sourceTree = "<group>"; };
 		22062A7E286E071100047AB5 /* SCNotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCNotificationViewController.swift; sourceTree = "<group>"; };
@@ -192,6 +194,16 @@
 				0A68049F2860802600EF2577 /* SCAccountViewController.swift */,
 			);
 			path = Account;
+			sourceTree = "<group>";
+		};
+		01B3DC7C287FFD5700895676 /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				0AD381B9287DD77E00C65B9A /* OfferItem.swift */,
+				0AD381B8287DD77D00C65B9A /* ProductItem.swift */,
+				01B3DC7D287FFD7900895676 /* OrderItem.swift */,
+			);
+			path = Entity;
 			sourceTree = "<group>";
 		};
 		01C6CA4228586E7B00F0838E /* ComponentView */ = {
@@ -371,7 +383,7 @@
 		0A9E1D1328579B9400D864A4 /* DataLayer */ = {
 			isa = PBXGroup;
 			children = (
-				0AC61BFE285C4E7E00586870 /* Entity */,
+				01B3DC7C287FFD5700895676 /* Entity */,
 				0A9842C3286E9CB20000D491 /* Api */,
 			);
 			path = DataLayer;
@@ -417,15 +429,6 @@
 				0AC61C04285C4F2800586870 /* SCProductCardViewCollectionViewCell.swift */,
 			);
 			path = Cell;
-			sourceTree = "<group>";
-		};
-		0AC61BFE285C4E7E00586870 /* Entity */ = {
-			isa = PBXGroup;
-			children = (
-				0AD381B9287DD77E00C65B9A /* OfferItem.swift */,
-				0AD381B8287DD77D00C65B9A /* ProductItem.swift */,
-			);
-			path = Entity;
 			sourceTree = "<group>";
 		};
 		0AD6AD35285FEE320065DFE0 /* Layout */ = {
@@ -626,6 +629,7 @@
 				0AC61C08285C4FDD00586870 /* SCCategoryChipCollectionViewCell.swift in Sources */,
 				0A9E1CFE28579B5F00D864A4 /* SceneDelegate.swift in Sources */,
 				01B18BA22860447000A09AD8 /* SCTextfieldWithPickerView.swift in Sources */,
+				01B3DC7E287FFD7900895676 /* OrderItem.swift in Sources */,
 				0AD055AD28582DBA000CDA44 /* UIImageView+Extension.swift in Sources */,
 				0A9842C6286E9CF30000D491 /* URLComponentsBuilder.swift in Sources */,
 				0A9842CE286EA18D0000D491 /* NetworkServices.swift in Sources */,

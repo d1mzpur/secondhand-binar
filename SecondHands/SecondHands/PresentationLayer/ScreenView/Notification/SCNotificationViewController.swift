@@ -8,75 +8,65 @@
 import UIKit
 
 class SCNotificationViewController: UIViewController {
-    var user: User = User.createData()
-    var dataProduct: [ProductItem] = []
-    var selectedCategoryIndex: Int = -1
-    
-    lazy var registerLabel: SCLabel = SCLabel( weight: .bold, size: 24)
-    
+    lazy var titleLabel: SCLabel = SCLabel( weight: .bold, size: 24)
     var NotificationTableView: UITableView = UITableView()
-    
-    
+    var service = NetworkServices()
+    var dataProduct: [NotifItem] = []{
+        didSet{
+            NotificationTableView.reloadData()
+        }
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.isHidden = true
     }
     
+    func getNotif() {
+        service.getNotif(){ [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let itemResults):
+                DispatchQueue.main.async {
+                    self.dataProduct = itemResults
+                }
+                
+            case .failure(let error):
+                print("Error: ",error.localizedDescription)
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        configureView()
-//        view.addSubview(NotificationCollection)
-//        setupCollection()
-        view.addSubview(registerLabel)
-        registerLabel.text = "Notifikasi"
-        registerLabel.textColor = .black
-        registerLabel.translatesAutoresizingMaskIntoConstraints = false
-        
+        view.addSubview(titleLabel)
+        titleLabel.text = "Notifikasi"
+        titleLabel.textColor = .black
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(NotificationTableView)
-        
         setupTableView()
         setupConstraint()
-        
+        getNotif()
         
     }
-    
-//    private func setupCollection() {
-//        NotificationCollection.delegate = self
-//        NotificationCollection.dataSource = self
-//        NotificationCollection.register(SCAddProductCollectionViewCell.self, forCellWithReuseIdentifier: "addProdcut")
-//        NotificationCollection.register(SCProductCardViewCollectionViewCell.self, forCellWithReuseIdentifier: "sellerProduct")
-//    }
     
     private func setupTableView() {
         NotificationTableView.delegate = self
         NotificationTableView.dataSource = self
-//        NotificationCollection.register(SCAddProductCollectionViewCell.self, forCellWithReuseIdentifier: "addProdcut")
         NotificationTableView.register(SCNotificationItemTableView.self, forCellReuseIdentifier: "NotificationProductList")
     }
     
-    private func configureView() {
-//        NotificationCollection.collectionViewLayout = LayoutSection.createSellerProduct()
-//        NotificationCollection.backgroundColor = .white
-//        NotificationCollection.showsVerticalScrollIndicato
-    }
     
     private func setupConstraint() {
         NotificationTableView.translatesAutoresizingMaskIntoConstraints = false
-//        NotificationCollection.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-        
-            registerLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
-            registerLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant: 20),
-            registerLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant: -20),
-//            NotificationCollection.topAnchor.constraint(equalTo: sellerView.bottomAnchor, constant: 8),
-//            NotificationCollection.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-//            NotificationCollection.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-//            NotificationCollection.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant: 20),
+            titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant: -20),
             
-            NotificationTableView.topAnchor.constraint(equalTo: registerLabel.topAnchor, constant: 44),
+            NotificationTableView.topAnchor.constraint(equalTo: titleLabel.topAnchor, constant: 44),
             NotificationTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             NotificationTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             NotificationTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
@@ -104,16 +94,18 @@ extension SCNotificationViewController: UITableViewDelegate, UITableViewDataSour
 }
 
 class SCNotificationItemTableView: UITableViewCell{
-    func fill(data:ProductItem){
-//        item.productImage
-        item.productTitle.text = data.productTitle
-        item.productPrice.text = String(describing: data.productPrice)
+    func fill(data:NotifItem){
+        item.productImage.loadImage(resource: data.product?.imageURL)
+        item.productTitle.text = data.productName
+        item.productPrice.text = "Rp "+String(describing: data.basePrice)
+        item.productOfferPrice.text = data.bidPrice != nil ? "Ditawar Rp "+String(describing: data.bidPrice!) : ""
     }
     
     private lazy var item: SCSellerItem = SCSellerItem()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        self.selectionStyle = .none
         addSubview(item)
         item.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([

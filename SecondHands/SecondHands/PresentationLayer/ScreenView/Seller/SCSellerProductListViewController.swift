@@ -10,9 +10,20 @@ import UIKit
 class SCSellerProductListViewController: UIViewController {
     var sellerView = SCSellerProfileView()
     var user: User = User.createData()
-    var dataProduct: [ProductItem] = []
+    var dataProduct: [ProductItem] = []{
+        didSet{
+            sellerCollection.dataProduct = dataProduct
+            sellerCollection.reloadData()
+        }
+    }
+    var dataOrderProduct: [OrderItem] = []{
+        didSet{
+            sellerTableView.dataProduct = dataOrderProduct
+            sellerTableView.reloadData()
+        }
+    }
     var categoryTitleArray: [String] = ["Produk","Diminati","Terjual"]
-    
+    var service = NetworkServices()
     
     var selectedCategory: String = "Produk"
     lazy var textTitle: UILabel = {
@@ -24,12 +35,41 @@ class SCSellerProductListViewController: UIViewController {
     }()
     
     lazy var sellerCategory: SCSellerCategoryCollectionView = SCSellerCategoryCollectionView(viewController: self, categoryTitleArray: categoryTitleArray)
-    lazy var sellerCollection: SCSellerProductCollectionView = SCSellerProductCollectionView(dataProduct: dataProduct)
-    lazy var sellerTableView: SCSellerProductTableView = SCSellerProductTableView(dataProduct: dataProduct)
+    lazy var sellerCollection: SCSellerProductCollectionView = SCSellerProductCollectionView(viewController: self)
+    lazy var sellerTableView: SCSellerProductTableView = SCSellerProductTableView()
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.isHidden = true
+    }
+    
+    func getProduct() {
+        service.getProduct(by: .seller) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let itemResults):
+                DispatchQueue.main.async {
+                    self.dataProduct = itemResults
+                }
+                
+            case .failure(let error):
+                print("Error: ",error.localizedDescription)
+            }
+        }
+    }
+    
+    func getOrder() {
+        service.getOrder(status: .pending) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let itemResults):
+                DispatchQueue.main.async {
+                    self.dataOrderProduct = itemResults
+                }
+            case .failure(let error):
+                print("Error: ",error.localizedDescription)
+            }
+        }
     }
     
     override func viewDidLoad() {
@@ -57,6 +97,8 @@ class SCSellerProductListViewController: UIViewController {
             break;
         }
         setupConstraint()
+        getProduct()
+        getOrder()
     }
 
     

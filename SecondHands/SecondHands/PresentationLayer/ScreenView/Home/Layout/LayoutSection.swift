@@ -87,7 +87,7 @@ extension LayoutSection {
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [itemCategory])
         let section = NSCollectionLayoutSection(group: group)
         //        section.contentInsets.leading = 16
-        //        section.interGroupSpacing = 16
+                section.interGroupSpacing = 16
         return section
     }
     

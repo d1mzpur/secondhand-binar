@@ -10,10 +10,11 @@ import UIKit
 
 class SCSellerProductCollectionView: UICollectionView,UICollectionViewDelegate, UICollectionViewDataSource{
     var dataProduct: [ProductItem] = []
+    var viewController: SCSellerProductListViewController = SCSellerProductListViewController()
     
-    init(dataProduct: [ProductItem]){
-        super.init(frame: .zero, collectionViewLayout: UICollectionViewLayout())
-        self.dataProduct = dataProduct
+    init(viewController: SCSellerProductListViewController = SCSellerProductListViewController()){
+        super.init( frame: .zero, collectionViewLayout: UICollectionViewLayout())
+        self.viewController = viewController
         self.delegate = self
         self.dataSource = self
         self.register(SCAddProductCollectionViewCell.self, forCellWithReuseIdentifier: "addProdcut")
@@ -34,6 +35,8 @@ class SCSellerProductCollectionView: UICollectionView,UICollectionViewDelegate, 
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let addProductCell = collectionView.dequeueReusableCell(withReuseIdentifier: "addProdcut", for: indexPath) as! SCAddProductCollectionViewCell
+        addProductCell.addAction(#selector(navigateToSellerUpload), target: self)
+
         let productCell = collectionView.dequeueReusableCell(withReuseIdentifier: "sellerProduct", for: indexPath) as! SCProductCardViewCollectionViewCell
         let item = indexPath.item
         
@@ -49,5 +52,9 @@ class SCSellerProductCollectionView: UICollectionView,UICollectionViewDelegate, 
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let _ = collectionView.cellForItem(at: indexPath) as? SCProductCardViewCollectionViewCell else { return }
+    }
+    
+    @objc func navigateToSellerUpload(){
+        viewController.tabBarController?.selectedIndex = 2
     }
 }

@@ -22,6 +22,8 @@ class SCSellerUploadViewController: UIViewController {
         self.tabBarController?.tabBar.isHidden = false
     }
     
+    var image: UIImage = UIImage()
+    
     lazy var formProductName: SCFormItem = SCFormItem( formType: .normal, formName: "Nama Produk", placeholder: "Nama Produk")
     
     lazy var formProductPrice: SCFormItem = SCFormItem(formType: .normal, formName: "Harga Produk", placeholder: "Rp.0.00")
@@ -32,7 +34,7 @@ class SCSellerUploadViewController: UIViewController {
     
     lazy var labelImagePicker: SCLabel = SCLabel(weight: .regular, size: 14)
     
-    lazy var imagePickerProduct: SCImagePicker = SCImagePicker(delegate: self, style: .style2, completionHandler: { (image) in print("image:", image)})
+    lazy var imagePickerProduct: SCImagePicker = SCImagePicker(delegate: self, style: .style2, completionHandler: { (image) in self.image = image})
     
     lazy var previewButton: SCButton = SCButton(style: .secondary, size: .normal, type: .defaultButton, title: "Preview")
     
@@ -118,15 +120,16 @@ class SCSellerUploadViewController: UIViewController {
     }
     */
     @objc func backButton() {
-        self.tabBarController?.selectedIndex = 0
+        self.tabBarController?.selectedIndex = 3
     }
     
     @objc func navigateToPreview(){
-        let tabBar = SCSellerPublishProductViewController()
-        navigationController?.pushViewController(tabBar, animated: true)
-        tabBar.productCard.productTitle.text = formProductName.text
-        tabBar.productCard.productPrice.text = ("Rp " + formProductPrice.text)
-        tabBar.productCard.productCategory.text = formCategory.text
-        tabBar.descCard.descLabel.text = formDescription.text
+        let SCSellerPublishVC = SCSellerPublishProductViewController()
+        navigationController?.pushViewController(SCSellerPublishVC, animated: true)
+        SCSellerPublishVC.productCard.productTitle.text = formProductName.text
+        SCSellerPublishVC.productCard.productPrice.text = ("Rp " + formProductPrice.text)
+        SCSellerPublishVC.productCard.productCategory.text = formCategory.text
+        SCSellerPublishVC.descCard.descLabel.text = formDescription.text
+        SCSellerPublishVC.makeHeaderImageView.image = imagePickerProduct.pickerIcon.image!
     }
 }

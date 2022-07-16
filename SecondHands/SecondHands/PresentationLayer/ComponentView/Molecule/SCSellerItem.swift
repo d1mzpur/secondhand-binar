@@ -25,7 +25,7 @@ class SCSellerItem: UIView {
     lazy var productLabel: SCLabel = {
         var lbl = SCLabel()
         lbl.text = "Penawaran produk"
-        lbl.textColor = .Neutral02
+        lbl.textColor = .Neutral03
         lbl.size = 10
         lbl.translatesAutoresizingMaskIntoConstraints = false
         return lbl
@@ -49,7 +49,7 @@ class SCSellerItem: UIView {
         return lbl
     }()
     
-    lazy var discountProduct: SCLabel = {
+    lazy var productOfferPrice: SCLabel = {
         var lbl = SCLabel()
         lbl.text = "Ditawar Rp 200.000"
         lbl.textColor = .Neutral05
@@ -76,7 +76,7 @@ class SCSellerItem: UIView {
             productLabel,
             productTitle,
             productPrice,
-            discountProduct,
+            productOfferPrice,
             UIView()
         ])
         stackView.setCustomSpacing(4.0, after: productLabel)
@@ -105,13 +105,13 @@ class SCSellerItem: UIView {
     }
     
     
-    init(frame: CGRect = CGRect.zero, productImageURL: String, productLabel: String, productTitle: String, productPrice: String, discountProduct: String) {
+    init(frame: CGRect = CGRect.zero, productImageURL: String, productLabel: String, productTitle: String, productPrice: String, productOfferPrice: String) {
         super.init(frame: frame)
         self.productImage.loadImage(resource: productImageURL)
         self.productLabel.text = productLabel
         self.productTitle.text = productTitle
         self.productPrice.text = productPrice
-        self.discountProduct.text = discountProduct
+        self.productOfferPrice.text = productOfferPrice
         setup()
     }
     

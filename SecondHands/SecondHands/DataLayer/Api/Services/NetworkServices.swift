@@ -27,6 +27,12 @@ enum ItemEndpoint: String {
     case banner = "/banner"
 }
 
+enum OrderStatus: String {
+    case pending = "pending"
+    case accepted = "accepted"
+    case declined = "declined"
+}
+
 class NetworkServices {
 //    /buyer/product
     let baseUrl = "https://market-final-project.herokuapp.com"
@@ -151,10 +157,12 @@ class NetworkServices {
             .path("/product")
             .buildUrl()
         else { return }
-        let urlRequest = URLRequestBuilder(url: urlcomponents)
+        var urlRequest = URLRequestBuilder(url: urlcomponents)
             .httpMethod(.GET)
             .build()
-//        print(urlRequest.url)
+        if(user == .seller){
+            urlRequest.setValue("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5kb2VAbWFpbC5jb20iLCJpYXQiOjE2NTQ5MjcxODZ9.fghFryd8OPEHztZlrN50PtZj0EC7NWFVj2iPPN9xi1M", forHTTPHeaderField: "access_token")
+        }
         let jsonDecoder = JSONDecoder()
         URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
             guard let data = data else { return }
@@ -164,6 +172,40 @@ class NetworkServices {
             
             do {
                 let session = try jsonDecoder.decode([ProductItem].self, from: data)
+                DispatchQueue.main.async {
+                    completion(.success(session))
+                }
+                
+            } catch let error {
+                completion(.failure(error))
+            }
+        }.resume()
+        
+    }
+    
+    func getOrder(status: OrderStatus, completion: @escaping(Result<[OrderItem], Error>) -> Void) {
+        let endPoint = self.baseUrl
+        
+        guard let urlcomponents = URLComponentsBuilder(baseURL: endPoint)
+            .path("/seller")
+            .path("/order")
+            .addQuery(key: "status", value: status.rawValue)
+            .buildUrl()
+        else { return }
+        var urlRequest = URLRequestBuilder(url: urlcomponents)
+            .httpMethod(.GET)
+            .build()
+            urlRequest.setValue("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5kb2VAbWFpbC5jb20iLCJpYXQiOjE2NTQ5MjcxODZ9.fghFryd8OPEHztZlrN50PtZj0EC7NWFVj2iPPN9xi1M", forHTTPHeaderField: "access_token")
+        
+        let jsonDecoder = JSONDecoder()
+        URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
+            guard let data = data else { return }
+            if let error = error {
+                print(error.localizedDescription)
+            }
+            
+            do {
+                let session = try jsonDecoder.decode([OrderItem].self, from: data)
                 DispatchQueue.main.async {
                     completion(.success(session))
                 }

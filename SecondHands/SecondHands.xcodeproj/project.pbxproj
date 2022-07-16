@@ -33,6 +33,7 @@
 		01D01326286D88870001CD7F /* SCSellerProductListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D01325286D88870001CD7F /* SCSellerProductListViewController.swift */; };
 		01D5118F287EDCCF00A60353 /* SCSellerProductOfferViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D5118E287EDCCF00A60353 /* SCSellerProductOfferViewController.swift */; };
 		0A17E99C285C6A0900B59262 /* SCBannerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A17E99B285C6A0900B59262 /* SCBannerCollectionViewCell.swift */; };
+		0A4A98C7287F1B910081379B /* UserLoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4A98C6287F1B910081379B /* UserLoginModel.swift */; };
 		0A507520286AB62600CF1912 /* SCSellerProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A50751F286AB62600CF1912 /* SCSellerProfileView.swift */; };
 		0A646D632864A79100160074 /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A646D622864A79100160074 /* Array+Extension.swift */; };
 		0A659650285CD08E006346F1 /* SCNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A65964F285CD08E006346F1 /* SCNotification.swift */; };
@@ -105,6 +106,7 @@
 		01D5118E287EDCCF00A60353 /* SCSellerProductOfferViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCSellerProductOfferViewController.swift; sourceTree = "<group>"; };
 		04E43696090E9B696D55119A /* Pods-SecondHands.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SecondHands.release.xcconfig"; path = "Target Support Files/Pods-SecondHands/Pods-SecondHands.release.xcconfig"; sourceTree = "<group>"; };
 		0A17E99B285C6A0900B59262 /* SCBannerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCBannerCollectionViewCell.swift; sourceTree = "<group>"; };
+		0A4A98C6287F1B910081379B /* UserLoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UserLoginModel.swift; path = SecondHands/DataLayer/Api/Services/Entity/UserLoginModel.swift; sourceTree = SOURCE_ROOT; };
 		0A50751F286AB62600CF1912 /* SCSellerProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCSellerProfileView.swift; sourceTree = "<group>"; };
 		0A646D622864A79100160074 /* Array+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
 		0A65964F285CD08E006346F1 /* SCNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCNotification.swift; sourceTree = "<group>"; };
@@ -434,6 +436,16 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		0AC61BFE285C4E7E00586870 /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				0AD381B9287DD77E00C65B9A /* OfferItem.swift */,
+				0AD381B8287DD77D00C65B9A /* ProductItem.swift */,
+				0A4A98C6287F1B910081379B /* UserLoginModel.swift */,
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
 		0AD6AD35285FEE320065DFE0 /* Layout */ = {
 			isa = PBXGroup;
 			children = (
@@ -640,6 +652,7 @@
 				0AD381BB287DD77E00C65B9A /* OfferItem.swift in Sources */,
 				0AD381BA287DD77E00C65B9A /* ProductItem.swift in Sources */,
 				0A6804AC286081B100EF2577 /* UIColor+Extension.swift in Sources */,
+				0A4A98C7287F1B910081379B /* UserLoginModel.swift in Sources */,
 				72FDA16A2869BAF200CD275E /* SCModalContactsViewController.swift in Sources */,
 				01B18BA6286088C400A09AD8 /* SCHomeViewController.swift in Sources */,
 				016F1C562861E696007A1ADE /* SCAccountTableViewCell.swift in Sources */,

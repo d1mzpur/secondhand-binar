@@ -37,6 +37,51 @@ class NetworkServices {
 //    /buyer/product
     let baseUrl = "https://market-final-project.herokuapp.com"
     
+    func authLogin(email: String, password: String, completion: @escaping (Result<UserLoginModel, Error>) -> Void) {
+        let endPoint = self.baseUrl
+        
+        let bodyData = """
+        {
+            "email" : "\(email)",
+            "password" : "\(password)"
+        }
+        """.data(using: String.Encoding.utf8)!
+//        print(bodyData.data(using: String.Encoding.utf8)!)
+        guard let urlComponents = URLComponentsBuilder(baseURL: endPoint)
+                .path("/auth")
+                .path("/login")
+                .buildUrl()
+        else { return }
+        
+        let urlRequest = URLRequestBuilder(url: urlComponents)
+            .httpMethod(.POST)
+//            .addHeader(key: <#T##String#>, value: "content-type")
+            .addBody(data: bodyData)
+            .build()
+        
+        URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
+            let repson = response as? HTTPURLResponse
+            
+            guard let data = data else { return }
+            if let error = error {
+                print(error.localizedDescription)
+            }
+            
+            let jsonDecoder = JSONDecoder()
+            do {
+                let jsonSerial = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
+                print("jSON serial" , jsonSerial)
+                let session = try jsonDecoder.decode(UserLoginModel.self, from: data)
+                DispatchQueue.main.async {
+                    completion(.success(session))
+                }
+                
+            } catch let error {
+                completion(.failure(error))
+            }
+        }.resume()
+    }
+    
     func getBanner(completion: @escaping(Result<[OfferItem], Error>) -> Void) {
         let endPoint = self.baseUrl
         

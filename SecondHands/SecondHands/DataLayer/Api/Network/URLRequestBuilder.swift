@@ -25,5 +25,15 @@ class URLRequestBuilder {
         return self
     }
     
+//    func addBody() -> URLRequestBuilder {
+//        request.httpBody = Data(base64Encoded: "application/json")
+//        return self
+//    }
+    
+    func addBody(data: Data) -> URLRequestBuilder {
+        request.httpBody = data
+        return self
+    }
+    
     func build() -> URLRequest { return request }
 }

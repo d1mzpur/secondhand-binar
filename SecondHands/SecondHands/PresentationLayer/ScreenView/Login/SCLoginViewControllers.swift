@@ -8,7 +8,7 @@
 import UIKit
 
 class SCLoginViewControllers: UIViewController {
-    
+    let userDefault = UserDefaults.standard
     override func viewWillAppear(_ animated: Bool) {
         self.tabBarController?.tabBar.isHidden = true
         self.navigationController?.navigationBar.barTintColor = .white
@@ -57,8 +57,20 @@ class SCLoginViewControllers: UIViewController {
     }()
     
     @objc func navigateToHome(){
-        let tabBar = SCTabBar()
-        navigationController?.pushViewController(tabBar, animated: true)
+        NetworkServices().authLogin(email: formEmail.text, password: formPassword.text) { (result) in
+            switch result {
+            case .success(let success):
+                if let accessToken = success.accessToken {
+//                    self.userDefault.setValue(accessToken, forKey: "accessToken")
+                    let vc = SCTabBar()
+                    self.navigationController?.pushViewController(vc, animated: true)
+                }
+                print(success)
+            case .failure(let error):
+                print("==>> Login Fail")
+            }
+        }
+        
     }
     
     @objc func navigateToRegister(){
@@ -75,6 +87,7 @@ class SCLoginViewControllers: UIViewController {
         loginLabel.text = "Belum punya akun?"
         loginButton.addTarget(self, action: #selector(navigateToHome), for: .touchUpInside )
         registerButton.addTarget(self, action: #selector(navigateToRegister), for: .touchUpInside )
+        
         
         view.addSubview(formStack)
         view.addSubview(loginLabelStack)

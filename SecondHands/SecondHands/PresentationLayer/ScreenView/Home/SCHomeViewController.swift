@@ -285,8 +285,8 @@ extension SCHomeViewController {
         var offset = scrollView.contentOffset.y / 150
         if offset > -0.5 {
             offset = 1
-            self.navigationController?.navigationBar.barTintColor = UIColor(hue: 1, saturation: offset, brightness: 1, alpha: 0)
-            self.navigationController?.navigationBar.backgroundColor = .LimeGreen03
+//            self.navigationController?.navigationBar.barTintColor = .LimeGreen03
+//            self.navigationController?.navigationBar.backgroundColor = .LimeGreen03
         } else {
             self.navigationController?.navigationBar.barTintColor = .white
         }

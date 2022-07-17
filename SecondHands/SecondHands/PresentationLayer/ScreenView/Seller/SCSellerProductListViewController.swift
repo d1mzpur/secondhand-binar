@@ -10,6 +10,8 @@ import UIKit
 class SCSellerProductListViewController: UIViewController {
     var sellerView = SCSellerProfileView()
     var user: User = User.createData()
+    var categoryTitleArray: [String] = ["Produk","Diminati","Terjual"]
+    var service = NetworkServices()
     var dataProduct: [ProductItem] = []{
         didSet{
             sellerCollection.dataProduct = dataProduct
@@ -22,8 +24,7 @@ class SCSellerProductListViewController: UIViewController {
             sellerTableView.reloadData()
         }
     }
-    var categoryTitleArray: [String] = ["Produk","Diminati","Terjual"]
-    var service = NetworkServices()
+
     
     var selectedCategory: String = "Produk"
     lazy var textTitle: UILabel = {
@@ -58,8 +59,8 @@ class SCSellerProductListViewController: UIViewController {
         }
     }
     
-    func getOrder() {
-        service.getOrder(status: .pending) { [weak self] result in
+    func getOrder(status: OrderStatus) {
+        service.getOrder(status: status) { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let itemResults):
@@ -86,19 +87,24 @@ class SCSellerProductListViewController: UIViewController {
         case "Produk":
             view.addSubview(sellerCollection)
             setupCollection()
+            getProduct()
             break;
         case "Diminati":
             view.addSubview(sellerTableView)
             setupTableView()
+            getOrder(status: .pending)
             break;
         case "Terjual":
+            view.addSubview(sellerTableView)
+            setupTableView()
+            getOrder(status: .accepted)
             break;
         default:
             break;
         }
         setupConstraint()
-        getProduct()
-        getOrder()
+        
+        
     }
 
     

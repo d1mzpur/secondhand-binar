@@ -59,6 +59,7 @@ class SCTextfield: UITextField {
     }
     
     public func setForPasswordTextfield() {
+        isSecureTextEntry = true
         clearButtonMode = .never
         let button = UIButton(frame: CGRect(x: 0, y: 0, width: 24, height: 24))
         button.setImage(UIImage(systemName: "eye"), for: .normal)

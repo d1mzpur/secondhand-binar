@@ -83,6 +83,7 @@ class SCSellerProductListViewController: UIViewController {
   
         sellerCollection.removeFromSuperview()
         sellerTableView.removeFromSuperview()
+//        let indexPath = IndexPath(item: 0, section: 0)
         switch( selectedCategory ){
         case "Produk":
             view.addSubview(sellerCollection)
@@ -92,11 +93,17 @@ class SCSellerProductListViewController: UIViewController {
         case "Diminati":
             view.addSubview(sellerTableView)
             setupTableView()
+//            if let cellLabel = (sellerTableView.cellForRow(at: indexPath) as? SCSellerEmptyItemTableView)?.productLabel{
+//                cellLabel.text = "Belum ada produkmu yang diminati nih, sabar ya rejeki nggak kemana kok"
+//            }
             getOrder(status: .pending)
             break;
         case "Terjual":
             view.addSubview(sellerTableView)
             setupTableView()
+//            if let cellLabel = (sellerTableView.cellForRow(at: indexPath) as? SCSellerEmptyItemTableView)?.productLabel{
+//                cellLabel.text = "Belum ada produkmu yang terjual nih, sabar ya rejeki nggak kemana kok"
+//            }
             getOrder(status: .accepted)
             break;
         default:

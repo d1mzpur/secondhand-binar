@@ -36,7 +36,10 @@ enum OrderStatus: String {
 class NetworkServices {
 //    /buyer/product
     let baseUrl = "https://market-final-project.herokuapp.com"
-    
+    let userDefaults = UserDefaults.standard
+    func getAccessToken() -> String {
+        return userDefaults.string(forKey: "accessToken") ?? ""
+    }
     func authLogin(email: String, password: String, completion: @escaping (Result<UserLoginModel, Error>) -> Void) {
         let endPoint = self.baseUrl
         
@@ -60,7 +63,7 @@ class NetworkServices {
             .build()
         
         URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
-            let repson = response as? HTTPURLResponse
+            let respon = response as? HTTPURLResponse
             
             guard let data = data else { return }
             if let error = error {
@@ -161,7 +164,7 @@ class NetworkServices {
             .httpMethod(.GET)
             .build()
         if(user == .seller){
-            urlRequest.setValue("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5kb2VAbWFpbC5jb20iLCJpYXQiOjE2NTQ5MjcxODZ9.fghFryd8OPEHztZlrN50PtZj0EC7NWFVj2iPPN9xi1M", forHTTPHeaderField: "access_token")
+            urlRequest.setValue(getAccessToken(), forHTTPHeaderField: "access_token")
         }
         let jsonDecoder = JSONDecoder()
         URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
@@ -195,7 +198,7 @@ class NetworkServices {
         var urlRequest = URLRequestBuilder(url: urlcomponents)
             .httpMethod(.GET)
             .build()
-            urlRequest.setValue("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5kb2VAbWFpbC5jb20iLCJpYXQiOjE2NTQ5MjcxODZ9.fghFryd8OPEHztZlrN50PtZj0EC7NWFVj2iPPN9xi1M", forHTTPHeaderField: "access_token")
+            urlRequest.setValue(getAccessToken(), forHTTPHeaderField: "access_token")
         
         let jsonDecoder = JSONDecoder()
         URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
@@ -228,7 +231,7 @@ class NetworkServices {
         var urlRequest = URLRequestBuilder(url: urlcomponents)
             .httpMethod(.GET)
             .build()
-            urlRequest.setValue("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5kb2VAbWFpbC5jb20iLCJpYXQiOjE2NTQ5MjcxODZ9.fghFryd8OPEHztZlrN50PtZj0EC7NWFVj2iPPN9xi1M", forHTTPHeaderField: "access_token")
+            urlRequest.setValue(getAccessToken(), forHTTPHeaderField: "access_token")
         
         let jsonDecoder = JSONDecoder()
         URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in

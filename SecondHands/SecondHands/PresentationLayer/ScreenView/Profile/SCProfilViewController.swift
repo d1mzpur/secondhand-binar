@@ -14,7 +14,7 @@ class SCProfilViewController: UIViewController {
         self.navigationController?.navigationBar.barTintColor = .white
         let nav = self.navigationController?.navigationBar
         nav?.tintColor = UIColor.black
-        let image = UIImage(systemName: "arrow.left")
+    let image = UIImage(systemName: "arrow.left")
 //        navigationItem.leftBarButtonItem = UIBarButtonItem(image: image, style: .plain, target: self, action:  Selector(("action")))
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: image, style: .plain, target: self, action:  #selector(backButton))
     }

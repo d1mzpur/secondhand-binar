@@ -9,6 +9,7 @@ import UIKit
 
 class SCLoginViewControllers: UIViewController {
     let userDefault = UserDefaults.standard
+    
     override func viewWillAppear(_ animated: Bool) {
         self.tabBarController?.tabBar.isHidden = true
         self.navigationController?.navigationBar.barTintColor = .white
@@ -17,6 +18,10 @@ class SCLoginViewControllers: UIViewController {
         let image = UIImage(systemName: "arrow.left")
 //        navigationItem.leftBarButtonItem = UIBarButtonItem(image: image, style: .plain, target: self, action:  Selector(("action")))
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: image, style: .plain, target: self, action:  #selector(backButton))
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = false
     }
     
     lazy var registerLabel: SCLabel = SCLabel( weight: .bold, size: 24)
@@ -60,14 +65,19 @@ class SCLoginViewControllers: UIViewController {
         NetworkServices().authLogin(email: formEmail.text, password: formPassword.text) { (result) in
             switch result {
             case .success(let success):
-                if let accessToken = success.accessToken {
-//                    self.userDefault.setValue(accessToken, forKey: "accessToken")
-                    let vc = SCTabBar()
-                    self.navigationController?.pushViewController(vc, animated: true)
+                guard success.id != nil else {
+                    let alert = UIAlertController(title: "Login", message: "User Not Found", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Ok", style: .default))
+                    self.present(alert, animated: true)
+                    return
                 }
-                print(success)
+                if let accessToken = success.accessToken {
+                    self.userDefault.set(accessToken, forKey: "accessToken")
+                    self.tabBarController?.selectedIndex = 0
+                    self.tabBarController?.viewWillAppear(true)
+                }
             case .failure(let error):
-                print("==>> Login Fail")
+                print("==>> Login Fail :",error)
             }
         }
         
@@ -81,6 +91,7 @@ class SCLoginViewControllers: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        formEmail.Textfield.autocapitalizationType = .none
         view.addSubview(registerLabel)
         registerLabel.text = "Masuk"
         registerLabel.textColor = .black
@@ -115,7 +126,6 @@ class SCLoginViewControllers: UIViewController {
     
     @objc
     func backButton() {
-        self.navigationController?.popViewController(animated: true)
+        self.tabBarController?.selectedIndex = 0
     }
-    
 }

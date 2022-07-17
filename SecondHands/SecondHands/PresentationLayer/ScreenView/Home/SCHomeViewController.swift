@@ -8,6 +8,8 @@
 import SwiftUI
 
 class SCHomeViewController: UIViewController {
+    let userDefaults = UserDefaults.standard
+    var accessToken: String = ""
     var productItem: [ProductItem]?
     var offerItem: [OfferItem]?
     var category: [Categories]?
@@ -63,7 +65,7 @@ class SCHomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        accessToken = userDefaults.string(forKey: "accessToken") ?? ""
         configureView()
         setupAddView()
         

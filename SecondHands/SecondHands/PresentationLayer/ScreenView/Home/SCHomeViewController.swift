@@ -22,10 +22,9 @@ class SCHomeViewController: UIViewController {
         var searchBar = SCSearchBar()
         searchBar.layer.cornerRadius = 16
         searchBar.clipsToBounds = true
-        searchBar.height = 44
-        searchBar.margin = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: -16)
+        searchBar.height = 100
+        searchBar.margin = UIEdgeInsets(top: 8, left: 16, bottom: 10, right: 16)
         searchBar.backgroundColor = .white
-        
         return searchBar
     }()
     
@@ -37,11 +36,18 @@ class SCHomeViewController: UIViewController {
         
         var searchBar = UISearchBar(frame: frameSearchBar)
         searchBar.placeholder = "Search item"
+        searchBar.autocapitalizationType = .none
+        searchBar.autocorrectionType = .no
+        searchBar.delegate = self
+        searchBar.searchTextField.delegate = self
         return searchBar
     }()
-    
-    lazy var searchView = SCSearchBar()
-    
+    lazy var searchController: UISearchController = {
+       var searchController = UISearchController()
+        searchController.searchBar.placeholder = "Search Controller"
+        searchController.delegate = self
+        return searchController
+    }()
     let homeCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
     
     var filterListProduct: [ProductItem]? = nil
@@ -49,8 +55,9 @@ class SCHomeViewController: UIViewController {
     let gradientLayer = CAGradientLayer()
     var selectedCategoryIndex: Int = -1
     var service = NetworkServices()
+    
     override func viewWillAppear(_ animated: Bool) {
-        navigationController?.navigationBar.isHidden = true
+
         selectedCategoryIndex = 0
         deleteBackgroundTopBar()
         createSearchBar()
@@ -68,7 +75,6 @@ class SCHomeViewController: UIViewController {
         setupAddView()
         
         setupCollection()
-        createSearchBar()
         setupConstraint()
         getBanner()
         getCategory()
@@ -83,7 +89,10 @@ class SCHomeViewController: UIViewController {
         service.getBanner { result in
             switch result {
             case .success(let success):
-                self.offerItem = success
+                DispatchQueue.main.async {
+                    self.offerItem = success
+                    self.homeCollectionView.reloadData()
+                }
             case .failure(let error):
                 print(error)
             }
@@ -138,7 +147,9 @@ class SCHomeViewController: UIViewController {
     }
     
     func createSearchBar() {
-        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: customSearchBar)
+        let searchBar = UIBarButtonItem(customView: self.searchBar)
+        navigationItem.leftBarButtonItem = searchBar
+        
     }
     
     func setupConstraint() {
@@ -196,7 +207,10 @@ extension SCHomeViewController: UICollectionViewDelegate, UICollectionViewDataSo
                 let selectedCategory = self.newCategory?[cellTapByIndex.item].name
                 self.filterListProduct = self.productItem.map { $0 }?.filter { $0.productCategory!.contains { $0.name == selectedCategory } }
                 
+                print("==> SECTION RELOAD", cellTapByIndex.section)
+                
                 collectionView.reloadData()
+                
                 print("== RELOAD DATA ==")
             }
             categoryCell.configure(item: self.newCategory?[indexPath.row].name ?? "")
@@ -229,6 +243,7 @@ extension SCHomeViewController: UICollectionViewDelegate, UICollectionViewDataSo
                 filterListProduct = productItem
             }
             
+//            collectionView.reloadSections(IndexSet(integer: 2))
         case 2:
             guard let _ = homeCollectionView.cellForItem(at: indexPath) as? SCProductCardViewCollectionViewCell else { return }
         default:
@@ -248,11 +263,22 @@ extension SCHomeViewController: UICollectionViewDelegate, UICollectionViewDataSo
         return headerOfCategory
     }
     
+    func isProductEmpty() -> Int {
+        return (self.filterListProduct?.isEmpty) == true ? Int(self.productItem?.count ?? 0) : Int(self.filterListProduct?.count ?? 0)
+        
+    }
+}
+
+extension SCHomeViewController: UISearchBarDelegate, UITextFieldDelegate, UISearchControllerDelegate {
+    
+    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
+        print("clicked")
+        return true
+    }
     
 }
 
 extension SCHomeViewController {
-    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         var offset = scrollView.contentOffset.y / 150
         if offset > -0.5 {
@@ -281,12 +307,6 @@ extension UIViewController {
 }
 
 extension SCHomeViewController {
-    
-    func isProductEmpty() -> Int {
-        return (self.filterListProduct?.isEmpty) == true ? Int(self.productItem?.count ?? 0) : Int(self.filterListProduct?.count ?? 0)
-        
-    }
-    
     func deleteBackgroundTopBar() {
         
         let colorTop =  UIColor.red //your status bar color

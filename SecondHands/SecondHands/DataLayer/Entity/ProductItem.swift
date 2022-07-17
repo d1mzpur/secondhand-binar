@@ -58,16 +58,3 @@ struct ProductItem: Codable {
 //        ]
 //    }
 }
-
-
-
-struct User {
-    let imageUser: String
-    let userName: String
-    let city: String
-    
-    static func createData() -> User {
-        return User(imageUser: "productImage", userName: "Nama Penjual", city: "Kota")
-    }
-    
-}

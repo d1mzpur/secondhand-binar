@@ -82,6 +82,50 @@ class NetworkServices {
         }.resume()
     }
     
+    func authRegister(fullName: String, email: String, password: String, nav: UINavigationController, completion: @escaping (Result<UserRegister, Error>) -> Void) {
+        let endPoint = self.baseUrl
+        
+        let bodyData = """
+        {
+            "full_name" : "\(fullName)",
+            "email" : "\(email)",
+            "password" : "\(password)"
+        }
+        """.data(using: String.Encoding.utf8)!
+//        print(bodyData.data(using: String.Encoding.utf8)!)
+        guard let urlComponents = URLComponentsBuilder(baseURL: endPoint)
+                .path("/auth")
+                .path("/register")
+                .buildUrl()
+        else { return }
+        
+        let urlRequest = URLRequestBuilder(url: urlComponents)
+            .httpMethod(.POST)
+            .addBody(data: bodyData)
+            .build()
+        
+        URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
+            let _ = response as? HTTPURLResponse
+            
+            guard let data = data else { return }
+            if let error = error {
+                print(error.localizedDescription)
+            }
+            let jsonSerial = try? JSONSerialization.jsonObject(with: data, options: .allowFragments)
+            print(jsonSerial)
+            let jsonDecoder = JSONDecoder()
+            do {
+                let session = try jsonDecoder.decode(UserRegister.self, from: data)
+                DispatchQueue.main.async {
+                    completion(.success(session))
+                }
+                
+            } catch let error {
+                completion(.failure(error.localizedDescription as! Error))
+            }
+        }.resume()
+    }
+    
     func getBanner(completion: @escaping(Result<[OfferItem], Error>) -> Void) {
         let endPoint = self.baseUrl
         

@@ -32,6 +32,8 @@ class SCSearchBar: UIView {
     }()
     
     private var heightConstraint: NSLayoutConstraint?
+    private var widthConstraint: NSLayoutConstraint?
+    
     private var topConstraint: NSLayoutConstraint!
     private var bottomConstraint: NSLayoutConstraint!
     private var leadingConstraint: NSLayoutConstraint!
@@ -40,6 +42,11 @@ class SCSearchBar: UIView {
     var height: CGFloat? {
         didSet { updateHeightConstraint() }
     }
+    
+    var width: CGFloat? {
+        didSet { updateWidthConstraint() }
+    }
+    
     var margin = UIEdgeInsets(top: 4, left: 8, bottom: -4, right: -8) {
         didSet { updateMarginConstraint() }
     }
@@ -77,6 +84,18 @@ class SCSearchBar: UIView {
             heightConstraint?.isActive = true
         } else {
             heightConstraint?.constant = height
+        }
+    }
+    
+    private func updateWidthConstraint() {
+        guard let width = width else {
+            return
+        }
+        if widthConstraint == nil {
+            widthConstraint = searchBar.widthAnchor.constraint(equalToConstant: width)
+            widthConstraint?.isActive = true
+        } else {
+            widthConstraint?.constant = width
         }
     }
     

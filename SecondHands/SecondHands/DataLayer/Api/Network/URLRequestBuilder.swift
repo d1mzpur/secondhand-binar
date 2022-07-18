@@ -20,8 +20,8 @@ class URLRequestBuilder {
         return self
     }
     
-    func addHeader(key: String, value: String) -> URLRequestBuilder {
-        request.addValue(key, forHTTPHeaderField: value)
+    func addHeader(value: String, key: String) -> URLRequestBuilder {
+        request.addValue(value, forHTTPHeaderField: key)
         return self
     }
     

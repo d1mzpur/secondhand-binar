@@ -69,6 +69,7 @@ class SCTestViewController: UIViewController {
 
         @objc func presentModalController() {
             let vc = SCModalContactsViewController()
+            
             vc.modalPresentationStyle = .overCurrentContext
             
             self.present(vc, animated: false)

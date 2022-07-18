@@ -75,6 +75,8 @@
 		726047F628607B9100AB2EA7 /* SCRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 726047F528607B9100AB2EA7 /* SCRegisterViewController.swift */; };
 		729BBDB92861C61B00BAE262 /* SCSellerUploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 729BBDB82861C61B00BAE262 /* SCSellerUploadViewController.swift */; };
 		72BDD18D2858A0BF006A75A6 /* SCButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72BDD18C2858A0BF006A75A6 /* SCButton.swift */; };
+		72D71C052874454200D0C384 /* SCModalTransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D71C042874454200D0C384 /* SCModalTransactionViewController.swift */; };
+		72D71C072874522400D0C384 /* SCRadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D71C062874522400D0C384 /* SCRadioButton.swift */; };
 		72FDA1682869BA1E00CD275E /* SCTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72FDA1672869BA1E00CD275E /* SCTestViewController.swift */; };
 		72FDA16A2869BAF200CD275E /* SCModalContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72FDA1692869BAF200CD275E /* SCModalContactsViewController.swift */; };
 /* End PBXBuildFile section */
@@ -151,6 +153,8 @@
 		726047F528607B9100AB2EA7 /* SCRegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCRegisterViewController.swift; sourceTree = "<group>"; };
 		729BBDB82861C61B00BAE262 /* SCSellerUploadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCSellerUploadViewController.swift; sourceTree = "<group>"; };
 		72BDD18C2858A0BF006A75A6 /* SCButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCButton.swift; sourceTree = "<group>"; };
+		72D71C042874454200D0C384 /* SCModalTransactionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCModalTransactionViewController.swift; sourceTree = "<group>"; };
+		72D71C062874522400D0C384 /* SCRadioButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCRadioButton.swift; sourceTree = "<group>"; };
 		72FDA1672869BA1E00CD275E /* SCTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCTestViewController.swift; sourceTree = "<group>"; };
 		72FDA1692869BAF200CD275E /* SCModalContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCModalContactsViewController.swift; sourceTree = "<group>"; };
 		8E059F21AB9FE36138B7D4CF /* libPods-SecondHands.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SecondHands.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -236,6 +240,7 @@
 				22E1F75F285A30D900FA40BF /* SCTextfield.swift */,
 				225D67B2285C772700C7EAA2 /* SCTextfieldarea.swift */,
 				01B18BA12860447000A09AD8 /* SCTextfieldWithPickerView.swift */,
+				72D71C062874522400D0C384 /* SCRadioButton.swift */,
 			);
 			path = Atom;
 			sourceTree = "<group>";
@@ -500,6 +505,7 @@
 			children = (
 				72FDA1672869BA1E00CD275E /* SCTestViewController.swift */,
 				72FDA1692869BAF200CD275E /* SCModalContactsViewController.swift */,
+				72D71C042874454200D0C384 /* SCModalTransactionViewController.swift */,
 			);
 			path = Modal;
 			sourceTree = "<group>";
@@ -637,6 +643,7 @@
 				0A507520286AB62600CF1912 /* SCSellerProfileView.swift in Sources */,
 				01D5118F287EDCCF00A60353 /* SCSellerProductOfferViewController.swift in Sources */,
 				0A17E99C285C6A0900B59262 /* SCBannerCollectionViewCell.swift in Sources */,
+				72D71C052874454200D0C384 /* SCModalTransactionViewController.swift in Sources */,
 				01593524285B2C8B006F9EE6 /* SCProductCard.swift in Sources */,
 				0A659650285CD08E006346F1 /* SCNotification.swift in Sources */,
 				0A9842BA286D99B10000D491 /* CategoryCollectionReusableView.swift in Sources */,
@@ -665,6 +672,7 @@
 				729BBDB92861C61B00BAE262 /* SCSellerUploadViewController.swift in Sources */,
 				0A99632B286A18D70074D640 /* SCHeaderCollectionReusableView.swift in Sources */,
 				0AF723D5285FA9FA00C0F146 /* SCSearchBar.swift in Sources */,
+				72D71C072874522400D0C384 /* SCRadioButton.swift in Sources */,
 				72BDD18D2858A0BF006A75A6 /* SCButton.swift in Sources */,
 				22D5643E285DA7E300BB5294 /* SCProfilViewController.swift in Sources */,
 				0AD38196287DCC2500C65B9A /* SCSellerProductCollectionView.swift in Sources */,

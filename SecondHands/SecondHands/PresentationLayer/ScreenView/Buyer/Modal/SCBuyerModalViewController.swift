@@ -68,7 +68,7 @@ class SCBuyerModalViewController: UIViewController {
     
 //    lazy var
 //    //Card
-    lazy var productCard = SCSellerProfileView(frame: .zero, productImageURL: "", productLabel: "Jam Tangan Casio", sellerCity: "Rp250.000")
+    lazy var productCard = SCBuyerModalCard(frame: .zero, imageProduct: "", productName: "Jam Tangan Casio", productPrice: "Rp250.000")
 //    //Content
 //    
     override func viewDidLoad() {
@@ -82,7 +82,6 @@ class SCBuyerModalViewController: UIViewController {
         containerView.addSubview(negoForm)
         containerView.addSubview(sendButton)
         
-        productCard.editButton.isHidden = true
         
         setupView()
         setupConstraints()

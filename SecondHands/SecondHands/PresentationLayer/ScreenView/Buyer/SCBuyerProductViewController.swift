@@ -51,7 +51,7 @@ class SCBuyerProductViewController: UIViewController {
         return imageView
     }()
     
-    lazy var publishButton: SCButton = SCButton(style: .primary, size: .normal, type: .defaultButton, title: "Terbitkan")
+    lazy var publishButton: SCButton = SCButton(style: .primary, size: .normal, type: .defaultButton, title: "Saya Tertarik dan ingin Nego")
     
     override func viewDidLoad() {
         super.viewDidLoad()

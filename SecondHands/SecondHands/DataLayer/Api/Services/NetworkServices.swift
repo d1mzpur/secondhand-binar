@@ -314,7 +314,7 @@ class NetworkServices {
             }
         }.resume()
         
-    }
+    }	
     
     func getOrder(status: OrderStatus, completion: @escaping(Result<[OrderItem], Error>) -> Void) {
         let endPoint = self.baseUrl
@@ -382,6 +382,48 @@ class NetworkServices {
         }.resume()
         
     }
+    
+    func postProduct(by user: UserEndpoint, completion: @escaping(Result<[AddProductItem], Error>) -> Void){
+        let endPoint = self.baseUrl
+        
+//        let bodyData = """
+//        {
+//            "email" : "\(email)",
+//            "password" : "\(password)"
+//        }
+//        """.data(using: String.Encoding.utf8)!
+        
+        guard let urlcomponents = URLComponentsBuilder(baseURL: endPoint)
+            .path(user.rawValue)
+            .path("/product")
+            .buildUrl()
+        else { return }
+        var urlRequest = URLRequestBuilder(url: urlcomponents)
+            .httpMethod(.POST)
+//            .addBody(data: bodyData)
+            .build()
+        if(user == .seller){
+            urlRequest.setValue("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5kb2VAbWFpbC5jb20iLCJpYXQiOjE2NTQ5MjcxODZ9.fghFryd8OPEHztZlrN50PtZj0EC7NWFVj2iPPN9xi1M", forHTTPHeaderField: "access_token")
+        }
+        let jsonDecoder = JSONDecoder()
+        URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
+            guard let data = data else { return }
+            if let error = error {
+                print(error.localizedDescription)
+            }
+            
+            do {
+                let session = try jsonDecoder.decode([AddProductItem].self, from: data)
+                DispatchQueue.main.async {
+                    completion(.success(session))
+                }
+                
+            } catch let error {
+                completion(.failure(error))
+            }
+        }.resume()
+    }
+
     
     func getItem( ) {
         

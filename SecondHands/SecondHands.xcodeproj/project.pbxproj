@@ -72,6 +72,8 @@
 		22E1F760285A30D900FA40BF /* SCTextfield.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E1F75F285A30D900FA40BF /* SCTextfield.swift */; };
 		36885D132946690787344D9D /* libPods-SecondHands.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E059F21AB9FE36138B7D4CF /* libPods-SecondHands.a */; };
 		720BB593285B177F0000E24C /* SCTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720BB592285B177F0000E24C /* SCTabBar.swift */; };
+		7220E4B6288559B000AB492E /* SCBuyerTestModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7220E4B5288559B000AB492E /* SCBuyerTestModalViewController.swift */; };
+		7220E4B828855B0600AB492E /* SCBuyerModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7220E4B728855B0600AB492E /* SCBuyerModalViewController.swift */; };
 		726047F628607B9100AB2EA7 /* SCRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 726047F528607B9100AB2EA7 /* SCRegisterViewController.swift */; };
 		729BBDB92861C61B00BAE262 /* SCSellerUploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 729BBDB82861C61B00BAE262 /* SCSellerUploadViewController.swift */; };
 		72BDD18D2858A0BF006A75A6 /* SCButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72BDD18C2858A0BF006A75A6 /* SCButton.swift */; };
@@ -150,6 +152,8 @@
 		22E1F75F285A30D900FA40BF /* SCTextfield.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCTextfield.swift; sourceTree = "<group>"; };
 		2405D193D3FF10489009FF7C /* Pods-SecondHands.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SecondHands.debug.xcconfig"; path = "Target Support Files/Pods-SecondHands/Pods-SecondHands.debug.xcconfig"; sourceTree = "<group>"; };
 		720BB592285B177F0000E24C /* SCTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCTabBar.swift; sourceTree = "<group>"; };
+		7220E4B5288559B000AB492E /* SCBuyerTestModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCBuyerTestModalViewController.swift; sourceTree = "<group>"; };
+		7220E4B728855B0600AB492E /* SCBuyerModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCBuyerModalViewController.swift; sourceTree = "<group>"; };
 		726047F528607B9100AB2EA7 /* SCRegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCRegisterViewController.swift; sourceTree = "<group>"; };
 		729BBDB82861C61B00BAE262 /* SCSellerUploadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCSellerUploadViewController.swift; sourceTree = "<group>"; };
 		72BDD18C2858A0BF006A75A6 /* SCButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCButton.swift; sourceTree = "<group>"; };
@@ -260,6 +264,8 @@
 		01CD6CA3285EFE8F00BA99DF /* ScreenView */ = {
 			isa = PBXGroup;
 			children = (
+				7220E4B32885596B00AB492E /* Buyer */,
+				729BBDB72861C5F500BAE262 /* Seller */,
 				22062A7D286E06D300047AB5 /* Notification */,
 				016F1C512860A7EB007A1ADE /* Account */,
 				0A9E1D1C28579C3600D864A4 /* Home */,
@@ -486,6 +492,23 @@
 			path = Register;
 			sourceTree = "<group>";
 		};
+		7220E4B32885596B00AB492E /* Buyer */ = {
+			isa = PBXGroup;
+			children = (
+				7220E4B42885597700AB492E /* Modal */,
+			);
+			path = Buyer;
+			sourceTree = "<group>";
+		};
+		7220E4B42885597700AB492E /* Modal */ = {
+			isa = PBXGroup;
+			children = (
+				7220E4B5288559B000AB492E /* SCBuyerTestModalViewController.swift */,
+				7220E4B728855B0600AB492E /* SCBuyerModalViewController.swift */,
+			);
+			path = Modal;
+			sourceTree = "<group>";
+		};
 		729BBDB72861C5F500BAE262 /* Seller */ = {
 			isa = PBXGroup;
 			children = (
@@ -654,6 +677,7 @@
 				0125553B2882C71C00B911CE /* NotifItem.swift in Sources */,
 				0A9E1CFE28579B5F00D864A4 /* SceneDelegate.swift in Sources */,
 				01B18BA22860447000A09AD8 /* SCTextfieldWithPickerView.swift in Sources */,
+				7220E4B6288559B000AB492E /* SCBuyerTestModalViewController.swift in Sources */,
 				01B3DC7E287FFD7900895676 /* OrderItem.swift in Sources */,
 				0AD055AD28582DBA000CDA44 /* UIImageView+Extension.swift in Sources */,
 				0A9842C6286E9CF30000D491 /* URLComponentsBuilder.swift in Sources */,
@@ -670,6 +694,7 @@
 				22144F102860C54F003921ED /* SCLoginViewControllers.swift in Sources */,
 				22E1F760285A30D900FA40BF /* SCTextfield.swift in Sources */,
 				729BBDB92861C61B00BAE262 /* SCSellerUploadViewController.swift in Sources */,
+				7220E4B828855B0600AB492E /* SCBuyerModalViewController.swift in Sources */,
 				0A99632B286A18D70074D640 /* SCHeaderCollectionReusableView.swift in Sources */,
 				0AF723D5285FA9FA00C0F146 /* SCSearchBar.swift in Sources */,
 				72D71C072874522400D0C384 /* SCRadioButton.swift in Sources */,

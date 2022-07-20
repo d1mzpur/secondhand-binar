@@ -1,14 +1,13 @@
 //
-//  SCTestViewController.swift
+//  SCBuyerTestModalViewController.swift
 //  SecondHands
 //
-//  Created by Tatang Sulaeman on 27/06/22.
+//  Created by Tatang Sulaeman on 18/07/22.
 //
 
 import UIKit
 
-class SCTestViewController: UIViewController {
-
+class SCBuyerTestModalViewController: UIViewController {
     // 1. Defined UI views
         lazy var titleLabel: UILabel = {
             let label = UILabel()
@@ -36,7 +35,6 @@ class SCTestViewController: UIViewController {
         }()
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupView()
         setupConstraints()
         registerButton.addTarget(self, action: #selector(presentModalController), for: .touchUpInside)
@@ -68,7 +66,7 @@ class SCTestViewController: UIViewController {
 
 
         @objc func presentModalController() {
-            let vc = SCModalTransactionViewController()
+            let vc = SCBuyerModalViewController()
             
             vc.modalPresentationStyle = .overCurrentContext
             

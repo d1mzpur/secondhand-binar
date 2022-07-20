@@ -13,6 +13,7 @@ struct SettingItem {
 }
 
 class SCAccountViewController: UIViewController {
+    let userDefault = UserDefaults.standard
     lazy var imagePicker: SCImagePicker = {
         var imagePicker = SCImagePicker(delegate: self,
                                         style: .style1, completionHandler: { image in
@@ -131,12 +132,19 @@ extension SCAccountViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let cell = tableView.cellForRow(at: indexPath) as? SCAccountTableViewCell else { return }
-        if(sectionItem.settingItem[indexPath.row].title == "Ubah Akun"){
+        guard let _ = tableView.cellForRow(at: indexPath) as? SCAccountTableViewCell else { return }
+        switch(sectionItem.settingItem[indexPath.row].title){
+        case "Ubah Akun":
             let profileVC = SCProfilViewController()
             navigationController?.pushViewController(profileVC, animated: true)
+        case "Keluar":
+            self.userDefault.removeObject(forKey: "accessToken")
+            self.tabBarController?.selectedIndex = 0
+            self.tabBarController?.viewWillAppear(true)
+        default:
+            break;
         }
-        print(sectionItem.settingItem[indexPath.row])
+
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {

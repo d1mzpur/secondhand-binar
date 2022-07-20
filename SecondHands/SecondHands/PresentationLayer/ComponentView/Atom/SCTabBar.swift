@@ -8,7 +8,9 @@
 import UIKit
 
 class SCTabBar: UITabBarController , UITabBarControllerDelegate{
-
+    let userDefaults = UserDefaults.standard
+    var accessToken: String = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.delegate = self
@@ -20,7 +22,7 @@ class SCTabBar: UITabBarController , UITabBarControllerDelegate{
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        accessToken = userDefaults.string(forKey: "accessToken") ?? ""
         self.navigationController?.isNavigationBarHidden = true
         
         //tab 1
@@ -30,13 +32,13 @@ class SCTabBar: UITabBarController , UITabBarControllerDelegate{
         tab1.tabBarItem = tab1Item
         
         //tab 2
-        let tab2 = SCSellerUploadViewController()
+        let tab2 = SCNotificationViewController()
         let nav2 = UINavigationController(rootViewController: tab2)
         let tab2Item = UITabBarItem(title: "Notifikasi", image: UIImage(systemName: "bell"), selectedImage: UIImage(systemName: "bell"))
         tab2.tabBarItem = tab2Item
         
         //tab 3
-        let tab3 = SCHomeCollectionViewController()
+        let tab3 = accessToken == "" ? SCLoginViewControllers() : SCSellerUploadViewController()
         let nav3 = UINavigationController(rootViewController: tab3)
         let tab3Item = UITabBarItem(title: "Jual", image: UIImage(systemName: "plus.circle"), selectedImage: UIImage(systemName: "plus.circle"))
         tab3.tabBarItem = tab3Item
@@ -48,7 +50,7 @@ class SCTabBar: UITabBarController , UITabBarControllerDelegate{
         tab4.tabBarItem = tab4Item
         
         //tab 5
-        let tab5 = SCAccountViewController()
+        let tab5 = accessToken == "" ? SCLoginViewControllers() : SCAccountViewController()
         let nav5 = UINavigationController(rootViewController: tab5)
         let tab5Item = UITabBarItem(title: "Akun", image: UIImage(systemName: "person"), selectedImage: UIImage(systemName: "person.fill"))
         tab5.tabBarItem = tab5Item

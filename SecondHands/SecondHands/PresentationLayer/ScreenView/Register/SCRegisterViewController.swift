@@ -99,7 +99,27 @@ class SCRegisterViewController: UIViewController {
     }
     
     @objc func navigateToHome(){
-        let tabBar = SCTabBar()
-        navigationController?.pushViewController(tabBar, animated: true)
+        NetworkServices().authRegister(fullName: formName.text, email: formEmail.text, password: formPassword.text, nav: navigationController!) { (result) in
+            switch result {
+            case .success(let success):
+                if let id = success.id {
+                    print(id)
+                    
+                    self.navigationController?.popViewController(animated: true)
+                }
+                let alert = UIAlertController(title: "Register Failed", message: String(describing: "failMessage"), preferredStyle: .alert)
+                let ok = UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in
+                     print("Ok button tapped")
+                  })
+                alert.addAction(ok)
+                self.present(alert, animated: true, completion: nil)
+            case .failure(let error):
+                let alert = UIAlertController(title: "Register Failed", message: "\(error.localizedDescription)", preferredStyle: .alert)
+                self.present(alert, animated: true, completion: .none)
+                
+                
+            }
+        }
+        
     }
 }

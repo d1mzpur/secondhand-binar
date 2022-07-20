@@ -27,13 +27,22 @@ class SCProductCardViewCollectionViewCell: UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         cardView.dropShadow(type: .low)
+        cardView.productImage.image = nil
+        cardView.productTitle.text = ""
+        cardView.productPrice.text = ""
+        cardView.productCategory.text = ""
     }
     
     func configure(item: ProductItem) {
-        cardView.productImage.image = UIImage(named: item.productImage)
+        guard
+            let productPrice = item.productPrice,
+            let category = item.productCategory?.map( { ($0.name ?? "") } ).joined(separator: ", ")
+        else { return }
+        cardView.productImage.loadImage(resource: item.productImage)
         cardView.productTitle.text = item.productTitle
-        cardView.productCategory.text = item.productCategory
-        cardView.productPrice.text = item.productPrice
+        cardView.productCategory.text = category
+        
+        cardView.productPrice.text = "Rp \(productPrice)"
         cardView.clipsToBounds = true
     }
     

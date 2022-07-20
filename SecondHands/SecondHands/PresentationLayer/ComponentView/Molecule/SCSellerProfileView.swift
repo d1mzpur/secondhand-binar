@@ -25,10 +25,10 @@ class SCSellerProfileView: UIView {
     }()
     
     var sellerCity: SCLabel = {
-        var usernameSeller = SCLabel(frame: .zero, weight: .regular, size: 10)
-        usernameSeller.textColor = .Neutral03
+        var sellerCity = SCLabel(frame: .zero, weight: .regular, size: 10)
+        sellerCity.textColor = .Neutral03
         
-        return usernameSeller
+        return sellerCity
     }()
     
     lazy var labelStackView: UIStackView = {
@@ -52,8 +52,21 @@ class SCSellerProfileView: UIView {
         return editButton
     }()
     
-    override init(frame: CGRect) {
+    override init(frame: CGRect = CGRect.zero) {
         super.init(frame: frame)
+        addSubview()
+        setupConstraint()
+        self.backgroundColor = .white
+        self.layer.cornerRadius = 16
+        self.clipsToBounds = true
+    }
+    
+    init(frame: CGRect, productImageURL: String, productLabel: String, sellerCity: String) {
+        super.init(frame: frame)
+        
+        self.imageSeller.loadImage(resource: productImageURL)
+        self.usernameSeller.text = productLabel
+        self.sellerCity.text = sellerCity
         addSubview()
         setupConstraint()
         self.backgroundColor = .white

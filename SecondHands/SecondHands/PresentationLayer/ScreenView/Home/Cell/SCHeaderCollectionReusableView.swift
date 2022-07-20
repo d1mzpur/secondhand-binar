@@ -10,7 +10,7 @@ import UIKit
 class SCHeaderCollectionReusableView: UICollectionReusableView {
     static let reuseIdentifier = "categorySection"
     lazy var label = UILabel()
-    var margin = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0) {
+    var margin = UIEdgeInsets(top: 16, left: 0, bottom: 0, right: 0) {
         didSet {
             updateMarginConstraint()
         }
@@ -41,10 +41,10 @@ class SCHeaderCollectionReusableView: UICollectionReusableView {
     private func setupconstraint() {
         label.translatesAutoresizingMaskIntoConstraints = false
         
-        topConstraint = label.topAnchor.constraint(equalTo: self.topAnchor)
-        leadingConstraint = label.leadingAnchor.constraint(equalTo: self.leadingAnchor)
-        bottomConstraint = label.bottomAnchor.constraint(equalTo: self.bottomAnchor)
-        trailingConstraint = label.trailingAnchor.constraint(equalTo: self.trailingAnchor)
+        topConstraint = label.topAnchor.constraint(equalTo: self.topAnchor, constant: margin.top)
+        leadingConstraint = label.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: margin.left)
+        bottomConstraint = label.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: margin.bottom)
+        trailingConstraint = label.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: margin.right)
         
         topConstraint.isActive = true
         leadingConstraint.isActive = true

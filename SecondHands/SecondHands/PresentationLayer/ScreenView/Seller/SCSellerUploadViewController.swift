@@ -18,6 +18,12 @@ class SCSellerUploadViewController: UIViewController {
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(backButton))
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = false
+    }
+    
+    var image: UIImage = UIImage()
+    
     lazy var formProductName: SCFormItem = SCFormItem( formType: .normal, formName: "Nama Produk", placeholder: "Nama Produk")
     
     lazy var formProductPrice: SCFormItem = SCFormItem(formType: .normal, formName: "Harga Produk", placeholder: "Rp.0.00")
@@ -28,7 +34,7 @@ class SCSellerUploadViewController: UIViewController {
     
     lazy var labelImagePicker: SCLabel = SCLabel(weight: .regular, size: 14)
     
-    lazy var imagePickerProduct: SCImagePicker = SCImagePicker(delegate: self, style: .style2, completionHandler: { (image) in print("image:", image)})
+    lazy var imagePickerProduct: SCImagePicker = SCImagePicker(delegate: self, style: .style2, completionHandler: { (image) in self.image = image})
     
     lazy var previewButton: SCButton = SCButton(style: .secondary, size: .normal, type: .defaultButton, title: "Preview")
     
@@ -59,16 +65,16 @@ class SCSellerUploadViewController: UIViewController {
         return stack
     }()
     
-    
-
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Lengkapi Detail Produk"
+        navigationItem.title = "Lengkapi Detail Produk"
         view.backgroundColor = .white
         formCategory.dataList = [
         "Elektronik","Mainan"
         ]
         labelImagePicker.text = "Foto Produk"
+        previewButton.addTarget(self, action: #selector(navigateToPreview), for: .touchUpInside )
+        uploadButton.addTarget(self, action: #selector(backButton), for: .touchUpInside )
 //        imagePickerProduct.layer.borderWidth = 1
         view.addSubview(formStack)
         view.addSubview(labelImagePicker)
@@ -113,8 +119,17 @@ class SCSellerUploadViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
-    @objc
-    func backButton() {
-        self.navigationController?.popViewController(animated: true)
+    @objc func backButton() {
+        self.tabBarController?.selectedIndex = 3
+    }
+    
+    @objc func navigateToPreview(){
+        let SCSellerPublishVC = SCSellerPublishProductViewController()
+        navigationController?.pushViewController(SCSellerPublishVC, animated: true)
+        SCSellerPublishVC.productCard.productTitle.text = formProductName.text
+        SCSellerPublishVC.productCard.productPrice.text = ("Rp " + formProductPrice.text)
+        SCSellerPublishVC.productCard.productCategory.text = formCategory.text
+        SCSellerPublishVC.descCard.descLabel.text = formDescription.text
+        SCSellerPublishVC.makeHeaderImageView.image = imagePickerProduct.pickerIcon.image!
     }
 }

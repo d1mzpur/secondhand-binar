@@ -1,8 +1,8 @@
 //
-//  SCSellerProductListViewController.swift
+//  SCSellerProductListViewController2.swift
 //  SecondHands
 //
-//  Created by Adji Firmansyah on 27/06/22.
+//  Created by Tio Hardadi Somantri on 6/30/22.
 //
 
 import UIKit
@@ -10,84 +10,151 @@ import UIKit
 class SCSellerProductListViewController: UIViewController {
     var sellerView = SCSellerProfileView()
     var user: User = User.createData()
-    var dataProduct: [ProductItem] = ProductItem.createData()
-    var selectedCategoryIndex: Int = -1
+    var categoryTitleArray: [String] = ["Produk","Diminati","Terjual"]
+    var service = NetworkServices()
+    var dataProduct: [ProductItem] = []{
+        didSet{
+            sellerCollection.dataProduct = dataProduct
+            sellerCollection.reloadData()
+        }
+    }
+    var dataOrderProduct: [OrderItem] = []{
+        didSet{
+            sellerTableView.dataProduct = dataOrderProduct
+            sellerTableView.reloadData()
+        }
+    }
+
     
-    var sellerCollection: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
+    var selectedCategory: String = "Produk"
+    lazy var textTitle: UILabel = {
+        var textTitle = UILabel()
+        textTitle.text = "Daftar Jual Saya"
+        textTitle.font = SCLabel(frame: .zero, weight: .bold, size: 20).font
+        textTitle.textColor = .black
+        return textTitle
+    }()
+    
+    lazy var sellerCategory: SCSellerCategoryCollectionView = SCSellerCategoryCollectionView(viewController: self, categoryTitleArray: categoryTitleArray)
+    lazy var sellerCollection: SCSellerProductCollectionView = SCSellerProductCollectionView(viewController: self)
+    lazy var sellerTableView: SCSellerProductTableView = SCSellerProductTableView()
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.isHidden = true
+    }
+    
+    func getProduct() {
+        service.getProduct(by: .seller) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let itemResults):
+                DispatchQueue.main.async {
+                    self.dataProduct = itemResults
+                }
+                
+            case .failure(let error):
+                print("Error: ",error.localizedDescription)
+            }
+        }
+    }
+    
+    func getOrder(status: OrderStatus) {
+        service.getOrder(status: status) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let itemResults):
+                DispatchQueue.main.async {
+                    self.dataOrderProduct = itemResults
+                }
+            case .failure(let error):
+                print("Error: ",error.localizedDescription)
+            }
+        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         configureView()
+        view.addSubview(textTitle)
         view.addSubview(sellerView)
-        view.addSubview(sellerCollection)
-        setupCollection()
+        view.addSubview(sellerCategory)
+  
+        sellerCollection.removeFromSuperview()
+        sellerTableView.removeFromSuperview()
+//        let indexPath = IndexPath(item: 0, section: 0)
+        switch( selectedCategory ){
+        case "Produk":
+            view.addSubview(sellerCollection)
+            setupCollection()
+            getProduct()
+            break;
+        case "Diminati":
+            view.addSubview(sellerTableView)
+            setupTableView()
+//            if let cellLabel = (sellerTableView.cellForRow(at: indexPath) as? SCSellerEmptyItemTableView)?.productLabel{
+//                cellLabel.text = "Belum ada produkmu yang diminati nih, sabar ya rejeki nggak kemana kok"
+//            }
+            getOrder(status: .pending)
+            break;
+        case "Terjual":
+            view.addSubview(sellerTableView)
+            setupTableView()
+//            if let cellLabel = (sellerTableView.cellForRow(at: indexPath) as? SCSellerEmptyItemTableView)?.productLabel{
+//                cellLabel.text = "Belum ada produkmu yang terjual nih, sabar ya rejeki nggak kemana kok"
+//            }
+            getOrder(status: .accepted)
+            break;
+        default:
+            break;
+        }
         setupConstraint()
+        
+        
     }
-    
-    private func setupCollection() {
-        sellerCollection.delegate = self
-        sellerCollection.dataSource = self
-        sellerCollection.register(SCAddProductCollectionViewCell.self, forCellWithReuseIdentifier: "addProdcut")
-        sellerCollection.register(SCProductCardViewCollectionViewCell.self, forCellWithReuseIdentifier: "sellerProduct")
-    }
+
     
     private func configureView() {
-        sellerCollection.collectionViewLayout = LayoutSection.createSellerProduct()
-        sellerCollection.backgroundColor = .white
-        sellerCollection.showsVerticalScrollIndicator = false
-        
         sellerView.configure(user: user)
     }
     
-    private func setupConstraint() {
-        sellerView.translatesAutoresizingMaskIntoConstraints = false
-        sellerCollection.translatesAutoresizingMaskIntoConstraints = false
-        
+    private func setupCollection() {
         NSLayoutConstraint.activate([
-            sellerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
-            sellerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            sellerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            
-            sellerCollection.topAnchor.constraint(equalTo: sellerView.bottomAnchor, constant: 8),
+            sellerCollection.topAnchor.constraint(equalTo: sellerCategory.bottomAnchor, constant: 8),
             sellerCollection.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             sellerCollection.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             sellerCollection.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
     }
     
+    private func setupTableView() {
+        NSLayoutConstraint.activate([
+            sellerTableView.topAnchor.constraint(equalTo: sellerCategory.bottomAnchor, constant: 8),
+            sellerTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            sellerTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            sellerTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+        ])
+    }
     
+    private func setupConstraint() {
+        textTitle.translatesAutoresizingMaskIntoConstraints = false
+        sellerView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            textTitle.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
+            textTitle.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            textTitle.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            
+            sellerView.topAnchor.constraint(equalTo: textTitle.bottomAnchor, constant: 16),
+            sellerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            sellerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            
+            sellerCategory.topAnchor.constraint(equalTo: sellerView.bottomAnchor, constant: 8),
+            sellerCategory.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            sellerCategory.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            sellerCategory.heightAnchor.constraint(equalToConstant: 60),
     
+        ])
+    }
 }
 
-extension SCSellerProductListViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dataProduct.count + 1
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let addProductCell = collectionView.dequeueReusableCell(withReuseIdentifier: "addProdcut", for: indexPath) as? SCAddProductCollectionViewCell,
-              let productCell = collectionView.dequeueReusableCell(withReuseIdentifier: "sellerProduct", for: indexPath) as? SCProductCardViewCollectionViewCell
-        else { return UICollectionViewCell() }
-        
-        let item = indexPath.item
-        let data = self.dataProduct[item > 0 ? item - 1 : item]
-        if item == 0 {
-            return addProductCell
-        } else {
-            productCell.configure(item: data)
-            return productCell
-        }
-        
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let _ = collectionView.cellForItem(at: indexPath) as? SCProductCardViewCollectionViewCell else { return }
-    }
-    
-}

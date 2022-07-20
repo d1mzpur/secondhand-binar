@@ -25,10 +25,10 @@ class SCButton: UIButton {
         case ghostButton
     }
     
-    public private(set) var style: Style
-    public private(set) var size: Size
-    public private(set) var type: typeButton
-    public private(set) var title: String
+    public var style: Style
+    public var size: Size
+    public var type: typeButton
+    public var title: String
 
     //MARK: -init
     init(style: Style, size: Size, type: typeButton, title: String) {

@@ -93,13 +93,13 @@ extension SCTextfieldWithPickerView: UIPickerViewDelegate, UIPickerViewDataSourc
     func dismissPickerView() {
        let toolBar = UIToolbar()
        toolBar.sizeToFit()
-       let button = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(action111))
+       let button = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneAction))
        toolBar.setItems([button], animated: true)
        toolBar.isUserInteractionEnabled = true
        self.inputAccessoryView = toolBar
     }
         
-    @objc func action111() {
+    @objc func doneAction() {
           self.endEditing(true)
     }
 }

@@ -22,8 +22,8 @@ class SCBannerCollectionViewCell: UICollectionViewCell {
     
     var offerImage: UIImageView = {
         var imageOffers = UIImageView()
-        
-        imageOffers.contentMode = .scaleAspectFit
+        imageOffers.contentMode = .scaleAspectFill
+        imageOffers.clipsToBounds = true
         return imageOffers
     }()
     
@@ -60,24 +60,29 @@ class SCBannerCollectionViewCell: UICollectionViewCell {
         return titleSV
     }()
     
-    lazy var bannerStackView: UIStackView = {
-        var bannerSC = UIStackView(arrangedSubviews: [titleStackView, offerImage])
-        bannerSC.axis = .horizontal
-        
-        return bannerSC
-    }()
+//    lazy var bannerStackView: UIStackView = {
+//        var bannerSC = UIStackView(arrangedSubviews: [titleStackView, offerImage])
+//        bannerSC.axis = .horizontal
+//
+//        return bannerSC
+//    }()
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        offerImage.image = nil
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.addSubview(bannerStackView)
-        self.addSubview(searchBar)
+        self.addSubview(offerImage)
+//        self.addSubview(searchBar)
         setupConstraint()
     }
     
     func configure(item: OfferItem) {
-        offerImage.image = UIImage(named: "offerImage")
+        offerImage.loadImage(resource: item.bannerImage)
         offerTitle.text = item.bannerTitle
-        discount.text = item.discount
+//        discount.text = item.discount
     }
     
     required init?(coder: NSCoder) {
@@ -85,25 +90,31 @@ class SCBannerCollectionViewCell: UICollectionViewCell {
     }
     
     private func setupConstraint() {
-        bannerStackView.translatesAutoresizingMaskIntoConstraints = false
-        searchBar.translatesAutoresizingMaskIntoConstraints = false
+        offerImage.translatesAutoresizingMaskIntoConstraints = false
+//        bannerStackView.translatesAutoresizingMaskIntoConstraints = false
+//        searchBar.translatesAutoresizingMaskIntoConstraints = false
 //        offerImage.translatesAutoresizingMaskIntoConstraints = false
-        offerTitle.translatesAutoresizingMaskIntoConstraints = false
+//        offerTitle.translatesAutoresizingMaskIntoConstraints = false
         
 //        let heighConstraint: NSLayoutConstraint!
 //        heighConstraint = offerTitle.heightAnchor.constraint(greaterThanOrEqualToConstant: 60)
 //        heighConstraint.isActive = true
         
         NSLayoutConstraint.activate([
+            offerImage.heightAnchor.constraint(equalToConstant: 200),
+            offerImage.topAnchor.constraint(equalTo: self.topAnchor),
+            offerImage.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            offerImage.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            offerImage.bottomAnchor.constraint(equalTo: self.bottomAnchor),
 //            offerImage.heightAnchor.constraint(equalToConstant: 123),
 //            offerImage.widthAnchor.constraint(equalToConstant: 127),
-            searchBar.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
-            searchBar.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
-            searchBar.bottomAnchor.constraint(equalTo: bannerStackView.topAnchor, constant: -16),
+//            searchBar.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
+//            searchBar.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
+//            searchBar.bottomAnchor.constraint(equalTo: bannerStackView.topAnchor, constant: -16),
             
-            bannerStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
-            bannerStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
-            bannerStackView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -16),
+//            bannerStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
+//            bannerStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
+//            bannerStackView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -16),
             
         ])
         

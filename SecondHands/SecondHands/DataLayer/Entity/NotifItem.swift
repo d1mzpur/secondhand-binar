@@ -19,7 +19,7 @@ struct NotifItem: Codable {
     let buyerName: String?
     let receiverID: Int
     let read: Bool
-    let notificationType: NotificationType
+    let notificationType: NotificationType?
     let orderID: Int?
     let createdAt, updatedAt: String
     let product: ProductNotifClass?
@@ -78,12 +78,14 @@ struct ProductNotifClass: Codable {
 enum ProductStatus: String, Codable {
     case available = "available"
     case seller = "seller"
+    case sold = "sold"
 }
 
 
 enum ProductStatusEnum: String, Codable {
     case bid = "bid"
     case create = "create"
+    case accepted = "accepted"
     case declined = "declined"
 }
 

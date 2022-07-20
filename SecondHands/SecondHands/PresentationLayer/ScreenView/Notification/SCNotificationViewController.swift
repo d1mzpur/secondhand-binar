@@ -32,6 +32,7 @@ class SCNotificationViewController: UIViewController {
                 }
                 
             case .failure(let error):
+                debugPrint(error)
                 print("Error: ",error.localizedDescription)
             }
         }

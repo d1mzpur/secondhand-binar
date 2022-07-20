@@ -98,6 +98,7 @@ extension SCImagePicker: UIImagePickerControllerDelegate, UINavigationController
         if let image = info[.originalImage] as? UIImage {
             isContainImage = true
             handler(image)
+            
             pickerIcon.image = image.resizeImageTo(size: CGSize( width:self.frame.size.width, height: self.frame.size.height))
             pickerIcon.layer.cornerRadius = 10
             pickerIcon.layer.masksToBounds = true

@@ -22,19 +22,19 @@ struct UserLoginModel: Codable {
 struct UpdateUserModel: Codable {
     let id: Int?
     let fullName: String?
-//    let email: String?
-//    let phoneNumber: String?
-//    let address: String?
-//    let image: String?
-//    let city: String?
+    let email: String?
+    let phoneNumber: Int?
+    let address: String?
+    let image: String?
+    let city: String?
     
     enum CodingKeys: String, CodingKey {
         case id
         case fullName = "full_name"
-//        case email
-//        case phoneNumber = "phone_number"
-//        case address
-//        case image
-//        case city
+        case email
+        case phoneNumber = "phone_number"
+        case address
+        case image
+        case city
     }
 }

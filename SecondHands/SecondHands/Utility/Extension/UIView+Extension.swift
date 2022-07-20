@@ -78,5 +78,60 @@ extension UIView {
         loading.stopAnimating()
         loading.removeFromSuperview()
     }
+    
+    func addImage(image: String) {
+        // screen width and height:
+        let width = UIScreen.main.bounds.size.width
+        let height = UIScreen.main.bounds.size.height
+
+        let imageViewBackground = UIImageView(frame: CGRect(x: 0, y: 0, width: width, height: height))
+        imageViewBackground.loadImage(resource: image)
+
+        // you can change the content mode:
+        imageViewBackground.contentMode = UIView.ContentMode.scaleAspectFill
+
+        self.addSubview(imageViewBackground)
+        self.bringSubviewToFront(imageViewBackground)
+    }
+    
+        func changeImage(imageName: String, contentMode: UIView.ContentMode = .scaleToFill) {
+            // setup the UIImageView
+            let backgroundImageView = UIImageView(frame: UIScreen.main.bounds)
+            backgroundImageView.loadImage(resource: imageName)
+            backgroundImageView.contentMode = contentMode
+            backgroundImageView.clipsToBounds = true
+            backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
+            backgroundImageView.layer.cornerRadius = 10
+            addSubview(backgroundImageView)
+            bringSubviewToFront(backgroundImageView)
+
+            // adding NSLayoutConstraints
+            let leadingConstraint = NSLayoutConstraint(item: backgroundImageView, attribute: .leading, relatedBy: .equal, toItem: self, attribute: .leading, multiplier: 1.0, constant: 0.0)
+            let trailingConstraint = NSLayoutConstraint(item: backgroundImageView, attribute: .trailing, relatedBy: .equal, toItem: self, attribute: .trailing, multiplier: 1.0, constant: 0.0)
+            let topConstraint = NSLayoutConstraint(item: backgroundImageView, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1.0, constant: 0.0)
+            let bottomConstraint = NSLayoutConstraint(item: backgroundImageView, attribute: .bottom, relatedBy: .equal, toItem: self, attribute: .bottom, multiplier: 1.0, constant: 0.0)
+
+            NSLayoutConstraint.activate([leadingConstraint, trailingConstraint, topConstraint, bottomConstraint])
+        }
+    
+    func changeImage(image: UIImage, contentMode: UIView.ContentMode = .scaleToFill) {
+        // setup the UIImageView
+        let backgroundImageView = UIImageView(frame: UIScreen.main.bounds)
+        backgroundImageView.image = image
+        backgroundImageView.contentMode = contentMode
+        backgroundImageView.clipsToBounds = true
+        backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
+        backgroundImageView.layer.cornerRadius = 10
+        addSubview(backgroundImageView)
+        bringSubviewToFront(backgroundImageView)
+
+        // adding NSLayoutConstraints
+        let leadingConstraint = NSLayoutConstraint(item: backgroundImageView, attribute: .leading, relatedBy: .equal, toItem: self, attribute: .leading, multiplier: 1.0, constant: 0.0)
+        let trailingConstraint = NSLayoutConstraint(item: backgroundImageView, attribute: .trailing, relatedBy: .equal, toItem: self, attribute: .trailing, multiplier: 1.0, constant: 0.0)
+        let topConstraint = NSLayoutConstraint(item: backgroundImageView, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1.0, constant: 0.0)
+        let bottomConstraint = NSLayoutConstraint(item: backgroundImageView, attribute: .bottom, relatedBy: .equal, toItem: self, attribute: .bottom, multiplier: 1.0, constant: 0.0)
+
+        NSLayoutConstraint.activate([leadingConstraint, trailingConstraint, topConstraint, bottomConstraint])
+    }
 }
 

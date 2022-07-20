@@ -18,7 +18,6 @@ class SCProfilViewController: UIViewController {
     let image = UIImage(systemName: "arrow.left")
 //        navigationItem.leftBarButtonItem = UIBarButtonItem(image: image, style: .plain, target: self, action:  Selector(("action")))
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: image, style: .plain, target: self, action:  #selector(backButton))
-        getUser()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -28,7 +27,7 @@ class SCProfilViewController: UIViewController {
     
     lazy var formName:  SCFormItem = SCFormItem(formType: .normal, formName: "Nama", placeholder: "contoh: johndee@gmail.com")
     lazy var formCity:  SCFormItem = SCFormItem(formType: .pickerView, formName: "Kota", placeholder: "contoh: Pilih Kota")
-    lazy var formAdress:  SCFormItem = SCFormItem(formType: .area, formName: "Alamat", placeholder: "contoh: Jalan Ikan Hiu 33")
+    lazy var formAdress:  SCFormItem = SCFormItem(formType: .area, formName: "Alamat", placeholder: "")
     lazy var formNumberPhone:  SCFormItem = SCFormItem(formType: .normal, formName: "No Handphone", placeholder: "contoh: +628123456789")
     
     
@@ -41,8 +40,18 @@ class SCProfilViewController: UIViewController {
     lazy var imagePicker: SCImagePicker = SCImagePicker(
             delegate: self,
             style: .style1,
-            completionHandler: { (image) in print("image:", image)}
+            completionHandler: { (image) in
+                (self.imagePicker as UIView).changeImage(image: image)
+                self.imageData = image.pngData()
+                print(self.imageData)
+            }
     )
+    
+    lazy var imageProfile: UIImageView = {
+       var imageProfile = UIImageView()
+        imageProfile.clipsToBounds = true
+        return imageProfile
+    }()
     
     lazy var formItemStack: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [
@@ -60,14 +69,13 @@ class SCProfilViewController: UIViewController {
         return stackView
         
     }()
-    
+    var imageData: Data?
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Lengkapi Info Akun"
         formCity.dataList = ["Bandung","Jakarta","Surabaya","Denpasar","Cilegon","Serang","Serang","Yogyakarta","Gorontalo","Cirebon"]
         view.backgroundColor = .white
-        
-        configureView()
+        getUser()
         view.addSubview(imagePicker)
         view.addSubview(formItemStack)
         
@@ -87,10 +95,6 @@ class SCProfilViewController: UIViewController {
             formItemStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
             
         ])
-    }
-    
-    func configureView() {
-        formName.Textfield.text = dataUser?.fullName
     }
     
     @objc
@@ -118,8 +122,23 @@ class SCProfilViewController: UIViewController {
                 guard let self = self else { return }
                 switch result {
                 case .success(let success):
-                    self.dataUser = success
-                    print(success)
+                    DispatchQueue.main.async {
+                        (self.imagePicker as UIView).changeImage(imageName: "https://developer.apple.com/swift/images/swift-og.png")
+                        if let image = success.image {
+                            
+                            let imageContainer = UIImageView()
+                            imageContainer.loadImage(resource: image)
+                            self.imageData = imageContainer.image?.pngData()
+                            print("SEND IMAGE DATA ==> ", self.imageData)
+                        }
+                        
+                        self.formName.Textfield.text = success.fullName
+                        self.formCity.TextfieldWithPicker.text = "Jakarta"
+//                        self.formAdress.Textfieldarea.setText(placeholder: "")
+                        self.formNumberPhone.Textfield.text = String(describing: success.phoneNumber)
+                        print("GET ==>> ", success)
+                    }
+                    
                 case .failure(let error):
                     print(error)
                 }

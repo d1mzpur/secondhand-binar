@@ -32,19 +32,19 @@ class SCTextfieldarea: UITextView, UITextViewDelegate {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func textViewDidBeginEditing(_ textView: UITextView) {
-        if textView.textColor == UIColor.Neutral02 {
-            textView.text = nil
-            textView.textColor = UIColor.black
-        }
-    }
-    
-    func textViewDidEndEditing(_ textView: UITextView) {
-        if textView.text.isEmpty {
-            textView.text = self.placeholder
-            textView.textColor = UIColor.Neutral02
-        }
-    }
+//    func textViewDidBeginEditing(_ textView: UITextView) {
+//        if textView.textColor == UIColor.Neutral02 {
+//            textView.text = nil
+//            textView.textColor = UIColor.black
+//        }
+//    }
+//
+//    func textViewDidEndEditing(_ textView: UITextView) {
+//        if textView.text.isEmpty {
+//            textView.text = self.placeholder
+//            textView.textColor = UIColor.Neutral02
+//        }
+//    }
     
     private func configure() {
         textContainerInset = textPadding
@@ -59,7 +59,7 @@ class SCTextfieldarea: UITextView, UITextViewDelegate {
     
     public func setText(placeholder: String) {
         self.placeholder = placeholder
-        self.textColor = UIColor.Neutral02
+//        self.textColor = UIColor.Neutral02
     }
     
 }

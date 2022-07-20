@@ -25,11 +25,11 @@ class SCModalContactsViewController: UIViewController {
         return view
     }()
     
-    let defaultHeight: CGFloat = 438
+    let defaultHeight: CGFloat = 480
     let dismissibleHeight: CGFloat = 200
     let maximumContainerHeight: CGFloat = UIScreen.main.bounds.height - 64
     
-    var currentContainerHeight: CGFloat = 438
+    var currentContainerHeight: CGFloat = 480
     var containerViewHeightConstraint: NSLayoutConstraint?
     var containerViewBottomConstraint: NSLayoutConstraint?
     
@@ -174,10 +174,10 @@ class SCModalContactsViewController: UIViewController {
     
     func animateShowDimmedView(){
         dimmedView.alpha = 0
-        UIView.animate(withDuration: 0.4) {
+//        UIView.animate(withDuration: 0.4) {
             self.dimmedView.alpha = self.maxDimmedAlpha
             self.view.layoutIfNeeded()
-        }
+//        }
     }
     
     func animateDismissView() {
@@ -199,6 +199,7 @@ class SCModalContactsViewController: UIViewController {
         animateShowDimmedView()
         animatePresentContainer()
     }
+
     func setupGesture(){
         let gesture = UIPanGestureRecognizer(target: self, action: #selector(self.handleGesture(gesture:)))
         gesture.delaysTouchesBegan = false
@@ -225,7 +226,8 @@ class SCModalContactsViewController: UIViewController {
         
         switch gesture.state {
         case .changed:
-            if newHeight < maximumContainerHeight {
+            if newHeight < maximumContainerHeight && newHeight > defaultHeight{
+                print(newHeight)
                 containerViewHeightConstraint?.constant = newHeight
                 view.layoutIfNeeded()
             }

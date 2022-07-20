@@ -1,14 +1,13 @@
 //
-//  SCModalTransactionViewController.swift
+//  SCBuyerModalViewController.swift
 //  SecondHands
 //
-//  Created by Tatang Sulaeman on 05/07/22.
+//  Created by Tatang Sulaeman on 18/07/22.
 //
 
 import UIKit
 
-class SCModalTransactionViewController: UIViewController {
-    
+class SCBuyerModalViewController: UIViewController {
     lazy var containerView: UIView = {
        let view = UIView()
         view.backgroundColor = .white
@@ -25,129 +24,66 @@ class SCModalTransactionViewController: UIViewController {
         return view
     }()
     
-    let defaultHeight: CGFloat = 354
+    let defaultHeight: CGFloat = 422
     let dismissibleHeight: CGFloat = 200
     let maximumContainerHeight: CGFloat = UIScreen.main.bounds.height - 64
     
-    var currentContainerHeight: CGFloat = 354
+    var currentContainerHeight: CGFloat = 422
     var containerViewHeightConstraint: NSLayoutConstraint?
     var containerViewBottomConstraint: NSLayoutConstraint?
-    
-    // Content
-    lazy var titleLabel: SCLabel = {
-       var label = SCLabel()
-        label.text = "Perbarui status penjualan produkmu"
-        label.weight = .bold
-        label.size = 14
-        return label
-    }()
-    lazy var succesSellLabel: SCLabel = {
-        var label = SCLabel()
-        label.text = "Berhasil Terjual"
+    //MARK: -Content
+    //Content
+    lazy var titleModalLabel: SCLabel = {
+       let label = SCLabel()
+        label.text = "Masukan Harga Tawarmu"
         label.size = 14
         label.weight = .medium
+        label.numberOfLines = 0
+        
         return label
     }()
-    lazy var succesSellSecondLabel: SCLabel = {
-        var label = SCLabel()
-        label.text = "Kamu telah sepakat menjual produk ini kepada pembeli"
+    
+    lazy var bodyLabel: SCLabel = {
+       let label = SCLabel()
+        label.text = "Harga tawaranmu akan diketahui penual, jika penjual cocok kamu akan segera dihubungi penjual."
         label.size = 14
         label.weight = .regular
         label.numberOfLines = 0
+        
         return label
     }()
     
-    lazy var cancelSellLabel: SCLabel = {
-        var label = SCLabel()
-        label.text = "Batalkan Transaksi"
-        label.size = 14
-        label.weight = .medium
-        return label
-    }()
-    lazy var cancelSellSecondLabel: SCLabel = {
-        var label = SCLabel()
-        label.text = "Kamu membatalkan transaksi produk ini dengan pembeli"
-        label.size = 14
-        label.weight = .regular
-        label.tintColor = .DarkBlue01
-        label.numberOfLines = 0
-        return label
+    lazy var negoForm: SCFormItem = SCFormItem( formType: .normal, formName: "Harga Tawar", placeholder: "Rp0,00")
+    
+    lazy var sendButton: SCButton = SCButton(style: .primary, size: .normal, type: .defaultButton, title: "Kirim")
+    
+    //Card
+    lazy var imageProdutc: UIImageView = {
+        let imageName = "exampleProductCardImage.png"
+        let image = UIImage(named: imageName)?.resizeImageTo(size: CGSize(width: 48, height: 48))
+        let imageView = UIImageView(image: image!)
+        imageView.layer.cornerRadius = 10
+        return imageView
     }()
     
-    lazy var radioButtonOne: SCRadioButton = SCRadioButton(style: .selected)
-    lazy var radioButtonTwo: SCRadioButton = SCRadioButton(style: .unselected)
-    lazy var submitButton: SCButton = SCButton(style: .primary, size: .normal, type: .defaultButton, title: "Kirim")
-    lazy var sellTitleStack: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [
-        radioButtonOne,
-        succesSellLabel,
-        ])
-        stack.axis = .horizontal
-        stack.distribution = .fillProportionally
-        stack.setCustomSpacing(19, after: radioButtonOne)
-        stack.alignment = .leading
-        return stack
-    }()
-    
-    lazy var succesSellStack: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [
-        sellTitleStack,
-        succesSellSecondLabel,
-        ])
-        stack.axis = .vertical
-        stack.setCustomSpacing(8, after: sellTitleStack)
-        return stack
-    }()
-    
-    lazy var cancelTitleStack: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [
-        radioButtonTwo,
-        cancelSellLabel
-        ])
-        stack.axis = .horizontal
-        stack.distribution = .fillProportionally
-        stack.setCustomSpacing(19, after: radioButtonTwo)
-        stack.alignment = .leading
-        
-        return stack
-    }()
-    
-    lazy var cancelStack: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [
-        cancelTitleStack,
-        cancelSellSecondLabel
-        ])
-        stack.axis = .vertical
-        stack.setCustomSpacing(8, after: cancelTitleStack)
-        
-        return stack
-    }()
-    
-    lazy var containerModalStack: UIStackView = {
-       let stack = UIStackView(arrangedSubviews: [
-        titleLabel,
-        succesSellStack,
-        cancelStack,
-        submitButton
-        
-       ])
-        stack.setCustomSpacing(24, after: titleLabel)
-        stack.setCustomSpacing(24, after: succesSellStack)
-        stack.setCustomSpacing(40, after: cancelStack)
-        stack.axis = .vertical
-        return stack
-    }()
-    
-    // Content
-
+//    lazy var
+//    //Card
+//    //Content
+//    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         view.addSubview(dimmedView)
         view.addSubview(containerView)
-        containerView.addSubview(containerModalStack)
+        containerView.addSubview(titleModalLabel)
+        containerView.addSubview(bodyLabel)
+        containerView.addSubview(negoForm)
+        containerView.addSubview(sendButton)
+        
         setupView()
         setupConstraints()
         setupGesture()
+
         // Do any additional setup after loading the view.
     }
     
@@ -235,10 +171,17 @@ class SCModalTransactionViewController: UIViewController {
         
         
     }
+    //MARK: -SetupConstraint
     func setupConstraints() {
         dimmedView.translatesAutoresizingMaskIntoConstraints = false
         containerView.translatesAutoresizingMaskIntoConstraints = false
-        containerModalStack.translatesAutoresizingMaskIntoConstraints = false
+        titleModalLabel.translatesAutoresizingMaskIntoConstraints = false
+        bodyLabel.translatesAutoresizingMaskIntoConstraints = false
+        negoForm.translatesAutoresizingMaskIntoConstraints = false
+        sendButton.translatesAutoresizingMaskIntoConstraints = false
+//        containerModalStack.translatesAutoresizingMaskIntoConstraints = false
+        
+       
             NSLayoutConstraint.activate([
                 dimmedView.topAnchor.constraint(equalTo: view.topAnchor),
                 dimmedView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
@@ -248,9 +191,26 @@ class SCModalTransactionViewController: UIViewController {
                 containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
                 containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
                 
-                containerModalStack.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 38),
-                containerModalStack.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
-                containerModalStack.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -20),
+                titleModalLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
+                titleModalLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -20),
+                titleModalLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 40),
+                
+                bodyLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
+                bodyLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -20),
+                bodyLabel.topAnchor.constraint(equalTo: titleModalLabel.bottomAnchor, constant: 16),
+                
+                
+                negoForm.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
+                negoForm.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -20),
+                negoForm.topAnchor.constraint(equalTo: bodyLabel.bottomAnchor, constant: 16),
+                
+                
+                sendButton.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
+                sendButton.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -20),
+                sendButton.topAnchor.constraint(equalTo: negoForm.bottomAnchor, constant: 16)
+                
+                
+                
                 
             ])
             

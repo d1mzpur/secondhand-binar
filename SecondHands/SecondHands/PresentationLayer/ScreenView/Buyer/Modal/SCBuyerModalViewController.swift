@@ -68,6 +68,7 @@ class SCBuyerModalViewController: UIViewController {
     
 //    lazy var
 //    //Card
+    lazy var productCard = SCSellerProfileView(frame: .zero, productImageURL: "", productLabel: "Jam Tangan Casio", sellerCity: "Rp250.000")
 //    //Content
 //    
     override func viewDidLoad() {
@@ -77,8 +78,11 @@ class SCBuyerModalViewController: UIViewController {
         view.addSubview(containerView)
         containerView.addSubview(titleModalLabel)
         containerView.addSubview(bodyLabel)
+        containerView.addSubview(productCard)
         containerView.addSubview(negoForm)
         containerView.addSubview(sendButton)
+        
+        productCard.editButton.isHidden = true
         
         setupView()
         setupConstraints()
@@ -177,6 +181,7 @@ class SCBuyerModalViewController: UIViewController {
         containerView.translatesAutoresizingMaskIntoConstraints = false
         titleModalLabel.translatesAutoresizingMaskIntoConstraints = false
         bodyLabel.translatesAutoresizingMaskIntoConstraints = false
+        productCard.translatesAutoresizingMaskIntoConstraints = false
         negoForm.translatesAutoresizingMaskIntoConstraints = false
         sendButton.translatesAutoresizingMaskIntoConstraints = false
 //        containerModalStack.translatesAutoresizingMaskIntoConstraints = false
@@ -199,10 +204,15 @@ class SCBuyerModalViewController: UIViewController {
                 bodyLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -20),
                 bodyLabel.topAnchor.constraint(equalTo: titleModalLabel.bottomAnchor, constant: 16),
                 
+                productCard.topAnchor.constraint(equalTo: bodyLabel.bottomAnchor, constant: 16),
+                productCard.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
+                productCard.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -20),
+                
+                
                 
                 negoForm.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
                 negoForm.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -20),
-                negoForm.topAnchor.constraint(equalTo: bodyLabel.bottomAnchor, constant: 16),
+                negoForm.topAnchor.constraint(equalTo: productCard.bottomAnchor, constant: 16),
                 
                 
                 sendButton.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),

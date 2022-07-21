@@ -19,6 +19,7 @@
 		01593533285CAC44006F9EE6 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01593532285CAC44006F9EE6 /* UIImage+Extension.swift */; };
 		016F1C562861E696007A1ADE /* SCAccountTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016F1C552861E696007A1ADE /* SCAccountTableViewCell.swift */; };
 		016F1C582861E69D007A1ADE /* SCFooterForVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016F1C572861E69D007A1ADE /* SCFooterForVersion.swift */; };
+		017C60042889D572000B57E4 /* Data+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017C60032889D572000B57E4 /* Data+Extension.swift */; };
 		0188A908285D11780079E091 /* SCFormItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0188A907285D11780079E091 /* SCFormItem.swift */; };
 		019DC75828590A68008B4BFE /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019DC75728590A68008B4BFE /* UIView+Extension.swift */; };
 		01B18BA22860447000A09AD8 /* SCTextfieldWithPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B18BA12860447000A09AD8 /* SCTextfieldWithPickerView.swift */; };
@@ -98,6 +99,7 @@
 		01593532285CAC44006F9EE6 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		016F1C552861E696007A1ADE /* SCAccountTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SCAccountTableViewCell.swift; sourceTree = "<group>"; };
 		016F1C572861E69D007A1ADE /* SCFooterForVersion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SCFooterForVersion.swift; sourceTree = "<group>"; };
+		017C60032889D572000B57E4 /* Data+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Extension.swift"; sourceTree = "<group>"; };
 		0188A907285D11780079E091 /* SCFormItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCFormItem.swift; sourceTree = "<group>"; };
 		019DC75728590A68008B4BFE /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		01B18BA12860447000A09AD8 /* SCTextfieldWithPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCTextfieldWithPickerView.swift; sourceTree = "<group>"; };
@@ -440,6 +442,7 @@
 				01593532285CAC44006F9EE6 /* UIImage+Extension.swift */,
 				0AD055AC28582DBA000CDA44 /* UIImageView+Extension.swift */,
 				019DC75728590A68008B4BFE /* UIView+Extension.swift */,
+				017C60032889D572000B57E4 /* Data+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -668,6 +671,7 @@
 				0AD38195287DCC2500C65B9A /* SCSellerCategoryCollectionView.swift in Sources */,
 				0AD381BF287DD7AD00C65B9A /* SCHomeViewController.swift in Sources */,
 				0A646D632864A79100160074 /* Array+Extension.swift in Sources */,
+				017C60042889D572000B57E4 /* Data+Extension.swift in Sources */,
 				0A9E1CFC28579B5F00D864A4 /* AppDelegate.swift in Sources */,
 				0A507520286AB62600CF1912 /* SCSellerProfileView.swift in Sources */,
 				01D5118F287EDCCF00A60353 /* SCSellerProductOfferViewController.swift in Sources */,

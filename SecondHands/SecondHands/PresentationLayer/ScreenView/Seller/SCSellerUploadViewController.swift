@@ -22,6 +22,16 @@ class SCSellerUploadViewController: UIViewController {
         self.tabBarController?.tabBar.isHidden = false
     }
     
+    var category: [Categories] = []{
+        didSet{
+            var temp: [String] = []
+            category.forEach{ item in
+                temp.append( item.name ?? "" )
+            }
+            self.formCategory.dataList = temp
+        }
+    }
+    
     var image: UIImage = UIImage()
     
     lazy var formProductName: SCFormItem = SCFormItem( formType: .normal, formName: "Nama Produk", placeholder: "Nama Produk")
@@ -65,16 +75,23 @@ class SCSellerUploadViewController: UIViewController {
         return stack
     }()
     
+    func getCategory() {
+        NetworkServices().getCategory { [weak self] (result) in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                self.category = result
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        getCategory()
         navigationItem.title = "Lengkapi Detail Produk"
         view.backgroundColor = .white
-        formCategory.dataList = [
-        "Elektronik","Mainan"
-        ]
         labelImagePicker.text = "Foto Produk"
         previewButton.addTarget(self, action: #selector(navigateToPreview), for: .touchUpInside )
-        uploadButton.addTarget(self, action: #selector(backButton), for: .touchUpInside )
+        uploadButton.addTarget(self, action: #selector(publishProduct), for: .touchUpInside )
 //        imagePickerProduct.layer.borderWidth = 1
         view.addSubview(formStack)
         view.addSubview(labelImagePicker)
@@ -122,14 +139,49 @@ class SCSellerUploadViewController: UIViewController {
     @objc func backButton() {
         self.tabBarController?.selectedIndex = 3
     }
+    @objc func publishProduct() {
+        if(formProductName.text != "" &&
+           formProductPrice.text != "" &&
+           formCategory.text != "" &&
+           formDescription.text != "" &&
+           (imagePickerProduct.pickerIcon.image != nil)
+        ){
+            self.tabBarController?.selectedIndex = 3
+        }else{
+            let alert = UIAlertController(title: "Pemberitahuan", message: "Lengkapi data terlebih dahulu", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .default))
+            self.present(alert, animated: true)
+            return
+        }
+    }
     
     @objc func navigateToPreview(){
-        let SCSellerPublishVC = SCSellerPublishProductViewController()
-        navigationController?.pushViewController(SCSellerPublishVC, animated: true)
-        SCSellerPublishVC.productCard.productTitle.text = formProductName.text
-        SCSellerPublishVC.productCard.productPrice.text = ("Rp " + formProductPrice.text)
-        SCSellerPublishVC.productCard.productCategory.text = formCategory.text
-        SCSellerPublishVC.descCard.descLabel.text = formDescription.text
-        SCSellerPublishVC.makeHeaderImageView.image = imagePickerProduct.pickerIcon.image!
+    
+        if(formProductName.text != "" &&
+           formProductPrice.text != "" &&
+           formCategory.text != "" &&
+           formDescription.text != "" &&
+           (imagePickerProduct.pickerIcon.image != nil)
+        ){
+            let SCSellerPublishVC = SCSellerPublishProductViewController()
+            navigationController?.pushViewController(SCSellerPublishVC, animated: true)
+            var tempCategory = category.filter{
+                $0.name == formCategory.text
+            }
+            
+            
+            SCSellerPublishVC.productCard.productTitle.text = formProductName.text
+            SCSellerPublishVC.productPrice = Int(formProductPrice.text) ?? 0
+            SCSellerPublishVC.productCard.productCategory.text = formCategory.text
+            SCSellerPublishVC.productCategoryId = tempCategory[0].id ?? 0
+            SCSellerPublishVC.descCard.descLabel.text = formDescription.text
+            SCSellerPublishVC.makeHeaderImageView.image = imagePickerProduct.pickerIcon.image!
+        }else{
+            let alert = UIAlertController(title: "Pemberitahuan", message: "Lengkapi data terlebih dahulu", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .default))
+            self.present(alert, animated: true)
+            return
+        }
+       
     }
 }

@@ -22,8 +22,14 @@ class SCSellerPublishProductViewController: UIViewController {
 //        self.dismiss(animated: true, completion: nil)
         self.tabBarController?.tabBar.isHidden = false
     }
+
+    var productPrice: Int = 0 {
+        didSet{
+            self.productCard.productPrice.text = ("Rp \(productPrice)")
+        }
+    }
     
-    
+    var productCategoryId: Int = 0
     
     lazy var productCard = SCProductCard(frame: .zero, productImageURL: "", productTitle: "Jam Tangan Casio", productCategory: "Aksesoris", productPrice: "Rp 250.000")
     
@@ -53,10 +59,23 @@ class SCSellerPublishProductViewController: UIViewController {
     
     lazy var publishButton: SCButton = SCButton(style: .primary, size: .normal, type: .defaultButton, title: "Terbitkan")
     
+    func getUser() {
+        NetworkServices().getUserAlamofire() { (result) in
+            DispatchQueue.main.async {
+                let user = User(
+                    imageUser: result.image ?? "",
+                    userName: result.fullName ?? "",
+                    city: result.city ?? ""
+                )
+                self.sellerCard.configure(user: user)
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        publishButton.addTarget(self, action: #selector(navigateToHome), for: .touchUpInside )
+        getUser()
+        publishButton.addTarget(self, action: #selector(publishProduct), for: .touchUpInside )
         let screensize: CGRect = UIScreen.main.bounds
         let screenWidth = screensize.width
         let screenHeight = screensize.height
@@ -109,9 +128,28 @@ class SCSellerPublishProductViewController: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
-    @objc func navigateToHome() {
-        self.tabBarController?.selectedIndex = 3
-        self.navigationController?.popViewController(animated: false)
-        
+    @objc func publishProduct() {
+        NetworkServices().createProduct(
+            name: self.productCard.productTitle.text ?? "",
+            description: self.descCard.descLabel.text ?? "",
+            price: productPrice ?? 0,
+            category: self.productCategoryId ?? 0,
+            location: self.sellerCard.sellerCity.text ?? "",
+            image: (self.makeHeaderImageView.image?.jpegData(compressionQuality: 0.3))!
+        ){ (result) in
+            switch result {
+            case .success(let success):
+                print(success)
+                self.tabBarController?.selectedIndex = 3
+                self.navigationController?.popViewController(animated: false)
+            case .failure(let error):
+//                let alert = UIAlertController(title: "Pemberitahuan", message: "Gagal membuat product", preferredStyle: .alert)
+//                alert.addAction(UIAlertAction(title: "Ok", style: .default))
+//                self.present(alert, animated: true)
+                print(error)
+                return
+            }
+  
+        }
     }
 }

@@ -168,8 +168,6 @@ class SCSellerUploadViewController: UIViewController {
             var tempCategory = category.filter{
                 $0.name == formCategory.text
             }
-            
-            
             SCSellerPublishVC.productCard.productTitle.text = formProductName.text
             SCSellerPublishVC.productPrice = Int(formProductPrice.text) ?? 0
             SCSellerPublishVC.productCard.productCategory.text = formCategory.text
@@ -182,6 +180,32 @@ class SCSellerUploadViewController: UIViewController {
             self.present(alert, animated: true)
             return
         }
+//        switch(formProductName.text.isEmpty, formProductPrice.text.isEmpty, formCategory.text.isEmpty, formDescription.text.isEmpty){
+//            
+//        case (false, false, false, false):
+//            let SCSellerPublishVC = SCSellerPublishProductViewController()
+//            navigationController?.pushViewController(SCSellerPublishVC, animated: true)
+//            SCSellerPublishVC.productCard.productTitle.text = formProductName.text
+//            SCSellerPublishVC.productCard.productPrice.text = ("Rp " + formProductPrice.text)
+//            SCSellerPublishVC.productCard.productCategory.text = formCategory.text
+//            SCSellerPublishVC.descCard.descLabel.text = formDescription.text
+//            SCSellerPublishVC.makeHeaderImageView.image = imagePickerProduct.pickerIcon.image!
+//            
+//        case (true, false, false, false):
+//            print("Nama Product kosong")
+//            
+//        case (false, true, true, true):
+//            print("Harga Product kosong")
+//            
+//        case (false, false, true, true):
+//            print("Category kosong")
+//            
+//        case (false, false, false, true):
+//            print("Deskripsi Product kosong")
+//            
+//        default:
+//            print("Data semua product kosong")
+//        }
        
     }
 }

@@ -27,18 +27,18 @@ class SCBuyerProductViewController: UIViewController {
     
     lazy var productCard = SCProductCard(frame: .zero, productImageURL: "", productTitle: "Jam Tangan Casio", productCategory: "Aksesoris", productPrice: "Rp 250.000")
     
-    lazy var sellerCard = SCSellerProfileView(frame: .zero, productImageURL: "", productLabel: "Nama Penjual", sellerCity: "Kota")
+    lazy var buyerCard = SCSellerProfileView(frame: .zero, productImageURL: "", productLabel: "Nama Penjual", sellerCity: "Kota")
     
     lazy var descCard = SCDescCard(frame: .zero, descLabel: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")
     
     lazy var formStack: UIStackView = {
        let stack = UIStackView(arrangedSubviews: [
         productCard,
-        sellerCard,
+        buyerCard,
         descCard,
        ])
         stack.setCustomSpacing(16, after: productCard)
-        stack.setCustomSpacing(16, after: sellerCard)
+        stack.setCustomSpacing(16, after: buyerCard)
         stack.axis = .vertical
         return stack
     }()
@@ -77,7 +77,7 @@ class SCBuyerProductViewController: UIViewController {
         formStack.bringSubviewToFront(publishButton)
         
         productCard.productImage.isHidden = true
-        sellerCard.editButton.isHidden = true
+        buyerCard.editButton.isHidden = true
         
         formStack.translatesAutoresizingMaskIntoConstraints = false
         publishButton.translatesAutoresizingMaskIntoConstraints = false

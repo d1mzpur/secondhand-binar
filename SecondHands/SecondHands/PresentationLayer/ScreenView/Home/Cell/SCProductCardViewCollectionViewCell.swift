@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class SCProductCardViewCollectionViewCell: UICollectionViewCell {
     lazy var cardView = SCProductCard()
@@ -38,7 +39,12 @@ class SCProductCardViewCollectionViewCell: UICollectionViewCell {
             let productPrice = item.productPrice,
             let category = item.productCategory?.map( { ($0.name ?? "") } ).joined(separator: ", ")
         else { return }
-        cardView.productImage.loadImage(resource: item.productImage)
+        cardView.productImage.kf.indicatorType = .activity
+        KF.url(URL(string: item.productImage!))
+            
+            .processingQueue(.mainAsync)
+            .cacheMemoryOnly()
+            .set(to: cardView.productImage)
         cardView.productTitle.text = item.productTitle
         cardView.productCategory.text = category
         

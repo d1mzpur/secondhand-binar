@@ -20,6 +20,21 @@ class SCHomeViewController: UIViewController {
         return newCategoryItem
     }
     var firstState: Bool = false
+    
+    lazy var loadingIndicator: UIActivityIndicatorView = {
+        var indicator  = UIActivityIndicatorView(style: .large)
+        indicator.color = .black
+        indicator.hidesWhenStopped = true
+        indicator.startAnimating()
+        return indicator
+    }()
+    
+    lazy var loadingView: UIAlertController = {
+        var loadingView = UIAlertController(title: "Please wait...", message: "", preferredStyle: .alert)
+        return loadingView
+    }()
+    
+    
     var customSearchBar: SCSearchBar = {
         var searchBar = SCSearchBar()
         searchBar.layer.cornerRadius = 16
@@ -78,40 +93,37 @@ class SCHomeViewController: UIViewController {
         
         setupCollection()
         setupConstraint()
-        getBanner()
-        getCategory()
-        getProduct()
+        loadData()
     }
     
     func setupAddView() {
         view.addSubview(homeCollectionView)
     }
     
+    func loadData() {
+        self.present(loadingView, animated: true, completion: nil)
+        getBanner()
+        getCategory()
+        getProduct()
+    }
+    
     func getBanner() {
-        service.getBanner { result in
-            switch result {
-            case .success(let success):
-                DispatchQueue.main.async {
-                    self.offerItem = success
-                    self.homeCollectionView.reloadData()
-                }
-            case .failure(let error):
-                print(error)
+        service.getBanner { [weak self] result in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                self.offerItem = result
+                self.homeCollectionView.reloadData()
             }
+
         }
     }
     
     func getCategory() {
-        service.getCategory { (result) in
-            switch result {
-            case .success(let result):
-                DispatchQueue.main.async {
-                    self.category = result
-                    self.homeCollectionView.reloadData()
-                }
-                
-            case .failure(let error):
-                print(error)
+        service.getCategory { [weak self] (result) in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                self.category = result
+                self.homeCollectionView.reloadData()
             }
         }
     }
@@ -119,16 +131,10 @@ class SCHomeViewController: UIViewController {
     func getProduct() {
         service.getProduct(by: .buyer) { [weak self] result in
             guard let self = self else { return }
-            switch result {
-            case .success(let itemResults):
-                DispatchQueue.main.async {
-                    self.productItem = itemResults
-                    self.filterListProduct = self.productItem
-                    self.homeCollectionView.reloadData()
-                }
-                
-            case .failure(let error):
-                print(error.localizedDescription)
+            DispatchQueue.main.async {
+                self.productItem = result
+                self.filterListProduct = self.productItem
+                self.homeCollectionView.reloadData()
             }
         }
     }
@@ -184,12 +190,10 @@ extension SCHomeViewController: UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard
-            let bannerCell = collectionView.dequeueReusableCell(withReuseIdentifier: "banner", for: indexPath) as? SCBannerCollectionViewCell,
-            let categoryCell = collectionView.dequeueReusableCell(withReuseIdentifier: "categoryChips", for: indexPath) as? SCCategoryChipCollectionViewCell,
-            let productCell = collectionView.dequeueReusableCell(withReuseIdentifier: "productList", for: indexPath) as? SCProductCardViewCollectionViewCell
-        else { return UICollectionViewCell() }
-        
+        let bannerCell = collectionView.dequeueReusableCell(withReuseIdentifier: "banner", for: indexPath) as! SCBannerCollectionViewCell
+        let categoryCell = collectionView.dequeueReusableCell(withReuseIdentifier: "categoryChips", for: indexPath) as! SCCategoryChipCollectionViewCell
+        let productCell = collectionView.dequeueReusableCell(withReuseIdentifier: "productList", for: indexPath) as! SCProductCardViewCollectionViewCell
+                
         let section = indexPath.section
         let item = indexPath.item + 1
         let newItem = item > 0 ? item - 1 : item
@@ -201,6 +205,7 @@ extension SCHomeViewController: UICollectionViewDelegate, UICollectionViewDataSo
             bannerCell.configure(item: offerItem ?? .init(bannerId: 0, bannerImage: "", bannerTitle: "", createdAt: "", updatedAt: ""))
             
             return bannerCell
+            
         } else if section == 1 {
             let selected = selectedCategoryIndex == indexPath[1]
             categoryCell.cellClicked(state: selected)
@@ -222,6 +227,7 @@ extension SCHomeViewController: UICollectionViewDelegate, UICollectionViewDataSo
         } else {
             guard let item = filterListProduct?.isEmpty == nil ? productList : filterListProduct?[newItem] else { return UICollectionViewCell() }
             productCell.configure(item: item)
+            dismiss(animated: true, completion: nil)
             return productCell
         }
         
@@ -319,7 +325,7 @@ extension SCHomeViewController {
         gradientLayer.locations = [ 0.5, 0.5]
         gradientLayer.frame = CGRect(x: 0, y: -20, width: 375, height: 64)
         
-        navigationController?.navigationBar.barTintColor = colorTop
+//        navigationController?.navigationBar.barTintColor = colorTop
         //        navigationController?.navigationBar.backgroundColor = .red
         //              self.navigationController?.navigationBar.layer.addSublayer(gradientLayer)
     }

@@ -30,7 +30,7 @@ class SCSellerUploadViewController: UIViewController {
     
     lazy var formCategory: SCFormItem = SCFormItem(formType: .pickerView, formName: "Kategori", placeholder: "Pilih Kategori")
     
-    lazy var formDescription: SCFormItem = SCFormItem(formType: .area, formName: "Deskripsi", placeholder: "Contoh: Jalan Ikan Hiu 33")
+    lazy var formDescription: SCFormItem = SCFormItem(formType: .area, formName: "Deskripsi", placeholder: "")
     
     lazy var labelImagePicker: SCLabel = SCLabel(weight: .regular, size: 14)
     

@@ -64,7 +64,8 @@ class NetworkServices {
         
         URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
             let respon = response as? HTTPURLResponse
-            
+            print(response)
+            print(respon?.statusCode)
             guard let data = data else { return }
             if let error = error {
                 print(error.localizedDescription)
@@ -129,6 +130,30 @@ class NetworkServices {
         }.resume()
     }
     
+    func getUserAlamofire(accessToken: String, completion: @escaping (UpdateUserModel) -> Void) {
+        let endPoint = self.baseUrl
+        print("catch token alamofire \n", accessToken)
+//        print(bodyData.data(using: String.Encoding.utf8)!)
+        guard let urlComponents = URLComponentsBuilder(baseURL: endPoint)
+                .path("/auth")
+                .path("/user")
+                .buildUrl()
+        else { return }
+        
+        let urlRequest = URLRequestBuilder(url: urlComponents)
+            .httpMethod(.GET)
+            .addHeader(value: accessToken, key: "access_token")
+            .build()
+        
+        AF.request(urlRequest).validate()
+            .responseDecodable(of: UpdateUserModel.self) { result in
+                if let value = result.value {
+                    completion(value)
+                }
+                
+        }
+    }
+    
     func getUser(accessToken: String, completion: @escaping (Result<UpdateUserModel, Error>) -> Void) {
         let endPoint = self.baseUrl
         print("catch token\n", accessToken)
@@ -145,7 +170,7 @@ class NetworkServices {
             .build()
         
         URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
-            let respon = response as? HTTPURLResponse
+            _ = response as? HTTPURLResponse
             
             guard let data = data else { return }
             if let error = error {
@@ -193,7 +218,7 @@ class NetworkServices {
             .build()
         
         URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
-            let respon = response as? HTTPURLResponse
+            _ = response as? HTTPURLResponse
             
             guard let data = data else { return }
             if let error = error {
@@ -215,7 +240,7 @@ class NetworkServices {
         }.resume()
     }
     
-    func getBanner(completion: @escaping(Result<[OfferItem], Error>) -> Void) {
+    func getBanner(completion: @escaping([OfferItem]) -> Void) {
         let endPoint = self.baseUrl
         
         // MARK: - INI URL
@@ -232,26 +257,17 @@ class NetworkServices {
             .httpMethod(.GET)
             .build()
 //        print(urlRequest.url)
-        let jsonDecoder = JSONDecoder()
-        URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
-            guard let data = data else { return }
-            if let error = error {
-                print(error.localizedDescription)
-            }
-            
-            do {
-                let session = try jsonDecoder.decode([OfferItem].self, from: data)
-                DispatchQueue.main.async {
-                    completion(.success(session))
+        
+        AF.request(urlRequest).validate()
+            .responseDecodable(of: [OfferItem].self) { result in
+                if let value = result.value {
+                    completion(value)
                 }
                 
-            } catch let error {
-                completion(.failure(error))
-            }
-        }.resume()
+        }
     }
     
-    func getCategory(completion: @escaping(Result<[Categories], Error>) -> Void) {
+    func getCategory(completion: @escaping([Categories]) -> Void) {
         let endPoint = self.baseUrl
         
         guard let urlcomponents = URLComponentsBuilder(baseURL: endPoint)
@@ -263,26 +279,17 @@ class NetworkServices {
             .httpMethod(.GET)
             .build()
 //        print(urlRequest.url)
-        let jsonDecoder = JSONDecoder()
-        URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
-            guard let data = data else { return }
-            if let error = error {
-                print(error.localizedDescription)
-            }
-            
-            do {
-                let session = try jsonDecoder.decode([Categories].self, from: data)
-                DispatchQueue.main.async {
-                    completion(.success(session))
+        
+        AF.request(urlRequest).validate()
+            .responseDecodable(of: [Categories].self) { result in
+                if let value = result.value {
+                    completion(value)
                 }
                 
-            } catch let error {
-                completion(.failure(error))
-            }
-        }.resume()
+        }
     }
     
-    func getProduct(by user: UserEndpoint, completion: @escaping(Result<[ProductItem], Error>) -> Void) {
+    func getProduct(by user: UserEndpoint, completion: @escaping([ProductItem]) -> Void) {
         let endPoint = self.baseUrl
         
         guard let urlcomponents = URLComponentsBuilder(baseURL: endPoint)
@@ -296,23 +303,32 @@ class NetworkServices {
         if(user == .seller){
             urlRequest.setValue(getAccessToken(), forHTTPHeaderField: "access_token")
         }
-        let jsonDecoder = JSONDecoder()
-        URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
-            guard let data = data else { return }
-            if let error = error {
-                print(error.localizedDescription)
-            }
-            
-            do {
-                let session = try jsonDecoder.decode([ProductItem].self, from: data)
-                DispatchQueue.main.async {
-                    completion(.success(session))
+        
+        AF.request(urlRequest).validate()
+            .responseDecodable(of: [ProductItem].self) { result in
+                if let value = result.value {
+                    completion(value)
                 }
                 
-            } catch let error {
-                completion(.failure(error))
-            }
-        }.resume()
+        }
+        
+//        let jsonDecoder = JSONDecoder()
+//        URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
+//            guard let data = data else { return }
+//            if let error = error {
+//                print(error.localizedDescription)
+//            }
+//            
+//            do {
+//                let session = try jsonDecoder.decode([ProductItem].self, from: data)
+//                DispatchQueue.main.async {
+//                    completion(.success(session))
+//                }
+//                
+//            } catch let error {
+//                completion(.failure(error))
+//            }
+//        }.resume()
         
     }	
     

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class SCBannerCollectionViewCell: UICollectionViewCell {
     var searchBar: SCSearchBar = {
@@ -80,7 +81,12 @@ class SCBannerCollectionViewCell: UICollectionViewCell {
     }
     
     func configure(item: OfferItem) {
-        offerImage.loadImage(resource: item.bannerImage)
+        offerImage.kf.indicatorType = .activity
+        KF.url(URL(string: item.bannerImage))
+            
+            .processingQueue(.mainAsync)
+            .cacheMemoryOnly()
+            .set(to: offerImage)
         offerTitle.text = item.bannerTitle
 //        discount.text = item.discount
     }

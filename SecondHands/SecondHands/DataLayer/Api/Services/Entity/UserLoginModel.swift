@@ -20,10 +20,10 @@ struct UserLoginModel: Codable {
 }
 
 struct UpdateUserModel: Codable {
-    let id: Int?
+    let id: Int? = 0
     let fullName: String?
     let email: String?
-    let phoneNumber: Int?
+    let phoneNumber: String?
     let address: String?
     let image: String?
     let city: String?
@@ -34,7 +34,7 @@ struct UpdateUserModel: Codable {
         case email
         case phoneNumber = "phone_number"
         case address
-        case image
+        case image = "image_url"
         case city
     }
 }

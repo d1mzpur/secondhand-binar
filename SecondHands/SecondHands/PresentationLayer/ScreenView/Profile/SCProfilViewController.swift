@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class SCProfilViewController: UIViewController {
     let userDefault = UserDefaults.standard
@@ -75,7 +76,8 @@ class SCProfilViewController: UIViewController {
         title = "Lengkapi Info Akun"
         formCity.dataList = ["Bandung","Jakarta","Surabaya","Denpasar","Cilegon","Serang","Serang","Yogyakarta","Gorontalo","Cirebon"]
         view.backgroundColor = .white
-        getUser()
+//        getUser()
+        getUserAla()
         view.addSubview(imagePicker)
         view.addSubview(formItemStack)
         
@@ -116,6 +118,28 @@ class SCProfilViewController: UIViewController {
         }
     }
     
+    func getUserAla() {
+        if let accessToken = userDefault.string(forKey: "accessToken") {
+            NetworkServices().getUserAlamofire(accessToken: accessToken) { (result) in
+                
+                DispatchQueue.main.async {
+                    if let image = result.image {
+                        (self.imagePicker as UIView).changeImage(imageName: image)
+                        let imageContainer = UIImageView()
+                        imageContainer.loadImage(resource: image)
+                        self.imageData = imageContainer.image?.pngData()
+                        print("SEND IMAGE DATA ==> ", self.imageData)
+                    }
+                    
+                    self.formName.Textfield.text = result.fullName
+                    self.formCity.TextfieldWithPicker.text = result.city
+                    self.formAdress.Textfieldarea.setText(placeholder: result.address ?? "")
+                    self.formNumberPhone.Textfield.text = result.phoneNumber
+                }
+            }
+        }
+    }
+    
     func getUser() {
         if let accessToken = userDefault.string(forKey: "accessToken") {
             NetworkServices().getUser(accessToken: accessToken) { [weak self] (result) in
@@ -123,9 +147,9 @@ class SCProfilViewController: UIViewController {
                 switch result {
                 case .success(let success):
                     DispatchQueue.main.async {
-                        (self.imagePicker as UIView).changeImage(imageName: "https://developer.apple.com/swift/images/swift-og.png")
+                        
                         if let image = success.image {
-                            
+                            (self.imagePicker as UIView).changeImage(imageName: image)
                             let imageContainer = UIImageView()
                             imageContainer.loadImage(resource: image)
                             self.imageData = imageContainer.image?.pngData()
@@ -134,8 +158,8 @@ class SCProfilViewController: UIViewController {
                         
                         self.formName.Textfield.text = success.fullName
                         self.formCity.TextfieldWithPicker.text = "Jakarta"
-//                        self.formAdress.Textfieldarea.setText(placeholder: "")
-                        self.formNumberPhone.Textfield.text = String(describing: success.phoneNumber)
+                        self.formAdress.Textfieldarea.setText(placeholder: success.address ?? "")
+                        self.formNumberPhone.Textfield.text = success.phoneNumber
                         print("GET ==>> ", success)
                     }
                     

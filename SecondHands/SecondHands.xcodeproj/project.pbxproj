@@ -67,6 +67,7 @@
 		2213A0F1286CB63800122486 /* SCDescCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2213A0F0286CB63800122486 /* SCDescCard.swift */; };
 		22144F102860C54F003921ED /* SCLoginViewControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22144F0F2860C54F003921ED /* SCLoginViewControllers.swift */; };
 		225D67B3285C772700C7EAA2 /* SCTextfieldarea.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225D67B2285C772700C7EAA2 /* SCTextfieldarea.swift */; };
+		22A01C2228884340009195FC /* SCBuyerProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A01C2128884340009195FC /* SCBuyerProductViewController.swift */; };
 		22B9F2422869FD4E0082BA10 /* SCSellerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B9F2412869FD4E0082BA10 /* SCSellerItem.swift */; };
 		22D5643E285DA7E300BB5294 /* SCProfilViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D5643D285DA7E300BB5294 /* SCProfilViewController.swift */; };
 		22E1F760285A30D900FA40BF /* SCTextfield.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E1F75F285A30D900FA40BF /* SCTextfield.swift */; };
@@ -75,6 +76,7 @@
 		7220E4B6288559B000AB492E /* SCBuyerTestModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7220E4B5288559B000AB492E /* SCBuyerTestModalViewController.swift */; };
 		7220E4B828855B0600AB492E /* SCBuyerModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7220E4B728855B0600AB492E /* SCBuyerModalViewController.swift */; };
 		726047F628607B9100AB2EA7 /* SCRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 726047F528607B9100AB2EA7 /* SCRegisterViewController.swift */; };
+		728BA6F128884A17009425EA /* SCBuyerModalCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728BA6F028884A16009425EA /* SCBuyerModalCard.swift */; };
 		729BBDB92861C61B00BAE262 /* SCSellerUploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 729BBDB82861C61B00BAE262 /* SCSellerUploadViewController.swift */; };
 		72BDD18D2858A0BF006A75A6 /* SCButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72BDD18C2858A0BF006A75A6 /* SCButton.swift */; };
 		72D71C052874454200D0C384 /* SCModalTransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D71C042874454200D0C384 /* SCModalTransactionViewController.swift */; };
@@ -147,6 +149,7 @@
 		2213A0F0286CB63800122486 /* SCDescCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCDescCard.swift; sourceTree = "<group>"; };
 		22144F0F2860C54F003921ED /* SCLoginViewControllers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCLoginViewControllers.swift; sourceTree = "<group>"; };
 		225D67B2285C772700C7EAA2 /* SCTextfieldarea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCTextfieldarea.swift; sourceTree = "<group>"; };
+		22A01C2128884340009195FC /* SCBuyerProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCBuyerProductViewController.swift; sourceTree = "<group>"; };
 		22B9F2412869FD4E0082BA10 /* SCSellerItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCSellerItem.swift; sourceTree = "<group>"; };
 		22D5643D285DA7E300BB5294 /* SCProfilViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCProfilViewController.swift; sourceTree = "<group>"; };
 		22E1F75F285A30D900FA40BF /* SCTextfield.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCTextfield.swift; sourceTree = "<group>"; };
@@ -155,6 +158,7 @@
 		7220E4B5288559B000AB492E /* SCBuyerTestModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCBuyerTestModalViewController.swift; sourceTree = "<group>"; };
 		7220E4B728855B0600AB492E /* SCBuyerModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCBuyerModalViewController.swift; sourceTree = "<group>"; };
 		726047F528607B9100AB2EA7 /* SCRegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCRegisterViewController.swift; sourceTree = "<group>"; };
+		728BA6F028884A16009425EA /* SCBuyerModalCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCBuyerModalCard.swift; sourceTree = "<group>"; };
 		729BBDB82861C61B00BAE262 /* SCSellerUploadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCSellerUploadViewController.swift; sourceTree = "<group>"; };
 		72BDD18C2858A0BF006A75A6 /* SCButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCButton.swift; sourceTree = "<group>"; };
 		72D71C042874454200D0C384 /* SCModalTransactionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCModalTransactionViewController.swift; sourceTree = "<group>"; };
@@ -257,6 +261,7 @@
 				22B9F2412869FD4E0082BA10 /* SCSellerItem.swift */,
 				0A50751F286AB62600CF1912 /* SCSellerProfileView.swift */,
 				2213A0F0286CB63800122486 /* SCDescCard.swift */,
+				728BA6F028884A16009425EA /* SCBuyerModalCard.swift */,
 			);
 			path = Molecule;
 			sourceTree = "<group>";
@@ -265,7 +270,6 @@
 			isa = PBXGroup;
 			children = (
 				7220E4B32885596B00AB492E /* Buyer */,
-				729BBDB72861C5F500BAE262 /* Seller */,
 				22062A7D286E06D300047AB5 /* Notification */,
 				016F1C512860A7EB007A1ADE /* Account */,
 				0A9E1D1C28579C3600D864A4 /* Home */,
@@ -495,6 +499,7 @@
 		7220E4B32885596B00AB492E /* Buyer */ = {
 			isa = PBXGroup;
 			children = (
+				22A01C2128884340009195FC /* SCBuyerProductViewController.swift */,
 				7220E4B42885597700AB492E /* Modal */,
 			);
 			path = Buyer;
@@ -657,6 +662,7 @@
 				225D67B3285C772700C7EAA2 /* SCTextfieldarea.swift in Sources */,
 				01D01326286D88870001CD7F /* SCSellerProductListViewController.swift in Sources */,
 				726047F628607B9100AB2EA7 /* SCRegisterViewController.swift in Sources */,
+				728BA6F128884A17009425EA /* SCBuyerModalCard.swift in Sources */,
 				2213A0F1286CB63800122486 /* SCDescCard.swift in Sources */,
 				2213A0EF286CADFA00122486 /* SCSellerPublishProductViewController.swift in Sources */,
 				0AD38195287DCC2500C65B9A /* SCSellerCategoryCollectionView.swift in Sources */,
@@ -706,6 +712,7 @@
 				0A996325286A0DDD0074D640 /* SCAddProductCollectionViewCell.swift in Sources */,
 				22062A7F286E071100047AB5 /* SCNotificationViewController.swift in Sources */,
 				01B18BA8286088D300A09AD8 /* LayoutSection.swift in Sources */,
+				22A01C2228884340009195FC /* SCBuyerProductViewController.swift in Sources */,
 				0A9A5879285DB2DA00E008A4 /* SCChipView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

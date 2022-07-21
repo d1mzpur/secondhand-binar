@@ -101,29 +101,48 @@ class SCProfilViewController: UIViewController {
     
     @objc
     func updateData() {
-        if let accessToken = userDefault.string(forKey: "accessToken") {
-            print("ACCESS TOKEN\n", accessToken)
-            let formNumber = Int(formNumberPhone.text )
-            NetworkServices().updateProfile(image: "", fullname: formName.text, city: formCity.text, address: formAdress.text, phoneNumber: formNumber ?? 0, accessToken: accessToken) { [weak self] (result) in
-                guard let self = self else { return }
-                switch result {
-                case .success(let success):
-                    DispatchQueue.main.async {
-                        print(success)
-                    }
-                case .failure(let error):
-                    print(error.localizedDescription)
+        let formNumber = Int(formNumberPhone.text )
+        NetworkServices().updateProfile(image: "", fullname: formName.text, city: formCity.text, address: formAdress.text, phoneNumber: formNumber ?? 0) { [weak self] (result) in
+            guard let self = self else { return }
+            switch result {
+            case .success(let success):
+                DispatchQueue.main.async {
+                    print(success)
                 }
+            case .failure(let error):
+                print(error.localizedDescription)
             }
         }
     }
     
     func getUserAla() {
-        if let accessToken = userDefault.string(forKey: "accessToken") {
-            NetworkServices().getUserAlamofire(accessToken: accessToken) { (result) in
+        NetworkServices().getUserAlamofire() { (result) in
+            
+            DispatchQueue.main.async {
+                if let image = result.image {
+                    (self.imagePicker as UIView).changeImage(imageName: image)
+                    let imageContainer = UIImageView()
+                    imageContainer.loadImage(resource: image)
+                    self.imageData = imageContainer.image?.pngData()
+                    print("SEND IMAGE DATA ==> ", self.imageData)
+                }
                 
+                self.formName.Textfield.text = result.fullName
+                self.formCity.TextfieldWithPicker.text = result.city
+                self.formAdress.Textfieldarea.setText(placeholder: result.address ?? "")
+                self.formNumberPhone.Textfield.text = result.phoneNumber
+            }
+        }
+    }
+    
+    func getUser() {
+        NetworkServices().getUser() { [weak self] (result) in
+            guard let self = self else { return }
+            switch result {
+            case .success(let success):
                 DispatchQueue.main.async {
-                    if let image = result.image {
+                    
+                    if let image = success.image {
                         (self.imagePicker as UIView).changeImage(imageName: image)
                         let imageContainer = UIImageView()
                         imageContainer.loadImage(resource: image)
@@ -131,41 +150,15 @@ class SCProfilViewController: UIViewController {
                         print("SEND IMAGE DATA ==> ", self.imageData)
                     }
                     
-                    self.formName.Textfield.text = result.fullName
-                    self.formCity.TextfieldWithPicker.text = result.city
-                    self.formAdress.Textfieldarea.setText(placeholder: result.address ?? "")
-                    self.formNumberPhone.Textfield.text = result.phoneNumber
+                    self.formName.Textfield.text = success.fullName
+                    self.formCity.TextfieldWithPicker.text = "Jakarta"
+                    self.formAdress.Textfieldarea.setText(placeholder: success.address ?? "")
+                    self.formNumberPhone.Textfield.text = success.phoneNumber
+                    print("GET ==>> ", success)
                 }
-            }
-        }
-    }
-    
-    func getUser() {
-        if let accessToken = userDefault.string(forKey: "accessToken") {
-            NetworkServices().getUser(accessToken: accessToken) { [weak self] (result) in
-                guard let self = self else { return }
-                switch result {
-                case .success(let success):
-                    DispatchQueue.main.async {
-                        
-                        if let image = success.image {
-                            (self.imagePicker as UIView).changeImage(imageName: image)
-                            let imageContainer = UIImageView()
-                            imageContainer.loadImage(resource: image)
-                            self.imageData = imageContainer.image?.pngData()
-                            print("SEND IMAGE DATA ==> ", self.imageData)
-                        }
-                        
-                        self.formName.Textfield.text = success.fullName
-                        self.formCity.TextfieldWithPicker.text = "Jakarta"
-                        self.formAdress.Textfieldarea.setText(placeholder: success.address ?? "")
-                        self.formNumberPhone.Textfield.text = success.phoneNumber
-                        print("GET ==>> ", success)
-                    }
-                    
-                case .failure(let error):
-                    print(error)
-                }
+                
+            case .failure(let error):
+                print(error)
             }
         }
     }

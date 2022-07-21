@@ -86,7 +86,7 @@ class SCSellerProfileView: UIView {
     }
     
     func configure(user: User) {
-        imageSeller.image = UIImage(named: user.imageUser)
+        imageSeller.loadImage(resource: user.imageUser)
         usernameSeller.text = user.userName
         sellerCity.text = user.city
     }

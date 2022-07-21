@@ -130,9 +130,8 @@ class NetworkServices {
         }.resume()
     }
     
-    func getUserAlamofire(accessToken: String, completion: @escaping (UpdateUserModel) -> Void) {
+    func getUserAlamofire(completion: @escaping (UpdateUserModel) -> Void) {
         let endPoint = self.baseUrl
-        print("catch token alamofire \n", accessToken)
 //        print(bodyData.data(using: String.Encoding.utf8)!)
         guard let urlComponents = URLComponentsBuilder(baseURL: endPoint)
                 .path("/auth")
@@ -142,7 +141,7 @@ class NetworkServices {
         
         let urlRequest = URLRequestBuilder(url: urlComponents)
             .httpMethod(.GET)
-            .addHeader(value: accessToken, key: "access_token")
+            .addHeader(value: getAccessToken(), key: "access_token")
             .build()
         
         AF.request(urlRequest).validate()
@@ -154,9 +153,9 @@ class NetworkServices {
         }
     }
     
-    func getUser(accessToken: String, completion: @escaping (Result<UpdateUserModel, Error>) -> Void) {
+    func getUser(completion: @escaping (Result<UpdateUserModel, Error>) -> Void) {
         let endPoint = self.baseUrl
-        print("catch token\n", accessToken)
+        print("catch token\n", getAccessToken())
 //        print(bodyData.data(using: String.Encoding.utf8)!)
         guard let urlComponents = URLComponentsBuilder(baseURL: endPoint)
                 .path("/auth")
@@ -166,7 +165,7 @@ class NetworkServices {
         
         let urlRequest = URLRequestBuilder(url: urlComponents)
             .httpMethod(.GET)
-            .addHeader(value: accessToken, key: "access_token")
+            .addHeader(value: getAccessToken(), key: "access_token")
             .build()
         
         URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
@@ -192,7 +191,7 @@ class NetworkServices {
         }.resume()
     }
     
-    func updateProfile(image: String, fullname: String, city: String, address: String, phoneNumber: Int, accessToken: String, completion: @escaping (Result<UpdateUserModel, Error>) -> Void) {
+    func updateProfile(image: String, fullname: String, city: String, address: String, phoneNumber: Int, completion: @escaping (Result<UpdateUserModel, Error>) -> Void) {
         let endPoint = self.baseUrl
         
         let bodyData = """
@@ -213,7 +212,7 @@ class NetworkServices {
         
         let urlRequest = URLRequestBuilder(url: urlComponents)
             .httpMethod(.POST)
-            .addHeader(value: "access_token", key: accessToken)
+            .addHeader(value: "access_token", key: getAccessToken())
             .addBody(data: bodyData)
             .build()
         

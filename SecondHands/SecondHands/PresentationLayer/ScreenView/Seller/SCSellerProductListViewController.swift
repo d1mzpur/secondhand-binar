@@ -9,7 +9,6 @@ import UIKit
 
 class SCSellerProductListViewController: UIViewController {
     var sellerView = SCSellerProfileView()
-    var user: User = User.createData()
     var categoryTitleArray: [String] = ["Produk","Diminati","Terjual"]
     var service = NetworkServices()
     var dataProduct: [ProductItem] = []{
@@ -44,6 +43,19 @@ class SCSellerProductListViewController: UIViewController {
         navigationController?.navigationBar.isHidden = true
     }
     
+    func getUser() {
+        NetworkServices().getUserAlamofire() { (result) in
+            DispatchQueue.main.async {
+                let user = User(
+                    imageUser: result.image ?? "",
+                    userName: result.fullName ?? "",
+                    city: result.city ?? ""
+                )
+                self.sellerView.configure(user: user)
+            }
+        }
+    }
+    
     func getProduct() {
         service.getProduct(by: .seller) { [weak self] result in
             guard let self = self else { return }
@@ -71,11 +83,11 @@ class SCSellerProductListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        configureView()
         view.addSubview(textTitle)
         view.addSubview(sellerView)
         view.addSubview(sellerCategory)
-  
+        sellerView.editButton.addAction(#selector(goToEditProfile), target: self)
+        getUser()
         sellerCollection.removeFromSuperview()
         sellerTableView.removeFromSuperview()
 //        let indexPath = IndexPath(item: 0, section: 0)
@@ -108,11 +120,11 @@ class SCSellerProductListViewController: UIViewController {
         
         
     }
-
     
-    private func configureView() {
-        sellerView.configure(user: user)
+    @objc func goToEditProfile(){
+        tabBarController?.selectedIndex = 4
     }
+
     
     private func setupCollection() {
         NSLayoutConstraint.activate([

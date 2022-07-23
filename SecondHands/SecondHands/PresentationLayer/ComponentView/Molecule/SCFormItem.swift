@@ -41,6 +41,14 @@ class SCFormItem: UIView {
                 case .area: return Textfieldarea.text
             }
         }
+        set {
+            switch formType{
+            case .normal: return Textfield.text = newValue
+                case .password: return TextfieldPassword.text = newValue
+                case .pickerView: return TextfieldWithPicker.text = newValue
+                case .area: return Textfieldarea.text = newValue
+            }
+        }
     }
     
     var dataList: [String] = [] {

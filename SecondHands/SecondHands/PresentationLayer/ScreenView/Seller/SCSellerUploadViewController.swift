@@ -8,7 +8,6 @@
 import UIKit
 
 class SCSellerUploadViewController: UIViewController {
-    
     override func viewWillAppear(_ animated: Bool) {
         self.tabBarController?.tabBar.isHidden = true
         self.navigationController?.navigationBar.barTintColor = .white
@@ -31,6 +30,7 @@ class SCSellerUploadViewController: UIViewController {
             self.formCategory.dataList = temp
         }
     }
+    var categoryId: Int = 0 
     
     var image: UIImage = UIImage()
     
@@ -87,6 +87,8 @@ class SCSellerUploadViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         getCategory()
+        getUser()
+        formProductPrice.Textfield.keyboardType = .numberPad
         navigationItem.title = "Lengkapi Detail Produk"
         view.backgroundColor = .white
         labelImagePicker.text = "Foto Produk"
@@ -125,6 +127,51 @@ class SCSellerUploadViewController: UIViewController {
 
         // Do any additional setup after loading the view.
     }
+    var user: User = User(imageUser: "", userName: "", city: "")
+    func getUser() {
+        NetworkServices().getUserAlamofire() { (result) in
+            DispatchQueue.main.async {
+                let user = User(
+                    imageUser: result.image ?? "",
+                    userName: result.fullName ?? "",
+                    city: result.city ?? "Indonesia"
+                )
+                self.user = user
+            }
+        }
+    }
+    
+    func resetForm(){
+        formProductName.text.removeAll()
+        formProductPrice.text.removeAll()
+        formCategory.text.removeAll()
+        formDescription.text.removeAll()
+        imagePickerProduct.resetImage()
+    }
+    func postData(){
+        NetworkServices().createProduct(
+            name: formProductName.text ,
+            description: formDescription.text ,
+            price: Int(formProductPrice.text) ?? 0,
+            category: categoryId,
+            location: user.city ,
+            image: (imagePickerProduct.pickerIcon.image!.jpegData(compressionQuality: 0.3))!
+        ){ (result) in
+            switch result {
+            case .success(let success):
+                print(success)
+                self.tabBarController?.selectedIndex = 3
+                self.navigationController?.popViewController(animated: false)
+            case .failure(let error):
+//                let alert = UIAlertController(title: "Pemberitahuan", message: "Gagal membuat product", preferredStyle: .alert)
+//                alert.addAction(UIAlertAction(title: "Ok", style: .default))
+//                self.present(alert, animated: true)
+                print(error)
+                return
+            }
+  
+        }
+    }
     
 
     /*
@@ -139,6 +186,7 @@ class SCSellerUploadViewController: UIViewController {
     @objc func backButton() {
         self.tabBarController?.selectedIndex = 3
     }
+    
     @objc func publishProduct() {
         if(formProductName.text != "" &&
            formProductPrice.text != "" &&
@@ -146,7 +194,15 @@ class SCSellerUploadViewController: UIViewController {
            formDescription.text != "" &&
            (imagePickerProduct.pickerIcon.image != nil)
         ){
+            let tempCategory = category.filter{
+                $0.name == formCategory.text
+            }
+            categoryId = tempCategory[0].id ?? 0
+            self.postData()
+            self.resetForm()
             self.tabBarController?.selectedIndex = 3
+  
+            
         }else{
             let alert = UIAlertController(title: "Pemberitahuan", message: "Lengkapi data terlebih dahulu", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Ok", style: .default))
@@ -163,17 +219,19 @@ class SCSellerUploadViewController: UIViewController {
            formDescription.text != "" &&
            (imagePickerProduct.pickerIcon.image != nil)
         ){
-            let SCSellerPublishVC = SCSellerPublishProductViewController()
-            navigationController?.pushViewController(SCSellerPublishVC, animated: true)
-            var tempCategory = category.filter{
+            let tempCategory = category.filter{
                 $0.name == formCategory.text
             }
+            categoryId = tempCategory[0].id ?? 0
+            let SCSellerPublishVC = SCSellerPublishProductViewController()
+            SCSellerPublishVC.uploadViewDelegate = self
             SCSellerPublishVC.productCard.productTitle.text = formProductName.text
             SCSellerPublishVC.productPrice = Int(formProductPrice.text) ?? 0
             SCSellerPublishVC.productCard.productCategory.text = formCategory.text
-            SCSellerPublishVC.productCategoryId = tempCategory[0].id ?? 0
             SCSellerPublishVC.descCard.descLabel.text = formDescription.text
             SCSellerPublishVC.makeHeaderImageView.image = imagePickerProduct.pickerIcon.image!
+            SCSellerPublishVC.sellerCard.configure(user: user)
+            navigationController?.pushViewController(SCSellerPublishVC, animated: true)
         }else{
             let alert = UIAlertController(title: "Pemberitahuan", message: "Lengkapi data terlebih dahulu", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Ok", style: .default))

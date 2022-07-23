@@ -14,7 +14,7 @@ struct NotifItem: Codable {
     let bidPrice: Int?
     let imageURL: String
     let transactionDate: String?
-    let status: ProductStatusEnum
+    let status: String?
     let sellerName: String
     let buyerName: String?
     let receiverID: Int
@@ -81,13 +81,6 @@ enum ProductStatus: String, Codable {
     case sold = "sold"
 }
 
-
-enum ProductStatusEnum: String, Codable {
-    case bid = "bid"
-    case create = "create"
-    case accepted = "accepted"
-    case declined = "declined"
-}
 
 // MARK: - User
 struct UserNotif: Codable {

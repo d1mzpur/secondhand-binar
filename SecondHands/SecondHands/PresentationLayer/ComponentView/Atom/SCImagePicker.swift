@@ -49,14 +49,20 @@ class SCImagePicker: UIView {
         setup()
     }
     
+    func resetImage(){
+        let image = UIImage(systemName: style == .style1 ? "camera" : "plus" )
+        pickerIcon.image = image
+        
+    }
+    
     override func layoutSubviews() {
         if (style == .style2){
             if(!isContainImage){
                 self.addDashedBorder()
             }
             else{
-                self.layer.sublayers?.popLast()
-                self.layer.sublayers?.popLast()
+//                self.layer.sublayers?.popLast()
+//                self.layer.sublayers?.popLast()
             }
         }
         
@@ -64,7 +70,7 @@ class SCImagePicker: UIView {
     }
     
 
-    private func setup() {
+    func setup() {
         self.backgroundColor = .DarkBlue01
         self.layer.cornerRadius = 10
         if (style == .style2){

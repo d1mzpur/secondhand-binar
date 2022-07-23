@@ -25,15 +25,8 @@ class SCNotificationViewController: UIViewController {
     func getNotif() {
         service.getNotif(){ [weak self] result in
             guard let self = self else { return }
-            switch result {
-            case .success(let itemResults):
-                DispatchQueue.main.async {
-                    self.dataProduct = itemResults
-                }
-                
-            case .failure(let error):
-                debugPrint(error)
-                print("Error: ",error.localizedDescription)
+            DispatchQueue.main.async {
+                self.dataProduct = result
             }
         }
     }

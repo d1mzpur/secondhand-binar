@@ -51,10 +51,14 @@ class SCSellerProfileView: UIView {
         
         return editButton
     }()
-    
-    override init(frame: CGRect = CGRect.zero) {
+    init(frame: CGRect = CGRect.zero, showEdit:Bool = true) {
         super.init(frame: frame)
-        addSubview()
+        self.addSubview(imageSeller)
+        self.addSubview(labelStackView)
+        if showEdit {
+            self.addSubview(editButton)
+            editButtonConstraint()
+        }
         setupConstraint()
         self.backgroundColor = .white
         self.layer.cornerRadius = 16
@@ -67,7 +71,10 @@ class SCSellerProfileView: UIView {
         self.imageSeller.loadImage(resource: productImageURL)
         self.usernameSeller.text = productLabel
         self.sellerCity.text = sellerCity
-        addSubview()
+        self.addSubview(imageSeller)
+        self.addSubview(labelStackView)
+        self.addSubview(editButton)
+        editButtonConstraint()
         setupConstraint()
         self.backgroundColor = .white
         self.layer.cornerRadius = 16
@@ -79,11 +86,6 @@ class SCSellerProfileView: UIView {
         self.dropShadow(type: .low)
     }
     
-    func addSubview() {
-        self.addSubview(imageSeller)
-        self.addSubview(labelStackView)
-        self.addSubview(editButton)
-    }
     
     func configure(user: User) {
         imageSeller.loadImage(resource: user.imageUser)
@@ -106,14 +108,19 @@ class SCSellerProfileView: UIView {
             labelStackView.topAnchor.constraint(equalTo: imageSeller.topAnchor, constant: 5),
             labelStackView.leadingAnchor.constraint(equalTo: imageSeller.trailingAnchor, constant: 16),
             labelStackView.bottomAnchor.constraint(equalTo: imageSeller.bottomAnchor, constant: -5),
-            
+
+        
+        ])
+    }
+    
+    func editButtonConstraint(){
+        NSLayoutConstraint.activate([
             editButton.topAnchor.constraint(equalTo: imageSeller.topAnchor, constant: 11),
             editButton.leadingAnchor.constraint(equalTo: labelStackView.trailingAnchor, constant: 16),
             editButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
             editButton.bottomAnchor.constraint(equalTo: imageSeller.bottomAnchor, constant: -11),
             editButton.heightAnchor.constraint(equalToConstant: 26),
             editButton.widthAnchor.constraint(equalToConstant: 47),
-        
         ])
     }
     

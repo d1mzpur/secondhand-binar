@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0125553B2882C71C00B911CE /* NotifItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0125553A2882C71C00B911CE /* NotifItem.swift */; };
+		014CC633288C79C6009E6910 /* userExample.png in Resources */ = {isa = PBXBuildFile; fileRef = 014CC632288C79C6009E6910 /* userExample.png */; };
 		0159351D285B0A21006F9EE6 /* Poppins-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 01593517285B0A20006F9EE6 /* Poppins-ExtraBold.ttf */; };
 		0159351E285B0A21006F9EE6 /* Poppins-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 01593518285B0A21006F9EE6 /* Poppins-Medium.ttf */; };
 		0159351F285B0A21006F9EE6 /* Poppins-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 01593519285B0A21006F9EE6 /* Poppins-Thin.ttf */; };
@@ -74,7 +75,6 @@
 		22E1F760285A30D900FA40BF /* SCTextfield.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E1F75F285A30D900FA40BF /* SCTextfield.swift */; };
 		36885D132946690787344D9D /* libPods-SecondHands.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E059F21AB9FE36138B7D4CF /* libPods-SecondHands.a */; };
 		720BB593285B177F0000E24C /* SCTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720BB592285B177F0000E24C /* SCTabBar.swift */; };
-		7220E4B6288559B000AB492E /* SCBuyerTestModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7220E4B5288559B000AB492E /* SCBuyerTestModalViewController.swift */; };
 		7220E4B828855B0600AB492E /* SCBuyerModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7220E4B728855B0600AB492E /* SCBuyerModalViewController.swift */; };
 		726047F628607B9100AB2EA7 /* SCRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 726047F528607B9100AB2EA7 /* SCRegisterViewController.swift */; };
 		728BA6F128884A17009425EA /* SCBuyerModalCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728BA6F028884A16009425EA /* SCBuyerModalCard.swift */; };
@@ -82,12 +82,12 @@
 		72BDD18D2858A0BF006A75A6 /* SCButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72BDD18C2858A0BF006A75A6 /* SCButton.swift */; };
 		72D71C052874454200D0C384 /* SCModalTransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D71C042874454200D0C384 /* SCModalTransactionViewController.swift */; };
 		72D71C072874522400D0C384 /* SCRadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D71C062874522400D0C384 /* SCRadioButton.swift */; };
-		72FDA1682869BA1E00CD275E /* SCTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72FDA1672869BA1E00CD275E /* SCTestViewController.swift */; };
 		72FDA16A2869BAF200CD275E /* SCModalContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72FDA1692869BAF200CD275E /* SCModalContactsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		0125553A2882C71C00B911CE /* NotifItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotifItem.swift; sourceTree = "<group>"; };
+		014CC632288C79C6009E6910 /* userExample.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = userExample.png; sourceTree = "<group>"; };
 		01593517285B0A20006F9EE6 /* Poppins-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-ExtraBold.ttf"; sourceTree = "<group>"; };
 		01593518285B0A21006F9EE6 /* Poppins-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Medium.ttf"; sourceTree = "<group>"; };
 		01593519285B0A21006F9EE6 /* Poppins-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Thin.ttf"; sourceTree = "<group>"; };
@@ -157,7 +157,6 @@
 		22E1F75F285A30D900FA40BF /* SCTextfield.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCTextfield.swift; sourceTree = "<group>"; };
 		2405D193D3FF10489009FF7C /* Pods-SecondHands.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SecondHands.debug.xcconfig"; path = "Target Support Files/Pods-SecondHands/Pods-SecondHands.debug.xcconfig"; sourceTree = "<group>"; };
 		720BB592285B177F0000E24C /* SCTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCTabBar.swift; sourceTree = "<group>"; };
-		7220E4B5288559B000AB492E /* SCBuyerTestModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCBuyerTestModalViewController.swift; sourceTree = "<group>"; };
 		7220E4B728855B0600AB492E /* SCBuyerModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCBuyerModalViewController.swift; sourceTree = "<group>"; };
 		726047F528607B9100AB2EA7 /* SCRegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCRegisterViewController.swift; sourceTree = "<group>"; };
 		728BA6F028884A16009425EA /* SCBuyerModalCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCBuyerModalCard.swift; sourceTree = "<group>"; };
@@ -165,7 +164,6 @@
 		72BDD18C2858A0BF006A75A6 /* SCButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCButton.swift; sourceTree = "<group>"; };
 		72D71C042874454200D0C384 /* SCModalTransactionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCModalTransactionViewController.swift; sourceTree = "<group>"; };
 		72D71C062874522400D0C384 /* SCRadioButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCRadioButton.swift; sourceTree = "<group>"; };
-		72FDA1672869BA1E00CD275E /* SCTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCTestViewController.swift; sourceTree = "<group>"; };
 		72FDA1692869BAF200CD275E /* SCModalContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCModalContactsViewController.swift; sourceTree = "<group>"; };
 		8E059F21AB9FE36138B7D4CF /* libPods-SecondHands.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SecondHands.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -258,6 +256,9 @@
 		01C6CA4428586E9200F0838E /* Molecule */ = {
 			isa = PBXGroup;
 			children = (
+				7220E4B728855B0600AB492E /* SCBuyerModalViewController.swift */,
+				72D71C042874454200D0C384 /* SCModalTransactionViewController.swift */,
+				72FDA1692869BAF200CD275E /* SCModalContactsViewController.swift */,
 				0188A907285D11780079E091 /* SCFormItem.swift */,
 				01593523285B2C8B006F9EE6 /* SCProductCard.swift */,
 				22B9F2412869FD4E0082BA10 /* SCSellerItem.swift */,
@@ -390,6 +391,7 @@
 				01593527285B6CF8006F9EE6 /* Font */,
 				0A9E1D0428579B6A00D864A4 /* Assets.xcassets */,
 				01B999062875A5EE00F73A46 /* emptyProduct.png */,
+				014CC632288C79C6009E6910 /* userExample.png */,
 				01593525285B30C5006F9EE6 /* exampleProductCardImage.png */,
 				0A9E1D0628579B6A00D864A4 /* LaunchScreen.storyboard */,
 				0A9E1D0928579B6A00D864A4 /* Info.plist */,
@@ -503,18 +505,8 @@
 			isa = PBXGroup;
 			children = (
 				22A01C2128884340009195FC /* SCBuyerProductViewController.swift */,
-				7220E4B42885597700AB492E /* Modal */,
 			);
 			path = Buyer;
-			sourceTree = "<group>";
-		};
-		7220E4B42885597700AB492E /* Modal */ = {
-			isa = PBXGroup;
-			children = (
-				7220E4B5288559B000AB492E /* SCBuyerTestModalViewController.swift */,
-				7220E4B728855B0600AB492E /* SCBuyerModalViewController.swift */,
-			);
-			path = Modal;
 			sourceTree = "<group>";
 		};
 		729BBDB72861C5F500BAE262 /* Seller */ = {
@@ -522,23 +514,12 @@
 			children = (
 				01265CC32872F43000C4DFC4 /* Section */,
 				0A99631B2869975F0074D640 /* Cell */,
-				72FDA1662869B9E800CD275E /* Modal */,
 				01D01325286D88870001CD7F /* SCSellerProductListViewController.swift */,
 				01D5118E287EDCCF00A60353 /* SCSellerProductOfferViewController.swift */,
 				729BBDB82861C61B00BAE262 /* SCSellerUploadViewController.swift */,
 				2213A0EE286CADFA00122486 /* SCSellerPublishProductViewController.swift */,
 			);
 			path = Seller;
-			sourceTree = "<group>";
-		};
-		72FDA1662869B9E800CD275E /* Modal */ = {
-			isa = PBXGroup;
-			children = (
-				72FDA1672869BA1E00CD275E /* SCTestViewController.swift */,
-				72FDA1692869BAF200CD275E /* SCModalContactsViewController.swift */,
-				72D71C042874454200D0C384 /* SCModalTransactionViewController.swift */,
-			);
-			path = Modal;
 			sourceTree = "<group>";
 		};
 		C3773511B88FA71C6CF758F9 /* Frameworks */ = {
@@ -612,6 +593,7 @@
 				0159351E285B0A21006F9EE6 /* Poppins-Medium.ttf in Resources */,
 				0A9E1D0828579B6A00D864A4 /* LaunchScreen.storyboard in Resources */,
 				01593520285B0A21006F9EE6 /* Poppins-ExtraLight.ttf in Resources */,
+				014CC633288C79C6009E6910 /* userExample.png in Resources */,
 				01C6CA4A2858714F00F0838E /* Poppins-Bold.ttf in Resources */,
 				01593521285B0A21006F9EE6 /* Poppins-SemiBold.ttf in Resources */,
 				0A9E1D0528579B6A00D864A4 /* Assets.xcassets in Resources */,
@@ -680,14 +662,12 @@
 				01593524285B2C8B006F9EE6 /* SCProductCard.swift in Sources */,
 				0A659650285CD08E006346F1 /* SCNotification.swift in Sources */,
 				0A9842BA286D99B10000D491 /* CategoryCollectionReusableView.swift in Sources */,
-				72FDA1682869BA1E00CD275E /* SCTestViewController.swift in Sources */,
 				01C6CA4628586EAB00F0838E /* SCLabel.swift in Sources */,
 				0188A908285D11780079E091 /* SCFormItem.swift in Sources */,
 				0AC61C08285C4FDD00586870 /* SCCategoryChipCollectionViewCell.swift in Sources */,
 				0125553B2882C71C00B911CE /* NotifItem.swift in Sources */,
 				0A9E1CFE28579B5F00D864A4 /* SceneDelegate.swift in Sources */,
 				01B18BA22860447000A09AD8 /* SCTextfieldWithPickerView.swift in Sources */,
-				7220E4B6288559B000AB492E /* SCBuyerTestModalViewController.swift in Sources */,
 				01B3DC7E287FFD7900895676 /* OrderItem.swift in Sources */,
 				0AD055AD28582DBA000CDA44 /* UIImageView+Extension.swift in Sources */,
 				0A9842C6286E9CF30000D491 /* URLComponentsBuilder.swift in Sources */,

@@ -49,12 +49,14 @@ class SCModalContactsViewController: UIViewController {
     
     
     lazy var buyerPicture: UIImageView = {
-        let imageName = "exampleProductCardImage.png"
-        let image = UIImage(named: imageName)?.resizeImageTo(size: CGSize(width: 48, height: 48))
+        let imageName = "userExample.png"
+        let image = UIImage(named: imageName)
         let imageView = UIImageView(image: image!)
-        imageView.contentMode = .left
+        imageView.autoresizingMask = [.flexibleWidth]
+        imageView.contentMode = .scaleAspectFit
+        imageView.layer.masksToBounds = true
         imageView.layer.cornerRadius = 10
-        
+        imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
@@ -70,17 +72,19 @@ class SCModalContactsViewController: UIViewController {
         var label = SCLabel()
         label.weight = .medium
         label.size = 10
+        label.textColor = .Neutral03
         label.text = "Kota"
         return label
     }()
 
     lazy var productPicture: UIImageView = {
         let imageName = "exampleProductCardImage.png"
-        let image = UIImage(named: imageName)?.resizeImageTo(size: CGSize(width: 48, height: 48))
+        let image = UIImage(named: imageName)
         let imageView = UIImageView(image: image!)
-        imageView.contentMode = .left
+        imageView.contentMode = .scaleToFill
+        imageView.layer.masksToBounds = true
         imageView.layer.cornerRadius = 10
-        
+        imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
@@ -303,6 +307,8 @@ class SCModalContactsViewController: UIViewController {
                 
                 buyerPicture.topAnchor.constraint(equalTo: cardTitleLabel.bottomAnchor, constant: 16),
                 buyerPicture.leadingAnchor.constraint(equalTo: newView.leadingAnchor, constant: 20),
+                buyerPicture.heightAnchor.constraint(equalToConstant: 48),
+                buyerPicture.widthAnchor.constraint(equalTo: buyerPicture.heightAnchor),
 
 
                 buyerLabel.topAnchor.constraint(equalTo: cardTitleLabel.bottomAnchor, constant: 16),
@@ -313,6 +319,8 @@ class SCModalContactsViewController: UIViewController {
                 
                 productPicture.topAnchor.constraint(equalTo: buyerPicture.bottomAnchor, constant: 16),
                 productPicture.leadingAnchor.constraint(equalTo: newView.leadingAnchor, constant: 20),
+                productPicture.heightAnchor.constraint(equalToConstant: 48),
+                productPicture.widthAnchor.constraint(equalTo: productPicture.heightAnchor),
                 
                 productLabel.topAnchor.constraint(equalTo: buyerCityLabel.bottomAnchor, constant: 16),
                 productLabel.leftAnchor.constraint(equalTo: productPicture.rightAnchor, constant: 16),

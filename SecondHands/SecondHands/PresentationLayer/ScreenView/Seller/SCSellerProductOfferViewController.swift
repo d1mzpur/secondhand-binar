@@ -8,9 +8,22 @@
 import UIKit
 
 class SCSellerProductOfferViewController: UIViewController {
-    var sellerView = SCSellerProfileView()
-    var user: User = User.createData()
-    var dataProduct: [ProductItem] = []
+    var sellerView: SCSellerProfileView = SCSellerProfileView(showEdit: false)
+    var buyerName: String = ""
+    var dataProduct: [NotifItem] = []{
+        didSet{
+            sellerTableView.reloadData()
+        }
+    }
+    
+    func getNotif() {
+        NetworkServices().getNotif(){ [weak self] result in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                self.dataProduct = result
+            }
+        }
+    }
  
     lazy var offerLabel: SCLabel = SCLabel( weight: .medium, size: 14)
     lazy var sellerTableView: UITableView = UITableView()
@@ -30,13 +43,18 @@ class SCSellerProductOfferViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         self.tabBarController?.tabBar.isHidden = false
+        self.tabBarController?.tabBar.barTintColor = .white
     }
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "Info Penawar"
         view.backgroundColor = .white
         
-        sellerView.configure(user: user)
+        let imageName = "userExample.png"
+        let image = UIImage(named: imageName)
+        sellerView.imageSeller.image = image
+        sellerView.sellerCity.text = "Indonesia"
+        sellerView.usernameSeller.text = buyerName
         view.addSubview(sellerView)
         
         offerLabel.text = "Daftar Produkmu yang Ditawar"
@@ -71,6 +89,8 @@ class SCSellerProductOfferViewController: UIViewController {
     
         ])
     }
+    
+
 }
 
 extension SCSellerProductOfferViewController: UITableViewDelegate,UITableViewDataSource{
@@ -81,29 +101,52 @@ extension SCSellerProductOfferViewController: UITableViewDelegate,UITableViewDat
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "sellerProductList", for: indexPath) as! SCSellerProductOfferViewControllerCell
-        cell.fill(data: dataProduct[indexPath.row])
+        cell.fill(data: dataProduct[indexPath.row],delegate: self)
         return cell
     }
 }
 
 class SCSellerProductOfferViewControllerCell: UITableViewCell{
-    func fill(data:ProductItem){
-//        item.productImage
-        item.productTitle.text = data.productTitle
-        item.productPrice.text = String(describing: data.productPrice)
+    var delegate: SCSellerProductOfferViewController?
+    var data:NotifItem?
+    func fill(data:NotifItem, delegate:SCSellerProductOfferViewController){
+        self.delegate = delegate
+        self.data = data
+        item.productImage.loadImage(resource: data.product?.imageURL)
+        item.productTitle.text = data.productName
+        item.productPrice.text = "Rp "+String(describing: data.basePrice)
+        if  data.status == "bid"{
+            item.addbutton(
+                button1Name: "Tolak",
+                button2Name: "Terima"
+            )
+            item.actionButton1.addTarget(self, action: #selector(tolakAction), for: .touchUpInside)
+            item.actionButton2.addTarget(self, action: #selector(presentModalTransaction), for: .touchUpInside)
+        }
+        else if  data.status == "accepted"{
+            item.addbutton(
+                button1Name: "Status",
+                button2Name: "Hubungi"
+            )
+            item.actionButton1.addTarget(self, action: #selector(tolakAction), for: .touchUpInside)
+            item.actionButton2.addTarget(self, action: #selector(terimaAction), for: .touchUpInside)
+        }
     }
     
-    private lazy var item: SCSellerItem = {
-        var sellerItem = SCSellerItem()
-        sellerItem.addbutton(
-            button1Name: "Tolak",
-            button2Name: "Terima"
-        )
-        sellerItem.actionButton1.addTarget(self, action: #selector(tolakAction), for: .touchUpInside)
-        sellerItem.actionButton2.addTarget(self, action: #selector(terimaAction), for: .touchUpInside)
-        return sellerItem
-    }()
+    @objc func presentModalTransaction() {
+        let vc = SCModalContactsViewController()
+        vc.buyerLabel.text = delegate?.buyerName
+        vc.buyerCityLabel.text = "Indonesia"
+        vc.productPicture.loadImage(resource: data?.imageURL)
+        vc.productLabel.text = data?.productName
+        vc.productPriceLabel.text = "Rp \((data?.basePrice)!)"
+        vc.productPriceNegoLabel.text  = "Rp \((data?.bidPrice)!)"
+        vc.modalPresentationStyle = .overCurrentContext
+        delegate?.present(vc, animated: false)
+    }
     
+    private lazy var item: SCSellerItem = SCSellerItem()
+
     @objc func tolakAction(){
         print("tolak")
     }

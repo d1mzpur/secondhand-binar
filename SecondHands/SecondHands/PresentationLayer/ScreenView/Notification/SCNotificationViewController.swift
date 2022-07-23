@@ -10,7 +10,6 @@ import UIKit
 class SCNotificationViewController: UIViewController {
     lazy var titleLabel: SCLabel = SCLabel( weight: .bold, size: 24)
     var NotificationTableView: UITableView = UITableView()
-    var service = NetworkServices()
     var dataProduct: [NotifItem] = []{
         didSet{
             NotificationTableView.reloadData()
@@ -19,11 +18,15 @@ class SCNotificationViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.navigationBar.isHidden = true
+        navigationController?.navigationBar.isHidden = true    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.navigationBar.isHidden = false
     }
     
     func getNotif() {
-        service.getNotif(){ [weak self] result in
+        NetworkServices().getNotif(){ [weak self] result in
             guard let self = self else { return }
             DispatchQueue.main.async {
                 self.dataProduct = result
@@ -84,6 +87,13 @@ extension SCNotificationViewController: UITableViewDelegate, UITableViewDataSour
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let filterProduct = dataProduct.filter{ item in item.buyerName == dataProduct[indexPath.row].buyerName }
+        let offerVC = SCSellerProductOfferViewController()
+        offerVC.buyerName = dataProduct[indexPath.row].buyerName ?? "null"
+        offerVC.dataProduct = filterProduct
+        navigationController?.pushViewController(offerVC, animated: true)
+    }
     
 }
 

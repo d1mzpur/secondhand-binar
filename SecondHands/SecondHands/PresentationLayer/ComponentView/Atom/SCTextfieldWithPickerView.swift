@@ -8,7 +8,6 @@
 import UIKit
 
 class SCTextfieldWithPickerView: UITextField{
-    var selectedData: String?
     var dataList: [String] = []
     
     var textPadding = UIEdgeInsets(
@@ -79,8 +78,8 @@ extension SCTextfieldWithPickerView: UIPickerViewDelegate, UIPickerViewDataSourc
         return dataList[row] // dropdown item
     }
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        selectedData = dataList[row] // selected item
-        self.text = selectedData
+        self.text = dataList[row] // selected item
+        
     }
 
         

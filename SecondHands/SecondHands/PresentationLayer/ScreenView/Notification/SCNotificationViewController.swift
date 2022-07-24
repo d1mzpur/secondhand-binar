@@ -10,7 +10,6 @@ import UIKit
 class SCNotificationViewController: UIViewController {
     lazy var titleLabel: SCLabel = SCLabel( weight: .bold, size: 24)
     var NotificationTableView: UITableView = UITableView()
-    var service = NetworkServices()
     var dataProduct: [NotifItem] = []{
         didSet{
             NotificationTableView.reloadData()
@@ -19,21 +18,18 @@ class SCNotificationViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.navigationBar.isHidden = true
+        navigationController?.navigationBar.isHidden = true    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.navigationBar.isHidden = false
     }
     
     func getNotif() {
-        service.getNotif(){ [weak self] result in
+        NetworkServices().getNotif(){ [weak self] result in
             guard let self = self else { return }
-            switch result {
-            case .success(let itemResults):
-                DispatchQueue.main.async {
-                    self.dataProduct = itemResults
-                }
-                
-            case .failure(let error):
-                debugPrint(error)
-                print("Error: ",error.localizedDescription)
+            DispatchQueue.main.async {
+                self.dataProduct = result
             }
         }
     }
@@ -91,6 +87,16 @@ extension SCNotificationViewController: UITableViewDelegate, UITableViewDataSour
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        let filterProduct = dataProduct.filter{ item in item.buyerName == dataProduct[indexPath.row].buyerName }
+//        guard (dataProduct[indexPath.row].notificationType!) == .seller else {return}
+        let producListVC = SCSellerProductListViewController()
+        producListVC.sellerCategory.selectedCategoryIndex = 1
+        producListVC.selectedCategory = "Diminati"
+//        offerVC.buyerName = dataProduct[indexPath.row].buyerName ?? "null"
+//        offerVC.dataProduct = filterProduct
+        navigationController?.pushViewController(producListVC, animated: true)
+    }
     
 }
 

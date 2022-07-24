@@ -66,7 +66,7 @@ class SCRegisterViewController: UIViewController {
         registerLabel.text = "Daftar"
         registerLabel.textColor = .black
         loginLabel.text = "Sudah punya akun?"
-        
+        formEmail.Textfield.autocapitalizationType = .none
         registerButton.addTarget(self, action: #selector(navigateToHome), for: .touchUpInside )
         loginButton.addTarget(self, action: #selector(backButton), for: .touchUpInside )
         

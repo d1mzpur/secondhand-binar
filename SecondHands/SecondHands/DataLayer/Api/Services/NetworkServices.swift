@@ -347,9 +347,42 @@ class NetworkServices {
             .responseDecodable(of: [ProductItem].self) { result in
                 if let value = result.value {
                     completion(value)
+            }
+        }
+        
+    }
+    
+    func sellerPatchOrder(id:Int, status:String, completion: @escaping(OrderItem) -> Void) {
+        let endPoint = self.baseUrl
+        let bodyData = """
+        {
+            "status" : "\(status)"
+        }
+        """.data(using: String.Encoding.utf8)!
+        guard let urlcomponents = URLComponentsBuilder(baseURL: endPoint)
+            .path("/seller")
+            .path("/order")
+            .path("/\(id)")
+            .buildUrl()
+        else { return }
+        var urlRequest = URLRequestBuilder(url: urlcomponents)
+            .addBody(data: bodyData)
+            .build()
+        urlRequest.setValue(getAccessToken(), forHTTPHeaderField: "access_token")
+        urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        urlRequest.httpMethod = "PATCH"
+        print(urlRequest)
+        AF.request(urlRequest).validate()
+            .responseJSON(){ res in
+                print(res)
+            }
+            .responseDecodable(of: OrderItem.self) { result in
+                if let value = result.value {
+                    completion(value)
                 }
                 
         }
+    }
         
 //        let jsonDecoder = JSONDecoder()
 //        URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
@@ -412,7 +445,6 @@ class NetworkServices {
             if let error = error {
                 print(error.localizedDescription)
             }
-            
             do {
                 let session = try jsonDecoder.decode([OrderItem].self, from: data)
                 DispatchQueue.main.async {
@@ -427,6 +459,42 @@ class NetworkServices {
     }
     
     func createProduct(name: String, description: String, price: Int, category: Int, location: String, image: Data, completion: @escaping (Result<reponseProduct, Error>) -> Void) {
+        let baseUrl = self.baseUrl
+        let fullUrl = baseUrl + "/seller/product"
+        let headers : Alamofire.HTTPHeaders = [
+                    "access_token" : getAccessToken(),
+                    "cache-control" : "no-cache",
+                    "Accept-Language" : "en",
+                    "Connection" : "close",
+                    "Content-type" : "multipart/form-data"
+                ]
+                AF.upload(
+                multipartFormData: { multipartFormData in
+                    multipartFormData.append(image, withName: "image", fileName: "image.jpg", mimeType: "image/jpeg");
+                    multipartFormData.append(name.data(using: .utf8)!, withName: "name")
+                    multipartFormData.append(description.data(using: .utf8)!, withName: "description")
+                    multipartFormData.append("\(price)".data(using: .utf8)!, withName: "base_price")
+                    multipartFormData.append("\(category)".data(using: .utf8)!, withName: "category_ids")
+                    multipartFormData.append(location.data(using: .utf8)!,  withName: "location")
+                },
+                to: fullUrl, usingThreshold: .max,
+                    method: .post,
+                    headers: headers)
+                .responseJSON(){ res in
+                    print(res)
+                }
+                .responseDecodable(of: reponseProduct.self) { (response) in
+                    switch response.result{
+                    case .success(let value):
+                        print("Json: \(value)")
+                        completion(.success( value ))
+                    case .failure(let error):
+                        print("Error: \(error.localizedDescription)")
+                        completion(.failure(error))
+                    }
+                }.uploadProgress { (progress) in
+                    print("Progress: \(progress.fractionCompleted)")
+                }
         let endPoint = self.baseUrl
         let parameters: [String:Any] = [
             "name" : name,
@@ -472,37 +540,46 @@ class NetworkServices {
             }
         }.resume()
     }
-    
-    func getNotif(notifType: NotificationType = .all, completion: @escaping(Result<[NotifItem], Error>) -> Void) {
+    func getNotif(notifType: NotificationType = .all, completion: @escaping([NotifItem]) -> Void) {
         let endPoint = self.baseUrl
         
-        guard let urlcomponents = URLComponentsBuilder(baseURL: endPoint)
+        guard let urlComponents = URLComponentsBuilder(baseURL: endPoint)
             .path("/notification")
             .addQuery(key: "notification_type", value: notifType.rawValue)
             .buildUrl()
         else { return }
-        var urlRequest = URLRequestBuilder(url: urlcomponents)
+        let urlRequest = URLRequestBuilder(url: urlComponents)
             .httpMethod(.GET)
+            .addHeader(value: getAccessToken(), key: "access_token")
             .build()
-            urlRequest.setValue(getAccessToken(), forHTTPHeaderField: "access_token")
         
-        let jsonDecoder = JSONDecoder()
-        URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
-            guard let data = data else { return }
-            if let error = error {
-                print(error.localizedDescription)
-            }
-            
-            do {
-                let session = try jsonDecoder.decode([NotifItem].self, from: data)
-                DispatchQueue.main.async {
-                    completion(.success(session))
+        AF.request(urlRequest).validate()
+            .responseDecodable(of: [NotifItem].self) { result in
+                if let value = result.value {
+                    completion(value)
                 }
                 
-            } catch let error {
-                completion(.failure(error))
-            }
-        }.resume()
+        }
+        
+//        let jsonDecoder = JSONDecoder()
+//        URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
+//            guard let data = data else { return }
+//            if let error = error {
+//                print(error.localizedDescription)
+//            }
+//
+//            do {
+//                let jsonSerial = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
+//                print("jSON serial" , jsonSerial)
+//                let session = try jsonDecoder.decode([NotifItem].self, from: data)
+//                DispatchQueue.main.async {
+//                    completion(.success(session))
+//                }
+//
+//            } catch let error {
+//                completion(.failure(error))
+//            }
+//        }.resume()
         
     }
     

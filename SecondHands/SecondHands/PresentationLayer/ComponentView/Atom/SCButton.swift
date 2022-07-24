@@ -55,7 +55,6 @@ class SCButton: UIButton {
     
     private func buttonSetup(){
         setTitle(title, for: .normal)
-
         titleLabel?.font = UIFont(name: "Poppins-Bold", size: 14)
     }
     

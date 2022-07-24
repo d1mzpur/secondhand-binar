@@ -43,13 +43,13 @@ struct ProductItem: Codable {
 }
 
 struct reponseProduct: Codable {
-    let id: Int
+    let id: Int?
     let name, productDescription: String
     let basePrice: Int
     let imageURL: String
     let imageName, location: String
     let userID: Int
-    let createdAt, updatedAt: String
+    let createdAt, updatedAt: String?
 
     enum CodingKeys: String, CodingKey {
         case id, name

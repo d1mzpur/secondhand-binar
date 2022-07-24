@@ -8,10 +8,11 @@
 import UIKit
 
 class SCSellerProductTableView: UITableView, UITableViewDelegate,UITableViewDataSource{
-    
+    var viewController: SCSellerProductListViewController = SCSellerProductListViewController()
     var dataProduct: [OrderItem] = []
-    init(){
+    init(viewController: SCSellerProductListViewController){
         super.init(frame: .zero, style: UITableView.Style.plain)
+        self.viewController = viewController
         self.delegate = self
         self.dataSource = self
         self.register(SCSellerItemTableView.self, forCellReuseIdentifier: "sellerProductList")
@@ -38,6 +39,15 @@ class SCSellerProductTableView: UITableView, UITableViewDelegate,UITableViewData
         let cell = tableView.dequeueReusableCell(withIdentifier: "sellerProductList", for: indexPath) as! SCSellerItemTableView
         cell.fill(data: dataProduct[indexPath.row])
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("taptap")
+        let filterProduct = dataProduct.filter{ item in item.user.id == dataProduct[indexPath.row].user.id }
+        let productOfferVC = SCSellerProductOfferViewController()
+        productOfferVC.buyer = dataProduct[indexPath.row].user
+        productOfferVC.dataProduct = filterProduct
+        viewController.navigationController?.pushViewController(productOfferVC, animated: true)
     }
 }
 

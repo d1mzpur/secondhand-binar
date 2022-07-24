@@ -74,7 +74,9 @@ class SCHomeViewController: UIViewController {
     var service = NetworkServices()
     
     override func viewWillAppear(_ animated: Bool) {
-
+        print("reload")
+        getProduct()
+        homeCollectionView.reloadData()
         selectedCategoryIndex = 0
         deleteBackgroundTopBar()
         createSearchBar()

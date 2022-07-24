@@ -257,11 +257,11 @@ extension SCHomeViewController: UICollectionViewDelegate, UICollectionViewDataSo
         case 2:
             guard let _ = homeCollectionView.cellForItem(at: indexPath) as? SCProductCardViewCollectionViewCell else { return }
             let detail = SCBuyerProductViewController()
-            detail.configure(by: (productItem?[indexPath.item].id)!)
+            detail.configure(by: (filterListProduct?[indexPath.item].id)!)
             navigationController?.pushViewController(detail, animated: true
             )
         default:
-            break
+            break   
         }
         
     }

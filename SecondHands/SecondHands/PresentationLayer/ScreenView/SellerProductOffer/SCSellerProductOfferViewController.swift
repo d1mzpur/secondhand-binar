@@ -12,20 +12,10 @@ class SCSellerProductOfferViewController: UIViewController {
     var buyer: UserOrder?
     var dataProduct: [OrderItem] = []{
         didSet{
-            print(dataProduct)
+            print("reload == ",dataProduct)
             sellerTableView.reloadData()
         }
     }
-    
-//    func getNotif() {
-//        NetworkServices().getNotif(){ [weak self] result in
-//            guard let self = self else { return }
-//            DispatchQueue.main.async {
-//                let filterProduct = result.filter{ item in item.buyerName == self.buyerId }
-//                self.dataProduct = filterProduct
-//            }
-//        }
-//    }
     
     func getOrder(status: OrderStatus) {
         NetworkServices().getOrder(status: status) { [weak self] result in
@@ -47,7 +37,7 @@ class SCSellerProductOfferViewController: UIViewController {
         NetworkServices().sellerPatchOrder(id: id, status: status){ [weak self] result in
             guard let self = self else { return }
             DispatchQueue.main.async {
-                self.getOrder(status: .pending)
+                self.getOrder(status: .all)
             }
         }
     }
@@ -140,7 +130,6 @@ class SCSellerProductOfferViewControllerCell: UITableViewCell{
         item.productImage.loadImage(resource: data.imageProduct)
         item.productTitle.text = data.productName
         item.productPrice.text = "Rp "+String(describing: data.basePrice)
-        print(data.status,"<=====")
         if  data.status == "pending"{
             print("masuk111")
             item.addbutton(
@@ -162,16 +151,18 @@ class SCSellerProductOfferViewControllerCell: UITableViewCell{
     }
     
     @objc func terimaAction() {
-        delegate?.patchOrder(id: data?.id ?? 0, status: "accepted")
         let vc = SCModalContactsViewController()
         vc.buyerLabel.text = data?.user.fullName
         vc.buyerCityLabel.text = "Indonesia"
         vc.productPicture.loadImage(resource: data?.imageProduct)
         vc.productLabel.text = data?.productName
         vc.productPriceLabel.text = "Rp \((data?.basePrice)!)"
-        vc.productPriceNegoLabel.text  = "Rp \((data?.price)!)"
+        vc.productPriceNegoLabel.text  = "Ditawar Rp \((data?.price)!)"
         vc.modalPresentationStyle = .overCurrentContext
         delegate?.present(vc, animated: false)
+        let filterProduct = delegate?.dataProduct.filter{ item in item.id != self.data?.id}
+        delegate?.dataProduct = filterProduct ?? []
+        delegate?.patchOrder(id: data?.id ?? 0, status: "accepted")
     }
     
     @objc func tolakAction(){

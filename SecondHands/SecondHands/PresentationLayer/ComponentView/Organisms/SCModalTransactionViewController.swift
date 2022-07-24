@@ -74,6 +74,20 @@ class SCModalTransactionViewController: UIViewController {
         return label
     }()
     
+    var selectedRadioButton = 1 {
+        didSet{
+            if selectedRadioButton == 1 {
+                radioButtonOne.style = .selected
+                radioButtonTwo.style = .unselected
+            }else{
+                radioButtonOne.style = .unselected
+                radioButtonTwo.style = .selected
+            }
+            radioButtonOne.handleStyleButton()
+            radioButtonTwo.handleStyleButton()
+        }
+    }
+    
     lazy var radioButtonOne: SCRadioButton = SCRadioButton(style: .selected)
     lazy var radioButtonTwo: SCRadioButton = SCRadioButton(style: .unselected)
     lazy var submitButton: SCButton = SCButton(style: .primary, size: .normal, type: .defaultButton, title: "Kirim")
@@ -144,11 +158,21 @@ class SCModalTransactionViewController: UIViewController {
         super.viewDidLoad()
         view.addSubview(dimmedView)
         view.addSubview(containerView)
+        radioButtonOne.addAction(#selector(selectRadio1), target: self)
+        radioButtonTwo.addAction(#selector(selectRadio2), target: self)
         containerView.addSubview(containerModalStack)
         setupView()
         setupConstraints()
         setupGesture()
         // Do any additional setup after loading the view.
+    }
+    
+    @objc func selectRadio1(){
+        selectedRadioButton = 1
+    }
+    
+    @objc func selectRadio2(){
+        selectedRadioButton = 2
     }
     
     func setupView(){

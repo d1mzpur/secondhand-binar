@@ -14,7 +14,7 @@ class SCRadioButton: UIButton {
         case unselected
     }
     
-    public private(set) var style: Style
+    public var style: Style
     
     init(style: Style) {
         self.style = style
@@ -36,7 +36,7 @@ class SCRadioButton: UIButton {
         setTitle("", for: .normal)
     }
     
-    private func handleStyleButton(){
+    func handleStyleButton(){
         switch style {
         case .selected:
             setImage(UIImage(named: "selected.png")?.resizeImageTo(size: CGSize(width: 16, height: 16)), for: .normal)

@@ -43,7 +43,6 @@
 		0A6804AC286081B100EF2577 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6804AB286081B100EF2577 /* UIColor+Extension.swift */; };
 		0A6E5275288BF600003BF36A /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6E5274288BF600003BF36A /* String+Extension.swift */; };
 		0A6E5278288D1DE7003BF36A /* Int+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6E5277288D1DE7003BF36A /* Int+Extension.swift */; };
-		0A9842BA286D99B10000D491 /* CategoryCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9842B9286D99B10000D491 /* CategoryCollectionReusableView.swift */; };
 		0A9842C6286E9CF30000D491 /* URLComponentsBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9842C5286E9CF30000D491 /* URLComponentsBuilder.swift */; };
 		0A9842CA286EA0F10000D491 /* URLRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9842C9286EA0F10000D491 /* URLRequestBuilder.swift */; };
 		0A9842CE286EA18D0000D491 /* NetworkServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9842CD286EA18D0000D491 /* NetworkServices.swift */; };

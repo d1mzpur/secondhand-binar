@@ -402,7 +402,6 @@ class NetworkServices {
 //            }
 //        }.resume()
         
-    }
     
     func getProductBy(id: String, user: UserEndpoint, completion: @escaping(ProductItem) -> Void) {
         let endPoint = self.baseUrl

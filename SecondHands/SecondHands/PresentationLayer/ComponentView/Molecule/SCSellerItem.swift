@@ -120,8 +120,8 @@ class SCSellerItem: UIView {
     }
    
     func addbutton(button1Name:String, button2Name:String){
-        actionButton1.title = button1Name
-        actionButton2.title = button1Name
+        actionButton1.setTitle(button1Name, for: .normal)
+        actionButton2.setTitle(button2Name, for: .normal)
         bottomConstrain.isActive = false
         self.addSubview(buttonStack)
         NSLayoutConstraint.activate([

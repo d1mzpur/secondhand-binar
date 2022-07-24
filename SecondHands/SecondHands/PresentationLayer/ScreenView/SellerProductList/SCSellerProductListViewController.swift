@@ -36,12 +36,17 @@ class SCSellerProductListViewController: UIViewController {
     
     lazy var sellerCategory: SCSellerCategoryCollectionView = SCSellerCategoryCollectionView(viewController: self, categoryTitleArray: categoryTitleArray)
     lazy var sellerCollection: SCSellerProductCollectionView = SCSellerProductCollectionView(viewController: self)
-    lazy var sellerTableView: SCSellerProductTableView = SCSellerProductTableView()
+    lazy var sellerTableView: SCSellerProductTableView = SCSellerProductTableView(viewController: self)
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.isHidden = true
     }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.navigationBar.isHidden = false
+    }
+    
     
     func getUser() {
         NetworkServices().getUserAlamofire() { (result) in
@@ -75,7 +80,7 @@ class SCSellerProductListViewController: UIViewController {
                     self.dataOrderProduct = itemResults
                 }
             case .failure(let error):
-                print("Error: ",error.localizedDescription)
+                print("Error: ",String(describing: error))
             }
         }
     }

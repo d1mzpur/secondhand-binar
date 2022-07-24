@@ -311,7 +311,39 @@ class NetworkServices {
             }
         }
         
-    }	
+    }
+    
+    func sellerPatchOrder(id:Int, status:String, completion: @escaping(OrderItem) -> Void) {
+        let endPoint = self.baseUrl
+        let bodyData = """
+        {
+            "status" : "\(status)"
+        }
+        """.data(using: String.Encoding.utf8)!
+        guard let urlcomponents = URLComponentsBuilder(baseURL: endPoint)
+            .path("/seller")
+            .path("/order")
+            .path("/\(id)")
+            .buildUrl()
+        else { return }
+        var urlRequest = URLRequestBuilder(url: urlcomponents)
+            .addBody(data: bodyData)
+            .build()
+        urlRequest.setValue(getAccessToken(), forHTTPHeaderField: "access_token")
+        urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        urlRequest.httpMethod = "PATCH"
+        print(urlRequest)
+        AF.request(urlRequest).validate()
+            .responseJSON(){ res in
+                print(res)
+            }
+            .responseDecodable(of: OrderItem.self) { result in
+                if let value = result.value {
+                    completion(value)
+                }
+                
+        }
+    }
     
     func getOrder(status: OrderStatus, completion: @escaping(Result<[OrderItem], Error>) -> Void) {
         let endPoint = self.baseUrl
@@ -333,7 +365,6 @@ class NetworkServices {
             if let error = error {
                 print(error.localizedDescription)
             }
-            
             do {
                 let session = try jsonDecoder.decode([OrderItem].self, from: data)
                 DispatchQueue.main.async {
@@ -384,7 +415,6 @@ class NetworkServices {
                 }.uploadProgress { (progress) in
                     print("Progress: \(progress.fractionCompleted)")
                 }
-    
     }
     func getNotif(notifType: NotificationType = .all, completion: @escaping([NotifItem]) -> Void) {
         let endPoint = self.baseUrl

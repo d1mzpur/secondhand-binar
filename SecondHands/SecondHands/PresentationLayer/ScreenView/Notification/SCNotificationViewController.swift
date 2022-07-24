@@ -88,11 +88,14 @@ extension SCNotificationViewController: UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let filterProduct = dataProduct.filter{ item in item.buyerName == dataProduct[indexPath.row].buyerName }
-        let offerVC = SCSellerProductOfferViewController()
-        offerVC.buyerName = dataProduct[indexPath.row].buyerName ?? "null"
-        offerVC.dataProduct = filterProduct
-        navigationController?.pushViewController(offerVC, animated: true)
+//        let filterProduct = dataProduct.filter{ item in item.buyerName == dataProduct[indexPath.row].buyerName }
+//        guard (dataProduct[indexPath.row].notificationType!) == .seller else {return}
+        let producListVC = SCSellerProductListViewController()
+        producListVC.sellerCategory.selectedCategoryIndex = 1
+        producListVC.selectedCategory = "Diminati"
+//        offerVC.buyerName = dataProduct[indexPath.row].buyerName ?? "null"
+//        offerVC.dataProduct = filterProduct
+        navigationController?.pushViewController(producListVC, animated: true)
     }
     
 }

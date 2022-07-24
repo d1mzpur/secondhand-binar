@@ -9,18 +9,45 @@ import UIKit
 
 class SCSellerProductOfferViewController: UIViewController {
     var sellerView: SCSellerProfileView = SCSellerProfileView(showEdit: false)
-    var buyerName: String = ""
-    var dataProduct: [NotifItem] = []{
+    var buyer: UserOrder?
+    var dataProduct: [OrderItem] = []{
         didSet{
+            print(dataProduct)
             sellerTableView.reloadData()
         }
     }
     
-    func getNotif() {
-        NetworkServices().getNotif(){ [weak self] result in
+//    func getNotif() {
+//        NetworkServices().getNotif(){ [weak self] result in
+//            guard let self = self else { return }
+//            DispatchQueue.main.async {
+//                let filterProduct = result.filter{ item in item.buyerName == self.buyerId }
+//                self.dataProduct = filterProduct
+//            }
+//        }
+//    }
+    
+    func getOrder(status: OrderStatus) {
+        NetworkServices().getOrder(status: status) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let itemResults):
+                DispatchQueue.main.async {
+                    let filterProduct = itemResults.filter{ item in item.user.id == self.buyer?.id }
+                    self.dataProduct = filterProduct
+                }
+            case .failure(let error):
+                print("Error: ",error.localizedDescription)
+            }
+        }
+    }
+    
+    
+    func patchOrder(id:Int, status:String) {
+        NetworkServices().sellerPatchOrder(id: id, status: status){ [weak self] result in
             guard let self = self else { return }
             DispatchQueue.main.async {
-                self.dataProduct = result
+                self.getOrder(status: .pending)
             }
         }
     }
@@ -49,12 +76,10 @@ class SCSellerProductOfferViewController: UIViewController {
         super.viewDidLoad()
         navigationItem.title = "Info Penawar"
         view.backgroundColor = .white
-        
-        let imageName = "userExample.png"
-        let image = UIImage(named: imageName)
-        sellerView.imageSeller.image = image
-        sellerView.sellerCity.text = "Indonesia"
-        sellerView.usernameSeller.text = buyerName
+
+        sellerView.imageSeller.loadImage(resource: buyer?.imageUrl)
+        sellerView.sellerCity.text = buyer?.city ?? "Indonesia"
+        sellerView.usernameSeller.text = buyer?.fullName
         view.addSubview(sellerView)
         
         offerLabel.text = "Daftar Produkmu yang Ditawar"
@@ -108,39 +133,59 @@ extension SCSellerProductOfferViewController: UITableViewDelegate,UITableViewDat
 
 class SCSellerProductOfferViewControllerCell: UITableViewCell{
     var delegate: SCSellerProductOfferViewController?
-    var data:NotifItem?
-    func fill(data:NotifItem, delegate:SCSellerProductOfferViewController){
+    var data:OrderItem?
+    func fill(data:OrderItem, delegate:SCSellerProductOfferViewController){
         self.delegate = delegate
         self.data = data
-        item.productImage.loadImage(resource: data.product?.imageURL)
+        item.productImage.loadImage(resource: data.imageProduct)
         item.productTitle.text = data.productName
         item.productPrice.text = "Rp "+String(describing: data.basePrice)
-        if  data.status == "bid"{
+        print(data.status,"<=====")
+        if  data.status == "pending"{
+            print("masuk111")
             item.addbutton(
                 button1Name: "Tolak",
                 button2Name: "Terima"
             )
             item.actionButton1.addTarget(self, action: #selector(tolakAction), for: .touchUpInside)
-            item.actionButton2.addTarget(self, action: #selector(presentModalTransaction), for: .touchUpInside)
+            item.actionButton2.addTarget(self, action: #selector(terimaAction), for: .touchUpInside)
         }
-        else if  data.status == "accepted"{
+        if data.status == "accepted"{
+            print("masuk2222")
             item.addbutton(
                 button1Name: "Status",
                 button2Name: "Hubungi"
             )
-            item.actionButton1.addTarget(self, action: #selector(tolakAction), for: .touchUpInside)
-            item.actionButton2.addTarget(self, action: #selector(terimaAction), for: .touchUpInside)
+            item.actionButton1.addTarget(self, action: #selector(statusAction), for: .touchUpInside)
+            item.actionButton2.addTarget(self, action: #selector(hubungiction), for: .touchUpInside)
         }
     }
     
-    @objc func presentModalTransaction() {
+    @objc func terimaAction() {
+        delegate?.patchOrder(id: data?.id ?? 0, status: "accepted")
         let vc = SCModalContactsViewController()
-        vc.buyerLabel.text = delegate?.buyerName
+        vc.buyerLabel.text = data?.user.fullName
         vc.buyerCityLabel.text = "Indonesia"
-        vc.productPicture.loadImage(resource: data?.imageURL)
+        vc.productPicture.loadImage(resource: data?.imageProduct)
         vc.productLabel.text = data?.productName
         vc.productPriceLabel.text = "Rp \((data?.basePrice)!)"
-        vc.productPriceNegoLabel.text  = "Rp \((data?.bidPrice)!)"
+        vc.productPriceNegoLabel.text  = "Rp \((data?.price)!)"
+        vc.modalPresentationStyle = .overCurrentContext
+        delegate?.present(vc, animated: false)
+    }
+    
+    @objc func tolakAction(){
+        delegate?.patchOrder(id: data?.id ?? 0, status: "declined")
+    }
+    
+    @objc func statusAction(){
+        let vc = ()
+        vc.modalPresentationStyle = .overCurrentContext
+        delegate?.present(vc, animated: false)
+    }
+    
+    @objc func hubungiction(){
+        let vc = SCModalContactsViewController()
         vc.modalPresentationStyle = .overCurrentContext
         delegate?.present(vc, animated: false)
     }
@@ -149,13 +194,8 @@ class SCSellerProductOfferViewControllerCell: UITableViewCell{
     
     private lazy var item: SCSellerItem = SCSellerItem()
 
-    @objc func tolakAction(){
-        print("tolak")
-    }
+
     
-    @objc func terimaAction(){
-        print("terima")
-    }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

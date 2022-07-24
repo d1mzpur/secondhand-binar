@@ -12,7 +12,8 @@ import Foundation
 struct OrderItem: Codable {
     let id, productID, buyerID, price: Int
     let transactionDate: String?
-    let productName, basePrice: String
+    let productName: String,
+        basePrice: Int 
     let imageProduct: String?
     let status, createdAt, updatedAt: String
     let product: ProductClass
@@ -36,7 +37,7 @@ struct OrderItem: Codable {
 // MARK: - ProductClass
 struct ProductClass: Codable {
     let name, productDescription: String
-    let basePrice: Int
+    let basePrice: Int?
     let imageURL: String
     let imageName, location: String
     let userID: Int
@@ -59,8 +60,9 @@ struct ProductClass: Codable {
 // MARK: - User
 struct UserOrder: Codable {
     let id: Int
-    let fullName, email, phoneNumber, address: String
-    let city: String
+    let fullName, email, phoneNumber, address: String?
+    let city: String?
+    let imageUrl: String?
 
     enum CodingKeys: String, CodingKey {
         case id
@@ -68,6 +70,7 @@ struct UserOrder: Codable {
         case email
         case phoneNumber = "phone_number"
         case address, city
+        case imageUrl = "image_url"
     }
 }
 

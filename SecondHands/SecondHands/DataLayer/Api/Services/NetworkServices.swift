@@ -31,6 +31,7 @@ enum OrderStatus: String {
     case pending = "pending"
     case accepted = "accepted"
     case declined = "declined"
+    case all = ""
 }
 
 class NetworkServices {

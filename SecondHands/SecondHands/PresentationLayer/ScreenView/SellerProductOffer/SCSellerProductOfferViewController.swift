@@ -27,7 +27,7 @@ class SCSellerProductOfferViewController: UIViewController {
 //        }
 //    }
     
-    func getOrder(status: OrderStatus) {
+    func getOrder(status: OrderStatus, completion:@escaping (_ status:Bool) -> Void) {
         NetworkServices().getOrder(status: status) { [weak self] result in
             guard let self = self else { return }
             switch result {
@@ -35,19 +35,21 @@ class SCSellerProductOfferViewController: UIViewController {
                 DispatchQueue.main.async {
                     let filterProduct = itemResults.filter{ item in item.user.id == self.buyer?.id }
                     self.dataProduct = filterProduct
+                    completion(true)
                 }
             case .failure(let error):
+                completion(false)
                 print("Error: ",error.localizedDescription)
             }
         }
     }
     
     
-    func patchOrder(id:Int, status:String) {
+    func patchOrder(id:Int, status:String, completion:@escaping (_ status:Bool) -> Void) {
         NetworkServices().sellerPatchOrder(id: id, status: status){ [weak self] result in
             guard let self = self else { return }
             DispatchQueue.main.async {
-                self.getOrder(status: .pending)
+                self.getOrder(status: .pending){ (result) in completion(result) }
             }
         }
     }
@@ -162,26 +164,30 @@ class SCSellerProductOfferViewControllerCell: UITableViewCell{
     }
     
     @objc func terimaAction() {
-        delegate?.patchOrder(id: data?.id ?? 0, status: "accepted")
-        let vc = SCModalContactsViewController()
-        vc.buyerLabel.text = data?.user.fullName
-        vc.buyerCityLabel.text = "Indonesia"
-        vc.productPicture.loadImage(resource: data?.imageProduct)
-        vc.productLabel.text = data?.productName
-        vc.productPriceLabel.text = "Rp \((data?.basePrice)!)"
-        vc.productPriceNegoLabel.text  = "Rp \((data?.price)!)"
-        vc.modalPresentationStyle = .overCurrentContext
-        delegate?.present(vc, animated: false)
+        delegate?.patchOrder(id: data?.id ?? 0, status: "accepted") { [weak self] (status) in
+            if status {
+                let vc = SCModalContactsViewController()
+                guard let self = self else { return }
+                vc.buyerLabel.text = self.data?.user.fullName
+                vc.buyerCityLabel.text = "Indonesia"
+                vc.productPicture.loadImage(resource: self.data?.imageProduct)
+                vc.productLabel.text = self.data?.productName
+                vc.productPriceLabel.text = "Rp \((self.data?.basePrice)!)"
+                vc.productPriceNegoLabel.text  = "Rp \((self.data?.price)!)"
+                vc.modalPresentationStyle = .overCurrentContext
+                self.delegate?.present(vc, animated: false)
+            }
+        }
     }
     
     @objc func tolakAction(){
-        delegate?.patchOrder(id: data?.id ?? 0, status: "declined")
+        delegate?.patchOrder(id: data?.id ?? 0, status: "declined") {_ in}
     }
     
     @objc func statusAction(){
-        let vc = ()
-        vc.modalPresentationStyle = .overCurrentContext
-        delegate?.present(vc, animated: false)
+//        let vc = ()
+//        vc.modalPresentationStyle = .overCurrentContext
+//        delegate?.present(vc, animated: false)
     }
     
     @objc func hubungiction(){

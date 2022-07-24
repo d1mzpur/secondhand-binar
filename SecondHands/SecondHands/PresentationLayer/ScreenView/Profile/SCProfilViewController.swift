@@ -75,7 +75,7 @@ class SCProfilViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Lengkapi Info Akun"
-        formCity.dataList = ["Bandung","Jakarta","Surabaya","Denpasar","Cilegon","Serang","Serang","Yogyakarta","Gorontalo","Cirebon"]
+        formCity.dataList = ["Bandung","Jakarta","Surabaya","Denpasar","Cilegon","Serang","Yogyakarta","Gorontalo","Cirebon", "Jambi","Bengkulu","Lampung","Riau", "Bogor", "Depok",  "Semarang", "Banyumas","Batu", "Malang", "Madiun", "Banten", "Bali", "Pontianank", "Poso", "Gowa", "Banjar", "Cimahi",  "Bekasi", "Bogor", "Karawang", "Purwakarta", "Tasikmalaya", "Sukabumi", "Kuningan", "Banyumanik", "Magelang", "Salahtiga", "Tegal", "Pemalang", "Kendal", "Demak", "Kudus", "Pati", "Magelang", "Wonosobo", "Gunung Kidul", "Jombang", "Magetan", "Ngawi", "Situbondo"]
         view.backgroundColor = .white
 //        getUser()
         getUserAla()

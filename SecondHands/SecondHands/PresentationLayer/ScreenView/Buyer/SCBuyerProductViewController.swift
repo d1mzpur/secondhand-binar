@@ -54,6 +54,8 @@ class SCBuyerProductViewController: UIViewController {
     
     lazy var publishButton: SCButton = SCButton(style: .primary, size: .normal, type: .defaultButton, title: "Saya Tertarik dan ingin Nego")
     
+    var productItem: ProductDetail?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -106,41 +108,67 @@ class SCBuyerProductViewController: UIViewController {
         
     }
     
-    func getProduct(id: String) {
+    func configure(by id: Int) {
         NetworkServices().getProductBy(id: id, user: .buyer) { [weak self] (result) in
             guard let self = self else { return }
-            self.makeHeaderImageView.kf.setImage(with: URL(string: result.productImage!))
-            self.productCard.productTitle.text = result.productTitle
+            self.productItem = result
             
-//            self.buyerCard.imageSeller.kf.setImage(with: URL(string: result))
+            self.makeHeaderImageView.kf.setImage(with: URL(string: result.imageURL!))
+            self.productCard.productTitle.text = result.name
             
-            let category = result.productCategory?.compactMap { $0.name?.split(separator: " ").joined(separator: " ") }.joined(separator: ", ")
+            self.buyerCard.imageSeller.kf.setImage(with: URL(string: (result.user?.imageURL) ?? ""))
+            self.buyerCard.usernameSeller.text = result.user?.fullName
+            self.buyerCard.sellerCity.text = result.user?.city
+            
+            let category = result.categories?.compactMap { $0.name!.split(separator: " ").joined(separator: " ") }.joined(separator: ", ")
             
             
             self.productCard.productCategory.text = category!
-            self.productCard.productPrice.text = "Rp. " + result.productPrice!.formatter()
-            self.descCard.descLabel.text = result.productDescription
+            self.productCard.productPrice.text = "Rp. " + result.basePrice!.formatter()
+            self.descCard.descLabel.text = result.welcomeDescription
         }
     }
     
-    func configure(data: ProductItem) {
-        print("ID", data.id)
-        productCard.productImage.kf.setImage(with: URL(string: data.productImage!))
-        productCard.productTitle.text = data.productTitle
-        let category = data.productCategory?.compactMap { $0.name?.split(separator: " ").joined(separator: " ") }.joined(separator: ", ")
-        
-        productCard.productCategory.text = category!
-        productCard.productPrice.text = "Rp. " + data.productPrice!.formatter()
-        descCard.descLabel.text = data.productDescription
-    }
+//    func configure(data: ProductItem) {
+//
+//        productCard.productImage.kf.setImage(with: URL(string: data.productImage!))
+//        productCard.productTitle.text = data.productTitle
+//        let category = data.productCategory?.compactMap { $0.name?.split(separator: " ").joined(separator: " ") }.joined(separator: ", ")
+//
+//        productCard.productCategory.text = category!
+//        productCard.productPrice.text = "Rp. " + data.productPrice!.formatter()
+//        descCard.descLabel.text = data.productDescription
+//    }
     
     @objc func backButton() {
         self.navigationController?.popViewController(animated: true)
     }
     
     @objc func navigateToHome() {
-        self.tabBarController?.selectedIndex = 3
-        self.navigationController?.popViewController(animated: false)
+//        self.tabBarController?.selectedIndex = 3
+        let vc = SCBuyerModalViewController()
+        vc.getData(item: productItem ?? ProductDetail(id: 0,
+                                                      name: "",
+                                                      welcomeDescription: "",
+                                                      basePrice: 0,
+                                                      imageURL: "",
+                                                      imageName: "",
+                                                      location: "",
+                                                      userID: 0,
+                                                      status: "",
+                                                      createdAt: "",
+                                                      updatedAt: "",
+                                                      categories: [Category(id: 0,
+                                                                            name: "")],
+                                                      user: SellerUser(id: 0,
+                                                                       fullName: "",
+                                                                       email: "",
+                                                                       phoneNumber: "",
+                                                                       address: "",
+                                                                       imageURL: "", city: ""))
+        )
+        vc.modalPresentationStyle = .overCurrentContext
+        present(vc, animated: false)
         
     }
 }

@@ -403,7 +403,7 @@ class NetworkServices {
 //        }.resume()
         
     
-    func getProductBy(id: String, user: UserEndpoint, completion: @escaping(ProductItem) -> Void) {
+    func getProductBy(id: Int, user: UserEndpoint, completion: @escaping(ProductDetail) -> Void) {
         let endPoint = self.baseUrl
         
         guard let urlcomponents = URLComponentsBuilder(baseURL: endPoint)
@@ -417,11 +417,43 @@ class NetworkServices {
 //            .build()
         
         AF.request(urlcomponents.absoluteString, method: .get).validate()
-            .responseDecodable(of: ProductItem.self) { result in
+            .responseDecodable(of: ProductDetail.self) { result in
                 if let value = result.value {
                     completion(value)
                 }
         }
+    }
+    
+    func getOfferProduct(id: Int, bidPrice: Int, completion: @escaping (ProductItem) -> Void) {
+        let endPoint = self.baseUrl
+        print("BID PRICE", bidPrice)
+        guard let urlcomponents = URLComponentsBuilder(baseURL: endPoint)
+            .path("/buyer")
+            .path("/order")
+            .buildUrl()
+        else { return }
+        let bodyData: [String: Any] = [
+            "product_id": id,
+            "bid_price": bidPrice
+        ]
+        
+        print("ACCESS TOKEN", getAccessToken())
+        AF.request(urlcomponents,
+                   method: .post,
+                   parameters: bodyData,
+                   encoding: JSONEncoding.default,
+                   headers: ["access_token" : getAccessToken()]).response { (result) in
+            print("STATUS CODE = ", result.response?.statusCode)
+            print("ERROR = ", result.error?.asAFError)
+        }
+        
+//        AF.request(urlcomponents,
+//                   method: .post,
+//                   parameters: bodyData,
+//                   encoding: JSONEncoding.default,
+//                   headers: ["access_token" : getAccessToken()]).responseData { (result) in
+//            print("STATUS CODE ", result.response?.statusCode)
+//        }
     }
     
     func getOrder(status: OrderStatus, completion: @escaping(Result<[OrderItem], Error>) -> Void) {

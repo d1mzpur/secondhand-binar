@@ -63,6 +63,58 @@ struct reponseProduct: Codable {
         case updatedAt = "updated_at"
     }
 }
+// MARK: - Welcome
+struct ProductDetail: Codable {
+    let id: Int?
+    let name, welcomeDescription: String?
+    let basePrice: Int?
+    let imageURL: String?
+    let imageName, location: String?
+    let userID: Int?
+    let status, createdAt, updatedAt: String?
+    let categories: [Category]?
+    let user: SellerUser?
+
+    enum CodingKeys: String, CodingKey {
+        case id, name
+        case welcomeDescription = "description"
+        case basePrice = "base_price"
+        case imageURL = "image_url"
+        case imageName = "image_name"
+        case location
+        case userID = "user_id"
+        case status, createdAt, updatedAt
+        case categories = "Categories"
+        case user = "User"
+    }
+}
+
+// MARK: - Category
+struct Category: Codable {
+    let id: Int
+    let name: String?
+}
+
+// MARK: - User
+struct SellerUser: Codable {
+    let id: Int?
+    let fullName, email: String?
+    let phoneNumber: String?
+    let address: String?
+    let imageURL: String?
+    let city: String?
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case fullName = "full_name"
+        case email
+        case phoneNumber = "phone_number"
+        case address
+        case imageURL = "image_url"
+        case city
+    }
+}
+
 //    static func createData() -> [ProductItem] {
 //        return [ProductItem(id: "1", productImage: "productImage", productTitle: "Apple Watch", productCategory: "Smart Watch", productPrice: "300.000", productDescription: "", sellerLocation: "Bogor", userId: "", statusProduct: "Available", createdAt: "2000-01-01T00:00:00.000Z", updatedAt: "2000-01-01T00:00:00.000Z", categories: [Categories(id: 1, name: "")]),
 //                ProductItem(id: "2", productImage: "productImage", productTitle: "Samsung Watch", productCategory: "Smart Watch", productPrice: "400.000", productDescription: "", sellerLocation: "", userId: "", statusProduct: "", createdAt: "2000-01-01T00:00:00.000Z", updatedAt: "2000-01-01T00:00:00.000Z", categories: [Categories(id: 1, name: "")]),

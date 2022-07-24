@@ -69,6 +69,9 @@ class SCBuyerModalViewController: UIViewController {
 //    lazy var
 //    //Card
     lazy var productCard = SCBuyerModalCard(frame: .zero, imageProduct: "", productName: "Jam Tangan Casio", productPrice: "Rp250.000")
+    
+    var id: Int? = 0
+    var bidPrice: Int? = 0
 //    //Content
 //    
     override func viewDidLoad() {
@@ -92,6 +95,25 @@ class SCBuyerModalViewController: UIViewController {
     
     func setupView(){
         view.backgroundColor = .clear
+        sendButton.addTarget(self, action: #selector(bidAction), for: .touchUpInside)
+    }
+    
+    func getData(item: ProductDetail) {
+        self.id = item.id
+        
+        productCard.imageProduct.kf.setImage(with: URL(string: item.imageURL ?? ""))
+        productCard.productName.text = item.name
+        productCard.productPrice.text = "Rp. " + (item.basePrice?.formatter())!
+    }
+    
+    @objc
+    func bidAction() {
+        print("BID ID ", id)
+        let bid = Int(negoForm.text) ?? 0
+        print("BID ID 2", bid)
+        NetworkServices().getOfferProduct(id: id ?? 0, bidPrice: bid) { (result) in
+            print(result.productTitle)
+        }
     }
     
     func animatePresentContainer(){

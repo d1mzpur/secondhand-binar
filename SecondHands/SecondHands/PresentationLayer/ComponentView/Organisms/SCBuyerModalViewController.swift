@@ -114,6 +114,8 @@ class SCBuyerModalViewController: UIViewController {
         NetworkServices().getOfferProduct(id: id ?? 0, bidPrice: bid) { (result) in
             print(result.productTitle)
         }
+        self.dismiss(animated: true, completion: nil)
+        
     }
     
     func animatePresentContainer(){

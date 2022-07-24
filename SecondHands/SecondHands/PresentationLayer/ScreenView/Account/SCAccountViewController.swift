@@ -23,6 +23,14 @@ class SCAccountViewController: UIViewController {
         return imagePicker
     }()
     
+    lazy var inisialName: UILabel = {
+       var inisialName = UILabel()
+        inisialName.font = SCLabel(frame: .zero, weight: .bold, size: 32).font
+        inisialName.textColor = .DarkBlue04
+        inisialName.textAlignment = .center
+        return inisialName
+    }()
+    
     lazy var tableView: UITableView = {
         var tableView = UITableView()
         tableView.isScrollEnabled = false
@@ -76,6 +84,20 @@ class SCAccountViewController: UIViewController {
         
         addSubview()
         registerTableView()
+        NetworkServices().getUserAlamofire { [weak self] (result) in
+            guard let self = self else { return }
+            
+            DispatchQueue.main.async {
+                if result.image == nil {
+                    self.imagePicker.pickerIcon.isHidden = true
+                    self.inisialName.text = result.fullName!.initials
+                    self.inisialName.isHidden = false
+                } else {
+                    self.inisialName.isHidden = true
+                    self.imagePicker.changeImage(imageName: result.image ?? "")
+                }
+            }
+        }
         setupConstraint()
         
     }
@@ -84,6 +106,7 @@ class SCAccountViewController: UIViewController {
         view.addSubview(imagePicker)
         view.addSubview(textTitle)
         view.addSubview(tableView)
+        self.imagePicker.addSubview(inisialName)
     }
     
     func registerTableView() {
@@ -95,6 +118,7 @@ class SCAccountViewController: UIViewController {
         imagePicker.translatesAutoresizingMaskIntoConstraints = false
         textTitle.translatesAutoresizingMaskIntoConstraints = false
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        inisialName.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             textTitle.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
@@ -110,6 +134,11 @@ class SCAccountViewController: UIViewController {
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
+            inisialName.centerYAnchor.constraint(equalTo: imagePicker.centerYAnchor),
+//            inisialName.centerXAnchor.constraint(equalTo: imagePicker.centerXAnchor),
+            inisialName.leadingAnchor.constraint(equalTo: imagePicker.leadingAnchor),
+            inisialName.trailingAnchor.constraint(equalTo: imagePicker.trailingAnchor),
         ])
     }
 }

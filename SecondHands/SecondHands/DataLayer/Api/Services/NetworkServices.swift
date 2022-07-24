@@ -192,6 +192,44 @@ class NetworkServices {
         }.resume()
     }
     
+    func updateProfiles(image: String, fullname: String, city: String, address: String, phoneNumber: Int, completion: @escaping (UpdateUserModel) -> Void) {
+        let endPoint = self.baseUrl
+        
+        print("Start update")
+        let bodyData: [String: Any] = [
+            "full_name": "\(fullname)",
+            "phone_number": phoneNumber,
+            "address": "\(address)",
+            "image_url" : "\(image)",
+            "city": "\(city)"
+        ]
+        
+        guard let urlComponents = URLComponentsBuilder(baseURL: endPoint)
+                .path("/auth")
+                .path("/user")
+                .buildUrl()
+        else { return }
+        
+//        let urlRequest = URLRequestBuilder(url: urlComponents)
+//            .httpMethod(.POST)
+//            .addHeader(value: "access_token", key: getAccessToken())
+//            .addBody(data: try! JSONSerialization.data(withJSONObject: bodyData, options: .prettyPrinted))
+//            .build()
+        AF.request(urlComponents, method: .put, parameters: bodyData, encoding: JSONEncoding.default, headers: ["access_token" : getAccessToken()]).response { (result) in
+            print("STATUS CODE = ", result.response?.statusCode)
+            print("ERROR = ", result.error?.asAFError)
+        }
+//        print("AF RequestValidate ", request.validate(statusCode: 200...400))
+//        AF.request(request.convertible)
+//            .responseDecodable(of: UpdateUserModel.self) { result in
+//                if let value = result.value {
+//                    print("== >> SUCCESS UPDATE", result.value)
+//                    completion(value)
+//            }
+//                print("AF ERROR ", result.error)
+//        }
+    }
+    
     func updateProfile(image: String, fullname: String, city: String, address: String, phoneNumber: Int, completion: @escaping (Result<UpdateUserModel, Error>) -> Void) {
         let endPoint = self.baseUrl
         
@@ -201,7 +239,7 @@ class NetworkServices {
             "full_name" : "\(fullname)",
             "city" : "\(city)",
             "address" : "\(address)",
-            "phone_number" : "\(phoneNumber)",
+            "phone_number" : \(phoneNumber)
         }
         """.data(using: String.Encoding.utf8)!
 //        print(bodyData.data(using: String.Encoding.utf8)!)
@@ -211,9 +249,10 @@ class NetworkServices {
                 .buildUrl()
         else { return }
         
+        print(getAccessToken())
         let urlRequest = URLRequestBuilder(url: urlComponents)
-            .httpMethod(.POST)
-            .addHeader(value: "access_token", key: getAccessToken())
+            .httpMethod(.PUT)
+            .addHeader(value: getAccessToken(), key: "access_token")
             .addBody(data: bodyData)
             .build()
         
@@ -330,7 +369,28 @@ class NetworkServices {
 //            }
 //        }.resume()
         
-    }	
+    }
+    
+    func getProductBy(id: String, user: UserEndpoint, completion: @escaping(ProductItem) -> Void) {
+        let endPoint = self.baseUrl
+        
+        guard let urlcomponents = URLComponentsBuilder(baseURL: endPoint)
+            .path(user.rawValue)
+            .path("/product")
+            .path("/\(id)")
+            .buildUrl()
+        else { return }
+//        let urlRequest = URLRequestBuilder(url: urlcomponents)
+//            .httpMethod(.GET)
+//            .build()
+        
+        AF.request(urlcomponents.absoluteString, method: .get).validate()
+            .responseDecodable(of: ProductItem.self) { result in
+                if let value = result.value {
+                    completion(value)
+                }
+        }
+    }
     
     func getOrder(status: OrderStatus, completion: @escaping(Result<[OrderItem], Error>) -> Void) {
         let endPoint = self.baseUrl
@@ -368,7 +428,7 @@ class NetworkServices {
     
     func createProduct(name: String, description: String, price: Int, category: Int, location: String, image: Data, completion: @escaping (Result<reponseProduct, Error>) -> Void) {
         let endPoint = self.baseUrl
-        var parameters: [String:Any] = [
+        let parameters: [String:Any] = [
             "name" : name,
             "description" : description,
             "base_price" : price,

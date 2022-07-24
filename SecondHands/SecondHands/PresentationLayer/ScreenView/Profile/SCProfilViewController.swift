@@ -71,6 +71,7 @@ class SCProfilViewController: UIViewController {
         
     }()
     var imageData: Data?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Lengkapi Info Akun"
@@ -99,25 +100,37 @@ class SCProfilViewController: UIViewController {
         ])
     }
     
+    func configure(data: UpdateUserModel) {
+        self.formName.Textfield.text = data.fullName
+        self.formCity.TextfieldWithPicker.text = data.city
+        self.formAdress.Textfieldarea.setText(placeholder: data.address ?? "")
+        self.formNumberPhone.Textfield.text = data.phoneNumber
+    }
+    
     @objc
     func updateData() {
-        let formNumber = Int(formNumberPhone.text )
-        NetworkServices().updateProfile(image: "", fullname: formName.text, city: formCity.text, address: formAdress.text, phoneNumber: formNumber ?? 0) { [weak self] (result) in
-            guard let self = self else { return }
-            switch result {
-            case .success(let success):
-                DispatchQueue.main.async {
-                    print(success)
-                }
-            case .failure(let error):
-                print(error.localizedDescription)
-            }
+        let formNumber = Int(formNumberPhone.text) ?? 0
+//        print("click")
+        NetworkServices().updateProfiles(image: String(data: imageData ?? Data(), encoding: .utf16) ?? "", fullname: formName.text, city: formCity.text, address: formAdress.text, phoneNumber: formNumber) { (result) in
+            print("result success" ,result.image)
+            self.configure(data: result)
         }
+//        NetworkServices().updateProfile(image: "", fullname: formName.text, city: formCity.text, address: formAdress.text, phoneNumber: formNumber) { [weak self] (result) in
+//            guard let self = self else { return }
+//            switch result {
+//            case .success(let success):
+//                DispatchQueue.main.async {
+//                    print(success)
+//                }
+//            case .failure(let error):
+//                print(error.localizedDescription)
+//            }
+//        }
     }
     
     func getUserAla() {
-        NetworkServices().getUserAlamofire() { (result) in
-            
+        NetworkServices().getUserAlamofire() { [weak self] (result) in
+            guard let self = self else { return }
             DispatchQueue.main.async {
                 if let image = result.image {
                     (self.imagePicker as UIView).changeImage(imageName: image)
@@ -127,38 +140,7 @@ class SCProfilViewController: UIViewController {
                     print("SEND IMAGE DATA ==> ", self.imageData)
                 }
                 
-                self.formName.Textfield.text = result.fullName
-                self.formCity.TextfieldWithPicker.text = result.city
-                self.formAdress.Textfieldarea.setText(placeholder: result.address ?? "")
-                self.formNumberPhone.Textfield.text = result.phoneNumber
-            }
-        }
-    }
-    
-    func getUser() {
-        NetworkServices().getUser() { [weak self] (result) in
-            guard let self = self else { return }
-            switch result {
-            case .success(let success):
-                DispatchQueue.main.async {
-                    
-                    if let image = success.image {
-                        (self.imagePicker as UIView).changeImage(imageName: image)
-                        let imageContainer = UIImageView()
-                        imageContainer.loadImage(resource: image)
-                        self.imageData = imageContainer.image?.pngData()
-                        print("SEND IMAGE DATA ==> ", self.imageData)
-                    }
-                    
-                    self.formName.Textfield.text = success.fullName
-                    self.formCity.TextfieldWithPicker.text = "Jakarta"
-                    self.formAdress.Textfieldarea.setText(placeholder: success.address ?? "")
-                    self.formNumberPhone.Textfield.text = success.phoneNumber
-                    print("GET ==>> ", success)
-                }
-                
-            case .failure(let error):
-                print(error)
+                self.configure(data: result)
             }
         }
     }

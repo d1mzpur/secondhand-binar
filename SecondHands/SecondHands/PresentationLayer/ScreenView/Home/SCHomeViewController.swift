@@ -254,6 +254,10 @@ extension SCHomeViewController: UICollectionViewDelegate, UICollectionViewDataSo
 //            collectionView.reloadSections(IndexSet(integer: 2))
         case 2:
             guard let _ = homeCollectionView.cellForItem(at: indexPath) as? SCProductCardViewCollectionViewCell else { return }
+            let detail = SCBuyerProductViewController()
+            detail.configure(data: (productItem?[indexPath.item])!)
+            navigationController?.pushViewController(detail, animated: true
+            )
         default:
             break
         }

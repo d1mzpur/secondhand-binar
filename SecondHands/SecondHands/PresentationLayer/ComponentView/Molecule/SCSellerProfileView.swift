@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class SCSellerProfileView: UIView {
     var imageSeller: UIImageView = {
@@ -86,7 +87,7 @@ class SCSellerProfileView: UIView {
     }
     
     func configure(user: User) {
-        imageSeller.loadImage(resource: user.imageUser)
+        imageSeller.kf.setImage(with: URL(string: user.imageUser))
         usernameSeller.text = user.userName
         sellerCity.text = user.city
     }

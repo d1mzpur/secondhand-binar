@@ -168,6 +168,7 @@ class SCBuyerProductViewController: UIViewController {
                                                                        imageURL: "", city: ""))
         )
         vc.modalPresentationStyle = .overCurrentContext
+        vc.delegate = self
         present(vc, animated: false)
         
     }

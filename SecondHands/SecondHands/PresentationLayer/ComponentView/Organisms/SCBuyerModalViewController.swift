@@ -15,7 +15,7 @@ class SCBuyerModalViewController: UIViewController {
         view.clipsToBounds = true
         return view
     }()
-    
+    var delegate: SCBuyerProductViewController?
     let maxDimmedAlpha: CGFloat = 0.6
     lazy var dimmedView: UIView = {
         let view = UIView()
@@ -115,7 +115,7 @@ class SCBuyerModalViewController: UIViewController {
             print(result.productTitle)
         }
         self.dismiss(animated: true, completion: nil)
-        
+        delegate?.navigationController?.popViewController(animated: true)
     }
     
     func animatePresentContainer(){

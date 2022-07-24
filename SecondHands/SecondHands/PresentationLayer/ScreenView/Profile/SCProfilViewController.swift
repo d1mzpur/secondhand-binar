@@ -118,8 +118,17 @@ class SCProfilViewController: UIViewController {
             address: formAdress.text,
             phoneNumber: formNumber
         ) { (result) in
-            print("result success" ,result.image)
-            self.configure(data: result)
+//            print("result success" ,result.image)
+            if result {
+//                self.configure(data: result)
+                let alert = UIAlertController(title: "Profile Updated", message: "", preferredStyle: .alert)
+                let action = UIAlertAction(title: "OK", style: .default, handler: { action in
+                    self.navigationController?.popViewController(animated: true)
+                })
+                
+                alert.addAction(action)
+                self.present(alert, animated: true, completion: nil)
+            }
         }
 //        NetworkServices().updateProfile(image: "", fullname: formName.text, city: formCity.text, address: formAdress.text, phoneNumber: formNumber) { [weak self] (result) in
 //            guard let self = self else { return }
@@ -132,6 +141,7 @@ class SCProfilViewController: UIViewController {
 //                print(error.localizedDescription)
 //            }
 //        }
+        
     }
     
     func getUserAla() {

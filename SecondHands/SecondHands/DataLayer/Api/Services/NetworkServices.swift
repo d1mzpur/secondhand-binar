@@ -193,7 +193,7 @@ class NetworkServices {
         }.resume()
     }
     
-    func updateProfiles(image: Data, fullname: String, city: String, address: String, phoneNumber: Int, completion: @escaping (UpdateUserModel) -> Void) {
+    func updateProfiles(image: Data, fullname: String, city: String, address: String, phoneNumber: Int, completion: @escaping (Bool) -> Void) {
         let endPoint = self.baseUrl
         
         guard let urlComponents = URLComponentsBuilder(baseURL: endPoint)
@@ -220,6 +220,9 @@ class NetworkServices {
         .response { (result) in
             print("STATUS CODE = ", result.response?.statusCode)
             print("ERROR = ", result.error?.asAFError)
+            if result.error == nil {
+                completion(true)
+            }
         }
     }
 

@@ -63,6 +63,7 @@ class SCAccountViewController: UIViewController {
     ])
     
     override func viewWillAppear(_ animated: Bool) {
+        updateData()
         view.backgroundColor = .white
         navigationController?.navigationBar.isHidden = true
     }
@@ -84,6 +85,12 @@ class SCAccountViewController: UIViewController {
         
         addSubview()
         registerTableView()
+        updateData()
+        setupConstraint()
+        
+    }
+    
+    func updateData() {
         NetworkServices().getUserAlamofire { [weak self] (result) in
             guard let self = self else { return }
             
@@ -98,8 +105,6 @@ class SCAccountViewController: UIViewController {
                 }
             }
         }
-        setupConstraint()
-        
     }
     
     func addSubview() {

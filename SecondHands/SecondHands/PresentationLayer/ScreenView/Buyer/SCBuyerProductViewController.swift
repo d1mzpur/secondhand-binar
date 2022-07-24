@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class SCBuyerProductViewController: UIViewController {
     
@@ -103,6 +104,34 @@ class SCBuyerProductViewController: UIViewController {
             publishButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
         
+    }
+    
+    func getProduct(id: String) {
+        NetworkServices().getProductBy(id: id, user: .buyer) { [weak self] (result) in
+            guard let self = self else { return }
+            self.makeHeaderImageView.kf.setImage(with: URL(string: result.productImage!))
+            self.productCard.productTitle.text = result.productTitle
+            
+//            self.buyerCard.imageSeller.kf.setImage(with: URL(string: result))
+            
+            let category = result.productCategory?.compactMap { $0.name?.split(separator: " ").joined(separator: " ") }.joined(separator: ", ")
+            
+            
+            self.productCard.productCategory.text = category!
+            self.productCard.productPrice.text = "Rp. " + result.productPrice!.formatter()
+            self.descCard.descLabel.text = result.productDescription
+        }
+    }
+    
+    func configure(data: ProductItem) {
+        print("ID", data.id)
+        productCard.productImage.kf.setImage(with: URL(string: data.productImage!))
+        productCard.productTitle.text = data.productTitle
+        let category = data.productCategory?.compactMap { $0.name?.split(separator: " ").joined(separator: " ") }.joined(separator: ", ")
+        
+        productCard.productCategory.text = category!
+        productCard.productPrice.text = "Rp. " + data.productPrice!.formatter()
+        descCard.descLabel.text = data.productDescription
     }
     
     @objc func backButton() {

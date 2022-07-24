@@ -179,9 +179,9 @@ class SCSellerProductOfferViewControllerCell: UITableViewCell{
     }
     
     @objc func statusAction(){
-//        let vc = ()
-//        vc.modalPresentationStyle = .overCurrentContext
-//        delegate?.present(vc, animated: false)
+        let vc = SCModalTransactionViewController()
+        vc.modalPresentationStyle = .overCurrentContext
+        delegate?.present(vc, animated: false)
     }
     
     @objc func hubungiction(){

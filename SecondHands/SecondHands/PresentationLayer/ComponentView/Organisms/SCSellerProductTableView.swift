@@ -31,7 +31,7 @@ class SCSellerProductTableView: UITableView, UITableViewDelegate,UITableViewData
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if dataProduct.count == 0 {
             tableView.separatorStyle = .none;
-            tableView.isScrollEnabled = false
+//            tableView.isScrollEnabled = false
             let cell = tableView.dequeueReusableCell(withIdentifier: "sellerEmptyProductList", for: indexPath) as! SCSellerEmptyItemTableView
             return cell
             
@@ -42,7 +42,6 @@ class SCSellerProductTableView: UITableView, UITableViewDelegate,UITableViewData
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("taptap")
         let filterProduct = dataProduct.filter{ item in item.user.id == dataProduct[indexPath.row].user.id }
         let productOfferVC = SCSellerProductOfferViewController()
         productOfferVC.buyer = dataProduct[indexPath.row].user

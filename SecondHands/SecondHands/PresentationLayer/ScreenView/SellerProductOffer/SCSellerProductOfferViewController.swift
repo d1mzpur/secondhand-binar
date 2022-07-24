@@ -17,27 +17,27 @@ class SCSellerProductOfferViewController: UIViewController {
         }
     }
     
-    func getOrder(status: OrderStatus) {
-        NetworkServices().getOrder(status: status) { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success(let itemResults):
-                DispatchQueue.main.async {
-                    let filterProduct = itemResults.filter{ item in item.user.id == self.buyer?.id }
-                    self.dataProduct = filterProduct
-                }
-            case .failure(let error):
-                print("Error: ",error.localizedDescription)
-            }
-        }
-    }
+//    func getOrder(status: OrderStatus) {
+//        NetworkServices().getOrder(status: status) { [weak self] result in
+//            guard let self = self else { return }
+//            switch result {
+//            case .success(let itemResults):
+//                DispatchQueue.main.async {
+//                    let filterProduct = itemResults.filter{ item in item.user.id == self.buyer?.id }
+//                    self.dataProduct = filterProduct
+//                }
+//            case .failure(let error):
+//                print("Error: ",error.localizedDescription)
+//            }
+//        }
+//    }
     
     
     func patchOrder(id:Int, status:String) {
         NetworkServices().sellerPatchOrder(id: id, status: status){ [weak self] result in
             guard let self = self else { return }
             DispatchQueue.main.async {
-                self.getOrder(status: .all)
+//                self.getOrder(status: .all)
             }
         }
     }
@@ -124,6 +124,7 @@ extension SCSellerProductOfferViewController: UITableViewDelegate,UITableViewDat
 class SCSellerProductOfferViewControllerCell: UITableViewCell{
     var delegate: SCSellerProductOfferViewController?
     var data:OrderItem?
+    var selectedStatus: Int?
     func fill(data:OrderItem, delegate:SCSellerProductOfferViewController){
         self.delegate = delegate
         self.data = data
@@ -131,7 +132,6 @@ class SCSellerProductOfferViewControllerCell: UITableViewCell{
         item.productTitle.text = data.productName
         item.productPrice.text = "Rp "+String(describing: data.basePrice)
         if  data.status == "pending"{
-            print("masuk111")
             item.addbutton(
                 button1Name: "Tolak",
                 button2Name: "Terima"
@@ -140,7 +140,6 @@ class SCSellerProductOfferViewControllerCell: UITableViewCell{
             item.actionButton2.addTarget(self, action: #selector(terimaAction), for: .touchUpInside)
         }
         if data.status == "accepted"{
-            print("masuk2222")
             item.addbutton(
                 button1Name: "Status",
                 button2Name: "Hubungi"
@@ -169,10 +168,22 @@ class SCSellerProductOfferViewControllerCell: UITableViewCell{
         delegate?.patchOrder(id: data?.id ?? 0, status: "declined")
     }
     
+    let vcModal = SCModalTransactionViewController()
     @objc func statusAction(){
-        let vc = SCModalTransactionViewController()
-        vc.modalPresentationStyle = .overCurrentContext
-        delegate?.present(vc, animated: false)
+        vcModal.submitButton.addAction(#selector(updateStatusAction), target: self)
+        vcModal.modalPresentationStyle = .overCurrentContext
+        delegate?.present(vcModal, animated: false)
+    }
+    
+    @objc func updateStatusAction(){
+        if(vcModal.selectedRadioButton == 1){
+            delegate?.patchOrder(id: data?.id ?? 0, status: "accepted")
+        }else{
+            delegate?.patchOrder(id: data?.id ?? 0, status: "declined")
+            let filterProduct = delegate?.dataProduct.filter{ item in item.id != self.data?.id}
+            delegate?.dataProduct = filterProduct ?? []
+        }
+        vcModal.dismiss(animated: true, completion: nil)
     }
     
     @objc func hubungiction(){
@@ -181,13 +192,8 @@ class SCSellerProductOfferViewControllerCell: UITableViewCell{
         delegate?.present(vc, animated: false)
     }
     
-    
-    
     private lazy var item: SCSellerItem = SCSellerItem()
 
-
-    
-    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.selectionStyle = .none

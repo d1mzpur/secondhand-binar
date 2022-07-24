@@ -193,17 +193,8 @@ class NetworkServices {
         }.resume()
     }
     
-    func updateProfiles(image: String, fullname: String, city: String, address: String, phoneNumber: Int, completion: @escaping (UpdateUserModel) -> Void) {
+    func updateProfiles(image: Data, fullname: String, city: String, address: String, phoneNumber: Int, completion: @escaping (UpdateUserModel) -> Void) {
         let endPoint = self.baseUrl
-        
-        print("Start update")
-        let bodyData: [String: Any] = [
-            "full_name": "\(fullname)",
-            "phone_number": phoneNumber,
-            "address": "\(address)",
-            "image_url" : "\(image)",
-            "city": "\(city)"
-        ]
         
         guard let urlComponents = URLComponentsBuilder(baseURL: endPoint)
                 .path("/auth")
@@ -211,74 +202,27 @@ class NetworkServices {
                 .buildUrl()
         else { return }
         
-//        let urlRequest = URLRequestBuilder(url: urlComponents)
-//            .httpMethod(.POST)
-//            .addHeader(value: "access_token", key: getAccessToken())
-//            .addBody(data: try! JSONSerialization.data(withJSONObject: bodyData, options: .prettyPrinted))
-//            .build()
-        AF.request(urlComponents, method: .put, parameters: bodyData, encoding: JSONEncoding.default, headers: ["access_token" : getAccessToken()]).response { (result) in
+        AF.upload(
+        multipartFormData: { multipartFormData in
+            multipartFormData.append(image, withName: "image", fileName: "image.jpg", mimeType: "image/jpeg")
+            multipartFormData.append(fullname.data(using: .utf8)!, withName: "full_name")
+            multipartFormData.append("\(phoneNumber)".data(using: .utf8)!, withName: "phone_number")
+            multipartFormData.append(address.data(using: .utf8)!, withName: "address")
+            multipartFormData.append(city.data(using: .utf8)!,  withName: "city")
+        },
+        to: urlComponents, usingThreshold: .max,
+            method: .put,
+            headers: ["access_token" : getAccessToken()])
+            .responseJSON(){ res in
+                print(image)
+                print(res)
+            }
+        .response { (result) in
             print("STATUS CODE = ", result.response?.statusCode)
             print("ERROR = ", result.error?.asAFError)
         }
-//        print("AF RequestValidate ", request.validate(statusCode: 200...400))
-//        AF.request(request.convertible)
-//            .responseDecodable(of: UpdateUserModel.self) { result in
-//                if let value = result.value {
-//                    print("== >> SUCCESS UPDATE", result.value)
-//                    completion(value)
-//            }
-//                print("AF ERROR ", result.error)
-//        }
     }
-    
-    func updateProfile(image: String, fullname: String, city: String, address: String, phoneNumber: Int, completion: @escaping (Result<UpdateUserModel, Error>) -> Void) {
-        let endPoint = self.baseUrl
-        
-        let bodyData = """
-        {
-            "image" : "\(image)",
-            "full_name" : "\(fullname)",
-            "city" : "\(city)",
-            "address" : "\(address)",
-            "phone_number" : \(phoneNumber)
-        }
-        """.data(using: String.Encoding.utf8)!
-//        print(bodyData.data(using: String.Encoding.utf8)!)
-        guard let urlComponents = URLComponentsBuilder(baseURL: endPoint)
-                .path("/auth")
-                .path("/user")
-                .buildUrl()
-        else { return }
-        
-        print(getAccessToken())
-        let urlRequest = URLRequestBuilder(url: urlComponents)
-            .httpMethod(.PUT)
-            .addHeader(value: getAccessToken(), key: "access_token")
-            .addBody(data: bodyData)
-            .build()
-        
-        URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
-            _ = response as? HTTPURLResponse
-            
-            guard let data = data else { return }
-            if let error = error {
-                print(error.localizedDescription)
-            }
-            
-            let jsonDecoder = JSONDecoder()
-            do {
-                let jsonSerial = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
-                print("jSON serial" , jsonSerial)
-                let session = try jsonDecoder.decode(UpdateUserModel.self, from: data)
-                DispatchQueue.main.async {
-                    completion(.success(session))
-                }
-                
-            } catch let error {
-                completion(.failure(error))
-            }
-        }.resume()
-    }
+
     
     func getBanner(completion: @escaping([OfferItem]) -> Void) {
         let endPoint = self.baseUrl
@@ -502,7 +446,7 @@ class NetworkServices {
                 ]
                 AF.upload(
                 multipartFormData: { multipartFormData in
-                    multipartFormData.append(image, withName: "image", fileName: "image.jpg", mimeType: "image/jpeg");
+                    multipartFormData.append(image, withName: "image", fileName: "image.jpg", mimeType: "image/jpeg")
                     multipartFormData.append(name.data(using: .utf8)!, withName: "name")
                     multipartFormData.append(description.data(using: .utf8)!, withName: "description")
                     multipartFormData.append("\(price)".data(using: .utf8)!, withName: "base_price")
@@ -512,9 +456,6 @@ class NetworkServices {
                 to: fullUrl, usingThreshold: .max,
                     method: .post,
                     headers: headers)
-                .responseJSON(){ res in
-                    print(res)
-                }
                 .responseDecodable(of: reponseProduct.self) { (response) in
                     switch response.result{
                     case .success(let value):
@@ -527,51 +468,9 @@ class NetworkServices {
                 }.uploadProgress { (progress) in
                     print("Progress: \(progress.fractionCompleted)")
                 }
-        let endPoint = self.baseUrl
-        let parameters: [String:Any] = [
-            "name" : name,
-            "description" : description,
-            "base_price" : price,
-            "category_ids" : [category],
-            "location" : location,
-//            "image" : image,
-        ] as Dictionary<String, Any>
-        print(parameters,"<====")
-        guard let urlComponents = URLComponentsBuilder(baseURL: endPoint)
-                .path("/seller")
-                .path("/product")
-                .buildUrl()
-        else { return }
-        
-        var urlRequest = URLRequestBuilder(url: urlComponents)
-            .httpMethod(.POST)
-            .build()
-
-        urlRequest.httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: [])
-        urlRequest.setValue(getAccessToken(), forHTTPHeaderField: "access_token")
-        
-        URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
-            let respon = response as? HTTPURLResponse
-            print(response)
-            print(respon?.statusCode)
-            guard let data = data else { return }
-            if let error = error {
-                print(error.localizedDescription)
-            }
-            
-            let jsonDecoder = JSONDecoder()
-            do {
-                let jsonSerial = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
-                print("jSON serial" , jsonSerial)
-                let session = try jsonDecoder.decode(reponseProduct.self, from: data)
-                DispatchQueue.main.async {
-                    completion(.success(session))
-                }
-            } catch let error {
-                completion(.failure(error))
-            }
-        }.resume()
     }
+    
+    
     func getNotif(notifType: NotificationType = .all, completion: @escaping([NotifItem]) -> Void) {
         let endPoint = self.baseUrl
         

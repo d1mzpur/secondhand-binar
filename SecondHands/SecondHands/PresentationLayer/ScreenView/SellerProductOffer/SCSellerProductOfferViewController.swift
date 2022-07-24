@@ -145,6 +145,8 @@ class SCSellerProductOfferViewControllerCell: UITableViewCell{
         delegate?.present(vc, animated: false)
     }
     
+    
+    
     private lazy var item: SCSellerItem = SCSellerItem()
 
     @objc func tolakAction(){

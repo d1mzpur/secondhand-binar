@@ -12,7 +12,7 @@ class SCSellerProfileView: UIView {
     var imageSeller: UIImageView = {
         var imageSeller = UIImageView()
         imageSeller.contentMode = .scaleAspectFill
-        imageSeller.layer.cornerRadius = 12
+    imageSeller.layer.cornerRadius = 12
         imageSeller.clipsToBounds = true
         
         return imageSeller

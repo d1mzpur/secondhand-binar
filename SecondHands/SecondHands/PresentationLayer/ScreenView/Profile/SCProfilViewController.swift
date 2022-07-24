@@ -43,7 +43,7 @@ class SCProfilViewController: UIViewController {
             style: .style1,
             completionHandler: { (image) in
                 (self.imagePicker as UIView).changeImage(image: image)
-                self.imageData = image.pngData()
+                self.imageData = image.jpegData(compressionQuality: 0.1)
                 print(self.imageData)
             }
     )
@@ -111,7 +111,13 @@ class SCProfilViewController: UIViewController {
     func updateData() {
         let formNumber = Int(formNumberPhone.text) ?? 0
 //        print("click")
-        NetworkServices().updateProfiles(image: String(data: imageData ?? Data(), encoding: .utf16) ?? "", fullname: formName.text, city: formCity.text, address: formAdress.text, phoneNumber: formNumber) { (result) in
+        NetworkServices().updateProfiles(
+            image: imageData ?? Data(),
+            fullname: formName.text,
+            city: formCity.text,
+            address: formAdress.text,
+            phoneNumber: formNumber
+        ) { (result) in
             print("result success" ,result.image)
             self.configure(data: result)
         }
@@ -136,7 +142,7 @@ class SCProfilViewController: UIViewController {
                     (self.imagePicker as UIView).changeImage(imageName: image)
                     let imageContainer = UIImageView()
                     imageContainer.loadImage(resource: image)
-                    self.imageData = imageContainer.image?.pngData()
+                    self.imageData = imageContainer.image?.jpegData(compressionQuality: 0.1)
                     print("SEND IMAGE DATA ==> ", self.imageData)
                 }
                 
